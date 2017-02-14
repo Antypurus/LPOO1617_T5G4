@@ -39,9 +39,8 @@ public class Map {
 		map[2][4]="X";
 		map[2][5]="X";
 		map[2][6]="X";
-		map[2][7]="X";
+		map[2][7]=" ";
 		map[2][8]=" ";
-		map[2][5]=" ";
 		map[3][1]=" ";
 		map[3][2]="I";
 		map[3][3]=" ";
@@ -132,9 +131,8 @@ public class Map {
 		map[2][4]="X";
 		map[2][5]="X";
 		map[2][6]="X";
-		map[2][7]="X";
+		map[2][7]=" ";
 		map[2][8]=" ";
-		map[2][5]=" ";
 		map[3][1]=" ";
 		map[3][2]="I";
 		map[3][3]=" ";
@@ -186,35 +184,48 @@ public class Map {
 		map[playerYPos][playerXPos]="H";
 	}
 	
-	
-	private boolean canMove(){
-		return false;
-	}
-	
 	public void MoveHero(){
+		
 		Scanner input = new Scanner(System.in);
 		System.out.print("Direçao:");
 		String Direction = input.next();
 		System.out.println(Direction);
 		System.out.print("\n");
+		
 		while(!(Direction.equals("end"))){
+			
 			if(Direction.equals("Up")){
-				playerYPos--;
+				if((!(map[playerYPos-1][playerXPos].equals("X")))&&(!(map[playerYPos-1][playerXPos].equals("I")))&&(!(map[playerYPos-1][playerXPos].equals("G")))){					
+					playerYPos--;
+				}
 			}
+			
 			if(Direction.equals("Down")){
-				playerYPos++;
+				if((!(map[playerYPos+1][playerXPos].equals("X")))&&(!(map[playerYPos+1][playerXPos].equals("I")))&&(!(map[playerYPos+1][playerXPos].equals("G")))){					
+					playerYPos++;
+				}
 			}
+			
 			if(Direction.equals("Right")){
-				playerXPos++;
+				if((!(map[playerYPos][playerXPos+1].equals("X")))&&(!(map[playerYPos][playerXPos+1].equals("I")))&&(!(map[playerYPos][playerXPos+1].equals("G")))){					
+					playerXPos++;
+				}
 			}
+			
 			if(Direction.equals("Left")){
-				playerXPos--;
+				if((!(map[playerYPos][playerXPos-1].equals("X")))&&(!(map[playerYPos][playerXPos-1].equals("I")))&&(!(map[playerYPos][playerXPos-1].equals("G")))){					
+					playerXPos--;
+				}
 			}
+			
 			this.updateMap();
 			this.drawMap();
+			
 			System.out.println(playerXPos+" "+playerYPos);
 			System.out.print("Direçao:");
+			
 			Direction = input.next();
+			
 			System.out.print("\n");
 		}
 		input.close();
