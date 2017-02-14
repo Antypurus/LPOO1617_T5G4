@@ -360,6 +360,22 @@ public class Map {
 				}
 			}
 			
+			if(map[playerYPos+1][playerXPos].equals("G")){
+				System.out.println("You LOSE!");
+				return;
+			}
+			if(map[playerYPos-1][playerXPos].equals("G")){
+				System.out.println("You LOSE!");
+				return;
+			}
+			if(map[playerYPos][playerXPos+1].equals("G")){
+				System.out.println("You LOSE!");
+				return;
+			}
+			if(map[playerYPos][playerXPos-1].equals("G")){
+				System.out.println("You LOSE!");
+				return;
+			}
 			if(map[playerYPos][playerXPos].equals("S")){
 				System.out.println("You WIN!");
 				return;
