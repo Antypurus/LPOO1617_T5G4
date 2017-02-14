@@ -3,13 +3,141 @@ import java.util.Scanner;
 public class Map {
 	private int playerXPos;
 	private int playerYPos;
+	private int guardXPos;
+	private int guardYPos;
+	private int guardMovStage=0;
 	private boolean leverPress = false;
 	
 	private String[][] map=new String[10][10];
 	
+	private void moveGuard(){
+		if(guardMovStage==0){
+			guardXPos--;
+			guardMovStage=1;
+			return;
+		}
+		if(guardMovStage==1){
+			guardYPos++;
+			guardMovStage=2;
+			return;
+		}
+		if(guardMovStage==2){
+			guardYPos++;
+			guardMovStage=3;
+			return;
+		}
+		if(guardMovStage==3){
+			guardYPos++;
+			guardMovStage=4;
+			return;
+		}
+		if(guardMovStage==4){
+			guardYPos++;
+			guardMovStage=5;
+			return;
+		}
+		if(guardMovStage==5){
+			guardXPos--;
+			guardMovStage=6;
+			return;
+		}
+		if(guardMovStage==6){
+			guardXPos--;
+			guardMovStage=7;
+			return;
+		}
+		if(guardMovStage==7){
+			guardXPos--;
+			guardMovStage=8;
+			return;
+		}
+		if(guardMovStage==8){
+			guardXPos--;
+			guardMovStage=9;
+			return;
+		}
+		if(guardMovStage==9){
+			guardXPos--;
+			guardMovStage=10;
+			return;
+		}
+		if(guardMovStage==10){
+			guardXPos--;
+			guardMovStage=11;
+			return;
+		}
+		if(guardMovStage==11){
+			guardYPos++;
+			guardMovStage=12;
+			return;
+		}
+		if(guardMovStage==12){
+			guardXPos++;
+			guardMovStage=13;
+			return;
+		}
+		if(guardMovStage==13){
+			guardXPos++;
+			guardMovStage=14;
+			return;
+		}
+		if(guardMovStage==14){
+			guardXPos++;
+			guardMovStage=15;
+			return;
+		}
+		if(guardMovStage==15){
+			guardXPos++;
+			guardMovStage=16;
+			return;
+		}
+		if(guardMovStage==16){
+			guardXPos++;
+			guardMovStage=17;
+			return;
+		}
+		if(guardMovStage==17){
+			guardXPos++;
+			guardMovStage=18;
+			return;
+		}
+		if(guardMovStage==18){
+			guardXPos++;
+			guardMovStage=19;
+			return;
+		}
+		if(guardMovStage==19){
+			guardYPos--;
+			guardMovStage=20;
+			return;
+		}
+		if(guardMovStage==20){
+			guardYPos--;
+			guardMovStage=21;
+			return;
+		}
+		if(guardMovStage==21){
+			guardYPos--;
+			guardMovStage=22;
+			return;
+		}
+		if(guardMovStage==22){
+			guardYPos--;
+			guardMovStage=23;
+			return;
+		}
+		if(guardMovStage==23){
+			guardYPos--;
+			guardMovStage=0;
+			return;
+		}
+	}
+	
 	public Map(){
 		playerXPos=1;
 		playerYPos=1;
+		guardYPos=1;
+		guardXPos=8;
 		for(int i=0;i<10;i++){
 			map[0][i]="X";
 		}
@@ -23,6 +151,9 @@ public class Map {
 			map[i][0]="X";
 			if(i==6||i==5){
 				map[i][0]="I";
+				if(leverPress){
+					map[i][0]="S";
+				}
 			}
 		}
 		map[1][1]=" ";
@@ -32,7 +163,7 @@ public class Map {
 		map[1][5]=" ";
 		map[1][6]="X";
 		map[1][7]=" ";
-		map[1][8]="G";
+		map[1][8]=" ";
 		map[2][1]="X";
 		map[2][2]="X";
 		map[2][3]=" ";
@@ -90,6 +221,7 @@ public class Map {
 		map[8][7]="K";
 		map[8][8]=" ";
 		map[playerYPos][playerXPos]="H";
+		map[guardYPos][guardXPos]="G";
 	}
 	
 	public void drawMap(){
@@ -115,6 +247,9 @@ public class Map {
 			map[i][0]="X";
 			if(i==6||i==5){
 				map[i][0]="I";
+				if(leverPress){
+					map[i][0]="S";
+				}
 			}
 		}
 		map[1][1]=" ";
@@ -124,7 +259,7 @@ public class Map {
 		map[1][5]=" ";
 		map[1][6]="X";
 		map[1][7]=" ";
-		map[1][8]="G";
+		map[1][8]=" ";
 		map[2][1]="X";
 		map[2][2]="X";
 		map[2][3]=" ";
@@ -182,12 +317,13 @@ public class Map {
 		map[8][7]="K";
 		map[8][8]=" ";
 		map[playerYPos][playerXPos]="H";
+		map[guardYPos][guardXPos]="G";
 	}
 	
 	public void MoveHero(){
 		
 		Scanner input = new Scanner(System.in);
-		System.out.print("Direçao:");
+		System.out.print("Direçao(Up/Down/Left/Right):");
 		String Direction = input.next();
 		System.out.println(Direction);
 		System.out.print("\n");
@@ -218,14 +354,25 @@ public class Map {
 				}
 			}
 			
+			if(playerXPos==7){
+				if(playerYPos==8){
+					leverPress=true;
+				}
+			}
+			
+			if(map[playerYPos][playerXPos].equals("S")){
+				System.out.println("You WIN!");
+				return;
+			}
+			
+			this.moveGuard();
 			this.updateMap();
 			this.drawMap();
 			
-			System.out.println(playerXPos+" "+playerYPos);
-			System.out.print("Direçao:");
+			System.out.print("Direçao(Up/Down/Left/Right):");
 			
 			Direction = input.next();
-			
+		
 			System.out.print("\n");
 		}
 		input.close();
