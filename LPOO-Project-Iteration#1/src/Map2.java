@@ -1,9 +1,10 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Map2 {
 	private int playerXPos = 1;
 	private int playerYPos = 8;
-	private int ogredXPos = 4;
+	private int ogreXPos = 4;
 	private int ogreYPos = 1;
 	private int keyXPos = 8;
 	private int keyYPos = 1;
@@ -37,7 +38,7 @@ public class Map2 {
 			}
 		}
 		map[playerYPos][playerXPos] = "H";
-		map[ogreYPos][ogredXPos] = "O";
+		map[ogreYPos][ogreXPos] = "O";
 		map[keyYPos][keyXPos] = "K";
 	}
 
@@ -74,9 +75,42 @@ public class Map2 {
 				map[i][j] = " ";
 			}
 		}
-		map[ogreYPos][ogredXPos] = "O";
+		map[ogreYPos][ogreXPos] = "O";
 		map[keyYPos][keyXPos] = "K";
 		map[playerYPos][playerXPos] = "H";
+	}
+	
+	public void moveOgre(){
+		Random generator = new Random();
+		int movement = generator.nextInt(4);
+		if(movement==0){
+			if((!(map[ogreYPos+1][ogreXPos].equals("X")))&&(!(map[ogreYPos+1][ogreXPos].equals("I")))&&(!(map[ogreYPos+1][ogreXPos].equals("H")))){
+				ogreYPos++;
+			}else{
+				moveOgre();
+			}
+		}
+		if(movement==1){
+			if((!(map[ogreYPos-1][ogreXPos].equals("X")))&&(!(map[ogreYPos-1][ogreXPos].equals("I")))&&(!(map[ogreYPos-1][ogreXPos].equals("H")))){
+				ogreYPos--;
+			}else{
+				moveOgre();
+			}
+		}
+		if(movement==2){
+			if((!(map[ogreYPos][ogreXPos+1].equals("X")))&&(!(map[ogreYPos][ogreXPos+1].equals("I")))&&(!(map[ogreYPos][ogreXPos+1].equals("H")))){
+				ogreXPos++;
+			}else{
+				moveOgre();
+			}
+		}
+		if(movement==3){
+			if((!(map[ogreYPos][ogreXPos-1].equals("X")))&&(!(map[ogreYPos][ogreXPos-1].equals("I")))&&(!(map[ogreYPos][ogreXPos-1].equals("H")))){
+				ogreXPos--;
+			}else{
+				moveOgre();
+			}
+		}
 	}
 
 	public void moveHero() {
@@ -116,6 +150,7 @@ public class Map2 {
 				}
 			}
 			
+			this.moveOgre();
 			this.updateMap();
 			this.drawMap();
 			
