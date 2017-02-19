@@ -39,10 +39,10 @@ public class Map2 {
 		}
 		map[playerYPos][playerXPos] = "H";
 		map[ogreYPos][ogreXPos] = "O";
-		if (!this.leverPress) {
+		if (!leverPress) {
 			map[keyYPos][keyXPos] = "k";
 		} else {
-			map[keyYPos][keyXPos] = "_";
+			map[keyYPos][keyXPos] = " ";
 		}
 	}
 
@@ -81,10 +81,8 @@ public class Map2 {
 		}
 		map[ogreYPos][ogreXPos] = "O";
 		map[playerYPos][playerXPos] = "H";
-		if (!this.leverPress) {
+		if (!leverPress) {
 			map[keyYPos][keyXPos] = "k";
-		} else {
-			map[keyYPos][keyXPos] = "_";
 		}
 	}
 
@@ -171,7 +169,7 @@ public class Map2 {
 				if (playerXPos == this.keyXPos) {
 					if (this.playerYPos == this.keyYPos) {
 						map[playerYPos][playerXPos] = "K";
-
+						this.leverPress = true;
 					}
 				}
 
