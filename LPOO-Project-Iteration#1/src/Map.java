@@ -385,7 +385,7 @@ public class Map {
 				return false;
 			}
 			if (map[playerYPos][playerXPos].equals("S")) {
-				System.out.println("You WIN!");
+				System.out.println("You WIN!\n ... \n Or Do You ? ");
 				input.close();
 				return true;
 			}

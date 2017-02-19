@@ -8,7 +8,7 @@ public class Map2 {
 	private int ogreYPos = 1;
 	private int keyXPos = 8;
 	private int keyYPos = 1;
-	private int ogreMoveStage = 0;
+	private boolean openDoor = false;
 	private boolean leverPress = false;
 
 	private String[][] map = new String[10][10];
@@ -39,7 +39,11 @@ public class Map2 {
 		}
 		map[playerYPos][playerXPos] = "H";
 		map[ogreYPos][ogreXPos] = "O";
-		map[keyYPos][keyXPos] = "K";
+		if (!this.leverPress) {
+			map[keyYPos][keyXPos] = "k";
+		} else {
+			map[keyYPos][keyXPos] = "_";
+		}
 	}
 
 	public void drawMap() {
@@ -76,38 +80,46 @@ public class Map2 {
 			}
 		}
 		map[ogreYPos][ogreXPos] = "O";
-		map[keyYPos][keyXPos] = "K";
 		map[playerYPos][playerXPos] = "H";
+		if (!this.leverPress) {
+			map[keyYPos][keyXPos] = "k";
+		} else {
+			map[keyYPos][keyXPos] = "_";
+		}
 	}
-	
-	public void moveOgre(){
+
+	public void moveOgre() {
 		Random generator = new Random();
 		int movement = generator.nextInt(4);
-		if(movement==0){
-			if((!(map[ogreYPos+1][ogreXPos].equals("X")))&&(!(map[ogreYPos+1][ogreXPos].equals("I")))&&(!(map[ogreYPos+1][ogreXPos].equals("H")))){
+		if (movement == 0) {
+			if ((!(map[ogreYPos + 1][ogreXPos].equals("X"))) && (!(map[ogreYPos + 1][ogreXPos].equals("I")))
+					&& (!(map[ogreYPos + 1][ogreXPos].equals("H")))) {
 				ogreYPos++;
-			}else{
+			} else {
 				moveOgre();
 			}
 		}
-		if(movement==1){
-			if((!(map[ogreYPos-1][ogreXPos].equals("X")))&&(!(map[ogreYPos-1][ogreXPos].equals("I")))&&(!(map[ogreYPos-1][ogreXPos].equals("H")))){
+		if (movement == 1) {
+			if ((!(map[ogreYPos - 1][ogreXPos].equals("X"))) && (!(map[ogreYPos - 1][ogreXPos].equals("I")))
+					&& (!(map[ogreYPos - 1][ogreXPos].equals("H")))) {
 				ogreYPos--;
-			}else{
+			} else {
 				moveOgre();
 			}
 		}
-		if(movement==2){
-			if((!(map[ogreYPos][ogreXPos+1].equals("X")))&&(!(map[ogreYPos][ogreXPos+1].equals("I")))&&(!(map[ogreYPos][ogreXPos+1].equals("H")))){
+		if (movement == 2) {
+			if ((!(map[ogreYPos][ogreXPos + 1].equals("X"))) && (!(map[ogreYPos][ogreXPos + 1].equals("I")))
+					&& (!(map[ogreYPos][ogreXPos + 1].equals("H")))) {
 				ogreXPos++;
-			}else{
+			} else {
 				moveOgre();
 			}
 		}
-		if(movement==3){
-			if((!(map[ogreYPos][ogreXPos-1].equals("X")))&&(!(map[ogreYPos][ogreXPos-1].equals("I")))&&(!(map[ogreYPos][ogreXPos-1].equals("H")))){
+		if (movement == 3) {
+			if ((!(map[ogreYPos][ogreXPos - 1].equals("X"))) && (!(map[ogreYPos][ogreXPos - 1].equals("I")))
+					&& (!(map[ogreYPos][ogreXPos - 1].equals("H")))) {
 				ogreXPos--;
-			}else{
+			} else {
 				moveOgre();
 			}
 		}
@@ -149,11 +161,71 @@ public class Map2 {
 					playerXPos--;
 				}
 			}
-			
+
 			this.moveOgre();
+
 			this.updateMap();
+
+			// representation checks
+			if (!this.leverPress) {
+				if (playerXPos == this.keyXPos) {
+					if (this.playerYPos == this.keyYPos) {
+						map[playerYPos][playerXPos] = "K";
+
+					}
+				}
+
+				if (this.ogreXPos == this.keyXPos) {
+					if (this.ogreYPos == this.keyYPos) {
+						map[ogreYPos][ogreXPos] = "$";
+					}
+				}
+			}
+
+			// Ogre collision checks
+			if ((this.playerXPos + 1) == (this.ogreXPos)) {
+				if (this.playerYPos == this.ogreYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+			if ((this.playerXPos - 1) == (this.ogreXPos)) {
+				if (this.playerYPos == this.ogreYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+			if ((this.playerXPos) == (this.ogreXPos)) {
+				if ((this.playerYPos + 1) == this.ogreYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+			if ((this.playerXPos) == (this.ogreXPos)) {
+				if ((this.playerYPos - 1) == this.ogreYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+			if ((this.playerXPos) == (this.ogreXPos)) {
+				if (this.playerYPos == this.ogreYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+
 			this.drawMap();
-			
+
 			System.out.print("Direçao(Up/Down/Left/Right):");
 
 			Direction = input.next();
