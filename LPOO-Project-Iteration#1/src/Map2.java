@@ -157,15 +157,19 @@ public class Map2 {
 				if ((!(map[playerYPos][playerXPos - 1].equals("X"))) && (!(map[playerYPos][playerXPos - 1].equals("X")))
 						&& (!(map[playerYPos][playerXPos - 1].equals("O")))) {
 					if (!openDoor) {
+						boolean isMoving = true;
 						if (!(map[playerYPos][playerXPos - 1].equals("I"))) {
 							this.playerXPos--;
+							isMoving = false;
 						}
 						if (this.playerXPos == 1) {
 							if ((this.playerYPos == 1)) {
-								openDoor = true;
+								if (isMoving) {
+									openDoor = true;
+								}
 							}
 						}
-					}else{
+					} else {
 						this.playerXPos--;
 					}
 				}
@@ -234,11 +238,11 @@ public class Map2 {
 			}
 
 			this.drawMap();
-			
-			if(map[this.playerYPos][this.playerXPos].equals("S")){
+
+			if ((this.playerXPos==0)) {
 				input.close();
 				System.out.println("\n Now You Have Trully Won Congratulation \n");
-				return ;
+				return;
 			}
 
 			System.out.print("Direçao(Up/Down/Left/Right):");
