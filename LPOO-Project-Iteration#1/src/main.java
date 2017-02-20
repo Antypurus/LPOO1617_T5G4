@@ -2,13 +2,14 @@
 public class main {
 
 	public static void main(String[] args) {
-		/*Map map = new Map();
+		Map map = new Map();
 		map.drawMap();
-		map.MoveHero();*/
-		
-		Map2 map = new Map2();
-		map.drawMap();
-		map.moveHero();
+		boolean cont = map.MoveHero();
+		if (cont) {
+			Map2 map2 = new Map2();
+			map2.drawMap();
+			map2.moveHero();
+		}
 	}
 
 }
