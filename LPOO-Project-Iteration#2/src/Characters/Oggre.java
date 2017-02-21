@@ -2,19 +2,24 @@ package Characters;
 
 public class Oggre extends Enemy{
 
-	@Override
+	public Oggre(){
+		type = "Ogre";
+		subType = "Crazy";
+		xPos = 4;
+		yPos = 1;
+		representation = 'O';
+	}
+	
 	public void move() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public String type() {
 		// TODO Auto-generated method stub
 		return null;

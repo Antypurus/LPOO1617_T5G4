@@ -135,7 +135,7 @@ public class Guard extends Enemy {
 	}
 
 	public void move() {
-		moveGuard();
+		moveGuard();// move calls the method specific to the guards movement
 	}
 
 	public void attack() {
