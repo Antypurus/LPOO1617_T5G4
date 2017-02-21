@@ -1,6 +1,8 @@
 package Characters;
 
 public abstract class Enemy {
+	
+	protected String[][] map;
 	protected int xPos;
 	protected int yPos;
 	protected String type;
