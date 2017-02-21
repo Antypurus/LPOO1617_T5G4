@@ -3,7 +3,10 @@ package Characters;
 import java.util.Random;
 
 public class Oggre extends Enemy{
-
+	
+	private int clubYPos = 1;
+	private int clubXPos = 4;
+	
 	public Oggre(){
 		type = "Ogre";
 		subType = "Crazy";
@@ -54,9 +57,48 @@ public class Oggre extends Enemy{
 		moveOgre();
 	}
 
-	public void attack() {
-		// TODO Auto-generated method stub
-		
+	public void ogreAttack() {
+		Random rand = new Random();
+		int randomClub = rand.nextInt((4 - 1) + 1) + 1;
+		clubYPos = yPos;
+		clubXPos = xPos;
+		if (randomClub == 1) {
+			if ((!(map[clubYPos - 1][clubXPos].equals("X"))) && (!(map[clubYPos - 1][clubXPos].equals("I")))) {
+				{
+					clubYPos = yPos - 1;
+				}
+			}
+		}
+		if (randomClub == 2) {
+			if ((!(map[clubYPos + 1][clubXPos].equals("X"))) && (!(map[clubYPos + 1][clubXPos].equals("I")))) {
+				{
+					clubYPos = yPos + 1;
+				}
+			}
+		}
+		if (randomClub == 3) {
+			if ((!(map[clubYPos][clubXPos + 1].equals("X"))) && (!(map[clubYPos][clubXPos + 1].equals("I")))) {
+				{
+					clubXPos = xPos + 1;
+				}
+			}
+		}
+		if (randomClub == 4) {
+			if ((!(map[clubYPos][clubXPos - 1].equals("X"))) && (!(map[clubYPos][clubXPos - 1].equals("I")))) {
+				{
+					clubXPos = xPos - 1;
+				}
+			}
+		}
+		if (clubYPos == yPos) {
+			if (clubXPos == xPos) {
+				this.ogreAttack();
+			}
+		}
+	}
+	
+	public void attack(){
+		ogreAttack();
 	}
 
 	public String type() {
