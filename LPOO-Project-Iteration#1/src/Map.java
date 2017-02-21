@@ -363,6 +363,8 @@ public class Map {
 					leverPress = true;
 				}
 			}
+			
+			this.updateMap();
 			this.moveGuard();
 			this.updateMap();
 

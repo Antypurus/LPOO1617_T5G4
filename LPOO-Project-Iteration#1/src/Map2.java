@@ -85,52 +85,57 @@ public class Map2 {
 		if (!leverPress) {
 			map[keyYPos][keyXPos] = "k";
 		}
-		map[clubYPos][clubXPos]="*";
-		if(!leverPress){
-			if(keyYPos==clubYPos){
-				if(keyXPos==clubXPos){
-					map[clubYPos][clubXPos]="$";
+		map[clubYPos][clubXPos] = "*";
+		if (!leverPress) {
+			if (keyYPos == clubYPos) {
+				if (keyXPos == clubXPos) {
+					map[clubYPos][clubXPos] = "$";
 				}
 			}
 		}
 		map[ogreYPos][ogreXPos] = "O";
 	}
 
-	private void ogreAttack(){
+	private void ogreAttack() {
 		Random rand = new Random();
-		int randomClub = rand.nextInt((4-1) +1)+1;
+		int randomClub = rand.nextInt((4 - 1) + 1) + 1;
 		clubYPos = ogreYPos;
 		clubXPos = ogreXPos;
-		if(randomClub == 1) {
-			if((!(map[clubYPos-1][clubXPos].equals("X")))&&(!(map[clubYPos-1][clubXPos].equals("I")))) {
-		{
-			clubYPos = ogreYPos - 1;
-		}
+		if (randomClub == 1) {
+			if ((!(map[clubYPos - 1][clubXPos].equals("X"))) && (!(map[clubYPos - 1][clubXPos].equals("I")))) {
+				{
+					clubYPos = ogreYPos - 1;
+				}
 			}
 		}
-		if(randomClub == 2) {
-			if((!(map[clubYPos+1][clubXPos].equals("X")))&&(!(map[clubYPos+1][clubXPos].equals("I")))){		
-		{
-			clubYPos = ogreYPos +1;
-		}
+		if (randomClub == 2) {
+			if ((!(map[clubYPos + 1][clubXPos].equals("X"))) && (!(map[clubYPos + 1][clubXPos].equals("I")))) {
+				{
+					clubYPos = ogreYPos + 1;
+				}
 			}
 		}
-		if(randomClub == 3) {
-			if((!(map[clubYPos][clubXPos+1].equals("X")))&&(!(map[clubYPos][clubXPos+1].equals("I")))){	
-		{
-			clubXPos = ogreXPos +1;
-		}
+		if (randomClub == 3) {
+			if ((!(map[clubYPos][clubXPos + 1].equals("X"))) && (!(map[clubYPos][clubXPos + 1].equals("I")))) {
+				{
+					clubXPos = ogreXPos + 1;
+				}
 			}
 		}
-		if(randomClub == 4) {
-			if((!(map[clubYPos][clubXPos-1].equals("X")))&&(!(map[clubYPos][clubXPos-1].equals("I")))){	
-		{
-			clubXPos = ogreXPos -1;
+		if (randomClub == 4) {
+			if ((!(map[clubYPos][clubXPos - 1].equals("X"))) && (!(map[clubYPos][clubXPos - 1].equals("I")))) {
+				{
+					clubXPos = ogreXPos - 1;
+				}
+			}
 		}
+		if (clubYPos == ogreYPos) {
+			if (clubXPos == ogreXPos) {
+				this.ogreAttack();
 			}
 		}
 	}
-	
+
 	public void moveOgre() {
 		Random generator = new Random();
 		int movement = generator.nextInt(4);
@@ -283,8 +288,8 @@ public class Map2 {
 					return;
 				}
 			}
-			
-			//club colison check
+
+			// club colison check
 			if ((this.playerXPos + 1) == (this.clubXPos)) {
 				if (this.playerYPos == this.clubYPos) {
 					this.drawMap();
@@ -326,10 +331,9 @@ public class Map2 {
 				}
 			}
 
-			
 			this.drawMap();
 
-			if ((this.playerXPos==0)) {
+			if ((this.playerXPos == 0)) {
 				input.close();
 				System.out.println("\n Now You Have Trully Won Congratulation \n");
 				return;
