@@ -20,4 +20,12 @@ public class Oggre extends Enemy{
 		return null;
 	}
 	
+	public String subType(){
+		return subType;
+	}
+	
+	public char representation(){
+		return representation;
+	}
+	
 }
