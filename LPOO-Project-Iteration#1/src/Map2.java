@@ -8,6 +8,8 @@ public class Map2 {
 	private int ogreYPos = 1;
 	private int keyXPos = 8;
 	private int keyYPos = 1;
+	private int clubYPos = 1;
+	private int clubXPos = 4;
 	private boolean openDoor = false;
 	private boolean leverPress = false;
 
@@ -79,13 +81,56 @@ public class Map2 {
 				map[i][j] = " ";
 			}
 		}
-		map[ogreYPos][ogreXPos] = "O";
 		map[playerYPos][playerXPos] = "H";
 		if (!leverPress) {
 			map[keyYPos][keyXPos] = "k";
 		}
+		map[clubYPos][clubXPos]="*";
+		if(!leverPress){
+			if(keyYPos==clubYPos){
+				if(keyXPos==clubXPos){
+					map[clubYPos][clubXPos]="$";
+				}
+			}
+		}
+		map[ogreYPos][ogreXPos] = "O";
 	}
 
+	private void ogreAttack(){
+		Random rand = new Random();
+		int randomClub = rand.nextInt((4-1) +1)+1;
+		clubYPos = ogreYPos;
+		clubXPos = ogreXPos;
+		if(randomClub == 1) {
+			if((!(map[clubYPos-1][clubXPos].equals("X")))&&(!(map[clubYPos-1][clubXPos].equals("I")))) {
+		{
+			clubYPos = ogreYPos - 1;
+		}
+			}
+		}
+		if(randomClub == 2) {
+			if((!(map[clubYPos+1][clubXPos].equals("X")))&&(!(map[clubYPos+1][clubXPos].equals("I")))){		
+		{
+			clubYPos = ogreYPos +1;
+		}
+			}
+		}
+		if(randomClub == 3) {
+			if((!(map[clubYPos][clubXPos+1].equals("X")))&&(!(map[clubYPos][clubXPos+1].equals("I")))){	
+		{
+			clubXPos = ogreXPos +1;
+		}
+			}
+		}
+		if(randomClub == 4) {
+			if((!(map[clubYPos][clubXPos-1].equals("X")))&&(!(map[clubYPos][clubXPos-1].equals("I")))){	
+		{
+			clubXPos = ogreXPos -1;
+		}
+			}
+		}
+	}
+	
 	public void moveOgre() {
 		Random generator = new Random();
 		int movement = generator.nextInt(4);
@@ -175,8 +220,10 @@ public class Map2 {
 				}
 			}
 
+			this.updateMap();
 			this.moveOgre();
-
+			this.updateMap();
+			this.ogreAttack();
 			this.updateMap();
 
 			// representation checks
@@ -237,6 +284,7 @@ public class Map2 {
 				}
 			}
 
+			
 			this.drawMap();
 
 			if ((this.playerXPos==0)) {

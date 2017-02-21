@@ -363,6 +363,8 @@ public class Map {
 					leverPress = true;
 				}
 			}
+			this.moveGuard();
+			this.updateMap();
 
 			if (map[playerYPos + 1][playerXPos].equals("G")) {
 				System.out.println("You LOSE!");
@@ -390,8 +392,6 @@ public class Map {
 				return true;
 			}
 
-			this.moveGuard();
-			this.updateMap();
 			this.drawMap();
 
 			System.out.print("Direçao(Up/Down/Left/Right):");
