@@ -283,6 +283,48 @@ public class Map2 {
 					return;
 				}
 			}
+			
+			//club colison check
+			if ((this.playerXPos + 1) == (this.clubXPos)) {
+				if (this.playerYPos == this.clubYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+			if ((this.playerXPos - 1) == (this.clubXPos)) {
+				if (this.playerYPos == this.clubYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+			if ((this.playerXPos) == (this.clubXPos)) {
+				if ((this.playerYPos + 1) == this.clubYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+			if ((this.playerXPos) == (this.clubXPos)) {
+				if ((this.playerYPos - 1) == this.clubYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
+			if ((this.playerXPos) == (this.clubXPos)) {
+				if (this.playerYPos == this.clubYPos) {
+					this.drawMap();
+					System.out.println("You LOSE!");
+					input.close();
+					return;
+				}
+			}
 
 			
 			this.drawMap();
