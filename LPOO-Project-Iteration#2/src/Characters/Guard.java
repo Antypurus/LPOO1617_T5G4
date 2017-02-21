@@ -1,5 +1,5 @@
 package Characters;
 
-public class Guard extends Enemy {
+public class Guard implements Enemy {
 
 }

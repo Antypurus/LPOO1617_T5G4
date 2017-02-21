@@ -1,5 +1,5 @@
 package Characters;
 
-public abstract class Enemy {
+public interface Enemy {
 
 }
