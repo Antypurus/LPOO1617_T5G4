@@ -7,12 +7,13 @@ public class Oggre extends Enemy{
 	private int clubYPos = 1;
 	private int clubXPos = 4;
 	
-	public Oggre(){
+	public Oggre(String[][] map){
 		type = "Ogre";
 		subType = "Crazy";
 		xPos = 4;
 		yPos = 1;
 		representation = 'O';
+		this.map=map;
 	}
 	
 	public void moveOgre() {
@@ -102,8 +103,7 @@ public class Oggre extends Enemy{
 	}
 
 	public String type() {
-		// TODO Auto-generated method stub
-		return null;
+		return type ;
 	}
 	
 	public String subType(){

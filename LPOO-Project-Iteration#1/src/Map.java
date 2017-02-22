@@ -323,7 +323,7 @@ public class Map {
 	public boolean MoveHero() {
 
 		Scanner input = new Scanner(System.in);
-		System.out.print("Direçao(Up/Down/Left/Right):");
+		System.out.print("DireÃ§Ã£o(Up/Down/Left/Right):");
 		String Direction = input.next();
 		System.out.println(Direction);
 		System.out.print("\n");
@@ -396,7 +396,7 @@ public class Map {
 
 			this.drawMap();
 
-			System.out.print("Direçao(Up/Down/Left/Right):");
+			System.out.print("Direï¿½ao(Up/Down/Left/Right):");
 
 			Direction = input.next();
 

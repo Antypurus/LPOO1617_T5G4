@@ -3,12 +3,13 @@ package Characters;
 public class Guard extends Enemy {
 	private int guardMovStage = 0;
 	
-	public Guard(){
+	public Guard(String[][] map){
 		type = "Guard";
 		subType = "";
 		xPos = 8;
 		yPos = 1;
 		representation = 'O';
+		this.map=map;
 	}
 	
 	private void moveGuard() {
