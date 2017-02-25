@@ -32,10 +32,10 @@ public class Map implements GameMap {
     }
 
     public boolean moveTo(int x, int y,Character character){
-        int intX=hero.getxPos()+x;
-        int intY=hero.getyPos()+y;
+        int intX=character.getxPos()+x;
+        int intY=character.getyPos()+y;
         String check = map[intY][intX];
-        if(check.equals("X")){
+        if(check.equals("X")||check.equals("I")||check.equals("H")||check.equals("O")||check.equals("G")){
             return false;
         }
         return true;
