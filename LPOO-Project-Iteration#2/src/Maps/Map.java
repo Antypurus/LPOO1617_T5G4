@@ -13,13 +13,16 @@ public class Map implements GameMap {
     Key[] keys;
     boolean hasNextMap=false;
     GameMap nextMap;
+    private int height,width;
 
 
-    public Map(String[][] map, Hero hero, Enemy[] enemies, Key[] key){
+    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key){
         this.map=map;
         this.enemies=enemies;
         this.hero=hero;
         this.keys=key;
+        this.height=dimensions.getySize();
+        this.width=dimensions.getxSize();
     }
 
     public Map(String[][] map, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap){
@@ -55,6 +58,24 @@ public class Map implements GameMap {
             return nextMap;
         }else{
             return null;
+        }
+    }
+
+    public boolean hasWon(){
+        int x=hero.getxPos();
+        int y=hero.getyPos();
+        String check=map[y][x];
+        if(check.equals("S")){
+            return true;
+        }
+        return false;
+    }
+
+    public void drawMap(){
+        for(int i=0;i<height;i++){
+            for(int j=0;j<width;j++){
+                System.out.print("|"+map[i][j]+"|");
+            }
         }
     }
 
