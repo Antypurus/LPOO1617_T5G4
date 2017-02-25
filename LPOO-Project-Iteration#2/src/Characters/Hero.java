@@ -2,7 +2,7 @@ package Characters;
 
 import java.util.Scanner;
 
-public class Hero {
+public class Hero extends Character {
     private int yPos;
     private int xPos;
     private boolean hasKey=false;
@@ -10,10 +10,18 @@ public class Hero {
     private char representation = 'H';
     private String[][] map;
 
+    public int getyPos() {
+        return yPos;
+    }
+    public int getxPos() {
+        return xPos;
+    }
+
     public Hero(String[][] map, int x, int y) {
         this.map = map;
         this.xPos=x;
         this.yPos=y;
+
     }
 
 

@@ -1,5 +1,6 @@
 package Maps;
 
+import Characters.Character;
 import Characters.Hero;
 import Characters.Enemy;
 import Objects.Key;
@@ -30,8 +31,14 @@ public class Map implements GameMap {
         this.nextMap=nextMap;
     }
 
-    public boolean moveTo(int x,int y){
-        return false;
+    public boolean moveTo(int x, int y,Character character){
+        int intX=hero.getxPos()+x;
+        int intY=hero.getyPos()+y;
+        String check = map[intY][intX];
+        if(check.equals("X")){
+            return false;
+        }
+        return true;
     }
 
     public void setNextMap(GameMap nextMap){

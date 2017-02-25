@@ -1,8 +1,5 @@
 package Objects;
 
-/**
- * Created by craky on 2/24/2017.
- */
 public class Key {
 
     private int xPos;

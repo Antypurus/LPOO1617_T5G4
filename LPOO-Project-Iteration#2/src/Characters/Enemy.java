@@ -1,6 +1,6 @@
 package Characters;
 
-public abstract class Enemy {
+public abstract class Enemy extends Character {
 	
 	protected String[][] map;
 	protected int xPos;
