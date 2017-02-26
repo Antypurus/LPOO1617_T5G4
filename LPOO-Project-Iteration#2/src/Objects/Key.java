@@ -19,7 +19,7 @@ public class Key {
         return yPos;
     }
 
-    public boolean isWasPicked() {
+    public boolean isPicked() {
         return wasPicked;
     }
 

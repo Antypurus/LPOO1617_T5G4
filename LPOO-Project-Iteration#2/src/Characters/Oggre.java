@@ -12,7 +12,7 @@ public class Oggre extends Enemy{
 		subType = "Crazy";
 		xPos = 4;
 		yPos = 1;
-		representation = 'O';
+		representation = "O";
 		this.map=map;
 	}
 	
@@ -110,7 +110,7 @@ public class Oggre extends Enemy{
 		return subType;
 	}
 	
-	public char representation(){
+	public String getRepresentation(){
 		return representation;
 	}
 	

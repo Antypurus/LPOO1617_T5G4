@@ -7,7 +7,7 @@ public class Hero extends Character {
     private int xPos;
     private boolean hasKey=false;
     private boolean pressedLever=false;
-    private char representation = 'H';
+    private String representation = "H";
     private String[][] map;
 
     public int getyPos() {
@@ -15,6 +15,10 @@ public class Hero extends Character {
     }
     public int getxPos() {
         return xPos;
+    }
+
+    public String getRepresentation(){
+        return representation;
     }
 
     public Hero(String[][] map, int x, int y) {

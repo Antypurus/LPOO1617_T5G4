@@ -8,7 +8,7 @@ public class Guard extends Enemy {
 		subType = "";
 		xPos = 8;
 		yPos = 1;
-		representation = 'O';
+		representation = "O";
 		this.map=map;
 	}
 	
@@ -151,7 +151,7 @@ public class Guard extends Enemy {
 		return subType;
 	}
 
-	public char representation(){
+	public String getRepresentation(){
 		return representation;
 	}
 }

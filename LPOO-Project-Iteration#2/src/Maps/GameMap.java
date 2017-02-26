@@ -8,4 +8,5 @@ public interface GameMap {
 	GameMap nextMap();
 	boolean hasWon();
 	void drawMap();
+	boolean mapLogic();
 }

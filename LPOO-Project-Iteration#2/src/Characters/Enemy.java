@@ -7,7 +7,7 @@ public abstract class Enemy extends Character {
 	protected int yPos;
 	protected String type;
 	protected String subType;
-	char representation;
+	protected String representation;
 
 	public abstract void move();
 
@@ -16,8 +16,6 @@ public abstract class Enemy extends Character {
 	public abstract String type();
 
 	public abstract String subType();
-
-	public abstract char representation();
 	
 	public int getXPos(){
 		return xPos;
@@ -35,7 +33,7 @@ public abstract class Enemy extends Character {
 		return subType;
 	}
 	
-	public char getRepresentation(){
+	public String getRepresentation(){
 		return representation;
 	}
 }

@@ -72,6 +72,19 @@ public class Map implements GameMap {
     }
 
     public void drawMap(){
+
+        for(int i=0;i<keys.length;i++){
+            if(keys[i].isPicked()){
+                map[keys[i].getyPos()][keys[i].getxPos()]="k";
+            }
+        }
+
+        for(int i=0;i<enemies.length;i++){
+            map[enemies[i].getyPos()][enemies[i].getxPos()]=enemies[i].getRepresentation();
+        }
+
+        map[hero.getyPos()][hero.getyPos()]=hero.getRepresentation();
+
         for(int i=0;i<height;i++){
             for(int j=0;j<width;j++){
                 System.out.print("|"+map[i][j]+"|");
@@ -79,4 +92,7 @@ public class Map implements GameMap {
         }
     }
 
+    public boolean mapLogic(){
+        return false;
+    }
 }
