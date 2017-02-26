@@ -118,6 +118,7 @@ public class Map implements GameMap {
         }
 
         resetMap();
+
     }
 
     public boolean mapLogic(){
