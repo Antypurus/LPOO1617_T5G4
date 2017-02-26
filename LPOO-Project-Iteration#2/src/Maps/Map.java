@@ -14,6 +14,7 @@ public class Map implements GameMap {
     boolean hasNextMap=false;
     GameMap nextMap;
     private int height,width;
+    private boolean imideateOpen=true;//represents weather or not the player need to spend a movement action to open the door
 
 
     public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key){
@@ -25,6 +26,16 @@ public class Map implements GameMap {
         this.width=dimensions.getxSize();
     }
 
+    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,boolean imediateOpen){
+        this.map=map;
+        this.enemies=enemies;
+        this.hero=hero;
+        this.keys=key;
+        this.height=dimensions.getySize();
+        this.width=dimensions.getxSize();
+        this.imideateOpen=imediateOpen;
+    }
+
     public Map(String[][] map, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap){
         this.map=map;
         this.enemies=enemies;
@@ -32,6 +43,16 @@ public class Map implements GameMap {
         this.keys=key;
         this.hasNextMap=true;
         this.nextMap=nextMap;
+    }
+
+    public Map(String[][] map, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap, boolean imeaditeOpen){
+        this.map=map;
+        this.enemies=enemies;
+        this.hero=hero;
+        this.keys=key;
+        this.hasNextMap=true;
+        this.nextMap=nextMap;
+        this.imideateOpen=imeaditeOpen;
     }
 
     public boolean moveTo(int x, int y,Character character){
