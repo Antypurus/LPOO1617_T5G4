@@ -4,14 +4,23 @@ import java.util.Random;
 
 public class Oggre extends Enemy{
 	
-	private int clubYPos = 1;
-	private int clubXPos = 4;
+	private int clubYPos = this.yPos;
+	private int clubXPos = this.xPos;
 	
 	public Oggre(String[][] map){
 		type = "Ogre";
 		subType = "Crazy";
 		xPos = 4;
 		yPos = 1;
+		representation = "O";
+		this.map=map;
+	}
+
+	public Oggre(String[][] map,int x,int y){
+		type = "Ogre";
+		subType = "Crazy";
+		xPos = x;
+		yPos = y;
 		representation = "O";
 		this.map=map;
 	}

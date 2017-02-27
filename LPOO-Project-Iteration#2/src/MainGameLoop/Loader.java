@@ -1,5 +1,8 @@
 package MainGameLoop;
 
+import Characters.Guard;
+import Characters.Hero;
+import Characters.Oggre;
 import Maps.MapDimension;
 
 public class Loader {
@@ -32,5 +35,14 @@ public class Loader {
             {"X","X","X","X","X","X","X","X","X","X"}
     };
     private MapDimension map2Dimension=new MapDimension(10,10);
+
+
+    Hero ma1Hero= new Hero(map1,2,1);
+    Hero map2Hero=new Hero(map2,1,8);
+
+    Guard map1Guard = new Guard(map1);
+    Oggre map2Oggre = new Oggre(map2);
+
+
 
 }

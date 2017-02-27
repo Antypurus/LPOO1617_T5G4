@@ -11,6 +11,15 @@ public class Guard extends Enemy {
 		representation = "O";
 		this.map=map;
 	}
+
+	public Guard(String[][] map,int x,int y){
+		type = "Guard";
+		subType = "";
+		xPos = x;
+		yPos = y;
+		representation = "O";
+		this.map=map;
+	}
 	
 	private void moveGuard() {
 		if (guardMovStage == 0) {
