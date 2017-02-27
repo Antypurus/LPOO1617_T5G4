@@ -4,6 +4,7 @@ import Characters.Character;
 import Characters.Hero;
 import Characters.Enemy;
 import Objects.Key;
+import Objects.Lever;
 
 public class Map implements GameMap {
 
@@ -11,6 +12,7 @@ public class Map implements GameMap {
     Enemy[] enemies;
     Hero hero;
     Key[] keys;
+    Lever[] levers;
     boolean hasNextMap=false;
     GameMap nextMap;
     private int height,width;

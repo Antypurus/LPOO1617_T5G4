@@ -1,6 +1,6 @@
 package Objects;
 
-public class Key {
+public class Key extends Object {
 
     private int xPos;
     private int yPos;
