@@ -103,6 +103,7 @@ public class Map implements GameMap {
             if(keys[i].isPicked()){
                 map[keys[i].getyPos()][keys[i].getxPos()]="k";
             }
+            System.out.println("\n");
         }
 
         for(int i=0;i<enemies.length;i++){
