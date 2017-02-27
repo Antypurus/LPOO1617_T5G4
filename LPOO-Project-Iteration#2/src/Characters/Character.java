@@ -4,10 +4,10 @@ public abstract class Character {
     private int xPos;
     private int yPos;
 
-    public int getyPos() {
+    public int getYPos() {
         return yPos;
     }
-    public int getxPos() {
+    public int getXPos() {
         return xPos;
     }
 }

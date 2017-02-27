@@ -8,7 +8,7 @@ public class Guard extends Enemy {
 		subType = "";
 		xPos = 8;
 		yPos = 1;
-		representation = "O";
+		representation = "G";
 		this.map=map;
 	}
 

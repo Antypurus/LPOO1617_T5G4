@@ -57,8 +57,8 @@ public class Map implements GameMap {
     }
 
     public boolean moveTo(int x, int y,Character character){
-        int intX=character.getxPos()+x;
-        int intY=character.getyPos()+y;
+        int intX=character.getXPos()+x;
+        int intY=character.getYPos()+y;
         String check = map[intY][intX];
         if(check.equals("X")||check.equals("I")||check.equals("H")||check.equals("O")||check.equals("G")){
             return false;
@@ -100,14 +100,13 @@ public class Map implements GameMap {
     public void drawMap(){
 
         for(int i=0;i<keys.length;i++){
-            if(keys[i].isPicked()){
-                map[keys[i].getyPos()][keys[i].getxPos()]="k";
+            if(!keys[i].isPicked()) {
+                map[keys[i].getyPos()][keys[i].getxPos()] = this.keys[i].getRep();
             }
-            System.out.println("\n");
         }
 
         for(int i=0;i<enemies.length;i++){
-            map[enemies[i].getyPos()][enemies[i].getxPos()]=enemies[i].getRepresentation();
+            map[enemies[i].getYPos()][enemies[i].getXPos()]=enemies[i].getRepresentation();
         }
 
         map[hero.getyPos()][hero.getyPos()]=hero.getRepresentation();
@@ -116,7 +115,10 @@ public class Map implements GameMap {
             for(int j=0;j<width;j++){
                 System.out.print("|"+map[i][j]+"|");
             }
+            System.out.print("\n");
         }
+
+        System.out.println("Enemy is is position: ("+enemies[0].getXPos()+","+enemies[0].getYPos()+")");
 
         resetMap();
 

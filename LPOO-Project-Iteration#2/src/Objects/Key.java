@@ -4,6 +4,7 @@ public class Key {
 
     private int xPos;
     private int yPos;
+    private String Representation = "k";
     private boolean wasPicked=false;
 
     public Key(int x,int y){
@@ -25,5 +26,9 @@ public class Key {
 
     public void setWasPicked(boolean wasPicked) {
         this.wasPicked = wasPicked;
+    }
+
+    public String getRep(){
+        return this.Representation;
     }
 }

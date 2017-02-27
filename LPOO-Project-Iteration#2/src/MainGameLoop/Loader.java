@@ -45,12 +45,14 @@ public class Loader {
     private Guard map1Guard = new Guard(map1);
     private Oggre map2Oggre = new Oggre(map2);
 
+    private Key map1Key = new Key(7,8);
+
     private Enemy[] map1Enemies=new Enemy[1];
     private Key[] map1Keys=new Key[1];
 
     public Loader(){
         map1Enemies[0]=map1Guard;
-        map1Keys[0]=new Key(7,8);
+        map1Keys[0]=map1Key;
 
         Map map1 = new Map(this.map1,map1Dimension,ma1Hero,map1Enemies,map1Keys,true);
         map1.drawMap();
