@@ -9,12 +9,12 @@ import Objects.Lever;
 public class Map implements GameMap {
 
     String[][] map,resetMap;
-    Enemy[] enemies;
+    Enemy[] enemies = null;
     Hero hero;
-    Key[] keys;
-    Lever[] levers;
+    Key[] keys=null;
+    Lever[] levers=null;
     boolean hasNextMap=false;
-    GameMap nextMap;
+    GameMap nextMap=null;
     private int height,width;
     private boolean imideateOpen=true;//represents weather or not the player need to spend a movement action to open the door
 
@@ -39,21 +39,45 @@ public class Map implements GameMap {
         this.imideateOpen=imediateOpen;
     }
 
-    public Map(String[][] map, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap){
+    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers){
+        this.map=map;
+        this.resetMap=map;
+        this.enemies=enemies;
+        this.hero=hero;
+        this.levers=levers;
+        this.height=dimensions.getySize();
+        this.width=dimensions.getxSize();
+    }
+
+    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers,boolean imediateOpen){
+        this.map=map;
+        this.enemies=enemies;
+        this.hero=hero;
+        this.levers=levers;
+        this.height=dimensions.getySize();
+        this.width=dimensions.getxSize();
+        this.imideateOpen=imediateOpen;
+    }
+    
+    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap){
         this.map=map;
         this.enemies=enemies;
         this.hero=hero;
         this.keys=key;
         this.hasNextMap=true;
+        this.height=dimensions.getySize();
+        this.width=dimensions.getxSize();
         this.nextMap=nextMap;
     }
 
-    public Map(String[][] map, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap, boolean imeaditeOpen){
+    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap, boolean imeaditeOpen){
         this.map=map;
         this.enemies=enemies;
         this.hero=hero;
         this.keys=key;
         this.hasNextMap=true;
+        this.height=dimensions.getySize();
+        this.width=dimensions.getxSize();
         this.nextMap=nextMap;
         this.imideateOpen=imeaditeOpen;
     }
