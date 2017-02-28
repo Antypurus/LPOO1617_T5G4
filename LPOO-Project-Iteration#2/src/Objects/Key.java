@@ -1,5 +1,7 @@
 package Objects;
 
+import Characters.Hero;
+
 public class Key extends Object {
 
     private int xPos;
@@ -22,6 +24,14 @@ public class Key extends Object {
 
     public boolean isPicked() {
         return wasPicked;
+    }
+
+    public void detectPickup(Hero hero){
+        if(hero.getyPos()==this.yPos){
+            if(hero.getxPos()==this.xPos){
+                this.wasPicked=true;
+            }
+        }
     }
 
     public void setWasPicked(boolean wasPicked) {

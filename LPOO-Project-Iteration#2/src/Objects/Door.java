@@ -24,20 +24,34 @@ public class Door extends Object {
     public void setOpen(boolean state){
     	this.isOpean=state;
 	}
+
+	public boolean getIsOpen(){
+    	return this.isOpean;
+	}
     
     public String getRepresentation(){
     	if(this.associatedKey==null){
     		if(this.associatedLever.getState()){
+    			this.isOpean=true;
     			return openRep;
     		}else{
     			return closedRep;
     		}
     	}else{
     		if(this.associatedKey.isPicked()){
+    			this.isOpean=true;
     			return openRep;
     		}else{
     			return closedRep;
     		}
     	}
     }
+
+	public int getxPos() {
+		return xPos;
+	}
+
+	public int getyPos() {
+		return yPos;
+	}
 }

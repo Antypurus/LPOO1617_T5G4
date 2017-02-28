@@ -10,7 +10,7 @@ import inputs.TextInput;
 
 public class Map implements GameMap {
 
-    private String[][] map,resetMap;
+    private String[][] map=new String[10][10],resetMap=new String[10][10];
     private Enemy[] enemies = null;
     private Hero hero;
     private Key[] keys=null;
@@ -20,7 +20,6 @@ public class Map implements GameMap {
     private GameMap nextMap=null;
     private int height,width;
     private boolean imideateOpen=true;//represents weather or not the player need to spend a movement action to open the door
-
 
     public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key){
         this.map=map;
@@ -40,6 +39,7 @@ public class Map implements GameMap {
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
         this.imideateOpen=imediateOpen;
+        this.resetMap=map;
     }
 
     public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers){
@@ -60,6 +60,7 @@ public class Map implements GameMap {
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
         this.imideateOpen=imediateOpen;
+        this.resetMap=map;
     }
     
     public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap){
@@ -71,6 +72,7 @@ public class Map implements GameMap {
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
         this.nextMap=nextMap;
+        this.resetMap=map;
     }
 
     public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap, boolean imeaditeOpen){
@@ -83,6 +85,7 @@ public class Map implements GameMap {
         this.width=dimensions.getxSize();
         this.nextMap=nextMap;
         this.imideateOpen=imeaditeOpen;
+        this.resetMap=map;
     }
 
     public void setDoor(Door[] doors){
@@ -120,9 +123,16 @@ public class Map implements GameMap {
         int x=hero.getxPos();
         int y=hero.getyPos();
         String check=map[y][x];
-        if(check.equals("S")){
-            return true;
-        }
+        if(doors!=null){
+        for(int i=0;i<doors.length;i++){
+            if(doors[i].getIsOpen()){
+                if(x==doors[i].getxPos()){
+                    if(y==doors[i].getyPos()){
+                        return true;
+                    }
+                }
+            }
+        }}
         return false;
     }
 
@@ -148,6 +158,12 @@ public class Map implements GameMap {
             }
         }
 
+        if(doors!=null){
+            for(int i=0;i<doors.length;i++){
+                map[doors[i].getyPos()][doors[i].getxPos()]=this.doors[i].getRepresentation();
+            }
+        }
+
         for(int i=0;i<enemies.length;i++){
             map[enemies[i].getYPos()][enemies[i].getXPos()]=enemies[i].getRepresentation();
         }
@@ -168,9 +184,10 @@ public class Map implements GameMap {
         int movement;
 
         while(!hasWon()){
-            movement = direction.getNextStep();
 
             this.drawMap();
+
+            movement = direction.getNextStep();
 
             switch (movement){
                 case(1):
@@ -191,9 +208,30 @@ public class Map implements GameMap {
                     }
             }
 
+            if(keys!=null){
+                for(int i=0;i<keys.length;i++){
+                    this.keys[i].detectPickup(this.hero);
+                }
+            }
+
+            if(levers!=null){
+                for(int i=0;i<levers.length;i++){
+                    this.levers[i].detectPress(this.hero);
+                }
+            }
+
+            for(int i = 0 ;i<enemies.length;i++){
+                this.enemies[i].move();
+                this.enemies[i].attack();
+            }
+
+            if(hasWon()){
+                System.out.println("Congratulations you have won");
+            }
+
         }
 
-
+        direction.close();
         return false;
 
     }

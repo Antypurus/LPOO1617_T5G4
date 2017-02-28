@@ -6,6 +6,7 @@ import Characters.Hero;
 import Characters.Oggre;
 import Maps.Map;
 import Maps.MapDimension;
+import Objects.Door;
 import Objects.Key;
 
 public class Loader {
@@ -50,12 +51,17 @@ public class Loader {
     private Enemy[] map1Enemies=new Enemy[1];
     private Key[] map1Keys=new Key[1];
 
+    private Door[] map1Doors = new Door[2];
+
     public Loader(){
         map1Enemies[0]=map1Guard;
         map1Keys[0]=map1Key;
+        map1Doors[0]=new Door(0,5,map1Key);
+        map1Doors[1]=new Door(0,6,map1Key);
 
         Map map1 = new Map(this.map1,map1Dimension,ma1Hero,map1Enemies,map1Keys,true);
-        map1.drawMap();
+        map1.setDoor(map1Doors);
+        map1.mapLogic();
     }
 
 

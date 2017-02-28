@@ -23,6 +23,8 @@ public class TextInput {
     
     public int getNextStep(){
     	String check = read();
+
+    	System.out.print("Direcção em que se pretende mover:");
     	
     	if(check.equals("Up")||check.equals("up")||check.equals("w")){
     		return 1;
@@ -36,6 +38,8 @@ public class TextInput {
     	if(check.equals("Right")||check.equals("right")||check.equals("d")){
     		return 4;
     	}
+
+    	System.out.print("\n");
     	
     	return 0;
     }

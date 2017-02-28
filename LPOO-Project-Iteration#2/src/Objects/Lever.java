@@ -1,5 +1,7 @@
 package Objects;
 
+import Characters.Hero;
+
 public class Lever {
 
 	private int xPos;
@@ -20,6 +22,14 @@ public class Lever {
 
 	public void setState(boolean state){
 		this.wasPressed=state;
+	}
+
+	public void detectPress(Hero hero){
+		if(hero.getxPos()==this.xPos){
+			if(hero.getyPos()==this.yPos){
+				this.wasPressed=true;
+			}
+		}
 	}
 
 	public int getxPos() {
