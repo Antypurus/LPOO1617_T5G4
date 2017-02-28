@@ -23,6 +23,18 @@ public class Loader {
         {"X"," ","I"," ","I"," ","X"," "," ","X"},
         {"X","X","X","X","X","X","X","X","X","X"}
     };
+    private String[][] referenceMap1=new String[][]{
+            {"X","X","X","X","X","X","X","X","X","X"},
+            {"X"," "," "," ","I"," ","X"," "," ","X"},
+            {"X","X","X"," ","X","X","X"," "," ","X"},
+            {"X"," ","I"," ","I"," ","X"," "," ","X"},
+            {"X","X","X"," ","X","X","X"," "," ","X"},
+            {" "," "," "," "," "," "," "," "," ","X"},
+            {" "," "," "," "," "," "," "," "," ","X"},
+            {"X","X","X"," ","X","X","X","X"," ","X"},
+            {"X"," ","I"," ","I"," ","X"," "," ","X"},
+            {"X","X","X","X","X","X","X","X","X","X"}
+    };
     private MapDimension map1Dimension=new MapDimension(10,10);
 
 
@@ -38,6 +50,20 @@ public class Loader {
             {"X"," "," "," "," "," "," "," "," ","X"},
             {"X","X","X","X","X","X","X","X","X","X"}
     };
+
+    private String[][] referenceMap2=new String[][]{
+            {"X","X","X","X","X","X","X","X","X","X"},
+            {" "," "," "," "," "," "," "," "," ","X"},
+            {"X"," "," "," "," "," "," "," "," ","X"},
+            {"X"," "," "," "," "," "," "," "," ","X"},
+            {"X"," "," "," "," "," "," "," "," ","X"},
+            {"X"," "," "," "," "," "," "," "," ","X"},
+            {"X"," "," "," "," "," "," "," "," ","X"},
+            {"X"," "," "," "," "," "," "," "," ","X"},
+            {"X"," "," "," "," "," "," "," "," ","X"},
+            {"X","X","X","X","X","X","X","X","X","X"}
+    };
+
     private MapDimension map2Dimension=new MapDimension(10,10);
 
     private Hero ma1Hero= new Hero(map1,2,1);
@@ -59,7 +85,7 @@ public class Loader {
         map1Doors[0]=new Door(0,5,map1Key);
         map1Doors[1]=new Door(0,6,map1Key);
 
-        Map map1 = new Map(this.map1,map1Dimension,ma1Hero,map1Enemies,map1Keys,true);
+        Map map1 = new Map(this.map1,this.referenceMap1,map1Dimension,ma1Hero,map1Enemies,map1Keys,true);
         map1.setDoor(map1Doors);
         map1.mapLogic();
     }

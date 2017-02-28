@@ -21,9 +21,9 @@ public class Map implements GameMap {
     private int height,width;
     private boolean imideateOpen=true;//represents weather or not the player need to spend a movement action to open the door
 
-    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key){
+    public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key){
         this.map=map;
-        this.resetMap=map;
+        this.resetMap=referenceMap;
         this.enemies=enemies;
         this.hero=hero;
         this.keys=key;
@@ -31,7 +31,7 @@ public class Map implements GameMap {
         this.width=dimensions.getxSize();
     }
 
-    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,boolean imediateOpen){
+    public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,boolean imediateOpen){
         this.map=map;
         this.enemies=enemies;
         this.hero=hero;
@@ -39,12 +39,12 @@ public class Map implements GameMap {
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
         this.imideateOpen=imediateOpen;
-        this.resetMap=map;
+        this.resetMap=referenceMap;
     }
 
-    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers){
+    public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers){
         this.map=map;
-        this.resetMap=map;
+        this.resetMap=referenceMap;
         this.enemies=enemies;
         this.hero=hero;
         this.levers=levers;
@@ -52,7 +52,7 @@ public class Map implements GameMap {
         this.width=dimensions.getxSize();
     }
 
-    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers,boolean imediateOpen){
+    public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers,boolean imediateOpen){
         this.map=map;
         this.enemies=enemies;
         this.hero=hero;
@@ -60,10 +60,10 @@ public class Map implements GameMap {
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
         this.imideateOpen=imediateOpen;
-        this.resetMap=map;
+        this.resetMap=referenceMap;
     }
     
-    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap){
+    public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap){
         this.map=map;
         this.enemies=enemies;
         this.hero=hero;
@@ -72,10 +72,10 @@ public class Map implements GameMap {
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
         this.nextMap=nextMap;
-        this.resetMap=map;
+        this.resetMap=referenceMap;
     }
 
-    public Map(String[][] map,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap, boolean imeaditeOpen){
+    public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap, boolean imeaditeOpen){
         this.map=map;
         this.enemies=enemies;
         this.hero=hero;
@@ -85,7 +85,7 @@ public class Map implements GameMap {
         this.width=dimensions.getxSize();
         this.nextMap=nextMap;
         this.imideateOpen=imeaditeOpen;
-        this.resetMap=map;
+        this.resetMap=referenceMap;
     }
 
     public void setDoor(Door[] doors){
@@ -137,13 +137,17 @@ public class Map implements GameMap {
         return false;
     }
 
-    private void resetMap(){
-        this.map=this.resetMap;
+    private void resetMap(String[][] map){
+        for(int i=0;i<this.height;i++){
+            for(int j=0;j<this.width;j++){
+                this.map[i][j]=map[i][j];
+            }
+        }
     }
 
     public void drawMap(){
 
-        resetMap();//we must reset the map before drawing it , this mustnt be done after drawing as we need to check certain conditions trough looking
+        this.resetMap(this.resetMap);//we must reset the map before drawing it , this mustnt be done after drawing as we need to check certain conditions trough looking
         // at the maps current state with the new positions for certain not native objects
 
         if(keys!=null){
