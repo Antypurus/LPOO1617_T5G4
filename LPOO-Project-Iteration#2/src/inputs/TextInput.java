@@ -22,9 +22,9 @@ public class TextInput {
     }
     
     public int getNextStep(){
-    	String check = read();
 
-    	System.out.print("Direcção em que se pretende mover:");
+    	System.out.print(" \n Direcção em que se pretende mover:");
+		String check = read();
     	
     	if(check.equals("Up")||check.equals("up")||check.equals("w")){
     		return 1;

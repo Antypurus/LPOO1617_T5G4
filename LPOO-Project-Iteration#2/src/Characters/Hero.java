@@ -10,10 +10,10 @@ public class Hero extends Character {
     private String representation = "H";
     private String[][] map;
 
-    public int getyPos() {
+    public int getYPos() {
         return yPos;
     }
-    public int getxPos() {
+    public int getXPos() {
         return xPos;
     }
 

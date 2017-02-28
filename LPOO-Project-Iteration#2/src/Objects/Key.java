@@ -27,8 +27,8 @@ public class Key extends Object {
     }
 
     public void detectPickup(Hero hero){
-        if(hero.getyPos()==this.yPos){
-            if(hero.getxPos()==this.xPos){
+        if(hero.getYPos()==this.yPos){
+            if(hero.getXPos()==this.xPos){
                 this.wasPicked=true;
             }
         }

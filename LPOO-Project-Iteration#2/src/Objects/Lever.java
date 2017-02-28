@@ -25,8 +25,8 @@ public class Lever {
 	}
 
 	public void detectPress(Hero hero){
-		if(hero.getxPos()==this.xPos){
-			if(hero.getyPos()==this.yPos){
+		if(hero.getXPos()==this.xPos){
+			if(hero.getYPos()==this.yPos){
 				this.wasPressed=true;
 			}
 		}

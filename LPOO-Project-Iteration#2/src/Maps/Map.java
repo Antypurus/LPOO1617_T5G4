@@ -10,7 +10,7 @@ import inputs.TextInput;
 
 public class Map implements GameMap {
 
-    private String[][] map=new String[10][10],resetMap=new String[10][10];
+    private String[][] map,resetMap;
     private Enemy[] enemies = null;
     private Hero hero;
     private Key[] keys=null;
@@ -95,6 +95,7 @@ public class Map implements GameMap {
     public boolean moveTo(int x, int y,Character character){
         int intX=character.getXPos()+x;
         int intY=character.getYPos()+y;
+        System.out.print("\n Atempting to move to : ("+intX+","+intY+")\n");
         String check = map[intY][intX];
         if(check.equals("X")||check.equals("I")||check.equals("H")||check.equals("O")||check.equals("G")){
             return false;
@@ -120,8 +121,8 @@ public class Map implements GameMap {
     }
 
     public boolean hasWon(){
-        int x=hero.getxPos();
-        int y=hero.getyPos();
+        int x=hero.getXPos();
+        int y=hero.getYPos();
         String check=map[y][x];
         if(doors!=null){
         for(int i=0;i<doors.length;i++){
@@ -168,7 +169,7 @@ public class Map implements GameMap {
             map[enemies[i].getYPos()][enemies[i].getXPos()]=enemies[i].getRepresentation();
         }
 
-        map[hero.getyPos()][hero.getyPos()]=hero.getRepresentation();
+        map[hero.getYPos()][hero.getXPos()]=hero.getRepresentation();
 
         for(int i=0;i<height;i++) {
             for (int j = 0; j < width; j++) {
@@ -193,19 +194,25 @@ public class Map implements GameMap {
                 case(1):
                     if(this.moveTo(0,-1,this.hero)){
                         this.hero.moveHero(0,-1);
+                        break;
                     }
                 case(2):
                     if(this.moveTo(0,1,this.hero)){
                         this.hero.moveHero(0,1);
+                        break;
                     }
                 case(3):
                     if(this.moveTo(-1,0,this.hero)){
                         this.hero.moveHero(-1,0);
+                        break;
                     }
                 case(4):
                     if(this.moveTo(1,0,this.hero)){
                         this.hero.moveHero(1,0);
+                        break;
                     }
+                default:
+                    break;
             }
 
             if(keys!=null){
