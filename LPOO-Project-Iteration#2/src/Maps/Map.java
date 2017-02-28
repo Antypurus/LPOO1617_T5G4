@@ -3,6 +3,7 @@ package Maps;
 import Characters.Character;
 import Characters.Hero;
 import Characters.Enemy;
+import Objects.Door;
 import Objects.Key;
 import Objects.Lever;
 import inputs.TextInput;
@@ -14,6 +15,7 @@ public class Map implements GameMap {
     private Hero hero;
     private Key[] keys=null;
     private Lever[] levers=null;
+    private Door[] doors=null;
     private boolean hasNextMap=false;
     private GameMap nextMap=null;
     private int height,width;
@@ -83,6 +85,10 @@ public class Map implements GameMap {
         this.imideateOpen=imeaditeOpen;
     }
 
+    public void setDoor(Door[] doors){
+        this.doors=doors;
+    }
+
     public boolean moveTo(int x, int y,Character character){
         int intX=character.getXPos()+x;
         int intY=character.getYPos()+y;
@@ -126,9 +132,19 @@ public class Map implements GameMap {
 
     public void drawMap(){
 
+        resetMap();//we must reset the map before drawing it , this mustnt be done after drawing as we need to check certain conditions trough looking
+        // at the maps current state with the new positions for certain not native objects
+
+        if(keys!=null){
         for(int i=0;i<keys.length;i++){
             if(!keys[i].isPicked()) {
                 map[keys[i].getyPos()][keys[i].getxPos()] = this.keys[i].getRep();
+            }
+        }}
+
+        if(levers!=null){
+            for(int i=0;i<levers.length;i++){
+                map[levers[i].getyPos()][levers[i].getxPos()]=this.levers[i].getRepresentation();
             }
         }
 
@@ -138,17 +154,12 @@ public class Map implements GameMap {
 
         map[hero.getyPos()][hero.getyPos()]=hero.getRepresentation();
 
-        for(int i=0;i<height;i++){
-            for(int j=0;j<width;j++){
-                System.out.print("|"+map[i][j]+"|");
+        for(int i=0;i<height;i++) {
+            for (int j = 0; j < width; j++) {
+                System.out.print("|" + map[i][j] + "|");
             }
             System.out.print("\n");
         }
-
-        System.out.println("Enemy is is position: ("+enemies[0].getXPos()+","+enemies[0].getYPos()+")");
-
-        resetMap();
-
     }
 
     public boolean mapLogic(){
@@ -164,7 +175,19 @@ public class Map implements GameMap {
             switch (movement){
                 case(1):
                     if(this.moveTo(0,-1,this.hero)){
-
+                        this.hero.moveHero(0,-1);
+                    }
+                case(2):
+                    if(this.moveTo(0,1,this.hero)){
+                        this.hero.moveHero(0,1);
+                    }
+                case(3):
+                    if(this.moveTo(-1,0,this.hero)){
+                        this.hero.moveHero(-1,0);
+                    }
+                case(4):
+                    if(this.moveTo(1,0,this.hero)){
+                        this.hero.moveHero(1,0);
                     }
             }
 

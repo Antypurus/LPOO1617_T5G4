@@ -20,6 +20,10 @@ public class Door extends Object {
     	this.yPos=yPos;
     	this.associatedKey=associatedkey;
     }
+
+    public void setOpen(boolean state){
+    	this.isOpean=state;
+	}
     
     public String getRepresentation(){
     	if(this.associatedKey==null){
