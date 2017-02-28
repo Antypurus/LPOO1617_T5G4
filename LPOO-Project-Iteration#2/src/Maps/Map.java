@@ -5,16 +5,17 @@ import Characters.Hero;
 import Characters.Enemy;
 import Objects.Key;
 import Objects.Lever;
+import inputs.TextInput;
 
 public class Map implements GameMap {
 
-    String[][] map,resetMap;
-    Enemy[] enemies = null;
-    Hero hero;
-    Key[] keys=null;
-    Lever[] levers=null;
-    boolean hasNextMap=false;
-    GameMap nextMap=null;
+    private String[][] map,resetMap;
+    private Enemy[] enemies = null;
+    private Hero hero;
+    private Key[] keys=null;
+    private Lever[] levers=null;
+    private boolean hasNextMap=false;
+    private GameMap nextMap=null;
     private int height,width;
     private boolean imideateOpen=true;//represents weather or not the player need to spend a movement action to open the door
 
@@ -151,6 +152,26 @@ public class Map implements GameMap {
     }
 
     public boolean mapLogic(){
+
+        TextInput direction = new TextInput();
+        int movement;
+
+        while(!hasWon()){
+            movement = direction.getNextStep();
+
+            this.drawMap();
+
+            switch (movement){
+                case(1):
+                    if(this.moveTo(0,-1,this.hero)){
+
+                    }
+            }
+
+        }
+
+
         return false;
+
     }
 }
