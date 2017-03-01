@@ -137,6 +137,15 @@ public class Map implements GameMap {
         return false;
     }
 
+    public boolean hasLost(){
+        for(int i=0;i<enemies.length;i++){
+            if(enemies[i].heroDetection(this.hero)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void resetMap(String[][] map){
         for(int i=0;i<this.height;i++){
             for(int j=0;j<this.width;j++){
@@ -188,7 +197,7 @@ public class Map implements GameMap {
         TextInput direction = new TextInput();
         int movement;
 
-        while(!hasWon()){
+        while(!hasWon()&&!hasLost()){
 
             this.drawMap();
 
@@ -236,8 +245,16 @@ public class Map implements GameMap {
                 this.enemies[i].attack();
             }
 
+            if(this.hasLost()){
+                System.out.println("\nYou Have Ben Caught !\n YOU LOSE!\n");
+                direction.close();
+                return false;
+            }
+
             if(hasWon()){
-                System.out.println("Congratulations you have won");
+                System.out.println("\nCongratulations you have won\n");
+                direction.close();
+                return true;
             }
 
         }

@@ -8,6 +8,7 @@ import Maps.Map;
 import Maps.MapDimension;
 import Objects.Door;
 import Objects.Key;
+import Objects.Lever;
 
 public class Loader {
 
@@ -72,20 +73,20 @@ public class Loader {
     private Guard map1Guard = new Guard(map1);
     private Oggre map2Oggre = new Oggre(map2);
 
-    private Key map1Key = new Key(7,8);
+    private Lever map1Lever = new Lever(7,8);
 
     private Enemy[] map1Enemies=new Enemy[1];
-    private Key[] map1Keys=new Key[1];
+    private Lever[] map1Levers=new Lever[1];
 
     private Door[] map1Doors = new Door[2];
 
     public Loader(){
         map1Enemies[0]=map1Guard;
-        map1Keys[0]=map1Key;
-        map1Doors[0]=new Door(0,5,map1Key);
-        map1Doors[1]=new Door(0,6,map1Key);
+        map1Levers[0]=map1Lever;
+        map1Doors[0]=new Door(0,5,map1Lever);
+        map1Doors[1]=new Door(0,6,map1Lever);
 
-        Map map1 = new Map(this.map1,this.referenceMap1,map1Dimension,ma1Hero,map1Enemies,map1Keys,true);
+        Map map1 = new Map(this.map1,this.referenceMap1,map1Dimension,ma1Hero,map1Enemies,map1Levers,true);
         map1.setDoor(map1Doors);
         map1.mapLogic();
     }
