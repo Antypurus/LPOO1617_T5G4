@@ -207,20 +207,56 @@ public class Map implements GameMap {
                     if(this.moveTo(0,-1,this.hero)){
                         this.hero.moveHero(0,-1);
                         break;
+                    }else{
+                        for(int i=0;i<doors.length;i++){
+                            if(hero.getYPos()-1==doors[i].getyPos()){
+                                if(hero.getXPos()==doors[i].getxPos()){
+                                    doors[i].setOpen(true);
+                                }
+                            }
+                        }
+                        break;
                     }
                 case(2):
                     if(this.moveTo(0,1,this.hero)){
                         this.hero.moveHero(0,1);
+                        break;
+                    }else{
+                        for(int i=0;i<doors.length;i++){
+                            if(hero.getYPos()+1==doors[i].getyPos()){
+                                if(hero.getXPos()==doors[i].getxPos()){
+                                    doors[i].setOpen(true);
+                                }
+                            }
+                        }
                         break;
                     }
                 case(3):
                     if(this.moveTo(-1,0,this.hero)){
                         this.hero.moveHero(-1,0);
                         break;
+                    }else{
+                        for(int i=0;i<doors.length;i++){
+                            if(hero.getYPos()==doors[i].getyPos()){
+                                if(hero.getXPos()-1==doors[i].getxPos()){
+                                    doors[i].setOpen(true);
+                                }
+                            }
+                        }
+                        break;
                     }
                 case(4):
                     if(this.moveTo(1,0,this.hero)){
                         this.hero.moveHero(1,0);
+                        break;
+                    }else{
+                        for(int i=0;i<doors.length;i++){
+                            if(hero.getYPos()==doors[i].getyPos()){
+                                if(hero.getXPos()+1==doors[i].getxPos()){
+                                    doors[i].setOpen(true);
+                                }
+                            }
+                        }
                         break;
                     }
                 default:
@@ -250,7 +286,7 @@ public class Map implements GameMap {
                 return false;
             }
 
-            if(hasWon()){
+            if(hasWon()&&(keys==null)){
                 System.out.println("\nCongratulations you have won\n");
                 return true;
             }

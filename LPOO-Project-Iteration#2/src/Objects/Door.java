@@ -38,7 +38,7 @@ public class Door extends Object {
     			return closedRep;
     		}
     	}else{
-    		if(this.associatedKey.isPicked()){
+    		if(this.associatedKey.isPicked()&&this.isOpean){
     			this.isOpean=true;
     			return openRep;
     		}else{
