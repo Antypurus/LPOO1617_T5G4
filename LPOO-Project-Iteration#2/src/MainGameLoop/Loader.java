@@ -100,6 +100,7 @@ public class Loader {
         Map map1 = new Map(this.map1,this.referenceMap1,map1Dimension,ma1Hero,map1Enemies,map1Levers,true);
         map1.setDoor(map1Doors);
         if(map1.mapLogic()){
+            System.out.println("Or do You ? HAHAHHAHAHAHA GET REKT SON !");
             this.ma1Hero.setXPos(1);
             this.ma1Hero.setYPos(8);
             Map map2 = new Map(this.map2,this.referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);

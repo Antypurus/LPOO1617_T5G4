@@ -20,6 +20,7 @@ public class Map implements GameMap {
     private GameMap nextMap=null;
     private int height,width;
     private boolean imideateOpen=true;//represents weather or not the player need to spend a movement action to open the door
+    private TextInput direction = new TextInput();
 
     public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key){
         this.map=map;
@@ -193,8 +194,6 @@ public class Map implements GameMap {
     }
 
     public boolean mapLogic(){
-
-        TextInput direction = new TextInput();
         int movement;
 
         while(!hasWon()&&!hasLost()){
@@ -253,7 +252,6 @@ public class Map implements GameMap {
 
             if(hasWon()){
                 System.out.println("\nCongratulations you have won\n");
-                direction.close();
                 return true;
             }
 
