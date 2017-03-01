@@ -181,6 +181,10 @@ public class Map implements GameMap {
 
         for(int i=0;i<enemies.length;i++){
             map[enemies[i].getYPos()][enemies[i].getXPos()]=enemies[i].getRepresentation();
+            if(enemies[i].getWeapons()!=null){
+            for(int j=0;j<enemies[i].getWeapons().length;j++){
+                map[enemies[i].getWeapons()[j].getyPos()][enemies[i].getWeapons()[j].getxPos()]=enemies[i].getWeapons()[j].getRep();
+            }}
         }
 
         map[hero.getYPos()][hero.getXPos()]=hero.getRepresentation();

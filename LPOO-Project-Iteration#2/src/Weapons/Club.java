@@ -9,5 +9,6 @@ public class Club extends Weapon {
         this.xPos=owner.getXPos();
         this.yPos=owner.getYPos();
         this.weaponName="Club";
+        this.Representation="*";
     }
 }

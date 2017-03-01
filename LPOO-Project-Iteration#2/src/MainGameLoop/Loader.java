@@ -9,6 +9,8 @@ import Maps.MapDimension;
 import Objects.Door;
 import Objects.Key;
 import Objects.Lever;
+import Weapons.Club;
+import Weapons.Weapon;
 
 public class Loader {
 
@@ -86,15 +88,22 @@ public class Loader {
     private Door[] map1Doors = new Door[2];
     private Door[] map2Doors = new Door[1];
 
+    private Club map2Club = new Club(map2Oggre);
+
+    private Weapon[] oggreMap2Weapons = new Weapon[1];
+
     public Loader(){
 
         map1Enemies[0]=map1Guard;
         map1Levers[0]=map1Lever;
         map1Doors[0]=new Door(0,5,map1Lever);
         map1Doors[1]=new Door(0,6,map1Lever);
+        oggreMap2Weapons[0]=map2Club;
+        map2Oggre.setWeapons(oggreMap2Weapons);
         map2Enemies[0]= map2Oggre;
         map2Keys[0]=map2Key;
         map2Doors[0]=new Door(0,1,map2Key);
+
 
 
         Map map1 = new Map(this.map1,this.referenceMap1,map1Dimension,ma1Hero,map1Enemies,map1Levers,true);

@@ -1,5 +1,7 @@
 package Characters;
 
+import Weapons.Club;
+
 import java.util.Random;
 
 public class Oggre extends Enemy{
@@ -23,6 +25,7 @@ public class Oggre extends Enemy{
 		yPos = y;
 		representation = "O";
 		this.map=map;
+		this.weapons[0]=new Club(this);
 	}
 	
 	public void moveOgre() {
@@ -68,43 +71,31 @@ public class Oggre extends Enemy{
 	}
 
 	public void ogreAttack() {
-		Random rand = new Random();
-		int randomClub = rand.nextInt((4 - 1) + 1) + 1;
-		clubYPos = yPos;
-		clubXPos = xPos;
-		if (randomClub == 1) {
-			if ((!(map[clubYPos - 1][clubXPos].equals("X"))) && (!(map[clubYPos - 1][clubXPos].equals("I")))) {
-				{
-					clubYPos = yPos - 1;
-				}
-			}
+		if(weapons!=null){
+		Random generator = new Random();
+		int direction = generator.nextInt(4);
+		switch(direction){
+			case(0):
+				weapons[0].setxPos(this.xPos+1);
+				weapons[0].setyPos(this.yPos);
+				break;
+			case(1):
+				weapons[0].setxPos(this.xPos-1);
+				weapons[0].setyPos(this.yPos);
+				break;
+			case(2):
+				weapons[0].setxPos(this.xPos);
+				weapons[0].setyPos(this.yPos+1);
+				break;
+			case(3):
+				weapons[0].setxPos(this.xPos);
+				weapons[0].setyPos(this.yPos-1);
+				break;
+			default:break;
 		}
-		if (randomClub == 2) {
-			if ((!(map[clubYPos + 1][clubXPos].equals("X"))) && (!(map[clubYPos + 1][clubXPos].equals("I")))) {
-				{
-					clubYPos = yPos + 1;
-				}
-			}
-		}
-		if (randomClub == 3) {
-			if ((!(map[clubYPos][clubXPos + 1].equals("X"))) && (!(map[clubYPos][clubXPos + 1].equals("I")))) {
-				{
-					clubXPos = xPos + 1;
-				}
-			}
-		}
-		if (randomClub == 4) {
-			if ((!(map[clubYPos][clubXPos - 1].equals("X"))) && (!(map[clubYPos][clubXPos - 1].equals("I")))) {
-				{
-					clubXPos = xPos - 1;
-				}
-			}
-		}
-		if (clubYPos == yPos) {
-			if (clubXPos == xPos) {
-				this.ogreAttack();
-			}
-		}
+		if(map[weapons[0].getyPos()][weapons[0].getxPos()].equals("X")||map[weapons[0].getyPos()][weapons[0].getxPos()].equals("I")){
+			this.ogreAttack();
+		}}
 	}
 	
 	public void attack(){
