@@ -83,7 +83,7 @@ public class Guard extends Enemy {
 			return;
 		}
 		if (guardMovStage == 12) {
-			yPos++;
+			xPos++;
 			guardMovStage = 13;
 			return;
 		}

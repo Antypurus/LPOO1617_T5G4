@@ -95,7 +95,7 @@ public class Map implements GameMap {
     public boolean moveTo(int x, int y,Character character){
         int intX=character.getXPos()+x;
         int intY=character.getYPos()+y;
-        System.out.print("\n Atempting to move to : ("+intX+","+intY+")\n");
+        //System.out.print("\n Atempting to move to : ("+intX+","+intY+")\n");
         String check = map[intY][intX];
         if(check.equals("X")||check.equals("I")||check.equals("H")||check.equals("O")||check.equals("G")){
             return false;
