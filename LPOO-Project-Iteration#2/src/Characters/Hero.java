@@ -17,6 +17,14 @@ public class Hero extends Character {
         return xPos;
     }
 
+    public void setYPos(int y){
+        this.yPos=y;
+    }
+
+    public void setXPos(int x){
+        this.xPos=x;
+    }
+
     public String getRepresentation(){
         return representation;
     }

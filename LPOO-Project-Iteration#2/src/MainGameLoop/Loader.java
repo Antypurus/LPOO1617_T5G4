@@ -74,21 +74,38 @@ public class Loader {
     private Oggre map2Oggre = new Oggre(map2);
 
     private Lever map1Lever = new Lever(7,8);
+    private Key map2Key = new Key(8,8);
 
     private Enemy[] map1Enemies=new Enemy[1];
+    private Enemy[] map2Enemies = new  Enemy[1];
+
     private Lever[] map1Levers=new Lever[1];
 
+    private Key[] map2Keys = new Key [1];
+
     private Door[] map1Doors = new Door[2];
+    private Door[] map2Doors = new Door[1];
 
     public Loader(){
+
         map1Enemies[0]=map1Guard;
         map1Levers[0]=map1Lever;
         map1Doors[0]=new Door(0,5,map1Lever);
         map1Doors[1]=new Door(0,6,map1Lever);
+        map2Enemies[0]= map2Oggre;
+        map2Keys[0]=map2Key;
+        map2Doors[0]=new Door(0,1,map2Key);
+
 
         Map map1 = new Map(this.map1,this.referenceMap1,map1Dimension,ma1Hero,map1Enemies,map1Levers,true);
         map1.setDoor(map1Doors);
-        map1.mapLogic();
+        if(map1.mapLogic()){
+            this.ma1Hero.setXPos(1);
+            this.ma1Hero.setYPos(8);
+            Map map2 = new Map(this.map2,this.referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+            map2.setDoor(map2Doors);
+            map2.mapLogic();
+        }
     }
 
 
