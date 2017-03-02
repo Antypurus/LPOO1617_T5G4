@@ -183,7 +183,7 @@ public class Map implements GameMap {
             map[enemies[i].getYPos()][enemies[i].getXPos()]=enemies[i].getRepresentation();
             if(enemies[i].getWeapons()!=null){
             for(int j=0;j<enemies[i].getWeapons().length;j++){
-                map[enemies[i].getWeapons()[j].getyPos()][enemies[i].getWeapons()[j].getxPos()]=enemies[i].getWeapons()[j].getRep();
+                map[enemies[i].getWeapons()[j].getyPos()][enemies[i].getWeapons()[j].getxPos()]=enemies[i].getWeapons()[j].getRep(this.keys,this.levers);
             }}
         }
 
@@ -265,6 +265,12 @@ public class Map implements GameMap {
                     }
                 default:
                     break;
+            }
+
+            if(this.hasLost()){
+                System.out.println("\nYou Have Ben Caught !\n YOU LOSE!\n");
+                direction.close();
+                return false;
             }
 
             if(keys!=null){
