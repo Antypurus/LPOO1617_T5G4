@@ -9,6 +9,15 @@ public class Hero extends Character {
     private boolean pressedLever=false;
     private String representation = "H";
     private String[][] map;
+    private boolean hasClub = false;
+
+    public boolean getHasClub(){
+        return this.hasClub;
+    }
+
+    public void setHasClub(boolean value){
+        this.hasClub=value;
+    }
 
     public int getYPos() {
         return yPos;

@@ -76,7 +76,7 @@ public class Loader {
     private Oggre map2Oggre = new Oggre(map2);
 
     private Lever map1Lever = new Lever(7,8);
-    private Key map2Key = new Key(8,8);
+    private Key map2Key = new Key(8,1);
 
     private Enemy[] map1Enemies=new Enemy[1];
     private Enemy[] map2Enemies = new  Enemy[1];

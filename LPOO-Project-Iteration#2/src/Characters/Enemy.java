@@ -11,6 +11,24 @@ public abstract class Enemy extends Character {
 	protected String subType;
 	protected String representation;
 	protected Weapon[] weapons = null;
+	protected int StunCounter=0;
+	protected boolean isStuned=false;
+
+	public int getStunCounter() {
+		return StunCounter;
+	}
+
+	public void setStunCounter(int stunCounter) {
+		StunCounter = stunCounter;
+	}
+
+	public boolean isStuned() {
+		return isStuned;
+	}
+
+	public void setStuned(boolean stuned) {
+		isStuned = stuned;
+	}
 
 	public Weapon[] getWeapons(){
 		return this.weapons;
@@ -51,27 +69,75 @@ public abstract class Enemy extends Character {
 	public boolean heroDetection(Hero hero){
 		if(hero.getXPos()==this.xPos){
 			if(hero.getYPos()==this.yPos){
+				if(!hero.getHasClub()){
+					return true;}else{
+					if(this.type.equals("Ogre")){
+						this.isStuned=true;
+						this.StunCounter=2;
+						return false;
+					}
+				}
 				return true;
 			}
 		}
 		if(hero.getXPos()+1==this.xPos){
 			if(hero.getYPos()==this.yPos){
-				return true;
+				if(!hero.getHasClub()){
+
+					if(!hero.getHasClub()){
+						return true;}else{
+						if(this.type.equals("Ogre")){
+							this.isStuned=true;
+							this.StunCounter=2;
+							return false;
+						}
+					}
+					return true;}
 			}
 		}
 		if(hero.getXPos()==this.xPos){
 			if(hero.getYPos()+1==this.yPos){
-				return true;
+				if(!hero.getHasClub()){
+
+					if(!hero.getHasClub()){
+						return true;}else{
+						if(this.type.equals("Ogre")){
+							this.isStuned=true;
+							this.StunCounter=2;
+							return false;
+						}
+					}
+					return true;}
 			}
 		}
 		if(hero.getXPos()-1==this.xPos){
 			if(hero.getYPos()==this.yPos){
-				return true;
+				if(!hero.getHasClub()){
+
+					if(!hero.getHasClub()){
+						return true;}else{
+						if(this.type.equals("Ogre")){
+							this.isStuned=true;
+							this.StunCounter=2;
+							return false;
+						}
+					}
+					return true;}
 			}
 		}
 		if(hero.getXPos()==this.xPos){
 			if(hero.getYPos()-1==this.yPos){
-				return true;
+				if(!hero.getHasClub()){
+
+					if(!hero.getHasClub()){
+						return true;}else{
+						if(this.type.equals("Ogre")){
+							this.isStuned=true;
+							this.StunCounter=2;
+							return false;
+						}
+					}
+					return true;}
 			}
 		}
 

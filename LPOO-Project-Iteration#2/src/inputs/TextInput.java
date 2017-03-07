@@ -2,11 +2,10 @@ package inputs;
 
 import java.util.*;
 
-
 public class TextInput {
 
-    String input;
-    Scanner inputreader;
+    private String input;
+    private Scanner inputreader;
 
     public TextInput(){
         inputreader=new Scanner(System.in);
