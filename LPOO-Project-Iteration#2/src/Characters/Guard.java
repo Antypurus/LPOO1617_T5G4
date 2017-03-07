@@ -11,7 +11,20 @@ public class Guard extends Enemy {
 	
 	public Guard(String[][] map){
 		type = "Guard";
-		subType = "";
+		Random generator = new Random();
+		int i=generator.nextInt(3);
+		switch(i) {
+			case(0):
+				subType="rookie";
+				break;
+			case(1):
+				subType="drunken";
+				break;
+			case(2):
+				subType="drunken";
+				break;
+			default:break;
+		}
 		xPos = 8;
 		yPos = 1;
 		representation = "G";
@@ -31,7 +44,7 @@ public class Guard extends Enemy {
                 subType="drunken";
                 break;
             case(2):
-                subType="";
+                subType="drunken";
                 break;
             default:break;
         }
@@ -293,6 +306,7 @@ public class Guard extends Enemy {
 	}
 
 	public void move() {
+
 	    if(this.subType.equals("rookie")){
 		    rookieMoveGuard();}// move calls the method specific to the guards movement
         if(this.subType.equals("drunken")){
