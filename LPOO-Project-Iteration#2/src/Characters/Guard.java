@@ -21,7 +21,7 @@ public class Guard extends Enemy {
 				subType="drunken";
 				break;
 			case(2):
-				subType="drunken";
+				subType="suspicious";
 				break;
 			default:break;
 		}
@@ -29,6 +29,7 @@ public class Guard extends Enemy {
 		yPos = 1;
 		representation = "G";
 		this.map=map;
+		System.out.println("\nThis guard is a "+this.subType+" Guard\n");
 	}
 
 	public Guard(String[][] map,int x,int y){
@@ -44,7 +45,7 @@ public class Guard extends Enemy {
                 subType="drunken";
                 break;
             case(2):
-                subType="drunken";
+                subType="suspicious";
                 break;
             default:break;
         }
@@ -52,6 +53,7 @@ public class Guard extends Enemy {
 		yPos = y;
 		representation = "O";
 		this.map=map;
+		System.out.println("\nThis guard is a "+this.subType+" Guard\n");
 	}
 	
 	private void rookieMoveGuard() {
@@ -200,7 +202,7 @@ public class Guard extends Enemy {
 				yPos--;
 				return ;
 			case(5):
-				guardMovStage=3;
+				guardMovStage=4;
 				yPos--;
 				return;
 			case(6):
@@ -305,13 +307,33 @@ public class Guard extends Enemy {
 		}
 	}
 
+	private void suspiciousMovement(){
+		if(!reverse){
+			this.rookieMoveGuard();
+			Random generator = new Random();
+			int test = generator.nextInt(3);
+			if(test==1){
+				reverse=true;
+			}
+		}else{
+			this.reverseMovement();
+			Random generator = new Random();
+			int test = generator.nextInt(3);
+			if(test==1){
+				reverse=false;
+			}
+		}
+	}
+
 	public void move() {
 
 	    if(this.subType.equals("rookie")){
-		    rookieMoveGuard();}// move calls the method specific to the guards movement
+		    reverseMovement();}// move calls the method specific to the guards movement
         if(this.subType.equals("drunken")){
-	        drunkenMoveGuard();
-        }
+	        drunkenMoveGuard();}
+		if(this.subType.equals("suspicious")){
+        	this.suspiciousMovement();
+		}
 	}
 
 	public void attack() {
