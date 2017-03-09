@@ -43,6 +43,7 @@ public class Hero extends Character {
         for(int i=0;i<keys.length;i++){
             if(this.xPos==keys[i].getxPos()){
                 if(this.yPos==keys[i].getyPos()){
+                    if(!keys[i].isPicked())
                     return this.KeyRep;
                 }
             }
