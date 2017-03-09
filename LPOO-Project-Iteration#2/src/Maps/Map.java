@@ -8,11 +8,13 @@ import Objects.Key;
 import Objects.Lever;
 import inputs.TextInput;
 
+import java.util.ArrayList;
+
 public class Map implements GameMap {
 
     private String[][] map,resetMap;
-    private Enemy[] enemies = null;
-    private Hero hero;
+    //private Enemy[] enemies = null;
+    private Hero hero=null;
     private Key[] keys=null;
     private Lever[] levers=null;
     private Door[] doors=null;
@@ -21,52 +23,60 @@ public class Map implements GameMap {
     private int height,width;
     private boolean imideateOpen=true;//represents weather or not the player need to spend a movement action to open the door
     private TextInput direction = new TextInput();
+    private ArrayList<Enemy>enemies = new ArrayList<Enemy>();
 
     public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key){
         this.map=map;
         this.resetMap=referenceMap;
-        this.enemies=enemies;
         this.hero=hero;
         this.keys=key;
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
+        for(int i=0;i<enemies.length;i++){
+            this.enemies.add(enemies[i]);
+        }
     }
 
     public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,boolean imediateOpen){
         this.map=map;
-        this.enemies=enemies;
         this.hero=hero;
         this.keys=key;
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
         this.imideateOpen=imediateOpen;
         this.resetMap=referenceMap;
+        for(int i=0;i<enemies.length;i++){
+            this.enemies.add(enemies[i]);
+        }
     }
 
     public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers){
         this.map=map;
         this.resetMap=referenceMap;
-        this.enemies=enemies;
         this.hero=hero;
         this.levers=levers;
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
+        for(int i=0;i<enemies.length;i++){
+            this.enemies.add(enemies[i]);
+        }
     }
 
     public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Lever[] levers,boolean imediateOpen){
         this.map=map;
-        this.enemies=enemies;
         this.hero=hero;
         this.levers=levers;
         this.height=dimensions.getySize();
         this.width=dimensions.getxSize();
         this.imideateOpen=imediateOpen;
         this.resetMap=referenceMap;
+        for(int i=0;i<enemies.length;i++){
+            this.enemies.add(enemies[i]);
+        }
     }
     
     public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap){
         this.map=map;
-        this.enemies=enemies;
         this.hero=hero;
         this.keys=key;
         this.hasNextMap=true;
@@ -74,11 +84,13 @@ public class Map implements GameMap {
         this.width=dimensions.getxSize();
         this.nextMap=nextMap;
         this.resetMap=referenceMap;
+        for(int i=0;i<enemies.length;i++){
+            this.enemies.add(enemies[i]);
+        }
     }
 
     public Map(String[][] map,String[][] referenceMap,MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,GameMap nextMap, boolean imeaditeOpen){
         this.map=map;
-        this.enemies=enemies;
         this.hero=hero;
         this.keys=key;
         this.hasNextMap=true;
@@ -87,6 +99,9 @@ public class Map implements GameMap {
         this.nextMap=nextMap;
         this.imideateOpen=imeaditeOpen;
         this.resetMap=referenceMap;
+        for(int i=0;i<enemies.length;i++){
+            this.enemies.add(enemies[i]);
+        }
     }
 
     public void setDoor(Door[] doors){
@@ -139,8 +154,8 @@ public class Map implements GameMap {
     }
 
     public boolean hasLost(){
-        for(int i=0;i<enemies.length;i++){
-            if(enemies[i].heroDetection(this.hero)){
+        for(int i=0;i<enemies.size();i++){
+            if(enemies.get(i).heroDetection(this.hero)){
                 return true;
             }
         }
@@ -179,15 +194,17 @@ public class Map implements GameMap {
             }
         }
 
-        for(int i=0;i<enemies.length;i++){
-            map[enemies[i].getYPos()][enemies[i].getXPos()]=enemies[i].getRepresentation();
-            if(enemies[i].getWeapons()!=null){
-            for(int j=0;j<enemies[i].getWeapons().length;j++){
-                map[enemies[i].getWeapons()[j].getyPos()][enemies[i].getWeapons()[j].getxPos()]=enemies[i].getWeapons()[j].getRep(this.keys,this.levers);
+        for(int i=0;i<enemies.size();i++){
+            map[enemies.get(i).getYPos()][enemies.get(i).getXPos()]=enemies.get(i).getRepresentation();
+            if(enemies.get(i).getWeapons()!=null){
+            for(int j=0;j<enemies.get(i).getWeapons().length;j++){
+                map[enemies.get(i).getWeapons()[j].getyPos()][enemies.get(i).getWeapons()[j].getxPos()]=enemies.get(i).getWeapons()[j].getRep(this.keys,this.levers);
             }}
         }
-
-        map[hero.getYPos()][hero.getXPos()]=hero.getRepresentation();
+        if(keys!=null){
+        map[hero.getYPos()][hero.getXPos()]=hero.getRepresentation(this.keys);}else{
+            map[hero.getYPos()][hero.getXPos()]=hero.getRepresentation(this.levers);
+        }
 
         for(int i=0;i<height;i++) {
             for (int j = 0; j < width; j++) {
@@ -285,9 +302,9 @@ public class Map implements GameMap {
                 }
             }
 
-            for(int i = 0 ;i<enemies.length;i++){
-                this.enemies[i].move();
-                this.enemies[i].attack();
+            for(int i = 0 ;i<enemies.size();i++){
+                this.enemies.get(i).move();
+                this.enemies.get(i).attack();
             }
 
             if(this.hasLost()){

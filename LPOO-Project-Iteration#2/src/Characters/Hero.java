@@ -1,5 +1,8 @@
 package Characters;
 
+import Objects.Key;
+import Objects.Lever;
+
 import java.util.Scanner;
 
 public class Hero extends Character {
@@ -8,6 +11,8 @@ public class Hero extends Character {
     private boolean hasKey=false;
     private boolean pressedLever=false;
     private String representation = "H";
+    private String clubRep = "A";
+    private String KeyRep = "K";
     private String[][] map;
     private boolean hasClub = false;
 
@@ -34,7 +39,31 @@ public class Hero extends Character {
         this.xPos=x;
     }
 
-    public String getRepresentation(){
+    public String getRepresentation(Key[] keys){
+        for(int i=0;i<keys.length;i++){
+            if(this.xPos==keys[i].getxPos()){
+                if(this.yPos==keys[i].getyPos()){
+                    return this.KeyRep;
+                }
+            }
+        }
+        if(this.hasClub){
+            return this.clubRep;
+        }
+        return representation;
+    }
+
+    public String getRepresentation(Lever[] keys){
+        for(int i=0;i<keys.length;i++){
+            if(this.xPos==keys[i].getxPos()){
+                if(this.yPos==keys[i].getyPos()){
+                    return this.KeyRep;
+                }
+            }
+        }
+        if(this.hasClub){
+            return this.clubRep;
+        }
         return representation;
     }
 
