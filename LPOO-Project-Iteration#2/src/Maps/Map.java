@@ -3,12 +3,14 @@ package Maps;
 import Characters.Character;
 import Characters.Hero;
 import Characters.Enemy;
+import Characters.Oggre;
 import Objects.Door;
 import Objects.Key;
 import Objects.Lever;
 import inputs.TextInput;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Map implements GameMap {
 
@@ -106,6 +108,21 @@ public class Map implements GameMap {
 
     public void setDoor(Door[] doors){
         this.doors=doors;
+    }
+
+    public void addEnemies(Enemy[] enemies){
+        for(int i=0;i<enemies.length;i++){
+            this.enemies.add(enemies[i]);
+        }
+    }
+
+    public void generateRandomOgres(int n_oggre){
+        Random generator=new Random();
+        Enemy[] send = new Enemy[n_oggre];
+        for(int i=0;i<n_oggre;i++){
+            send[i]= new Oggre(this.map,generator.nextInt(9)+1,generator.nextInt(9)+1);
+        }
+        this.addEnemies(send);
     }
 
     public boolean moveTo(int x, int y,Character character){
@@ -304,7 +321,9 @@ public class Map implements GameMap {
 
             for(int i = 0 ;i<enemies.size();i++){
                 this.enemies.get(i).move();
-                this.enemies.get(i).attack();
+                if(!this.enemies.get(i).isStuned()) {
+                    this.enemies.get(i).attack();
+                }
             }
 
             if(this.hasLost()){

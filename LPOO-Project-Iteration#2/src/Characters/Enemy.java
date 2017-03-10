@@ -70,7 +70,8 @@ public abstract class Enemy extends Character {
 		if(hero.getXPos()==this.xPos){
 			if(hero.getYPos()==this.yPos){
 				if(!hero.getHasClub()){
-					return true;}else{
+					return true;
+				}else{
 					if(this.type.equals("Ogre")){
 						this.isStuned=true;
 						this.StunCounter=2;

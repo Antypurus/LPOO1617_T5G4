@@ -67,7 +67,14 @@ public class Oggre extends Enemy{
 	}
 	
 	public void move(){
-		moveOgre();
+		if(!this.isStuned) {
+			moveOgre();
+		}else{
+			this.StunCounter--;
+			if(StunCounter==0){
+				this.isStuned=false;
+			}
+		}
 	}
 
 	public void ogreAttack() {

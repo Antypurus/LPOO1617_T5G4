@@ -75,7 +75,6 @@ public class Hero extends Character {
 
     }
 
-
     public void moveHero(int x,int y) {
        this.yPos+=y;
        this.xPos+=x;
