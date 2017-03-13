@@ -112,6 +112,7 @@ public class Loader {
             System.out.println("\nOr do You ? In Truth You Fell into a huge trap and are now trapped by an Ogre!\n");
             this.ma1Hero.setXPos(1);
             this.ma1Hero.setYPos(8);
+            this.ma1Hero.setHasClub(true);
             Map map2 = new Map(this.map2,this.referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
             map2.setDoor(map2Doors);
             map2.mapLogic();
