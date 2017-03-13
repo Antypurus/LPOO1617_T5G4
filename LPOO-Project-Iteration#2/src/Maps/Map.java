@@ -7,6 +7,9 @@ import Characters.Oggre;
 import Objects.Door;
 import Objects.Key;
 import Objects.Lever;
+import Tools.DistanceCalculator;
+import Weapons.Club;
+import Weapons.Weapon;
 import inputs.TextInput;
 
 import java.util.ArrayList;
@@ -118,9 +121,18 @@ public class Map implements GameMap {
 
     public void generateRandomOgres(int n_oggre){
         Random generator=new Random();
+        Weapon[] add = new Club[1];
         Enemy[] send = new Enemy[n_oggre];
-        for(int i=0;i<n_oggre;i++){
-            send[i]= new Oggre(this.map,generator.nextInt(9)+1,generator.nextInt(9)+1);
+         for(int i=0;i<n_oggre;i++){
+            Oggre send_ = new Oggre(this.map);
+            DistanceCalculator calc = new DistanceCalculator(this.hero,send_);
+            add[0]=new Club(send_);
+            send_.setWeapons(add);
+            if(calc.getDistance()<2) {
+                i--;
+            }else{
+                send[i]=send_;
+            }
         }
         this.addEnemies(send);
     }

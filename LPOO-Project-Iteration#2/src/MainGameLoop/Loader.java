@@ -115,6 +115,7 @@ public class Loader {
             this.ma1Hero.setHasClub(true);
             Map map2 = new Map(this.map2,this.referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
             map2.setDoor(map2Doors);
+            map2.generateRandomOgres(5);
             map2.mapLogic();
         }
     }

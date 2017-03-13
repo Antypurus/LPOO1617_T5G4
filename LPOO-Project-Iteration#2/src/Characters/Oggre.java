@@ -100,7 +100,7 @@ public class Oggre extends Enemy{
 				break;
 			default:break;
 		}
-		if(map[weapons[0].getyPos()][weapons[0].getxPos()].equals("X")||map[weapons[0].getyPos()][weapons[0].getxPos()].equals("I")){
+		if(map[weapons[0].getyPos()][weapons[0].getxPos()].equals("X")||map[weapons[0].getyPos()][weapons[0].getxPos()].equals("I")||map[weapons[0].getyPos()][weapons[0].getxPos()].equals("O")||map[weapons[0].getyPos()][weapons[0].getxPos()].equals("*")){
 			this.ogreAttack();
 		}}
 	}
