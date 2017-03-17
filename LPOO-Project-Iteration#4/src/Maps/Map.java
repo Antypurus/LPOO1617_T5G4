@@ -504,7 +504,8 @@ public class Map implements GameMap {
             if(hasWon()&&(keys==null)){
                 return true;
             }
-
+        
+        this.SwingDrawMap(textArea);
         return false;
 	}
 }
