@@ -408,11 +408,6 @@ public class Map implements GameMap {
     }
     
     public boolean SwingmapLogic(int movement,JTextArea textArea){
-
-
-            this.SwingDrawMap(textArea);
-
-
             switch (movement){
                 case(1):
                     if(this.moveTo(0,-1,this.hero)){
