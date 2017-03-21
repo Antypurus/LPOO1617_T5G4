@@ -73,8 +73,7 @@ public class Main_Window {
 				{ "X", " ", "I", " ", "I", " ", "X", " ", " ", "X" },
 				{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" } };
 
-		String[][] ReferenceMap1 = new String[][] { 
-				{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
+		String[][] ReferenceMap1 = new String[][] { { "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
 				{ "X", " ", " ", " ", "I", " ", "X", " ", " ", "X" },
 				{ "X", "X", "X", " ", "X", "X", "X", " ", " ", "X" },
 				{ "X", " ", "I", " ", "I", " ", "X", " ", " ", "X" },
@@ -103,7 +102,7 @@ public class Main_Window {
 		map1Doors[0] = new Door(0, 5, map1Lever);
 		map1Doors[1] = new Door(0, 6, map1Lever);
 
-		Map Map1 = new Map(map1, ReferenceMap1, map1Dimension, map1Hero, map1Enemies, map1Levers,true);
+		Map Map1 = new Map(map1, ReferenceMap1, map1Dimension, map1Hero, map1Enemies, map1Levers, true);
 		Map1.setDoor(map1Doors);
 
 		frmDungeonKeep = new JFrame();
@@ -136,48 +135,79 @@ public class Main_Window {
 		GameDisplayArea.setEditable(false);
 		GameDisplayArea.setBounds(10, 86, 320, 310);
 		frmDungeonKeep.getContentPane().add(GameDisplayArea);
-
+		
+		JLabel GameStatusMessage = new JLabel("");
+		JButton MovementButtonLeft = new JButton("Left");
 		JButton MovementButtonUp = new JButton("Up");
+		JButton MovementButtonRight = new JButton("Right");
+		JButton MovementButtonDown = new JButton("Down");
+		
+		
+
 		MovementButtonUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(1, GameDisplayArea);
+				if(Map1.hasLost()){
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Lost !");
+				}
 			}
 		});
 		MovementButtonUp.setEnabled(false);
 		MovementButtonUp.setBounds(389, 202, 89, 23);
 		frmDungeonKeep.getContentPane().add(MovementButtonUp);
 
-		JButton MovementButtonLeft = new JButton("Left");
 		MovementButtonLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(3, GameDisplayArea);
+				if(Map1.hasLost()){
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Lost !");
+				}
 			}
 		});
 		MovementButtonLeft.setEnabled(false);
 		MovementButtonLeft.setBounds(340, 236, 89, 23);
 		frmDungeonKeep.getContentPane().add(MovementButtonLeft);
 
-		JButton MovementButtonRight = new JButton("Right");
 		MovementButtonRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(4, GameDisplayArea);
+				if(Map1.hasLost()){
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Lost !");
+				}
 			}
 		});
 		MovementButtonRight.setEnabled(false);
 		MovementButtonRight.setBounds(437, 236, 89, 23);
 		frmDungeonKeep.getContentPane().add(MovementButtonRight);
 
-		JButton MovementButtonDown = new JButton("Down");
 		MovementButtonDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(2, GameDisplayArea);
+				if(Map1.hasLost()){
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Lost !");
+				}
 			}
 		});
 		MovementButtonDown.setEnabled(false);
 		MovementButtonDown.setBounds(389, 270, 89, 23);
 		frmDungeonKeep.getContentPane().add(MovementButtonDown);
 
-		JLabel GameStatusMessage = new JLabel("");
 		GameStatusMessage.setBounds(10, 406, 320, 14);
 		frmDungeonKeep.getContentPane().add(GameStatusMessage);
 
@@ -195,28 +225,37 @@ public class Main_Window {
 		});
 
 		NewGameButton.addActionListener(new ActionListener() {
+			int ct = 0;
 			public void actionPerformed(ActionEvent e) {
+				ct++;
 
-				MovementButtonUp.setEnabled(true);
-				MovementButtonDown.setEnabled(true);
-				MovementButtonRight.setEnabled(true);
-				MovementButtonLeft.setEnabled(true);
-								
-				Map1.SwingDrawMap(GameDisplayArea);
+				if (ct >= 2) {
+					MovementButtonUp.setEnabled(true);
+					MovementButtonDown.setEnabled(true);
+					MovementButtonRight.setEnabled(true);
+					MovementButtonLeft.setEnabled(true);
 
-				GameStatusMessage.setText("New Game Started");
-				
-				int nOgres = 0;
-				try{
-					nOgres = Integer.parseInt(OggreCounter.getText());
-				}catch(NumberFormatException a){
-					JOptionPane.showMessageDialog(frmDungeonKeep,"Formato não valido");
+					Map1.SwingDrawMap(GameDisplayArea);
+
+					GameStatusMessage.setText("New Game Started");
+					int nOgres = 0;
+					try {
+						nOgres = Integer.parseInt(OggreCounter.getText());
+					} catch (NumberFormatException a) {
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Formato não valido");
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+					}
+					if (nOgres > 5) {
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Limite de ogres excedido");
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+					}
 				}
-				if(nOgres>5){
-					JOptionPane.showMessageDialog(frmDungeonKeep,"Limite de ogres excedido");
-					System.exit(0);
-				}
-				
 
 			}
 		});
