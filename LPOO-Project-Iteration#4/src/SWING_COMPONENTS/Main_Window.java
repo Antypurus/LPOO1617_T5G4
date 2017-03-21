@@ -12,10 +12,14 @@ import javax.swing.SwingConstants;
 import Characters.Enemy;
 import Characters.Guard;
 import Characters.Hero;
+import Characters.Oggre;
 import Maps.Map;
 import Maps.MapDimension;
 import Objects.Door;
+import Objects.Key;
 import Objects.Lever;
+import Weapons.Club;
+import Weapons.Weapon;
 
 import javax.swing.JTextField;
 import javax.swing.JPanel;
@@ -62,47 +66,95 @@ public class Main_Window {
 	 */
 	private void initialize() {
 
-		String[][] map1 = new String[][] { { "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
-				{ "X", " ", " ", " ", "I", " ", "X", " ", " ", "X" },
-				{ "X", "X", "X", " ", "X", "X", "X", " ", " ", "X" },
-				{ "X", " ", "I", " ", "I", " ", "X", " ", " ", "X" },
-				{ "X", "X", "X", " ", "X", "X", "X", " ", " ", "X" },
-				{ " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-				{ " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-				{ "X", "X", "X", " ", "X", "X", "X", "X", " ", "X" },
-				{ "X", " ", "I", " ", "I", " ", "X", " ", " ", "X" },
-				{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" } };
+		 String[][] map1=new String[][]{
+	        {"X","X","X","X","X","X","X","X","X","X"},
+	        {"X"," "," "," ","I"," ","X"," "," ","X"},
+	        {"X","X","X"," ","X","X","X"," "," ","X"},
+	        {"X"," ","I"," ","I"," ","X"," "," ","X"},
+	        {"X","X","X"," ","X","X","X"," "," ","X"},
+	        {" "," "," "," "," "," "," "," "," ","X"},
+	        {" "," "," "," "," "," "," "," "," ","X"},
+	        {"X","X","X"," ","X","X","X","X"," ","X"},
+	        {"X"," ","I"," ","I"," ","X"," "," ","X"},
+	        {"X","X","X","X","X","X","X","X","X","X"}
+	    };
+	     String[][] referenceMap1=new String[][]{
+	            {"X","X","X","X","X","X","X","X","X","X"},
+	            {"X"," "," "," ","I"," ","X"," "," ","X"},
+	            {"X","X","X"," ","X","X","X"," "," ","X"},
+	            {"X"," ","I"," ","I"," ","X"," "," ","X"},
+	            {"X","X","X"," ","X","X","X"," "," ","X"},
+	            {" "," "," "," "," "," "," "," "," ","X"},
+	            {" "," "," "," "," "," "," "," "," ","X"},
+	            {"X","X","X"," ","X","X","X","X"," ","X"},
+	            {"X"," ","I"," ","I"," ","X"," "," ","X"},
+	            {"X","X","X","X","X","X","X","X","X","X"}
+	    };
+	     MapDimension map1Dimension=new MapDimension(10,10);
 
-		String[][] ReferenceMap1 = new String[][] { { "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
-				{ "X", " ", " ", " ", "I", " ", "X", " ", " ", "X" },
-				{ "X", "X", "X", " ", "X", "X", "X", " ", " ", "X" },
-				{ "X", " ", "I", " ", "I", " ", "X", " ", " ", "X" },
-				{ "X", "X", "X", " ", "X", "X", "X", " ", " ", "X" },
-				{ " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-				{ " ", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
-				{ "X", "X", "X", " ", "X", "X", "X", "X", " ", "X" },
-				{ "X", " ", "I", " ", "I", " ", "X", " ", " ", "X" },
-				{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" } };
 
-		MapDimension map1Dimension = new MapDimension(10, 10);
-		Hero map1Hero = new Hero(map1, 2, 1);
+	     String[][] map2=new String[][]{
+	            {"X","X","X","X","X","X","X","X","X","X"},
+	            {" "," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X","X","X","X","X","X","X","X","X","X"}
+	    };
 
-		Guard map1Guard = new Guard(map1);
+	     String[][] referenceMap2=new String[][]{
+	            {"X","X","X","X","X","X","X","X","X","X"},
+	            {" "," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X"," "," "," "," "," "," "," "," ","X"},
+	            {"X","X","X","X","X","X","X","X","X","X"}
+	    };
 
-		Lever map1Lever = new Lever(7, 8);
+	     MapDimension map2Dimension=new MapDimension(10,10);
 
-		Enemy[] map1Enemies = new Enemy[1];
+	     Hero ma1Hero= new Hero(map1,2,1);
+	     Hero map2Hero=new Hero(map2,1,8);
 
-		Lever[] map1Levers = new Lever[1];
+	     Guard map1Guard = new Guard(map1);
+	     Oggre map2Oggre = new Oggre(map2);
 
-		Door[] map1Doors = new Door[2];
+	     Lever map1Lever = new Lever(7,8);
+	     Key map2Key = new Key(8,1);
 
-		map1Enemies[0] = map1Guard;
-		map1Levers[0] = map1Lever;
-		map1Doors[0] = new Door(0, 5, map1Lever);
-		map1Doors[1] = new Door(0, 6, map1Lever);
+	     Enemy[] map1Enemies=new Enemy[1];
+	     Enemy[] map2Enemies = new  Enemy[1];
 
-		Map Map1 = new Map(map1, ReferenceMap1, map1Dimension, map1Hero, map1Enemies, map1Levers, true);
+	     Lever[] map1Levers=new Lever[1];
+
+	     Key[] map2Keys = new Key [1];
+
+	     Door[] map1Doors = new Door[2];
+	     Door[] map2Doors = new Door[1];
+
+	     Club map2Club = new Club(map2Oggre);
+
+	     Weapon[] oggreMap2Weapons = new Weapon[1];
+
+	        map1Enemies[0]=map1Guard;
+	        map1Levers[0]=map1Lever;
+	        map1Doors[0]=new Door(0,5,map1Lever);
+	        map1Doors[1]=new Door(0,6,map1Lever);
+	        oggreMap2Weapons[0]=map2Club;
+	        map2Oggre.setWeapons(oggreMap2Weapons);
+	        map2Enemies[0]= map2Oggre;
+	        map2Keys[0]=map2Key;
+	        map2Doors[0]=new Door(0,1,map2Key);
+
+		Map Map1 = new Map(map1, referenceMap1, map1Dimension, ma1Hero, map1Enemies, map1Levers, true);
 		Map1.setDoor(map1Doors);
 
 		frmDungeonKeep = new JFrame();
@@ -148,11 +200,27 @@ public class Main_Window {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(1, GameDisplayArea);
 				if(Map1.hasLost()){
+					Map1.SwingDrawMap(GameDisplayArea);
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
 					MovementButtonLeft.setEnabled(false);
 					GameStatusMessage.setText("You Lost !");
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+					GameDisplayArea.setText("");
+		            ma1Hero.setXPos(1);
+		            ma1Hero.setYPos(8);
+		            ma1Hero.setHasClub(true);
+		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.setDoor(map2Doors);
+		            Map1.SwingDrawMap(GameDisplayArea);
+				}else if(Map1.hasWon()){
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Won!");
 				}
 			}
 		});
@@ -164,11 +232,27 @@ public class Main_Window {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(3, GameDisplayArea);
 				if(Map1.hasLost()){
+					Map1.SwingDrawMap(GameDisplayArea);
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
 					MovementButtonLeft.setEnabled(false);
 					GameStatusMessage.setText("You Lost !");
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+					GameDisplayArea.setText("");
+		            ma1Hero.setXPos(1);
+		            ma1Hero.setYPos(8);
+		            ma1Hero.setHasClub(true);
+		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.setDoor(map2Doors);
+		            Map1.SwingDrawMap(GameDisplayArea);
+				}else if(Map1.hasWon()){
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Won!");
 				}
 			}
 		});
@@ -180,11 +264,27 @@ public class Main_Window {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(4, GameDisplayArea);
 				if(Map1.hasLost()){
+					Map1.SwingDrawMap(GameDisplayArea);
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
 					MovementButtonLeft.setEnabled(false);
 					GameStatusMessage.setText("You Lost !");
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+					GameDisplayArea.setText("");
+		            ma1Hero.setXPos(1);
+		            ma1Hero.setYPos(8);
+		            ma1Hero.setHasClub(true);
+		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.setDoor(map2Doors);
+		            Map1.SwingDrawMap(GameDisplayArea);
+				}else if(Map1.hasWon()){
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Won!");
 				}
 			}
 		});
@@ -196,11 +296,27 @@ public class Main_Window {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(2, GameDisplayArea);
 				if(Map1.hasLost()){
+					Map1.SwingDrawMap(GameDisplayArea);
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
 					MovementButtonLeft.setEnabled(false);
 					GameStatusMessage.setText("You Lost !");
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+					GameDisplayArea.setText("");
+		            ma1Hero.setXPos(1);
+		            ma1Hero.setYPos(8);
+		            ma1Hero.setHasClub(true);
+		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.setDoor(map2Doors);
+		            Map1.SwingDrawMap(GameDisplayArea);
+				}else if(Map1.hasWon()&&(!Map1.hasNextMap())){
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Won!");
 				}
 			}
 		});
