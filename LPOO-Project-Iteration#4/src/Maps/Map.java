@@ -187,7 +187,8 @@ public class Map implements GameMap {
     public boolean hasLost(){
         for(int i=0;i<enemies.size();i++){
             if(enemies.get(i).heroDetection(this.hero)){
-                return true;
+                System.exit(0);
+            	return true;
             }
         }
         return false;

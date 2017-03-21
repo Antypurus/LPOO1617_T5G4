@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 
@@ -101,7 +103,7 @@ public class Main_Window {
 		map1Doors[0] = new Door(0, 5, map1Lever);
 		map1Doors[1] = new Door(0, 6, map1Lever);
 
-		Map Map1 = new Map(map1, ReferenceMap1, map1Dimension, map1Hero, map1Enemies, map1Levers);
+		Map Map1 = new Map(map1, ReferenceMap1, map1Dimension, map1Hero, map1Enemies, map1Levers,true);
 		Map1.setDoor(map1Doors);
 
 		frmDungeonKeep = new JFrame();
@@ -199,8 +201,22 @@ public class Main_Window {
 				MovementButtonDown.setEnabled(true);
 				MovementButtonRight.setEnabled(true);
 				MovementButtonLeft.setEnabled(true);
+								
+				Map1.SwingDrawMap(GameDisplayArea);
 
 				GameStatusMessage.setText("New Game Started");
+				
+				int nOgres = 0;
+				try{
+					nOgres = Integer.parseInt(OggreCounter.getText());
+				}catch(NumberFormatException a){
+					JOptionPane.showMessageDialog(frmDungeonKeep,"Formato não valido");
+				}
+				if(nOgres>5){
+					JOptionPane.showMessageDialog(frmDungeonKeep,"Limite de ogres excedido");
+					System.exit(0);
+				}
+				
 
 			}
 		});
