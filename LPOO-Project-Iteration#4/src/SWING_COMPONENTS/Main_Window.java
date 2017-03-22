@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import java.awt.Color;
 
 public class Main_Window {
 
@@ -185,7 +186,7 @@ public class Main_Window {
 		JTextArea GameDisplayArea = new JTextArea();
 		GameDisplayArea.setFont(new Font("Courier New", Font.PLAIN, 20));
 		GameDisplayArea.setEditable(false);
-		GameDisplayArea.setBounds(222, 3, 157, 154);
+		GameDisplayArea.setBounds(326, 28, 62, 27);
 		frmDungeonKeep.getContentPane().add(GameDisplayArea);
 		
 		JLabel GameStatusMessage = new JLabel("");
@@ -400,7 +401,8 @@ public class Main_Window {
 		frmDungeonKeep.getContentPane().add(ExitButton);
 		
 		ImagePanel panel = new ImagePanel();
-		panel.setBounds(10, 87, 289, 310);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(10, 95, 300, 300);
 		frmDungeonKeep.getContentPane().add(panel);
 	}
 }
