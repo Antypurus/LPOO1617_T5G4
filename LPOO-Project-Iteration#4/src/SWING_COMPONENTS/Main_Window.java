@@ -185,7 +185,7 @@ public class Main_Window {
 		JTextArea GameDisplayArea = new JTextArea();
 		GameDisplayArea.setFont(new Font("Courier New", Font.PLAIN, 20));
 		GameDisplayArea.setEditable(false);
-		GameDisplayArea.setBounds(10, 86, 320, 310);
+		GameDisplayArea.setBounds(222, 3, 157, 154);
 		frmDungeonKeep.getContentPane().add(GameDisplayArea);
 		
 		JLabel GameStatusMessage = new JLabel("");
@@ -398,5 +398,9 @@ public class Main_Window {
 		});
 		ExitButton.setBounds(389, 373, 89, 23);
 		frmDungeonKeep.getContentPane().add(ExitButton);
+		
+		ImagePanel panel = new ImagePanel();
+		panel.setBounds(10, 87, 289, 310);
+		frmDungeonKeep.getContentPane().add(panel);
 	}
 }
