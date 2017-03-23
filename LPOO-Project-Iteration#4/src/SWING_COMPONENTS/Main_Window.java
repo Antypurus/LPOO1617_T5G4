@@ -38,6 +38,7 @@ public class Main_Window {
 
 	private JFrame frmDungeonKeep;
 	private JTextField OggreCounter;
+	private ImagePanel panel;
 
 	/**
 	 * Launch the application.
@@ -120,9 +121,10 @@ public class Main_Window {
 	            {"X","X","X","X","X","X","X","X","X","X"}
 	    };
 
+	    
 	     MapDimension map2Dimension=new MapDimension(10,10);
 
-	     Hero ma1Hero= new Hero(map1,2,1);
+	     Hero ma1Hero= new Hero(map1,8,8);
 	     Hero map2Hero=new Hero(map2,1,8);
 
 	     Guard map1Guard = new Guard(map1);
@@ -165,7 +167,7 @@ public class Main_Window {
 		frmDungeonKeep.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDungeonKeep.getContentPane().setLayout(null);
 
-		JLabel OggreCounterLabel = new JLabel("Number Of Oggres");
+		JLabel OggreCounterLabel = new JLabel("Number Of Ogres");
 		OggreCounterLabel.setBounds(10, 11, 120, 14);
 		frmDungeonKeep.getContentPane().add(OggreCounterLabel);
 
@@ -182,12 +184,6 @@ public class Main_Window {
 		GuardPersonalitySelector.setModel(new DefaultComboBoxModel(new String[] { "Novice", "Drunken", "Suspicious" }));
 		GuardPersonalitySelector.setBounds(134, 33, 86, 20);
 		frmDungeonKeep.getContentPane().add(GuardPersonalitySelector);
-
-		JTextArea GameDisplayArea = new JTextArea();
-		GameDisplayArea.setFont(new Font("Courier New", Font.PLAIN, 20));
-		GameDisplayArea.setEditable(false);
-		GameDisplayArea.setBounds(326, 28, 62, 27);
-		frmDungeonKeep.getContentPane().add(GameDisplayArea);
 		
 		JLabel GameStatusMessage = new JLabel("");
 		JButton MovementButtonLeft = new JButton("Left");
@@ -195,138 +191,6 @@ public class Main_Window {
 		JButton MovementButtonRight = new JButton("Right");
 		JButton MovementButtonDown = new JButton("Down");
 		
-		
-
-		MovementButtonUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Map1.SwingmapLogic(1, GameDisplayArea);
-				if(Map1.hasLost()){
-					Map1.SwingDrawMap(GameDisplayArea);
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Lost !");
-				}
-				if(Map1.hasWon()&&Map1.hasNextMap()){
-					GameDisplayArea.setText("");
-		            ma1Hero.setXPos(1);
-		            ma1Hero.setYPos(8);
-		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
-		            Map1.setDoor(map2Doors);
-		            Map1.SwingDrawMap(GameDisplayArea);
-				}else if(Map1.hasWon()){
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Won!");
-				}
-			}
-		});
-		MovementButtonUp.setEnabled(false);
-		MovementButtonUp.setBounds(389, 202, 89, 23);
-		frmDungeonKeep.getContentPane().add(MovementButtonUp);
-
-		MovementButtonLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Map1.SwingmapLogic(3, GameDisplayArea);
-				if(Map1.hasLost()){
-					Map1.SwingDrawMap(GameDisplayArea);
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Lost !");
-				}
-				if(Map1.hasWon()&&Map1.hasNextMap()){
-					GameDisplayArea.setText("");
-		            ma1Hero.setXPos(1);
-		            ma1Hero.setYPos(8);
-		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
-		            Map1.setDoor(map2Doors);
-		            Map1.SwingDrawMap(GameDisplayArea);
-				}else if(Map1.hasWon()){
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Won!");
-				}
-			}
-		});
-		MovementButtonLeft.setEnabled(false);
-		MovementButtonLeft.setBounds(340, 236, 89, 23);
-		frmDungeonKeep.getContentPane().add(MovementButtonLeft);
-
-		MovementButtonRight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Map1.SwingmapLogic(4, GameDisplayArea);
-				if(Map1.hasLost()){
-					Map1.SwingDrawMap(GameDisplayArea);
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Lost !");
-				}
-				if(Map1.hasWon()&&Map1.hasNextMap()){
-					GameDisplayArea.setText("");
-		            ma1Hero.setXPos(1);
-		            ma1Hero.setYPos(8);
-		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
-		            Map1.setDoor(map2Doors);
-		            Map1.SwingDrawMap(GameDisplayArea);
-				}else if(Map1.hasWon()){
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Won!");
-				}
-			}
-		});
-		MovementButtonRight.setEnabled(false);
-		MovementButtonRight.setBounds(437, 236, 89, 23);
-		frmDungeonKeep.getContentPane().add(MovementButtonRight);
-
-		MovementButtonDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Map1.SwingmapLogic(2, GameDisplayArea);
-				if(Map1.hasLost()){
-					Map1.SwingDrawMap(GameDisplayArea);
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Lost !");
-				}
-				if(Map1.hasWon()&&Map1.hasNextMap()){
-					GameDisplayArea.setText("");
-		            ma1Hero.setXPos(1);
-		            ma1Hero.setYPos(8);
-		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
-		            Map1.setDoor(map2Doors);
-		            Map1.SwingDrawMap(GameDisplayArea);
-				}else if(Map1.hasWon()&&(!Map1.hasNextMap())){
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Won!");
-				}
-			}
-		});
-		MovementButtonDown.setEnabled(false);
-		MovementButtonDown.setBounds(389, 270, 89, 23);
-		frmDungeonKeep.getContentPane().add(MovementButtonDown);
-
-		GameStatusMessage.setBounds(10, 406, 320, 14);
-		frmDungeonKeep.getContentPane().add(GameStatusMessage);
 
 		JButton NewGameButton = new JButton("New Game");
 		NewGameButton.addMouseListener(new MouseAdapter() {
@@ -347,12 +211,16 @@ public class Main_Window {
 				ct++;
 
 				if (ct >= 2) {
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 1, map1Doors);
+					panel.setBackground(Color.WHITE);
+					panel.setBounds(10, 95, 300, 300);
+					frmDungeonKeep.getContentPane().add(panel);
 					MovementButtonUp.setEnabled(true);
 					MovementButtonDown.setEnabled(true);
 					MovementButtonRight.setEnabled(true);
 					MovementButtonLeft.setEnabled(true);
-
-					Map1.SwingDrawMap(GameDisplayArea);
+					panel.repaint();
+					//Map1.SwingDrawMap(GameDisplayArea);
 
 					GameStatusMessage.setText("New Game Started");
 					int nOgres = 0;
@@ -379,6 +247,171 @@ public class Main_Window {
 
 		NewGameButton.setBounds(389, 87, 89, 23);
 		frmDungeonKeep.getContentPane().add(NewGameButton);
+		
+		MovementButtonUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Map1.SwingmapLogic(1);
+				panel.repaint();
+				if(Map1.hasLost()){
+					panel.repaint();
+					//Map1.SwingDrawMap(GameDisplayArea);
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+					//GameDisplayArea.setText("");
+		            ma1Hero.setXPos(1);
+		            ma1Hero.setYPos(8);
+		            ma1Hero.setHasClub(true);
+		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.setDoor(map2Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map1Doors);
+					panel.setBackground(Color.WHITE);
+					panel.setBounds(10, 95, 300, 300);
+					frmDungeonKeep.getContentPane().add(panel);
+		            panel.repaint();
+		            //Map1.SwingDrawMap(GameDisplayArea);
+				}else if(Map1.hasWon()){
+					panel.repaint();
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Won!");
+				}
+			}
+		});
+		MovementButtonUp.setEnabled(false);
+		MovementButtonUp.setBounds(389, 202, 89, 23);
+		frmDungeonKeep.getContentPane().add(MovementButtonUp);
+
+		MovementButtonLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Map1.SwingmapLogic(3);
+				panel.repaint();
+				if(Map1.hasLost()){
+					panel.repaint();
+					//Map1.SwingDrawMap(GameDisplayArea);
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+					//GameDisplayArea.setText("");
+		            ma1Hero.setXPos(1);
+		            ma1Hero.setYPos(8);
+		            ma1Hero.setHasClub(true);
+		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.setDoor(map2Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map1Doors);
+					panel.setBackground(Color.WHITE);
+					panel.setBounds(10, 95, 300, 300);
+		            panel.repaint();
+		           // Map1.SwingDrawMap(GameDisplayArea);
+				}else if(Map1.hasWon()){
+					panel.repaint();
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Won!");
+				}
+			}
+		});
+		MovementButtonLeft.setEnabled(false);
+		MovementButtonLeft.setBounds(340, 236, 89, 23);
+		frmDungeonKeep.getContentPane().add(MovementButtonLeft);
+
+		MovementButtonRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Map1.SwingmapLogic(4);
+				panel.repaint();
+				if(Map1.hasLost()){
+					panel.repaint();
+				//	Map1.SwingDrawMap(GameDisplayArea);
+//					MovementButtonUp.setEnabled(false);
+//					MovementButtonDown.setEnabled(false);
+//					MovementButtonRight.setEnabled(false);
+//					MovementButtonLeft.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+				//	GameDisplayArea.setText("");
+		            ma1Hero.setXPos(1);
+		            ma1Hero.setYPos(8);
+		            ma1Hero.setHasClub(true);
+		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.setDoor(map2Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map1Doors);
+					panel.setBackground(Color.WHITE);
+					panel.setBounds(10, 95, 300, 300);
+		            panel.repaint();
+		         //   Map1.SwingDrawMap(GameDisplayArea);
+				}else if(Map1.hasWon()){
+					panel.repaint();
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Won!");
+				}
+			}
+		});
+		MovementButtonRight.setEnabled(false);
+		MovementButtonRight.setBounds(437, 236, 89, 23);
+		frmDungeonKeep.getContentPane().add(MovementButtonRight);
+
+		MovementButtonDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Map1.SwingmapLogic(2);
+				panel.repaint();
+				if(Map1.hasLost()){
+					panel.repaint();
+					//Map1.SwingDrawMap(GameDisplayArea);
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+					//GameDisplayArea.setText("");
+		            ma1Hero.setXPos(1);
+		            ma1Hero.setYPos(8);
+		            ma1Hero.setHasClub(true);
+		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.setDoor(map2Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map1Doors);
+					panel.setBackground(Color.WHITE);
+					panel.setBounds(10, 95, 300, 300);
+		            panel.repaint();
+		           // Map1.SwingDrawMap(GameDisplayArea);
+				}else if(Map1.hasWon()&&(!Map1.hasNextMap())){
+					panel.repaint();
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					GameStatusMessage.setText("You Won!");
+				}
+			}
+		});
+		MovementButtonDown.setEnabled(false);
+		MovementButtonDown.setBounds(389, 270, 89, 23);
+		frmDungeonKeep.getContentPane().add(MovementButtonDown);
+
+		GameStatusMessage.setBounds(10, 406, 320, 14);
+		frmDungeonKeep.getContentPane().add(GameStatusMessage);
+
 
 		JButton ExitButton = new JButton("Exit");
 		ExitButton.addMouseListener(new MouseAdapter() {
@@ -400,9 +433,5 @@ public class Main_Window {
 		ExitButton.setBounds(389, 373, 89, 23);
 		frmDungeonKeep.getContentPane().add(ExitButton);
 		
-		ImagePanel panel = new ImagePanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(10, 95, 300, 300);
-		frmDungeonKeep.getContentPane().add(panel);
 	}
 }

@@ -3,6 +3,7 @@ package SWING_COMPONENTS;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -15,10 +16,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import Characters.Guard;
+import Characters.Hero;
+import Characters.Oggre;
+import Maps.Map;
+import Objects.Door;
+import Objects.Lever;
 
 public class ImagePanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener{
 
+	private Hero H;
+	private Guard G;
+	private Oggre O;
+	private Map map;
+	private Lever k;
+	private int level;
+	private Door[] map1Doors = new Door[2];
     private Image ogre;
     private Image wall;
     private Image closeddoor;
@@ -40,10 +56,13 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private Image guardup;
     private Image guarddown;
     private Image key;
-    private static final int map_width = 10;
-    private static final int map_height = 10;
-    private static final int pixel_size = 30;
-    public ImagePanel() {
+    private final int map_width = 10;
+    private final int map_height = 10;
+    private final int pixel_size = 30;
+    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, int level, Door map1Doors[]) {
+    	addMouseListener(this);
+    	addMouseMotionListener(this);
+    	addKeyListener(this);
           wall = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/wall red.png")).getImage();
           closeddoor = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/closed door.png")).getImage();
           openabledoor = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openableDoor.jpg")).getImage();
@@ -63,24 +82,40 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
           guardup = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardup.png")).getImage();
           guarddown = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardown.png")).getImage();
           key = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/key.png")).getImage();
+          this.H = H;
+          this.G = G;
+          this.O = O;
+          this.map = map;
+          this.level = level;
+          this.k = k;
+       for(int i = 0 ; i < map1Doors.length; i++)
+       {
+    	   this.map1Doors[i] = map1Doors[i];
+       }
     }
 
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
      //   g.drawImage(ogre, 0, 0, this); // see javadoc for more info on the parameters          
        // g.drawImage(wall, 40,40,this);
-        g.drawImage(heroright, pixel_size,pixel_size,this);
-        g.drawImage(heroleft, 2*pixel_size,pixel_size,this);
+        if(level == 1)
+{
+    	g.drawImage(lever, pixel_size*(k.getxPos()), pixel_size*(k.getyPos()),this);
+        g.drawImage(heroright, H.getXPos()*pixel_size,H.getYPos()*pixel_size,this);
+   /*     g.drawImage(heroleft, 2*pixel_size,pixel_size,this);
         g.drawImage(herodown, 3*pixel_size,pixel_size,this);
         g.drawImage(heroup, 3*pixel_size,2*pixel_size,this);
-    	g.drawImage(openabledoor, 0, pixel_size*5,this);
-    	g.drawImage(openabledoor, 0, pixel_size*6,this);
-    	g.drawImage(guarddown, pixel_size*8, pixel_size,this);
-    	g.drawImage(guardup, pixel_size*8, 2*pixel_size,this);
-    	g.drawImage(guardright, pixel_size*8, 3*pixel_size,this);
-    	g.drawImage(guardleft, pixel_size*8, 4*pixel_size,this);
-    	g.drawImage(lever, pixel_size*7, pixel_size*8,this);
+        */
+    	for(int i = 0; i < map1Doors.length; i++)
+    	{
+    		 g.drawImage(openabledoor, (map1Doors[i].getxPos())*pixel_size,(map1Doors[i].getyPos())*pixel_size,this);
+    	}
+    	g.drawImage(guarddown, G.getXPos()*pixel_size, G.getYPos()*pixel_size,this);
+//    	g.drawImage(guardup, pixel_size*8, 2*pixel_size,this);
+//    	g.drawImage(guardright, pixel_size*8, 3*pixel_size,this);
+//    	g.drawImage(guardleft, pixel_size*8, 4*pixel_size,this);
         
         for(int i = 0; i < map_height; i++)
         {
@@ -106,7 +141,9 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         	if(i != 3 && i != 8 && i != 7)
         	g.drawImage(wall, pixel_size*i, 2*pixel_size,this);
         }
-    /*   
+}
+        else { 
+        	repaint();
         for(int i = 0; i < map_height; i++)
         {
         	if(i== 1)
@@ -127,19 +164,79 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         g.drawImage(ogredown,pixel_size*5,3*pixel_size,this);
         g.drawImage(ogreleft,pixel_size*5,4*pixel_size,this);
         g.drawImage(ogreright,pixel_size*5,5*pixel_size,this);
-        */
+        
+        }
+        this.requestFocusInWindow();
     }
     
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+    @Override
+	public void keyPressed(KeyEvent e) {
+		//int keycode = e.getKeyCode();
+
+		if(e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			map.SwingmapLogic(1);
+			if(map.hasLost()){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Lost!");
+				System.exit(0);
+			}
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			map.SwingmapLogic(2);
+			if(map.hasLost()){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Lost!");
+				System.exit(0);
+			}
+			
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			map.SwingmapLogic(3);
+			if(map.hasLost()){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Lost!");
+				System.exit(0);
+			}
+			
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			map.SwingmapLogic(4);
+			if(map.hasLost()){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Lost!");
+				System.exit(0);
+			}
+			
+		}
+		repaint();
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyEvent e) {
+//		int keycode = e.getKeyCode();
+//
+//		if(keycode == KeyEvent.VK_UP)
+//		{
+//			map.SwingmapLogic(4);
+//			repaint();
+//		}
+////		if(keycode == KeyEvent.VK_DOWN)
+////		{
+////			a = J.move(2);
+////		}
+////		if(keycode == KeyEvent.VK_LEFT)
+////		{
+////			a = J.move(3);
+////		}
+//		if(keycode == KeyEvent.VK_RIGHT)
+//		{
+//			map.SwingmapLogic(4);
+//			repaint();
+//		}
 	}
 
 	@Override

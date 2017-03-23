@@ -69,7 +69,7 @@ public class Loader {
 
     private MapDimension map2Dimension=new MapDimension(10,10);
 
-    private Hero ma1Hero= new Hero(map1,2,1);
+    private Hero ma1Hero= new Hero(map1,8,8);
     private Hero map2Hero=new Hero(map2,1,8);
 
     private Guard map1Guard = new Guard(map1);
