@@ -573,7 +573,7 @@ public class Map implements GameMap {
 			this.clearEnemies();
 			return true;
 		}
-
+//
 		//this.SwingDrawMap(textArea);
 		return false;
 	}
