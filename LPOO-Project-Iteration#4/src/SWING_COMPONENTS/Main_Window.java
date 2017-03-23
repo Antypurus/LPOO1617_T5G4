@@ -39,6 +39,7 @@ public class Main_Window {
 	private JFrame frmDungeonKeep;
 	private JTextField OggreCounter;
 	private ImagePanel panel;
+	private boolean goodFormat = true;
 
 	/**
 	 * Launch the application.
@@ -211,16 +212,10 @@ public class Main_Window {
 				ct++;
 
 				if (ct >= 2) {
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 1, map1Doors);
-					panel.setBackground(Color.WHITE);
-					panel.setBounds(10, 95, 300, 300);
-					frmDungeonKeep.getContentPane().add(panel);
 					MovementButtonUp.setEnabled(true);
 					MovementButtonDown.setEnabled(true);
 					MovementButtonRight.setEnabled(true);
 					MovementButtonLeft.setEnabled(true);
-					panel.repaint();
-					//Map1.SwingDrawMap(GameDisplayArea);
 
 					GameStatusMessage.setText("New Game Started");
 					int nOgres = 0;
@@ -232,6 +227,7 @@ public class Main_Window {
 						MovementButtonDown.setEnabled(false);
 						MovementButtonRight.setEnabled(false);
 						MovementButtonLeft.setEnabled(false);
+						goodFormat = false;
 					}
 					if (nOgres > 5) {
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Limite de ogres excedido");
@@ -239,6 +235,14 @@ public class Main_Window {
 						MovementButtonDown.setEnabled(false);
 						MovementButtonRight.setEnabled(false);
 						MovementButtonLeft.setEnabled(false);
+					}
+					if(goodFormat){
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 1, map1Doors);
+					panel.setBackground(Color.WHITE);
+					panel.setBounds(10, 95, 300, 300);
+					frmDungeonKeep.getContentPane().add(panel);
+					panel.repaint();
+					Map1.SwingDrawMap();
 					}
 				}
 
@@ -254,7 +258,7 @@ public class Main_Window {
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
-					//Map1.SwingDrawMap(GameDisplayArea);
+					Map1.SwingDrawMap();
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
@@ -267,14 +271,14 @@ public class Main_Window {
 		            ma1Hero.setXPos(1);
 		            ma1Hero.setYPos(8);
 		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map2Doors);
+					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever,map2Key, 2, map2Doors);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
 		            panel.repaint();
-		            //Map1.SwingDrawMap(GameDisplayArea);
+		            Map1.SwingDrawMap();
 				}else if(Map1.hasWon()){
 					panel.repaint();
 					MovementButtonUp.setEnabled(false);
@@ -295,7 +299,7 @@ public class Main_Window {
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
-					//Map1.SwingDrawMap(GameDisplayArea);
+					Map1.SwingDrawMap();
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
@@ -308,13 +312,14 @@ public class Main_Window {
 		            ma1Hero.setXPos(1);
 		            ma1Hero.setYPos(8);
 		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map2Doors);
+					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 2, map2Doors);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
+					frmDungeonKeep.getContentPane().add(panel);
 		            panel.repaint();
-		           // Map1.SwingDrawMap(GameDisplayArea);
+		           Map1.SwingDrawMap();
 				}else if(Map1.hasWon()){
 					panel.repaint();
 					MovementButtonUp.setEnabled(false);
@@ -335,7 +340,7 @@ public class Main_Window {
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
-				//	Map1.SwingDrawMap(GameDisplayArea);
+					Map1.SwingDrawMap();
 //					MovementButtonUp.setEnabled(false);
 //					MovementButtonDown.setEnabled(false);
 //					MovementButtonRight.setEnabled(false);
@@ -348,13 +353,15 @@ public class Main_Window {
 		            ma1Hero.setXPos(1);
 		            ma1Hero.setYPos(8);
 		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map2Doors);
+		            panel.removeAll(); 
+					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 2, map2Doors);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
+					frmDungeonKeep.getContentPane().add(panel);
 		            panel.repaint();
-		         //   Map1.SwingDrawMap(GameDisplayArea);
+		            Map1.SwingDrawMap();
 				}else if(Map1.hasWon()){
 					panel.repaint();
 					MovementButtonUp.setEnabled(false);
@@ -375,7 +382,7 @@ public class Main_Window {
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
-					//Map1.SwingDrawMap(GameDisplayArea);
+					Map1.SwingDrawMap();
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
@@ -388,13 +395,15 @@ public class Main_Window {
 		            ma1Hero.setXPos(1);
 		            ma1Hero.setYPos(8);
 		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
+		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map2Doors);
+					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever,map2Key, 2, map2Doors);
+					panel.revalidate();
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
+					frmDungeonKeep.getContentPane().add(panel);
 		            panel.repaint();
-		           // Map1.SwingDrawMap(GameDisplayArea);
+		            Map1.SwingDrawMap();
 				}else if(Map1.hasWon()&&(!Map1.hasNextMap())){
 					panel.repaint();
 					MovementButtonUp.setEnabled(false);

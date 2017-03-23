@@ -24,6 +24,7 @@ import Characters.Hero;
 import Characters.Oggre;
 import Maps.Map;
 import Objects.Door;
+import Objects.Key;
 import Objects.Lever;
 
 public class ImagePanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener{
@@ -34,6 +35,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 	private Map map;
 	private Lever k;
 	private int level;
+	private Key K;
 	private Door[] map1Doors = new Door[2];
 	private Door[] map2Doors = new Door[1];
     private Image ogre;
@@ -60,7 +62,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private final int map_width = 10;
     private final int map_height = 10;
     private final int pixel_size = 30;
-    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, int level, Door mapDoors[]) {
+    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, Key K, int level, Door mapDoors[]) {
     	addMouseListener(this);
     	addMouseMotionListener(this);
     	addKeyListener(this);
@@ -89,6 +91,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
           this.map = map;
           this.level = level;
           this.k = k;
+          this.K = K;
           if(level == 1)
        for(int i = 0 ; i < mapDoors.length; i++)
        {
@@ -151,11 +154,15 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         	g.drawImage(wall, pixel_size*i, 2*pixel_size,this);
         }
 }
-        else { 
+        else if(level == 2){ 
+        	repaint();
+            g.drawImage(heroright, H.getXPos()*pixel_size, H.getYPos()*pixel_size,this);
+            g.drawImage(key,pixel_size*K.getxPos(),pixel_size*K.getyPos(),this);
+            g.drawImage(ogreup,pixel_size*O.getXPos(),O.getYPos()*pixel_size,this);
         for(int i = 0; i < map_height; i++)
         {
         	if(i== 1)
-        	g.drawImage(openabledoor, 0, pixel_size*i,this);
+        	g.drawImage(openabledoor, map2Doors[0].getxPos()*pixel_size, map2Doors[0].getyPos()*pixel_size,this);
         	else
         	g.drawImage(wall, 0, pixel_size*i,this);
         	g.drawImage(wall, (map_width-1)*pixel_size, pixel_size*i,this);
@@ -166,12 +173,9 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         	g.drawImage(wall,pixel_size*i,0,this);
         	g.drawImage(wall,pixel_size*i,(map_height-1)*pixel_size,this);
         }
-        g.drawImage(heroright, pixel_size*2, pixel_size*(map_height-2),this);
-        g.drawImage(key,pixel_size*(map_width-2),pixel_size,this);
-        g.drawImage(ogreup,pixel_size*5,2*pixel_size,this);
-        g.drawImage(ogredown,pixel_size*5,3*pixel_size,this);
-        g.drawImage(ogreleft,pixel_size*5,4*pixel_size,this);
-        g.drawImage(ogreright,pixel_size*5,5*pixel_size,this);
+//        g.drawImage(ogredown,pixel_size*5,3*pixel_size,this);
+//        g.drawImage(ogreleft,pixel_size*5,4*pixel_size,this);
+//        g.drawImage(ogreright,pixel_size*5,5*pixel_size,this);
         
         }
         this.requestFocusInWindow();
