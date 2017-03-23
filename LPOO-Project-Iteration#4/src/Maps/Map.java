@@ -15,6 +15,7 @@ import inputs.TextInput;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class Map implements GameMap {
@@ -479,7 +480,7 @@ public class Map implements GameMap {
 
 	}
 
-	public boolean SwingmapLogic(int movement, JTextArea textArea) {
+	public boolean SwingmapLogic(int movement) {
 		switch (movement) {
 		case (1):
 			if (this.moveTo(0, -1, this.hero)) {
@@ -573,7 +574,7 @@ public class Map implements GameMap {
 			return true;
 		}
 
-		this.SwingDrawMap(textArea);
+		//this.SwingDrawMap(textArea);
 		return false;
 	}
 }

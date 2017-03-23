@@ -35,6 +35,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 	private Lever k;
 	private int level;
 	private Door[] map1Doors = new Door[2];
+	private Door[] map2Doors = new Door[1];
     private Image ogre;
     private Image wall;
     private Image closeddoor;
@@ -59,7 +60,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private final int map_width = 10;
     private final int map_height = 10;
     private final int pixel_size = 30;
-    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, int level, Door map1Doors[]) {
+    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, int level, Door mapDoors[]) {
     	addMouseListener(this);
     	addMouseMotionListener(this);
     	addKeyListener(this);
@@ -88,10 +89,18 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
           this.map = map;
           this.level = level;
           this.k = k;
-       for(int i = 0 ; i < map1Doors.length; i++)
+          if(level == 1)
+       for(int i = 0 ; i < mapDoors.length; i++)
        {
-    	   this.map1Doors[i] = map1Doors[i];
+    	   this.map1Doors[i] = mapDoors[i];
        }
+          else
+          {
+              for(int i = 0 ; i < mapDoors.length; i++)
+              {
+           	   this.map2Doors[i] = mapDoors[i];
+              }
+          }
     }
 
     
@@ -143,7 +152,6 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         }
 }
         else { 
-        	repaint();
         for(int i = 0; i < map_height; i++)
         {
         	if(i== 1)

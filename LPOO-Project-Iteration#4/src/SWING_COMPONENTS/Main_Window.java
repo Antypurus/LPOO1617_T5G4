@@ -269,7 +269,7 @@ public class Main_Window {
 		            ma1Hero.setHasClub(true);
 		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map1Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map2Doors);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
@@ -310,7 +310,7 @@ public class Main_Window {
 		            ma1Hero.setHasClub(true);
 		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map1Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map2Doors);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 		            panel.repaint();
@@ -350,7 +350,7 @@ public class Main_Window {
 		            ma1Hero.setHasClub(true);
 		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map1Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map2Doors);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 		            panel.repaint();
@@ -390,7 +390,7 @@ public class Main_Window {
 		            ma1Hero.setHasClub(true);
 		            Map1.bld(map2,referenceMap2,map2Dimension,ma1Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map1Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, 2, map2Doors);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 		            panel.repaint();
