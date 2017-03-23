@@ -34,8 +34,6 @@ public class Map implements GameMap {
 										// open the door
 	private TextInput direction = new TextInput();
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-	private Map nextMap = null;
-
 	public void setNextMap(Map nextMap){
 		this.hasNextMap=true;
 		this.nextMap = nextMap;
@@ -66,11 +64,7 @@ public class Map implements GameMap {
 	}
 
 	public String[][] getReferenceMap(){
-		return this.resetMap
-	}
-
-	public String[][] getMap(){
-		return this.map;
+		return this.resetMap;
 	}
 
 	public int getHeight(){
@@ -174,7 +168,7 @@ public class Map implements GameMap {
 	}
 
 	public Map(String[][] map, String[][] referenceMap, MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,
-			GameMap nextMap) {
+			Map nextMap) {
 		this.map = map;
 		this.hero = hero;
 		this.keys = key;
@@ -189,14 +183,14 @@ public class Map implements GameMap {
 	}
 
 	public Map(String[][] map, String[][] referenceMap, MapDimension dimensions, Hero hero, Enemy[] enemies, Key[] key,
-			GameMap nextMap, boolean hasNextMap) {
+			Map nextMap, boolean hasNextMap) {
 		this.map = map;
 		this.hero = hero;
 		this.keys = key;
 		this.hasNextMap = true;
 		this.height = dimensions.getySize();
 		this.width = dimensions.getxSize();
-		this.nextMap = nextMap;
+		this.nextMap = (Map) nextMap;
 		this.hasNextMap = hasNextMap;
 		this.resetMap = referenceMap;
 		for (int i = 0; i < enemies.length; i++) {
@@ -249,7 +243,7 @@ public class Map implements GameMap {
 		return true;
 	}
 
-	public void setNextMap(GameMap nextMap) {
+	public void setNextMap_(Map nextMap) {
 		this.hasNextMap = true;
 		this.nextMap = nextMap;
 	}
