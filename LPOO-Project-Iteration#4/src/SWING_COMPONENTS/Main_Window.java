@@ -40,6 +40,8 @@ public class Main_Window {
 	private JTextField OggreCounter;
 	private ImagePanel panel;
 	private boolean goodFormat = true;
+	private Map Map1;
+	private Guard map1Guard;
 
 	/**
 	 * Launch the application.
@@ -128,7 +130,7 @@ public class Main_Window {
 	     Hero ma1Hero= new Hero(map1,8,8);
 	     Hero map2Hero=new Hero(map2,1,8);
 
-	     Guard map1Guard = new Guard(map1);
+	     //Guard map1Guard = new Guard(map1);
 	     Oggre map2Oggre = new Oggre(map2);
 
 	     Lever map1Lever = new Lever(7,8);
@@ -148,18 +150,6 @@ public class Main_Window {
 
 	     Weapon[] oggreMap2Weapons = new Weapon[1];
 
-	        map1Enemies[0]=map1Guard;
-	        map1Levers[0]=map1Lever;
-	        map1Doors[0]=new Door(0,5,map1Lever);
-	        map1Doors[1]=new Door(0,6,map1Lever);
-	        oggreMap2Weapons[0]=map2Club;
-	        map2Oggre.setWeapons(oggreMap2Weapons);
-	        map2Enemies[0]= map2Oggre;
-	        map2Keys[0]=map2Key;
-	        map2Doors[0]=new Door(0,1,map2Key);
-
-		Map Map1 = new Map(map1, referenceMap1, map1Dimension, ma1Hero, map1Enemies, map1Levers, true);
-		Map1.setDoor(map1Doors);
 
 		frmDungeonKeep = new JFrame();
 		frmDungeonKeep.setResizable(false);
@@ -182,10 +172,11 @@ public class Main_Window {
 		frmDungeonKeep.getContentPane().add(GuardPersonalityLabel);
 
 		JComboBox GuardPersonalitySelector = new JComboBox();
-		GuardPersonalitySelector.setModel(new DefaultComboBoxModel(new String[] { "Novice", "Drunken", "Suspicious" }));
+		GuardPersonalitySelector.setModel(new DefaultComboBoxModel(new String[] { "rookie", "drunken", "suspicious" }));
 		GuardPersonalitySelector.setBounds(134, 33, 86, 20);
 		frmDungeonKeep.getContentPane().add(GuardPersonalitySelector);
-		
+
+	
 		JLabel GameStatusMessage = new JLabel("");
 		JButton MovementButtonLeft = new JButton("Left");
 		JButton MovementButtonUp = new JButton("Up");
@@ -218,6 +209,8 @@ public class Main_Window {
 					MovementButtonLeft.setEnabled(true);
 
 					GameStatusMessage.setText("New Game Started");
+					goodFormat = true;
+					ct= 0;
 					int nOgres = 0;
 					try {
 						nOgres = Integer.parseInt(OggreCounter.getText());
@@ -228,6 +221,7 @@ public class Main_Window {
 						MovementButtonRight.setEnabled(false);
 						MovementButtonLeft.setEnabled(false);
 						goodFormat = false;
+						ct=0;
 					}
 					if (nOgres > 5) {
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Limite de ogres excedido");
@@ -235,8 +229,25 @@ public class Main_Window {
 						MovementButtonDown.setEnabled(false);
 						MovementButtonRight.setEnabled(false);
 						MovementButtonLeft.setEnabled(false);
+						ct=0;
 					}
 					if(goodFormat){
+						String personality;
+						personality = GuardPersonalitySelector.getSelectedItem().toString();
+						map1Guard = new Guard(map1, personality);
+						System.out.println(personality);
+						map1Enemies[0]=map1Guard;
+				        map1Levers[0]=map1Lever;
+				        map1Doors[0]=new Door(0,5,map1Lever);
+				        map1Doors[1]=new Door(0,6,map1Lever);
+				        oggreMap2Weapons[0]=map2Club;
+				        map2Oggre.setWeapons(oggreMap2Weapons);
+				        map2Enemies[0]= map2Oggre;
+				        map2Keys[0]=map2Key;
+				        map2Doors[0]=new Door(0,1,map2Key);
+
+					Map1 = new Map(map1, referenceMap1, map1Dimension, ma1Hero, map1Enemies, map1Levers, true);
+					Map1.setDoor(map1Doors);
 					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 1, map1Doors, map2Club);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
@@ -285,7 +296,9 @@ public class Main_Window {
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
 					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Won!");
+					//GameStatusMessage.setText("You Won!");
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
 				}
 			}
 		});
@@ -326,7 +339,9 @@ public class Main_Window {
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
 					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Won!");
+					//GameStatusMessage.setText("You Won!");
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
 				}
 			}
 		});
@@ -368,7 +383,9 @@ public class Main_Window {
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
 					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Won!");
+					//GameStatusMessage.setText("You Won!");
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
 				}
 			}
 		});
@@ -410,7 +427,9 @@ public class Main_Window {
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
 					MovementButtonLeft.setEnabled(false);
-					GameStatusMessage.setText("You Won!");
+					//GameStatusMessage.setText("You Won!");
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
 				}
 			}
 		});

@@ -199,6 +199,12 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 				JOptionPane.showMessageDialog(null, "You Lost!");
 				System.exit(0);
 			}
+			
+			if(map.hasWon()&&(!map.hasNextMap())){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Won!");
+				System.exit(0);
+			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
@@ -206,6 +212,12 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 			if(map.hasLost()){
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Lost!");
+				System.exit(0);
+			}
+
+			if(map.hasWon()&&(!map.hasNextMap())){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Won!");
 				System.exit(0);
 			}
 			
@@ -219,6 +231,12 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 				System.exit(0);
 			}
 			
+			if(map.hasWon()&&(!map.hasNextMap())){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Won!");
+				System.exit(0);
+			}
+			
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
@@ -226,6 +244,12 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 			if(map.hasLost()){
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Lost!");
+				System.exit(0);
+			}
+			
+			if(map.hasWon()&&(!map.hasNextMap())){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Won!");
 				System.exit(0);
 			}
 			
