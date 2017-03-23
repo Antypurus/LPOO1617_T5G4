@@ -61,6 +61,7 @@ public class Guard extends Enemy {
 		subType = Personality;
 		xPos = 8;
 		yPos = 1;
+		this.isSleep = false;
 		representation = "G";
 		this.map=map;
 		System.out.println("\nThis guard is a "+this.subType+" Guard\n");
