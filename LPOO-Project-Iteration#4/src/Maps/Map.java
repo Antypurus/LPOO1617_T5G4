@@ -27,13 +27,59 @@ public class Map implements GameMap {
 	private Lever[] levers = null;
 	private Door[] doors = null;
 	private boolean hasNextMap = false;
-	private GameMap nextMap = null;
+	private Map nextMap = null;
 	private int height, width;
 	private boolean imideateOpen = true;// represents weather or not the player
 										// need to spend a movement action to
 										// open the door
 	private TextInput direction = new TextInput();
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	private Map nextMap = null;
+
+	public void setNextMap(Map nextMap){
+		this.hasNextMap=true;
+		this.nextMap = nextMap;
+	}
+
+	public Map getNextMap(){
+		return this.nextMap;
+	}
+
+	public ArrayList<Enemy> getEnemies(){
+		return this.enemies;
+	}
+
+	public Hero getHero(){
+		return  this.hero;
+	}
+
+	public Door[] getDoors(){
+		return this.doors;
+	}
+
+	public Lever[] getLevers(){
+		return this.levers;
+	}
+
+	public Key[] getKeys(){
+		return this.keys;
+	}
+
+	public String[][] getReferenceMap(){
+		return this.resetMap
+	}
+
+	public String[][] getMap(){
+		return this.map;
+	}
+
+	public int getHeight(){
+		return this.height;
+	}
+
+	public int getWidth(){
+		return this.width;
+	}
 
 	private void clearEnemies(){
 		this.enemies.clear();
