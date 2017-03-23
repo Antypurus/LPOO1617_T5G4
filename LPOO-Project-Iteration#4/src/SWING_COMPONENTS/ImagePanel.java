@@ -26,6 +26,7 @@ import Maps.Map;
 import Objects.Door;
 import Objects.Key;
 import Objects.Lever;
+import Weapons.Club;
 
 public class ImagePanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener{
 
@@ -35,10 +36,12 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 	private Map map;
 	private Lever k;
 	private int level;
+	private Club Cl;
 	private Key K;
 	private Door[] map1Doors = new Door[2];
 	private Door[] map2Doors = new Door[1];
     private Image ogre;
+    private Image club;
     private Image wall;
     private Image closeddoor;
     private Image openabledoor;
@@ -62,7 +65,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private final int map_width = 10;
     private final int map_height = 10;
     private final int pixel_size = 30;
-    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, Key K, int level, Door mapDoors[]) {
+    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, Key K, int level, Door mapDoors[], Club Cl) {
     	addMouseListener(this);
     	addMouseMotionListener(this);
     	addKeyListener(this);
@@ -85,6 +88,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
           guardup = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardup.png")).getImage();
           guarddown = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardown.png")).getImage();
           key = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/key.png")).getImage();
+          club = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/club.png")).getImage();
           this.H = H;
           this.G = G;
           this.O = O;
@@ -92,6 +96,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
           this.level = level;
           this.k = k;
           this.K = K;
+          this.Cl = Cl;
           if(level == 1)
        for(int i = 0 ; i < mapDoors.length; i++)
        {
@@ -158,6 +163,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         	repaint();
             g.drawImage(heroright, H.getXPos()*pixel_size, H.getYPos()*pixel_size,this);
             g.drawImage(key,pixel_size*K.getxPos(),pixel_size*K.getyPos(),this);
+            g.drawImage(club,pixel_size*Cl.getxPos(),Cl.getyPos()*pixel_size,this);
             g.drawImage(ogreup,pixel_size*O.getXPos(),O.getYPos()*pixel_size,this);
         for(int i = 0; i < map_height; i++)
         {

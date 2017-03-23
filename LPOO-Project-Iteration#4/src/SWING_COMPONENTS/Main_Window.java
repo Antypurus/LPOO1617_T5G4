@@ -237,7 +237,7 @@ public class Main_Window {
 						MovementButtonLeft.setEnabled(false);
 					}
 					if(goodFormat){
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 1, map1Doors);
+					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 1, map1Doors, map2Club);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
@@ -273,7 +273,7 @@ public class Main_Window {
 		            ma1Hero.setHasClub(true);
 		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever,map2Key, 2, map2Doors);
+					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever,map2Key, 2, map2Doors,map2Club);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
@@ -314,7 +314,7 @@ public class Main_Window {
 		            ma1Hero.setHasClub(true);
 		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 2, map2Doors);
+					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 2, map2Doors,map2Club);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
@@ -356,7 +356,7 @@ public class Main_Window {
 		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
 		            panel.removeAll(); 
-					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 2, map2Doors);
+					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 2, map2Doors,map2Club);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
@@ -397,7 +397,7 @@ public class Main_Window {
 		            ma1Hero.setHasClub(true);
 		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
 		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever,map2Key, 2, map2Doors);
+					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever,map2Key, 2, map2Doors,map2Club);
 					panel.revalidate();
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
