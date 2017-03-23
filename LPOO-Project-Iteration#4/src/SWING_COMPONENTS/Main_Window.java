@@ -123,7 +123,6 @@ public class Main_Window {
 	            {"X"," "," "," "," "," "," "," "," ","X"},
 	            {"X","X","X","X","X","X","X","X","X","X"}
 	    };
-
 	    
 	     MapDimension map2Dimension=new MapDimension(10,10);
 
@@ -266,6 +265,7 @@ public class Main_Window {
 		MovementButtonUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(1);
+				panel.playerDirection(1);
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
@@ -309,6 +309,7 @@ public class Main_Window {
 		MovementButtonLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(3);
+				panel.playerDirection(3);
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
@@ -352,6 +353,7 @@ public class Main_Window {
 		MovementButtonRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(4);
+				panel.playerDirection(4);
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
@@ -396,6 +398,7 @@ public class Main_Window {
 		MovementButtonDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map1.SwingmapLogic(2);
+				panel.playerDirection(2);
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
