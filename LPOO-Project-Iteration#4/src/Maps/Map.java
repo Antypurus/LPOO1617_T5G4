@@ -365,6 +365,53 @@ public class Map implements GameMap {
 
 	}
 
+	public void SwingDrawMap() {
+
+		this.resetMap(this.resetMap);// we must reset the map before drawing it
+										// , this mustnt be done after drawing
+										// as we need to check certain
+										// conditions trough looking
+		// at the maps current state with the new positions for certain not
+		// native objects
+
+		if (keys != null) {
+			for (int i = 0; i < keys.length; i++) {
+				if (!keys[i].isPicked()) {
+					map[keys[i].getyPos()][keys[i].getxPos()] = this.keys[i].getRep();
+				}
+			}
+		}
+
+		if (levers != null) {
+			for (int i = 0; i < levers.length; i++) {
+				map[levers[i].getyPos()][levers[i].getxPos()] = this.levers[i].getRepresentation();
+			}
+		}
+
+		if (doors != null) {
+			for (int i = 0; i < doors.length; i++) {
+				map[doors[i].getyPos()][doors[i].getxPos()] = this.doors[i].getRepresentation();
+			}
+		}
+
+		for (int i = 0; i < enemies.size(); i++) {
+			map[enemies.get(i).getYPos()][enemies.get(i).getXPos()] = enemies.get(i).getRepresentation();
+			if (enemies.get(i).getWeapons() != null) {
+				for (int j = 0; j < enemies.get(i).getWeapons().length; j++) {
+					map[enemies.get(i).getWeapons()[j].getyPos()][enemies.get(i).getWeapons()[j]
+							.getxPos()] = enemies.get(i).getWeapons()[j].getRep(this.keys, this.levers);
+				}
+			}
+		}
+		if (keys != null) {
+			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.keys);
+		} else {
+			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.levers);
+		}
+
+	}
+
+	
 	public boolean mapLogic() {
 		int movement;
 
@@ -574,6 +621,104 @@ public class Map implements GameMap {
 		}
 
 		this.SwingDrawMap(textArea);
+		return false;
+	}
+	
+	public boolean SwingmapLogic(int movement) {
+		switch (movement) {
+		case (1):
+			if (this.moveTo(0, -1, this.hero)) {
+				this.hero.moveHero(0, -1);
+				break;
+			} else {
+				for (int i = 0; i < doors.length; i++) {
+					if (hero.getYPos() - 1 == doors[i].getyPos()) {
+						if (hero.getXPos() == doors[i].getxPos()) {
+							doors[i].setOpen(true);
+						}
+					}
+				}
+				break;
+			}
+		case (2):
+			if (this.moveTo(0, 1, this.hero)) {
+				this.hero.moveHero(0, 1);
+				break;
+			} else {
+				for (int i = 0; i < doors.length; i++) {
+					if (hero.getYPos() + 1 == doors[i].getyPos()) {
+						if (hero.getXPos() == doors[i].getxPos()) {
+							doors[i].setOpen(true);
+						}
+					}
+				}
+				break;
+			}
+		case (3):
+			if (this.moveTo(-1, 0, this.hero)) {
+				this.hero.moveHero(-1, 0);
+				break;
+			} else {
+				for (int i = 0; i < doors.length; i++) {
+					if (hero.getYPos() == doors[i].getyPos()) {
+						if (hero.getXPos() - 1 == doors[i].getxPos()) {
+							doors[i].setOpen(true);
+						}
+					}
+				}
+				break;
+			}
+		case (4):
+			if (this.moveTo(1, 0, this.hero)) {
+				this.hero.moveHero(1, 0);
+				break;
+			} else {
+				for (int i = 0; i < doors.length; i++) {
+					if (hero.getYPos() == doors[i].getyPos()) {
+						if (hero.getXPos() + 1 == doors[i].getxPos()) {
+							doors[i].setOpen(true);
+						}
+					}
+				}
+				break;
+			}
+		default:
+			break;
+		}
+
+		if (this.hasLost()) {
+			return false;
+		}
+
+		if (keys != null) {
+			for (int i = 0; i < keys.length; i++) {
+				this.keys[i].detectPickup(this.hero);
+			}
+		}
+
+		if (levers != null) {
+			for (int i = 0; i < levers.length; i++) {
+				this.levers[i].detectPress(this.hero);
+			}
+		}
+
+		for (int i = 0; i < enemies.size(); i++) {
+			this.enemies.get(i).move();
+			if (!this.enemies.get(i).isStuned()) {
+				this.enemies.get(i).attack();
+			}
+		}
+
+		if (this.hasLost()) {
+			return false;
+		}
+
+		if (hasWon() && (keys == null)) {
+			this.clearEnemies();
+			return true;
+		}
+
+		this.SwingDrawMap();
 		return false;
 	}
 }

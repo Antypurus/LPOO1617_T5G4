@@ -56,6 +56,26 @@ public class Guard extends Enemy {
 		System.out.println("\nThis guard is a "+this.subType+" Guard\n");
 	}
 	
+	public Guard(String[][] map ,String Personality){
+		type = "Guard";
+		subType = Personality;
+		xPos = 8;
+		yPos = 1;
+		representation = "G";
+		this.map=map;
+		System.out.println("\nThis guard is a "+this.subType+" Guard\n");
+	}
+	
+	public Guard(String[][] map,int x,int y,String Personality){
+		type = "Guard";
+		subType = Personality;
+		xPos = x;
+		yPos = y;
+		representation = "G";
+		this.map=map;
+		System.out.println("\nThis guard is a "+this.subType+" Guard\n");
+	}
+	
 	private void rookieMoveGuard() {
 		if (guardMovStage == 0) {
 			xPos--;
