@@ -321,6 +321,15 @@ public class Map implements GameMap {
 				}
 			}
 		}
+		for(int i=0;i<this.nonStandardDoors.size();i++){
+			if (nonStandardDoors.get(i).getIsOpen()) {
+				if (x == nonStandardDoors.get(i).getxPos()) {
+					if (y == nonStandardDoors.get(i).getyPos()) {
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 
@@ -505,6 +514,13 @@ public class Map implements GameMap {
 						}
 					}
 				}
+				for(int i=0;i<this.nonStandardDoors.size();i++){
+					if (hero.getYPos() - 1 == nonStandardDoors.get(i).getyPos()) {
+						if (hero.getXPos() == nonStandardDoors.get(i).getxPos()) {
+							nonStandardDoors.get(i).setOpen(true);
+						}
+					}
+				}
 				break;
 			}
 		case (2):
@@ -516,6 +532,13 @@ public class Map implements GameMap {
 					if (hero.getYPos() + 1 == doors[i].getyPos()) {
 						if (hero.getXPos() == doors[i].getxPos()) {
 							doors[i].setOpen(true);
+						}
+					}
+				}
+				for(int i=0;i<this.nonStandardDoors.size();i++){
+					if (hero.getYPos() + 1 == nonStandardDoors.get(i).getyPos()) {
+						if (hero.getXPos() == nonStandardDoors.get(i).getxPos()) {
+							nonStandardDoors.get(i).setOpen(true);
 						}
 					}
 				}
@@ -533,6 +556,13 @@ public class Map implements GameMap {
 						}
 					}
 				}
+				for(int i=0;i<this.nonStandardDoors.size();i++){
+					if (hero.getYPos() == nonStandardDoors.get(i).getyPos()) {
+						if (hero.getXPos()-1 == nonStandardDoors.get(i).getxPos()) {
+							nonStandardDoors.get(i).setOpen(true);
+						}
+					}
+				}
 				break;
 			}
 		case (4):
@@ -544,6 +574,13 @@ public class Map implements GameMap {
 					if (hero.getYPos() == doors[i].getyPos()) {
 						if (hero.getXPos() + 1 == doors[i].getxPos()) {
 							doors[i].setOpen(true);
+						}
+					}
+				}
+				for(int i=0;i<this.nonStandardDoors.size();i++){
+					if (hero.getYPos() == nonStandardDoors.get(i).getyPos()) {
+						if (hero.getXPos()+1 == nonStandardDoors.get(i).getxPos()) {
+							nonStandardDoors.get(i).setOpen(true);
 						}
 					}
 				}
@@ -626,6 +663,8 @@ public class Map implements GameMap {
 	public boolean SwingmapLogic(int movement) {
 		
 		this.movementInterpreter(movement);
+		
+		this.SwingDrawMap();
 
 		if (this.hasLost()) {
 			return false;
