@@ -72,10 +72,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
           lever = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/lever.png")).getImage();
           turnedlever = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/leverturned.png")).getImage();
           hero = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/heroright.png")).getImage();
-          ogreleft = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreleft.png")).getImage();
-          ogreright = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreright.png")).getImage();
-          ogreup = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreup.png")).getImage();
-          ogredown = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogredown.png")).getImage();
+          ogre = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogredown.png")).getImage();
           guard = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardown.png")).getImage();
           key = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/key.png")).getImage();
           club = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/club.png")).getImage();
@@ -200,13 +197,11 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
             g.drawImage(key,pixel_size*map.getNextMap().getKeys()[0].getxPos(),pixel_size*map.getNextMap().getKeys()[0].getyPos(),this);
             g.drawImage(hero, map.getNextMap().getHero().getXPos()*pixel_size, map.getNextMap().getHero().getYPos()*pixel_size,this);
             g.drawImage(club,pixel_size*Cl.getxPos(),Cl.getyPos()*pixel_size,this);
-            g.drawImage(ogreup,pixel_size*map.getNextMap().getEnemies().get(0).getXPos(),map.getNextMap().getEnemies().get(0).getYPos()*pixel_size,this);
         	}
             else
             {
                 g.drawImage(hero,map.getNextMap().getHero().getXPos()*pixel_size, map.getNextMap().getHero().getYPos()*pixel_size,this);
                 g.drawImage(club,pixel_size*Cl.getxPos(),Cl.getyPos()*pixel_size,this);
-                g.drawImage(ogreup,pixel_size*map.getNextMap().getEnemies().get(0).getXPos(),map.getNextMap().getEnemies().get(0).getYPos()*pixel_size,this);
             }
         for(int i = 0; i < map_height; i++)
         {
@@ -225,7 +220,16 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 //        g.drawImage(ogredown,pixel_size*5,3*pixel_size,this);
 //        g.drawImage(ogreleft,pixel_size*5,4*pixel_size,this);
 //        g.drawImage(ogreright,pixel_size*5,5*pixel_size,this);
-        
+        if(Cl.getxPos() < map.getNextMap().getEnemies().get(0).getXPos())
+        	ogre = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreleft.png")).getImage();
+        else if(Cl.getxPos() > map.getNextMap().getEnemies().get(0).getXPos())
+        	ogre = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreright.png")).getImage();
+        else if(Cl.getyPos() > map.getNextMap().getEnemies().get(0).getYPos())
+        	ogre = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogredown.png")).getImage();
+        else if(Cl.getyPos() < map.getNextMap().getEnemies().get(0).getYPos())
+        	ogre = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreup.png")).getImage();
+        for(int i = 0; i < map.getNextMap().getEnemies().size();i++)
+        g.drawImage(ogre,pixel_size*map.getNextMap().getEnemies().get(i).getXPos(),map.getNextMap().getEnemies().get(i).getYPos()*pixel_size,this);
         }
         this.requestFocusInWindow();
     }

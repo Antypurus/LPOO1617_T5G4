@@ -137,7 +137,7 @@ public class Main_Window {
 	     Key map2Key = new Key(8,1);
 
 	     Enemy[] map1Enemies=new Enemy[1];
-	     Enemy[] map2Enemies = new  Enemy[1];
+	   
 
 	     Lever[] map1Levers=new Lever[1];
 
@@ -236,13 +236,15 @@ public class Main_Window {
 						personality = GuardPersonalitySelector.getSelectedItem().toString();
 						map1Guard = new Guard(map1, personality);
 						System.out.println(personality);
+						Enemy[] map2Enemies = new  Enemy[nOgres];
 						map1Enemies[0]=map1Guard;
 				        map1Levers[0]=map1Lever;
 				        map1Doors[0]=new Door(0,5,map1Lever);
 				        map1Doors[1]=new Door(0,6,map1Lever);
 				        oggreMap2Weapons[0]=map2Club;
 				        map2Oggre.setWeapons(oggreMap2Weapons);
-				        map2Enemies[0]= map2Oggre;
+				        for(int i = 0; i < nOgres; i++)
+				        map2Enemies[i]= map2Oggre;
 				        map2Keys[0]=map2Key;
 				        map2Doors[0]=new Door(0,1,map2Key);
 

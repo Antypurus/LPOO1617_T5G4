@@ -10,10 +10,13 @@ public class Oggre extends Enemy{
 	private int clubXPos = this.xPos;
 	
 	public Oggre(String[][] map){
+		Random generator = new Random();
+		int movementx = generator.nextInt(4);
+		int movementy = generator.nextInt(4);
 		type = "Ogre";
 		subType = "Crazy";
-		xPos = 4;
-		yPos = 1;
+		xPos = 4 + movementx;
+		yPos = 1 + movementy;
 		representation = "O";
 		this.map=map;
 	}
