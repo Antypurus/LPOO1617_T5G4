@@ -39,94 +39,94 @@ public class Map implements GameMap {
 	private ArrayList<Door> nonStandardDoors = new ArrayList<Door>();
 	private ArrayList<Lever> nonStandardLever = new ArrayList<Lever>();
 	private ArrayList<Key> nonStandardKeys = new ArrayList<Key>();
-	
-	public void setNextMap(Map nextMap){
-		this.hasNextMap=true;
+
+	public void setNextMap(Map nextMap) {
+		this.hasNextMap = true;
 		this.nextMap = nextMap;
 	}
-	
-	public void addDoor(Door door,Key associatedKey){
+
+	public void addDoor(Door door, Key associatedKey) {
 		this.nonStandardDoors.add(door);
 		this.nonStandardKeys.add(associatedKey);
 	}
-	
-	public Door[] getNonStandardDoors(){
+
+	public Door[] getNonStandardDoors() {
 		return (Door[]) this.nonStandardDoors.toArray();
 	}
-	
-	public Key[] getNonStandardKeys(){
+
+	public Key[] getNonStandardKeys() {
 		return (Key[]) this.nonStandardKeys.toArray();
 	}
-	
-	public Lever[] getNonStandardLever(){
+
+	public Lever[] getNonStandardLever() {
 		return (Lever[]) this.nonStandardLever.toArray();
 	}
-	
-	public void addDoor(Door door,Lever associatedLever){
+
+	public void addDoor(Door door, Lever associatedLever) {
 		this.nonStandardDoors.add(door);
 		this.nonStandardLever.add(associatedLever);
 	}
-	
-	public void addWall(Wall wall){
+
+	public void addWall(Wall wall) {
 		this.nonStandardWall.add(wall);
 	}
-	
-	public void addWall(Wall[] walls){
-		for(int i=0;i<walls.length;i++){
+
+	public void addWall(Wall[] walls) {
+		for (int i = 0; i < walls.length; i++) {
 			this.nonStandardWall.add(walls[i]);
 		}
 	}
-	
-	public Wall[] getWalls(){
+
+	public Wall[] getWalls() {
 		return (Wall[]) this.nonStandardWall.toArray();
 	}
 
-	public Map getNextMap(){
+	public Map getNextMap() {
 		return this.nextMap;
 	}
 
-	public ArrayList<Enemy> getEnemies(){
+	public ArrayList<Enemy> getEnemies() {
 		return this.enemies;
 	}
 
-	public Hero getHero(){
-		return  this.hero;
+	public Hero getHero() {
+		return this.hero;
 	}
 
-	public Door[] getDoors(){
+	public Door[] getDoors() {
 		return this.doors;
 	}
 
-	public Lever[] getLevers(){
+	public Lever[] getLevers() {
 		return this.levers;
 	}
 
-	public Key[] getKeys(){
+	public Key[] getKeys() {
 		return this.keys;
 	}
 
-	public String[][] getReferenceMap(){
+	public String[][] getReferenceMap() {
 		return this.resetMap;
 	}
 
-	public int getHeight(){
+	public int getHeight() {
 		return this.height;
 	}
 
-	public int getWidth(){
+	public int getWidth() {
 		return this.width;
 	}
 
-	private void clearEnemies(){
+	private void clearEnemies() {
 		this.enemies.clear();
-		if(this.keys!=null){
-			keys=null;
+		if (this.keys != null) {
+			keys = null;
 		}
-		if(this.levers!=null){
-			levers=null;
+		if (this.levers != null) {
+			levers = null;
 		}
 	}
-	
+
 	public Map(String[][] map, String[][] referenceMap, MapDimension dimensions, Hero hero, Enemy[] enemies,
 			Key[] key) {
 		this.map = map;
@@ -249,8 +249,8 @@ public class Map implements GameMap {
 			this.enemies.add(enemies[i]);
 		}
 	}
-	
-	public void addEnemy(Enemy enemie){
+
+	public void addEnemy(Enemy enemie) {
 		this.enemies.add(enemie);
 	}
 
@@ -345,15 +345,7 @@ public class Map implements GameMap {
 		}
 	}
 
-	public void drawMap() {
-
-		this.resetMap(this.resetMap);// we must reset the map before drawing it
-										// , this mustnt be done after drawing
-										// as we need to check certain
-										// conditions trough looking
-		// at the maps current state with the new positions for certain not
-		// native objects
-
+	private void drawkeys() {
 		if (keys != null) {
 			for (int i = 0; i < keys.length; i++) {
 				if (!keys[i].isPicked()) {
@@ -362,18 +354,41 @@ public class Map implements GameMap {
 			}
 		}
 
+		for (int i = 0; i < this.nonStandardKeys.size(); i++) {
+			if (!nonStandardKeys.get(i).isPicked()) {
+				map[nonStandardKeys.get(i).getyPos()][nonStandardKeys.get(i).getxPos()] = this.nonStandardKeys.get(i)
+						.getRep();
+			}
+		}
+	}
+
+	private void drawLevers() {
 		if (levers != null) {
 			for (int i = 0; i < levers.length; i++) {
 				map[levers[i].getyPos()][levers[i].getxPos()] = this.levers[i].getRepresentation();
 			}
 		}
 
+		for (int i = 0; i < this.nonStandardLever.size(); i++) {
+			map[nonStandardLever.get(i).getyPos()][nonStandardLever.get(i).getxPos()] = this.nonStandardLever.get(i)
+					.getRepresentation();
+		}
+	}
+
+	private void drawDoors() {
 		if (doors != null) {
 			for (int i = 0; i < doors.length; i++) {
 				map[doors[i].getyPos()][doors[i].getxPos()] = this.doors[i].getRepresentation();
 			}
 		}
 
+		for (int i = 0; i < this.nonStandardDoors.size(); i++) {
+			map[nonStandardDoors.get(i).getyPos()][nonStandardDoors.get(i).getxPos()] = this.nonStandardDoors.get(i)
+					.getRepresentation();
+		}
+	}
+
+	private void drawEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
 			map[enemies.get(i).getYPos()][enemies.get(i).getXPos()] = enemies.get(i).getRepresentation();
 			if (enemies.get(i).getWeapons() != null) {
@@ -383,6 +398,25 @@ public class Map implements GameMap {
 				}
 			}
 		}
+	}
+
+	public void drawMap() {
+
+		this.resetMap(this.resetMap);// we must reset the map before drawing it
+										// , this mustnt be done after drawing
+										// as we need to check certain
+										// conditions trough looking
+		// at the maps current state with the new positions for certain not
+		// native objects
+
+		this.drawkeys();
+
+		this.drawLevers();
+
+		this.drawDoors();
+
+		this.drawEnemies();
+
 		if (keys != null) {
 			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.keys);
 		} else {
@@ -408,35 +442,14 @@ public class Map implements GameMap {
 		// at the maps current state with the new positions for certain not
 		// native objects
 
-		if (keys != null) {
-			for (int i = 0; i < keys.length; i++) {
-				if (!keys[i].isPicked()) {
-					map[keys[i].getyPos()][keys[i].getxPos()] = this.keys[i].getRep();
-				}
-			}
-		}
+		this.drawkeys();
 
-		if (levers != null) {
-			for (int i = 0; i < levers.length; i++) {
-				map[levers[i].getyPos()][levers[i].getxPos()] = this.levers[i].getRepresentation();
-			}
-		}
+		this.drawLevers();
 
-		if (doors != null) {
-			for (int i = 0; i < doors.length; i++) {
-				map[doors[i].getyPos()][doors[i].getxPos()] = this.doors[i].getRepresentation();
-			}
-		}
+		this.drawDoors();
 
-		for (int i = 0; i < enemies.size(); i++) {
-			map[enemies.get(i).getYPos()][enemies.get(i).getXPos()] = enemies.get(i).getRepresentation();
-			if (enemies.get(i).getWeapons() != null) {
-				for (int j = 0; j < enemies.get(i).getWeapons().length; j++) {
-					map[enemies.get(i).getWeapons()[j].getyPos()][enemies.get(i).getWeapons()[j]
-							.getxPos()] = enemies.get(i).getWeapons()[j].getRep(this.keys, this.levers);
-				}
-			}
-		}
+		this.drawEnemies();
+		
 		if (keys != null) {
 			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.keys);
 		} else {
@@ -461,43 +474,23 @@ public class Map implements GameMap {
 		// at the maps current state with the new positions for certain not
 		// native objects
 
-		if (keys != null) {
-			for (int i = 0; i < keys.length; i++) {
-				if (!keys[i].isPicked()) {
-					map[keys[i].getyPos()][keys[i].getxPos()] = this.keys[i].getRep();
-				}
-			}
-		}
+		this.drawkeys();
 
-		if (levers != null) {
-			for (int i = 0; i < levers.length; i++) {
-				map[levers[i].getyPos()][levers[i].getxPos()] = this.levers[i].getRepresentation();
-			}
-		}
+		this.drawLevers();
 
-		if (doors != null) {
-			for (int i = 0; i < doors.length; i++) {
-				map[doors[i].getyPos()][doors[i].getxPos()] = this.doors[i].getRepresentation();
-			}
-		}
+		this.drawDoors();
 
-		for (int i = 0; i < enemies.size(); i++) {
-			map[enemies.get(i).getYPos()][enemies.get(i).getXPos()] = enemies.get(i).getRepresentation();
-			if (enemies.get(i).getWeapons() != null) {
-				for (int j = 0; j < enemies.get(i).getWeapons().length; j++) {
-					map[enemies.get(i).getWeapons()[j].getyPos()][enemies.get(i).getWeapons()[j]
-							.getxPos()] = enemies.get(i).getWeapons()[j].getRep(this.keys, this.levers);
-				}
-			}
-		}
+		this.drawEnemies();
+		
+		/*
 		if (keys != null) {
 			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.keys);
 		} else {
 			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.levers);
-		}
+		}*/
 
 	}
-	
+
 	public boolean mapLogic() {
 		int movement;
 
