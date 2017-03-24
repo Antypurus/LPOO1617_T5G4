@@ -490,122 +490,8 @@ public class Map implements GameMap {
 		}*/
 
 	}
-
-	public boolean mapLogic() {
-		int movement;
-
-		while (!hasWon() && !hasLost()) {
-
-			this.drawMap();
-
-			movement = direction.getNextStep();
-
-			switch (movement) {
-			case (1):
-				if (this.moveTo(0, -1, this.hero)) {
-					this.hero.moveHero(0, -1);
-					break;
-				} else {
-					for (int i = 0; i < doors.length; i++) {
-						if (hero.getYPos() - 1 == doors[i].getyPos()) {
-							if (hero.getXPos() == doors[i].getxPos()) {
-								doors[i].setOpen(true);
-							}
-						}
-					}
-					break;
-				}
-			case (2):
-				if (this.moveTo(0, 1, this.hero)) {
-					this.hero.moveHero(0, 1);
-					break;
-				} else {
-					for (int i = 0; i < doors.length; i++) {
-						if (hero.getYPos() + 1 == doors[i].getyPos()) {
-							if (hero.getXPos() == doors[i].getxPos()) {
-								doors[i].setOpen(true);
-							}
-						}
-					}
-					break;
-				}
-			case (3):
-				if (this.moveTo(-1, 0, this.hero)) {
-					this.hero.moveHero(-1, 0);
-					break;
-				} else {
-					for (int i = 0; i < doors.length; i++) {
-						if (hero.getYPos() == doors[i].getyPos()) {
-							if (hero.getXPos() - 1 == doors[i].getxPos()) {
-								doors[i].setOpen(true);
-							}
-						}
-					}
-					break;
-				}
-			case (4):
-				if (this.moveTo(1, 0, this.hero)) {
-					this.hero.moveHero(1, 0);
-					break;
-				} else {
-					for (int i = 0; i < doors.length; i++) {
-						if (hero.getYPos() == doors[i].getyPos()) {
-							if (hero.getXPos() + 1 == doors[i].getxPos()) {
-								doors[i].setOpen(true);
-							}
-						}
-					}
-					break;
-				}
-			default:
-				break;
-			}
-
-			if (this.hasLost()) {
-				System.out.println("\nYou Have Ben Caught !\n YOU LOSE!\n");
-				direction.close();
-				return false;
-			}
-
-			if (keys != null) {
-				for (int i = 0; i < keys.length; i++) {
-					this.keys[i].detectPickup(this.hero);
-				}
-			}
-
-			if (levers != null) {
-				for (int i = 0; i < levers.length; i++) {
-					this.levers[i].detectPress(this.hero);
-				}
-			}
-
-			for (int i = 0; i < enemies.size(); i++) {
-				this.enemies.get(i).move();
-				if (!this.enemies.get(i).isStuned()) {
-					this.enemies.get(i).attack();
-				}
-			}
-
-			if (this.hasLost()) {
-				System.out.println("\nYou Have Ben Caught !\n YOU LOSE!\n");
-				direction.close();
-				return false;
-			}
-
-			if (hasWon() && (keys == null)) {
-				System.out.println("\nCongratulations you have won\n");
-				this.clearEnemies();
-				return true;
-			}
-
-		}
-
-		direction.close();
-		return false;
-
-	}
-
-	public boolean SwingmapLogic(int movement) {
+	
+	private void movementInterpreter(int movement){
 		switch (movement) {
 		case (1):
 			if (this.moveTo(0, -1, this.hero)) {
@@ -666,22 +552,88 @@ public class Map implements GameMap {
 		default:
 			break;
 		}
+	}
 
-		if (this.hasLost()) {
-			return false;
-		}
-
+	private void keyLogic(){
 		if (keys != null) {
 			for (int i = 0; i < keys.length; i++) {
 				this.keys[i].detectPickup(this.hero);
 			}
 		}
-
+		for(int i=0;i<this.nonStandardKeys.size();i++){
+			this.nonStandardKeys.get(i).detectPickup(this.hero);
+		}
+	}
+	
+	private void leverLogic(){
 		if (levers != null) {
 			for (int i = 0; i < levers.length; i++) {
 				this.levers[i].detectPress(this.hero);
 			}
 		}
+		for(int i=0;i<this.nonStandardLever.size();i++){
+			this.nonStandardLever.get(i).detectPress(this.hero);
+		}
+	}
+	
+	public boolean mapLogic() {
+		int movement;
+
+		while (!hasWon() && !hasLost()) {
+
+			this.drawMap();
+
+			movement = direction.getNextStep();
+
+			this.movementInterpreter(movement);
+			
+			if (this.hasLost()) {
+				System.out.println("\nYou Have Ben Caught !\n YOU LOSE!\n");
+				direction.close();
+				return false;
+			}
+
+			this.keyLogic();
+
+			this.leverLogic();
+
+			for (int i = 0; i < enemies.size(); i++) {
+				this.enemies.get(i).move();
+				if (!this.enemies.get(i).isStuned()) {
+					this.enemies.get(i).attack();
+				}
+			}
+
+			if (this.hasLost()) {
+				System.out.println("\nYou Have Ben Caught !\n YOU LOSE!\n");
+				direction.close();
+				return false;
+			}
+
+			if (hasWon() && (keys == null)) {
+				System.out.println("\nCongratulations you have won\n");
+				this.clearEnemies();
+				return true;
+			}
+
+		}
+
+		direction.close();
+		return false;
+
+	}
+
+	public boolean SwingmapLogic(int movement) {
+		
+		this.movementInterpreter(movement);
+
+		if (this.hasLost()) {
+			return false;
+		}
+
+		this.keyLogic();
+
+		this.leverLogic();
 
 		for (int i = 0; i < enemies.size(); i++) {
 			this.enemies.get(i).move();
