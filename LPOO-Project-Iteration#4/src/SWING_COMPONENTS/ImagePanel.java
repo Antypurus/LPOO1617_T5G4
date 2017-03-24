@@ -108,6 +108,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 //          }
     }
 
+    
     public void playerDirection(int mov)
     {
     	this.Direction = mov;
