@@ -7,6 +7,7 @@ import Characters.Oggre;
 import Objects.Door;
 import Objects.Key;
 import Objects.Lever;
+import Objects.Wall;
 import Tools.DistanceCalculator;
 import Weapons.Club;
 import Weapons.Weapon;
@@ -34,9 +35,50 @@ public class Map implements GameMap {
 										// open the door
 	private TextInput direction = new TextInput();
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	private ArrayList<Wall> nonStandardWall = new ArrayList<Wall>();
+	private ArrayList<Door> nonStandardDoors = new ArrayList<Door>();
+	private ArrayList<Lever> nonStandardLever = new ArrayList<Lever>();
+	private ArrayList<Key> nonStandardKeys = new ArrayList<Key>();
+	
 	public void setNextMap(Map nextMap){
 		this.hasNextMap=true;
 		this.nextMap = nextMap;
+	}
+	
+	public void addDoor(Door door,Key associatedKey){
+		this.nonStandardDoors.add(door);
+		this.nonStandardKeys.add(associatedKey);
+	}
+	
+	public Door[] getNonStandardDoors(){
+		return (Door[]) this.nonStandardDoors.toArray();
+	}
+	
+	public Key[] getNonStandardKeys(){
+		return (Key[]) this.nonStandardKeys.toArray();
+	}
+	
+	public Lever[] getNonStandardLever(){
+		return (Lever[]) this.nonStandardLever.toArray();
+	}
+	
+	public void addDoor(Door door,Lever associatedLever){
+		this.nonStandardDoors.add(door);
+		this.nonStandardLever.add(associatedLever);
+	}
+	
+	public void addWall(Wall wall){
+		this.nonStandardWall.add(wall);
+	}
+	
+	public void addWall(Wall[] walls){
+		for(int i=0;i<walls.length;i++){
+			this.nonStandardWall.add(walls[i]);
+		}
+	}
+	
+	public Wall[] getWalls(){
+		return (Wall[]) this.nonStandardWall.toArray();
 	}
 
 	public Map getNextMap(){
@@ -206,6 +248,10 @@ public class Map implements GameMap {
 		for (int i = 0; i < enemies.length; i++) {
 			this.enemies.add(enemies[i]);
 		}
+	}
+	
+	public void addEnemy(Enemy enemie){
+		this.enemies.add(enemie);
 	}
 
 	public void generateRandomOgres(int n_oggre) {
@@ -451,7 +497,6 @@ public class Map implements GameMap {
 		}
 
 	}
-
 	
 	public boolean mapLogic() {
 		int movement;
@@ -567,7 +612,6 @@ public class Map implements GameMap {
 
 	}
 
-	
 	public boolean SwingmapLogic(int movement) {
 		switch (movement) {
 		case (1):
