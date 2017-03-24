@@ -37,6 +37,8 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 	private Hero H;
 	private ArrayList<Enemy> E1 = new ArrayList<Enemy>();
 	private ArrayList<Enemy> E2 = new ArrayList<Enemy>();
+	private boolean openDoor = false;
+	private boolean canProceed = false;
 	private Map map;
 	private Lever[] k;
 	private int level;
@@ -45,6 +47,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private Image ogre;
     private Image club;
     private Image wall;
+    private Image door;
     private Image closeddoor;
     private Image openabledoor;
     private Image opendoor;
@@ -67,6 +70,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     	addKeyListener(this);
           wall = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/wall red.png")).getImage();
           closeddoor = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/closed door.png")).getImage();
+          door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openableDoor.jpg")).getImage();
           openabledoor = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openableDoor.jpg")).getImage();
           opendoor = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openedDoor.png")).getImage();
           lever = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/lever.png")).getImage();
@@ -206,7 +210,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         for(int i = 0; i < map_height; i++)
         {
         	if(i== 1)
-        	g.drawImage(openabledoor, map.getNextMap().getDoors()[0].getxPos()*pixel_size, map.getNextMap().getDoors()[0].getyPos()*pixel_size,this);
+        	g.drawImage(door, map.getNextMap().getDoors()[0].getxPos()*pixel_size, map.getNextMap().getDoors()[0].getyPos()*pixel_size,this);
         	else
         	g.drawImage(wall, 0, pixel_size*i,this);
         	g.drawImage(wall, (map_width-1)*pixel_size, pixel_size*i,this);
@@ -273,7 +277,14 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 					JOptionPane.showMessageDialog(null, "You Lost!");
 					System.exit(0);
 				}
-				
+				if(map.getNextMap().getKeys()[0].isPicked() && map.getNextMap().getHero().getXPos() == map.getNextMap().getDoors()[0].getxPos()+1){
+					openDoor = true;
+					if(canProceed)
+						door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openedDoor.png")).getImage();
+					canProceed = true;
+				}
+				if(!openDoor)
+					door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openableDoor.jpg")).getImage();
 				if(map.getNextMap().hasWon()){
 					repaint();
 					JOptionPane.showMessageDialog(null, "You Won!");
@@ -306,6 +317,15 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 					JOptionPane.showMessageDialog(null, "You Lost!");
 					System.exit(0);
 				}
+				
+				if(map.getNextMap().getKeys()[0].isPicked() && map.getNextMap().getHero().getXPos() == map.getNextMap().getDoors()[0].getxPos()+1){
+					openDoor = true;
+					if(canProceed)
+						door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openedDoor.png")).getImage();
+					canProceed = true;
+				}
+				if(!openDoor)
+					door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openableDoor.jpg")).getImage();
 				
 				if(map.getNextMap().hasWon()){
 					repaint();
@@ -343,6 +363,16 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 					JOptionPane.showMessageDialog(null, "You Lost!");
 					System.exit(0);
 				}
+				door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openableDoor.jpg")).getImage();
+				
+				if(canProceed)
+					door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openedDoor.png")).getImage();
+					repaint();
+				
+				if(map.getNextMap().getKeys()[0].isPicked() && map.getNextMap().getHero().getXPos() == map.getNextMap().getDoors()[0].getxPos() +1){
+					openDoor = true;
+					canProceed = true;
+				}
 				
 				if(map.getNextMap().hasWon()){
 					repaint();
@@ -350,6 +380,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 					System.exit(0);
 				}
 			}
+			repaint();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
@@ -376,6 +407,15 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 					JOptionPane.showMessageDialog(null, "You Lost!");
 					System.exit(0);
 				}
+				
+				if(map.getNextMap().getKeys()[0].isPicked() && map.getNextMap().getHero().getXPos() == map.getNextMap().getDoors()[0].getxPos()+1){
+					openDoor = true;
+					if(canProceed)
+						door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openedDoor.png")).getImage();
+					canProceed = true;
+				}
+				if(!openDoor)
+					door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openableDoor.jpg")).getImage();
 				
 				if(map.getNextMap().hasWon()){
 					repaint();
