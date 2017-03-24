@@ -41,6 +41,7 @@ public class Main_Window {
 	private ImagePanel panel;
 	private boolean goodFormat = true;
 	private Map Map1;
+	private Map Map2;
 	private Guard map1Guard;
 
 	/**
@@ -247,7 +248,11 @@ public class Main_Window {
 
 					Map1 = new Map(map1, referenceMap1, map1Dimension, ma1Hero, map1Enemies, map1Levers, true);
 					Map1.setDoor(map1Doors);
-					panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 1, map1Doors, map2Club);
+					Map2 = new Map(map2, referenceMap2, map2Dimension, map2Hero, map2Enemies, map2Keys, true);
+					Map2.setDoor(map2Doors);
+					Map1.setNextMap(Map2);
+					//panel = new ImagePanel(ma1Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 1, map1Doors, map2Club);
+					panel = new ImagePanel(Map1, map2Club);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
@@ -264,6 +269,7 @@ public class Main_Window {
 		
 		MovementButtonUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!panel.getnextStage()) {
 				Map1.SwingmapLogic(1);
 				panel.playerDirection(1);
 				panel.repaint();
@@ -278,18 +284,19 @@ public class Main_Window {
 					System.exit(0);
 				}
 				if(Map1.hasWon()&&Map1.hasNextMap()){
-					//GameDisplayArea.setText("");
-		            ma1Hero.setXPos(1);
-		            ma1Hero.setYPos(8);
-		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
-		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever,map2Key, 2, map2Doors,map2Club);
-					panel.setBackground(Color.WHITE);
-					panel.setBounds(10, 95, 300, 300);
-					frmDungeonKeep.getContentPane().add(panel);
-		            panel.repaint();
-		            Map1.SwingDrawMap();
+//					//GameDisplayArea.setText("");
+//		            ma1Hero.setXPos(1);
+//		            ma1Hero.setYPos(8);
+//		            ma1Hero.setHasClub(true);
+//		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
+//		            Map1.setDoor(map2Doors);
+//					panel = new ImagePanel(Map1, map2Club);
+//					panel.setBackground(Color.WHITE);
+//					panel.setBounds(10, 95, 300, 300);
+//					frmDungeonKeep.getContentPane().add(panel);
+//		            panel.repaint();
+//		            Map1.SwingDrawMap();
+					panel.setnextStage(true);
 				}else if(Map1.hasWon()){
 					panel.repaint();
 					MovementButtonUp.setEnabled(false);
@@ -301,13 +308,116 @@ public class Main_Window {
 					System.exit(0);
 				}
 			}
+				else
+				{
+					Map1.getNextMap().SwingmapLogic(1);
+					panel.playerDirection(1);
+					panel.repaint();
+					if(Map1.getNextMap().hasWon()){
+						panel.repaint();
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+						//GameStatusMessage.setText("You Won!");
+						JOptionPane.showMessageDialog(null, "You Won!");
+						System.exit(0);
+					}
+					else if(Map1.getNextMap().hasLost()){
+						panel.repaint();
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+						//GameStatusMessage.setText("You Won!");
+						JOptionPane.showMessageDialog(null, "You Lose!");
+						System.exit(0);
+					}
+				}
+			}
 		});
 		MovementButtonUp.setEnabled(false);
 		MovementButtonUp.setBounds(389, 202, 89, 23);
 		frmDungeonKeep.getContentPane().add(MovementButtonUp);
+		
+		MovementButtonDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!panel.getnextStage()) {
+				Map1.SwingmapLogic(2);
+				panel.playerDirection(2);
+				panel.repaint();
+				if(Map1.hasLost()){
+					panel.repaint();
+					Map1.SwingDrawMap();
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				if(Map1.hasWon()&&Map1.hasNextMap()){
+//					//GameDisplayArea.setText("");
+//		            ma1Hero.setXPos(1);
+//		            ma1Hero.setYPos(8);
+//		            ma1Hero.setHasClub(true);
+//		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
+//		            Map1.setDoor(map2Doors);
+//					panel = new ImagePanel(Map1, map2Club);
+//					panel.revalidate();
+//					panel.setBackground(Color.WHITE);
+//					panel.setBounds(10, 95, 300, 300);
+//					frmDungeonKeep.getContentPane().add(panel);
+//		            panel.repaint();
+//		            Map1.SwingDrawMap();
+					panel.setnextStage(true);
+				}
+				else if(Map1.hasWon()&&(!Map1.hasNextMap())){
+					panel.repaint();
+					MovementButtonUp.setEnabled(false);
+					MovementButtonDown.setEnabled(false);
+					MovementButtonRight.setEnabled(false);
+					MovementButtonLeft.setEnabled(false);
+					//GameStatusMessage.setText("You Won!");
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
+				}
+			}
+				else
+				{
+					Map1.getNextMap().SwingmapLogic(2);
+					panel.playerDirection(2);
+					panel.repaint();
+					if(Map1.getNextMap().hasWon()){
+						panel.repaint();
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+						//GameStatusMessage.setText("You Won!");
+						JOptionPane.showMessageDialog(null, "You Won!");
+						System.exit(0);
+					}
+					else if(Map1.getNextMap().hasLost()){
+						panel.repaint();
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+						//GameStatusMessage.setText("You Won!");
+						JOptionPane.showMessageDialog(null, "You Lose!");
+						System.exit(0);
+					}
+				}
+			}
+		});
+		MovementButtonDown.setEnabled(false);
+		MovementButtonDown.setBounds(389, 270, 89, 23);
+		frmDungeonKeep.getContentPane().add(MovementButtonDown);
 
 		MovementButtonLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!panel.getnextStage()) {
 				Map1.SwingmapLogic(3);
 				panel.playerDirection(3);
 				panel.repaint();
@@ -323,17 +433,18 @@ public class Main_Window {
 				}
 				if(Map1.hasWon()&&Map1.hasNextMap()){
 					//GameDisplayArea.setText("");
-		            ma1Hero.setXPos(1);
-		            ma1Hero.setYPos(8);
-		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
-		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 2, map2Doors,map2Club);
-					panel.setBackground(Color.WHITE);
-					panel.setBounds(10, 95, 300, 300);
-					frmDungeonKeep.getContentPane().add(panel);
-		            panel.repaint();
-		           Map1.SwingDrawMap();
+//		            ma1Hero.setXPos(1);
+//		            ma1Hero.setYPos(8);
+//		            ma1Hero.setHasClub(true);
+//		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
+//		            Map1.setDoor(map2Doors);
+//					panel = new ImagePanel(Map1, map2Club);
+//					panel.setBackground(Color.WHITE);
+//					panel.setBounds(10, 95, 300, 300);
+//					frmDungeonKeep.getContentPane().add(panel);
+//		            panel.repaint();
+//		           Map1.SwingDrawMap();
+					panel.setnextStage(true);
 				}else if(Map1.hasWon()){
 					panel.repaint();
 					MovementButtonUp.setEnabled(false);
@@ -345,6 +456,33 @@ public class Main_Window {
 					System.exit(0);
 				}
 			}
+				else
+				{
+					Map1.getNextMap().SwingmapLogic(3);
+					panel.playerDirection(3);
+					panel.repaint();
+					if(Map1.getNextMap().hasWon()){
+						panel.repaint();
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+						//GameStatusMessage.setText("You Won!");
+						JOptionPane.showMessageDialog(null, "You Won!");
+						System.exit(0);
+					}
+					else if(Map1.getNextMap().hasLost()){
+						panel.repaint();
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+						//GameStatusMessage.setText("You Won!");
+						JOptionPane.showMessageDialog(null, "You Lose!");
+						System.exit(0);
+					}
+				}
+			}
 		});
 		MovementButtonLeft.setEnabled(false);
 		MovementButtonLeft.setBounds(340, 236, 89, 23);
@@ -352,6 +490,7 @@ public class Main_Window {
 
 		MovementButtonRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!panel.getnextStage()) {
 				Map1.SwingmapLogic(4);
 				panel.playerDirection(4);
 				panel.repaint();
@@ -366,19 +505,20 @@ public class Main_Window {
 					System.exit(0);
 				}
 				if(Map1.hasWon()&&Map1.hasNextMap()){
-				//	GameDisplayArea.setText("");
-		            ma1Hero.setXPos(1);
-		            ma1Hero.setYPos(8);
-		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
-		            Map1.setDoor(map2Doors);
-		            panel.removeAll(); 
-					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever, map2Key, 2, map2Doors,map2Club);
-					panel.setBackground(Color.WHITE);
-					panel.setBounds(10, 95, 300, 300);
-					frmDungeonKeep.getContentPane().add(panel);
-		            panel.repaint();
-		            Map1.SwingDrawMap();
+//				//	GameDisplayArea.setText("");
+//		            ma1Hero.setXPos(1);
+//		            ma1Hero.setYPos(8);
+//		            ma1Hero.setHasClub(true);
+//		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
+//		            Map1.setDoor(map2Doors);
+//		            panel.removeAll(); 
+//					panel = new ImagePanel(Map1, map2Club);
+//					panel.setBackground(Color.WHITE);
+//					panel.setBounds(10, 95, 300, 300);
+//					frmDungeonKeep.getContentPane().add(panel);
+//		            panel.repaint();
+//		            Map1.SwingDrawMap();
+					panel.setnextStage(true);
 				}else if(Map1.hasWon()){
 					panel.repaint();
 					MovementButtonUp.setEnabled(false);
@@ -390,55 +530,37 @@ public class Main_Window {
 					System.exit(0);
 				}
 			}
+				else
+				{
+					Map1.getNextMap().SwingmapLogic(4);
+					panel.playerDirection(4);
+					panel.repaint();
+					if(Map1.getNextMap().hasWon()){
+						panel.repaint();
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+						//GameStatusMessage.setText("You Won!");
+						JOptionPane.showMessageDialog(null, "You Won!");
+						System.exit(0);
+					}
+					else if(Map1.getNextMap().hasLost()){
+						panel.repaint();
+						MovementButtonUp.setEnabled(false);
+						MovementButtonDown.setEnabled(false);
+						MovementButtonRight.setEnabled(false);
+						MovementButtonLeft.setEnabled(false);
+						//GameStatusMessage.setText("You Won!");
+						JOptionPane.showMessageDialog(null, "You Lose!");
+						System.exit(0);
+					}
+				}
+			}
 		});
 		MovementButtonRight.setEnabled(false);
 		MovementButtonRight.setBounds(437, 236, 89, 23);
 		frmDungeonKeep.getContentPane().add(MovementButtonRight);
-
-		MovementButtonDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Map1.SwingmapLogic(2);
-				panel.playerDirection(2);
-				panel.repaint();
-				if(Map1.hasLost()){
-					panel.repaint();
-					Map1.SwingDrawMap();
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					JOptionPane.showMessageDialog(null, "You Lost!");
-					System.exit(0);
-				}
-				if(Map1.hasWon()&&Map1.hasNextMap()){
-					//GameDisplayArea.setText("");
-		            ma1Hero.setXPos(1);
-		            ma1Hero.setYPos(8);
-		            ma1Hero.setHasClub(true);
-		            Map1.bld(map2,referenceMap2,map2Dimension,map2Hero,map2Enemies,map2Keys,false);
-		            Map1.setDoor(map2Doors);
-					panel = new ImagePanel(map2Hero, map1Guard, map2Oggre, Map1, map1Lever,map2Key, 2, map2Doors,map2Club);
-					panel.revalidate();
-					panel.setBackground(Color.WHITE);
-					panel.setBounds(10, 95, 300, 300);
-					frmDungeonKeep.getContentPane().add(panel);
-		            panel.repaint();
-		            Map1.SwingDrawMap();
-				}else if(Map1.hasWon()&&(!Map1.hasNextMap())){
-					panel.repaint();
-					MovementButtonUp.setEnabled(false);
-					MovementButtonDown.setEnabled(false);
-					MovementButtonRight.setEnabled(false);
-					MovementButtonLeft.setEnabled(false);
-					//GameStatusMessage.setText("You Won!");
-					JOptionPane.showMessageDialog(null, "You Won!");
-					System.exit(0);
-				}
-			}
-		});
-		MovementButtonDown.setEnabled(false);
-		MovementButtonDown.setBounds(389, 270, 89, 23);
-		frmDungeonKeep.getContentPane().add(MovementButtonDown);
 
 		GameStatusMessage.setBounds(10, 406, 320, 14);
 		frmDungeonKeep.getContentPane().add(GameStatusMessage);

@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -19,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Characters.Enemy;
 import Characters.Guard;
 import Characters.Hero;
 import Characters.Oggre;
@@ -33,15 +35,13 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 	private int Direction;
 	private boolean nextStage = false;
 	private Hero H;
-	private Guard G;
-	private Oggre O;
+	private ArrayList<Enemy> E1 = new ArrayList<Enemy>();
+	private ArrayList<Enemy> E2 = new ArrayList<Enemy>();
 	private Map map;
-	private Lever k;
+	private Lever[] k;
 	private int level;
 	private Club Cl;
-	private Key K;
-	private Door[] map1Doors = new Door[2];
-	private Door[] map2Doors = new Door[1];
+	private Key[] K;
     private Image ogre;
     private Image club;
     private Image wall;
@@ -52,23 +52,16 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private Image lever;
     private Image turnedlever;
     private Image hero;
-    private Image heroleft;
-    private Image heroright;
-    private Image heroup;
-    private Image herodown;
     private Image ogreleft;
     private Image ogreright;
     private Image ogreup;
     private Image ogredown;
-    private Image guardleft;
-    private Image guardright;
-    private Image guardup;
-    private Image guarddown;
     private Image key;
     private final int map_width = 10;
     private final int map_height = 10;
     private final int pixel_size = 30;
-    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, Key K, int level, Door mapDoors[], Club Cl) {
+//    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, Key K, int level, Door mapDoors[], Club Cl) {
+    public ImagePanel(Map map, Club Cl) {
     	addMouseListener(this);
     	addMouseMotionListener(this);
     	addKeyListener(this);
@@ -83,32 +76,35 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
           ogreright = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreright.png")).getImage();
           ogreup = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreup.png")).getImage();
           ogredown = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogredown.png")).getImage();
-          guardleft = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardleft.png")).getImage();
-          guardright = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardright.png")).getImage();
-          guardup = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardup.png")).getImage();
-          guarddown = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardown.png")).getImage();
+          guard = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardown.png")).getImage();
           key = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/key.png")).getImage();
           club = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/club.png")).getImage();
-          this.H = H;
-          this.G = G;
-          this.O = O;
           this.map = map;
-          this.level = level;
-          this.k = k;
-          this.K = K;
           this.Cl = Cl;
-          if(level == 1)
-       for(int i = 0 ; i < mapDoors.length; i++)
-       {
-    	   this.map1Doors[i] = mapDoors[i];
-       }
-          else
-          {
-              for(int i = 0 ; i < mapDoors.length; i++)
-              {
-           	   this.map2Doors[i] = mapDoors[i];
-              }
-          }
+//          this.H = map.getHero();
+//       for(int i = 0; i < map.getEnemies().size(); i++)
+//       {
+//    	   E1.add(map.getEnemies().get(i));
+//       }
+//       for(int i = 0; i < map.getNextMap().getEnemies().size(); i++)
+//       {
+//    	   E2.add(map.getNextMap().getEnemies().get(i));
+//       }
+//          this.k = map.getLevers();
+//          this.K = map.getNextMap().getKeys();
+//          this.Cl = Cl;
+//          if(!this.nextStage)
+//       for(int i = 0 ; i < map.getDoors().length; i++)
+//       {
+//    	   this.map1Doors[i] = map.getDoors()[i];
+//       }
+//          else
+//          {
+//              for(int i = 0 ; i < map.getNextMap().getDoors().length; i++)
+//              {
+//           	   this.map2Doors[i] = map.getNextMap().getDoors()[i];
+//              }
+//          }
     }
 
     public void playerDirection(int mov)
@@ -134,32 +130,43 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         super.paintComponent(g);
      //   g.drawImage(ogre, 0, 0, this); // see javadoc for more info on the parameters          
        // g.drawImage(wall, 40,40,this);
-        if(level == 1)
+        if(!nextStage)
 {
-        	if(k.getState()){
-        		g.drawImage(turnedlever, pixel_size*(k.getxPos()), pixel_size*(k.getyPos()),this);
-        		g.drawImage(hero, H.getXPos()*pixel_size,H.getYPos()*pixel_size,this);
+        	if(map.getLevers()[0].getState()){
+        		g.drawImage(turnedlever, pixel_size*(map.getLevers()[0].getxPos()), pixel_size*(map.getLevers()[0].getyPos()),this);
+        		g.drawImage(hero, map.getHero().getXPos()*pixel_size,map.getHero().getYPos()*pixel_size,this);
         	}
         	else
         	{
-            	g.drawImage(lever, pixel_size*(k.getxPos()), pixel_size*(k.getyPos()),this);
-                g.drawImage(hero, H.getXPos()*pixel_size,H.getYPos()*pixel_size,this);
+            	g.drawImage(lever, pixel_size*(map.getLevers()[0].getxPos()), pixel_size*(map.getLevers()[0].getyPos()),this);
+                g.drawImage(hero, map.getHero().getXPos()*pixel_size,map.getHero().getYPos()*pixel_size,this);
         	}
    /*     g.drawImage(heroleft, 2*pixel_size,pixel_size,this);
         g.drawImage(herodown, 3*pixel_size,pixel_size,this);
         g.drawImage(heroup, 3*pixel_size,2*pixel_size,this);
         */
-    	for(int i = 0; i < map1Doors.length; i++)
+    	for(int i = 0; i < map.getDoors().length; i++)
     	{
-    		if(k.getState())
-    			g.drawImage(opendoor, (map1Doors[i].getxPos())*pixel_size,(map1Doors[i].getyPos())*pixel_size,this);
+    		if(map.getLevers()[0].getState())
+    			g.drawImage(opendoor, (map.getDoors()[i].getxPos())*pixel_size,(map.getDoors()[i].getyPos())*pixel_size,this);
     		else
-    			g.drawImage(openabledoor, (map1Doors[i].getxPos())*pixel_size,(map1Doors[i].getyPos())*pixel_size,this);
+    			g.drawImage(openabledoor, (map.getDoors()[i].getxPos())*pixel_size,(map.getDoors()[i].getyPos())*pixel_size,this);
     	}
-    	g.drawImage(guarddown, G.getXPos()*pixel_size, G.getYPos()*pixel_size,this);
-//    	g.drawImage(guardup, pixel_size*8, 2*pixel_size,this);
-//    	g.drawImage(guardright, pixel_size*8, 3*pixel_size,this);
-//    	g.drawImage(guardleft, pixel_size*8, 4*pixel_size,this);
+    	if(map.getEnemies().get(0).getSubType().equals("rookie")){
+    		if(map.getEnemies().get(0).getXPos() == 8 && map.getEnemies().get(0).getYPos() == 1)
+    			guard = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardleft.png")).getImage();
+    		else if(map.getEnemies().get(0).getXPos() == 7 && map.getEnemies().get(0).getYPos() == 1)
+    			guard = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardown.png")).getImage();
+    		else if(map.getEnemies().get(0).getXPos() == 7 && map.getEnemies().get(0).getYPos() == 5)
+    			guard = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardleft.png")).getImage();
+    		else if(map.getEnemies().get(0).getXPos() == 1 && map.getEnemies().get(0).getYPos() == 5)
+    			guard = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardown.png")).getImage();
+    		else if(map.getEnemies().get(0).getXPos() == 1 && map.getEnemies().get(0).getYPos() == 6)
+    			guard = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardright.png")).getImage();
+    		else if(map.getEnemies().get(0).getXPos() == 8 && map.getEnemies().get(0).getYPos() == 6)
+    			guard = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/guardup.png")).getImage();
+    	}
+    	g.drawImage(guard, map.getEnemies().get(0).getXPos()*pixel_size, map.getEnemies().get(0).getYPos()*pixel_size,this);
         
         for(int i = 0; i < map_height; i++)
         {
@@ -186,25 +193,25 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         	g.drawImage(wall, pixel_size*i, 2*pixel_size,this);
         }
 }
-        else if(level == 2){ 
+        else { 
         	repaint();
-        	if(!K.isPicked())
+        	if(!map.getNextMap().getKeys()[0].isPicked())
         	{
-            g.drawImage(key,pixel_size*K.getxPos(),pixel_size*K.getyPos(),this);
-            g.drawImage(hero, H.getXPos()*pixel_size, H.getYPos()*pixel_size,this);
+            g.drawImage(key,pixel_size*map.getNextMap().getKeys()[0].getxPos(),pixel_size*map.getNextMap().getKeys()[0].getyPos(),this);
+            g.drawImage(hero, map.getNextMap().getHero().getXPos()*pixel_size, map.getNextMap().getHero().getYPos()*pixel_size,this);
             g.drawImage(club,pixel_size*Cl.getxPos(),Cl.getyPos()*pixel_size,this);
-            g.drawImage(ogreup,pixel_size*O.getXPos(),O.getYPos()*pixel_size,this);
+            g.drawImage(ogreup,pixel_size*map.getNextMap().getEnemies().get(0).getXPos(),map.getNextMap().getEnemies().get(0).getYPos()*pixel_size,this);
         	}
             else
             {
-                g.drawImage(hero, H.getXPos()*pixel_size, H.getYPos()*pixel_size,this);
+                g.drawImage(hero,map.getNextMap().getHero().getXPos()*pixel_size, map.getNextMap().getHero().getYPos()*pixel_size,this);
                 g.drawImage(club,pixel_size*Cl.getxPos(),Cl.getyPos()*pixel_size,this);
-                g.drawImage(ogreup,pixel_size*O.getXPos(),O.getYPos()*pixel_size,this);
+                g.drawImage(ogreup,pixel_size*map.getNextMap().getEnemies().get(0).getXPos(),map.getNextMap().getEnemies().get(0).getYPos()*pixel_size,this);
             }
         for(int i = 0; i < map_height; i++)
         {
         	if(i== 1)
-        	g.drawImage(openabledoor, map2Doors[0].getxPos()*pixel_size, map2Doors[0].getyPos()*pixel_size,this);
+        	g.drawImage(openabledoor, map.getNextMap().getDoors()[0].getxPos()*pixel_size, map.getNextMap().getDoors()[0].getyPos()*pixel_size,this);
         	else
         	g.drawImage(wall, 0, pixel_size*i,this);
         	g.drawImage(wall, (map_width-1)*pixel_size, pixel_size*i,this);
@@ -227,6 +234,11 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     {
     	return nextStage;
     }
+    
+    public void setnextStage(boolean nextStage)
+    {
+    	this.nextStage = nextStage;
+    }
 
     @Override
 	public void keyPressed(KeyEvent e) {
@@ -234,8 +246,9 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
 		if(e.getKeyCode() == KeyEvent.VK_UP)
 		{
+			if(!nextStage) {
 			map.SwingmapLogic(1);
-			hero = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/heroup.png")).getImage();
+			this.playerDirection(1);
 			if(map.hasLost()){
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Lost!");
@@ -246,52 +259,99 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Won!");
 				System.exit(0);
+			}
+			}
+			else  {
+				map.getNextMap().SwingmapLogic(1);
+				this.playerDirection(1);
+				if(map.getNextMap().hasLost()){
+					repaint();
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				
+				if(map.getNextMap().hasWon()){
+					repaint();
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
+				}
 			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
+			if(!nextStage) {
 			map.SwingmapLogic(2);
-			hero = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/herodown.png")).getImage();
+			this.playerDirection(2);
 			if(map.hasLost()){
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Lost!");
 				System.exit(0);
 			}
-
+			
 			if(map.hasWon()&&(!map.hasNextMap())){
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Won!");
 				System.exit(0);
 			}
-			
+			}
+			else  {
+				map.getNextMap().SwingmapLogic(2);
+				this.playerDirection(2);
+				if(map.getNextMap().hasLost()){
+					repaint();
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				
+				if(map.getNextMap().hasWon()){
+					repaint();
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
+				}
+			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
+			if(!nextStage) {
 			map.SwingmapLogic(3);
-			hero = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/heroleft.png")).getImage();
+			this.playerDirection(3);
 			if(map.hasLost()){
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Lost!");
 				System.exit(0);
 			}
-			if(map.hasWon())
-			{
-				this.removeAll();
-			}
+			
 			if(map.hasWon()&&(!map.hasNextMap())){
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Won!");
 				System.exit(0);
 			}
 			if(map.hasWon()&&map.hasNextMap()){
+				repaint();
 				this.nextStage = true;
 			}
-			
+			}
+			else  {
+				map.getNextMap().SwingmapLogic(3);
+				this.playerDirection(3);
+				if(map.getNextMap().hasLost()){
+					repaint();
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				
+				if(map.getNextMap().hasWon()){
+					repaint();
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
+				}
+			}
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
+			if(!nextStage) {
 			map.SwingmapLogic(4);
-			hero = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/heroright.png")).getImage();
+			this.playerDirection(4);
 			if(map.hasLost()){
 				repaint();
 				JOptionPane.showMessageDialog(null, "You Lost!");
@@ -303,33 +363,29 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 				JOptionPane.showMessageDialog(null, "You Won!");
 				System.exit(0);
 			}
-			
+			}
+			else  {
+				map.getNextMap().SwingmapLogic(4);
+				this.playerDirection(4);
+				if(map.getNextMap().hasLost()){
+					repaint();
+					JOptionPane.showMessageDialog(null, "You Lost!");
+					System.exit(0);
+				}
+				
+				if(map.getNextMap().hasWon()){
+					repaint();
+					JOptionPane.showMessageDialog(null, "You Won!");
+					System.exit(0);
+				}
+			}
 		}
 		repaint();
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-//		int keycode = e.getKeyCode();
-//
-//		if(keycode == KeyEvent.VK_UP)
-//		{
-//			map.SwingmapLogic(4);
-//			repaint();
-//		}
-////		if(keycode == KeyEvent.VK_DOWN)
-////		{
-////			a = J.move(2);
-////		}
-////		if(keycode == KeyEvent.VK_LEFT)
-////		{
-////			a = J.move(3);
-////		}
-//		if(keycode == KeyEvent.VK_RIGHT)
-//		{
-//			map.SwingmapLogic(4);
-//			repaint();
-//		}
+		// TODO Auto-generated method stub
 	}
 
 	@Override
