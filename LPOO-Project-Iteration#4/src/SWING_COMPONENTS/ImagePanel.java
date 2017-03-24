@@ -195,6 +195,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         }
 }
         else { 
+        	//
         	repaint();
         	if(!map.getNextMap().getKeys()[0].isPicked())
         	{
