@@ -2,18 +2,21 @@ package SWING_COMPONENTS;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Characters.Oggre;
 import Maps.Map;
 
 
-public class EditMap extends JPanel implements MouseListener{
+public class EditMap extends JPanel implements MouseListener, KeyListener{
 	
 	private Oggre O;
 	private Image sprite;
@@ -74,8 +77,10 @@ public class EditMap extends JPanel implements MouseListener{
 		 if(type != null) {
 		 if(type.equals("Exit"))
 			System.out.println("oi");
-		 if(type.equals("Ogre"))
+		 if(type.equals("Ogre")){
 			Images.add(Ogre);
+			O = new Oggre(X.get(X.size()-1), Y.get(Y.size() -1));
+		 }
 		 if(type.equals("Hero") && !this.isHeroChosen){
 			this.isHeroChosen = true;
 			Images.add(Hero);
@@ -136,6 +141,52 @@ public class EditMap extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			map.SwingmapLogic(1);
+			if(map.hasLost()){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Lost!");
+				System.exit(0);
+			}
+			
+			if(map.hasWon()){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Won!");
+				System.exit(0);
+			}
+			}
+		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			map.SwingmapLogic(2);
+			if(map.hasLost()){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Lost!");
+				System.exit(0);
+			}
+			
+			if(map.hasWon()){
+				repaint();
+				JOptionPane.showMessageDialog(null, "You Won!");
+				System.exit(0);
+			}
+			}
+		}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
