@@ -31,6 +31,15 @@ public class Oggre extends Enemy{
 		this.weapons[0]=new Club(this);
 	}
 	
+	public Oggre(int x,int y){
+		this.xPos = x;
+		this.yPos = y;
+	}
+	
+	public void setMap(String[][] map){
+		this.map = map;
+	}
+	
 	public void moveOgre() {
 		Random generator = new Random();
 		int movement = generator.nextInt(4);

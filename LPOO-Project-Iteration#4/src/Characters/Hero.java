@@ -74,6 +74,15 @@ public class Hero extends Character {
         this.yPos=y;
 
     }
+    
+    public void setMap(String[][] map){
+    	this.map = map;
+    }
+    
+    public Hero(int x,int y){
+    	this.xPos = x;
+    	this.yPos = y;
+    }
 
     public void moveHero(int x,int y) {
        this.yPos+=y;
