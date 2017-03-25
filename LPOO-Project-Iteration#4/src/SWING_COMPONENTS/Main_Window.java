@@ -43,6 +43,7 @@ public class Main_Window {
 	private Map Map1;
 	private Map Map2;
 	private Guard map1Guard;
+	private boolean heroButton = true;
 
 	/**
 	 * Launch the application.
@@ -192,38 +193,109 @@ public class Main_Window {
 				
 				if(ct >= 2)
 				{	
+//					Map map3;
 					frmDungeonKeep.getContentPane().removeAll();
 					frmDungeonKeep.getContentPane().repaint();
-					EditMap lblNewLabel = new EditMap();
-					lblNewLabel.setBackground(Color.WHITE);
-					lblNewLabel.setBounds(409, 206, 30, 30);
-					frmDungeonKeep.getContentPane().add(lblNewLabel);
+//					EditMap lblNewLabel = new EditMap(map3);
+//					lblNewLabel.setBackground(Color.WHITE);
+//					lblNewLabel.setBounds(409, 206, 30, 30);
+//					frmDungeonKeep.getContentPane().add(lblNewLabel);
+//					
+//					EditMap lblNewLabel_1 = new EditMap();
+//					lblNewLabel_1.setBackground(Color.WHITE);
+//					lblNewLabel_1.setBounds(409, 245, 30, 30);
+//					frmDungeonKeep.getContentPane().add(lblNewLabel_1);
+//					
+//					EditMap lblNewLabel_2 = new EditMap();
+//					lblNewLabel_2.setBackground(Color.WHITE);
+//					lblNewLabel_2.setBounds(409, 284, 30, 30);
+//					frmDungeonKeep.getContentPane().add(lblNewLabel_2);
+//					
+//					EditMap lblNewLabel_3 = new EditMap();
+//					lblNewLabel_3.setBackground(Color.WHITE);
+//					lblNewLabel_3.setBounds(409, 323, 30, 30);
+//					frmDungeonKeep.getContentPane().add(lblNewLabel_3);
+//
+//					lblNewLabel.repaint();
+//					lblNewLabel_1.repaint();
+//					lblNewLabel_2.repaint();
+//					lblNewLabel_3.repaint();
 					
-					EditMap lblNewLabel_1 = new EditMap();
-					lblNewLabel_1.setBackground(Color.WHITE);
-					lblNewLabel_1.setBounds(409, 245, 30, 30);
-					frmDungeonKeep.getContentPane().add(lblNewLabel_1);
+					EditMap editPanel = new EditMap();
+					editPanel.setBackground(Color.WHITE);
+					editPanel.setBounds(10, 95, 300, 300);
+					frmDungeonKeep.getContentPane().add(editPanel);
 					
-					EditMap lblNewLabel_2 = new EditMap();
-					lblNewLabel_2.setBackground(Color.WHITE);
-					lblNewLabel_2.setBounds(409, 284, 30, 30);
-					frmDungeonKeep.getContentPane().add(lblNewLabel_2);
 					
-					EditMap lblNewLabel_3 = new EditMap();
-					lblNewLabel_3.setBackground(Color.WHITE);
-					lblNewLabel_3.setBounds(409, 323, 30, 30);
-					frmDungeonKeep.getContentPane().add(lblNewLabel_3);
+					JButton btnOgre = new JButton("Ogre");
+					btnOgre.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							editPanel.setType("Ogre");
+						}
+					});
+					btnOgre.setBounds(389, 168, 89, 23);
+					frmDungeonKeep.getContentPane().add(btnOgre);
+					
+					JButton btnHero = new JButton("Hero");
+					btnHero.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							editPanel.setType("Hero");
+							btnHero.setEnabled(false);
+						}
+					});
+					btnHero.setBounds(389, 202, 89, 23);
+					frmDungeonKeep.getContentPane().add(btnHero);
+					
+					JButton btnWall = new JButton("Wall");
+					btnWall.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							editPanel.setType("Wall");
+						}
+					});
+					btnWall.setBounds(389, 236, 89, 23);
+					frmDungeonKeep.getContentPane().add(btnWall);
+					
+					JButton btnDoor = new JButton("Door");
+					btnDoor.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							editPanel.setType("Door");
+						}
+					});
+					btnDoor.setBounds(389, 270, 89, 23);
+					frmDungeonKeep.getContentPane().add(btnDoor);
+					
+					JButton btnExit = new JButton("Exit");
+					btnExit.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							editPanel.setType("Exit");
+						}
+					});
+					btnExit.setBounds(389, 309, 89, 23);
+					frmDungeonKeep.getContentPane().add(btnExit);
+					
+					JButton btnPlay = new JButton("Play");
+					btnPlay.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							editPanel.setType("Play");
+						}
+					});
+					btnPlay.setBounds(389, 348, 89, 23);
+					frmDungeonKeep.getContentPane().add(btnPlay);
 
-					lblNewLabel.repaint();
-					lblNewLabel_1.repaint();
-					lblNewLabel_2.repaint();
-					lblNewLabel_3.repaint();
 					ct = 0;
 				}
 			}
 		});
 		btnMapEditor.setBounds(389, 121, 89, 23);
 		frmDungeonKeep.getContentPane().add(btnMapEditor);
+		
+		
 
 		JButton NewGameButton = new JButton("New Game");
 		NewGameButton.addMouseListener(new MouseAdapter() {
@@ -628,8 +700,6 @@ public class Main_Window {
 		});
 		ExitButton.setBounds(389, 373, 89, 23);
 		frmDungeonKeep.getContentPane().add(ExitButton);
-
-	
 	
 		
 	}
