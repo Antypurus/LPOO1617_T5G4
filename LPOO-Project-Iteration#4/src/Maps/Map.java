@@ -680,12 +680,17 @@ public class Map implements GameMap, Serializable {
 
 		this.leverLogic();
 
-		for (int i = 0; i < enemies.size(); i++) {
-			this.enemies.get(i).move();
-			if (!this.enemies.get(i).isStuned()) {
-				this.enemies.get(i).attack();
-			}
+		this.enemies.get(0).move();
+		if (!this.enemies.get(0).isStuned()) {
+			this.enemies.get(0).attack();
 		}
+		
+//		for (int i = 0; i < enemies.size(); i++) {
+//			this.enemies.get(i).move();
+//			if (!this.enemies.get(i).isStuned()) {
+//				this.enemies.get(i).attack();
+//			}
+//		}
 
 		if (this.hasLost()) {
 			return false;

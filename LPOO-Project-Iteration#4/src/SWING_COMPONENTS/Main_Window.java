@@ -293,7 +293,7 @@ public class Main_Window{
 //				Map1.writeExternal(Map1);
 				try {
 					
-					FileInputStream fi = new FileInputStream("C:/Users/Diogo/Desktop/Faculdade/test.ser");
+					FileInputStream fi = new FileInputStream("test.ser");
 					ObjectInputStream oi = new ObjectInputStream(fi);
 
 					// Read objects
@@ -450,7 +450,7 @@ public class Main_Window{
 								// write object to file
 								FileOutputStream fos = null;
 								ObjectOutputStream oos = null;
-								fos = new FileOutputStream(new File("C:/Users/Diogo/Desktop/Faculdade/test.ser"));
+								fos = new FileOutputStream(new File("test.ser"));
 								oos = new ObjectOutputStream(fos);
 //								oos.writeObject(Map1);
 								if(!Map1.hasWon()){
