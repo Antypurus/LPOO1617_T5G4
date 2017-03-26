@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class Map implements GameMap, Serializable {
-
+//
 	/**
 	 * 
 	 */
