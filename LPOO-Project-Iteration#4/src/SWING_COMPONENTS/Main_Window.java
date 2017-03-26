@@ -283,7 +283,7 @@ public class Main_Window{
 				}
 			}
 		});
-		btnMapEditor.setBounds(389, 121, 89, 23);
+		btnMapEditor.setBounds(389, 121, 100, 23);
 		frmDungeonKeep.getContentPane().add(btnMapEditor);
 		
 		JButton btnLoad = new JButton("Load");
@@ -300,6 +300,7 @@ public class Main_Window{
 					try {
 						String personality;
 						personality = GuardPersonalitySelector.getSelectedItem().toString();
+						int level = (int) oi.readObject();
 						map1Guard = (Guard) oi.readObject();
 						ma1Hero = (Hero) oi.readObject();
 						map2Hero = (Hero) oi.readObject();
@@ -321,21 +322,24 @@ public class Main_Window{
 					Map2 = new Map(map2, referenceMap2, map2Dimension, map2Hero, map2Enemies, map2Keys, true);
 					Map2.setDoor(map2Doors);
 					Map1.setNextMap(Map2);
-					if(!nextLevel){
+					if(level == 1){
 					panel = new ImagePanel(Map1, map2Club);
 					panel.setBackground(Color.WHITE);
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
-					panel.repaint();
 					}
-					else
+					else if(level == 2)
 					{
+						Map1 = new Map(map1, referenceMap1, map1Dimension, ma1Hero, map1Enemies, map1Levers, true);
+						Map1.setDoor(map1Doors);
+						Map2 = new Map(map2, referenceMap2, map2Dimension, map2Hero, map2Enemies, map2Keys, true);
+						Map2.setDoor(map2Doors);
+						Map1.setNextMap(Map2);
 						panel = new ImagePanel(Map1, map2Club);
 						panel.setBackground(Color.WHITE);
 						panel.setBounds(10, 95, 300, 300);
-						frmDungeonKeep.getContentPane().add(panel);
 						panel.setnextStage(true);
-						panel.repaint();
+						frmDungeonKeep.getContentPane().add(panel);
 					}
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
@@ -344,6 +348,7 @@ public class Main_Window{
 
 					oi.close();
 					fi.close();
+					panel.repaint();
 //					// read object from file
 //					FileInputStream fis = new FileInputStream("mybean.ser");
 //					ObjectInputStream ois = new ObjectInputStream(fis);
@@ -361,7 +366,7 @@ public class Main_Window{
 				MovementButtonLeft.setEnabled(true);
 			}
 		});
-		btnLoad.setBounds(389, 50, 89, 23);
+		btnLoad.setBounds(389, 50, 100, 23);
 		frmDungeonKeep.getContentPane().add(btnLoad);
 
 		JButton NewGameButton = new JButton("New Game");
@@ -458,6 +463,7 @@ public class Main_Window{
 								Hero H1 = Map1.getHero();
 								Hero H2 = Map2.getHero();
 								Enemy O = Map2.getEnemies().get(0);
+								oos.writeObject(1);
 								oos.writeObject(G);
 								oos.writeObject(H1);
 								oos.writeObject(H2);
@@ -472,6 +478,7 @@ public class Main_Window{
 									Hero H1 = Map1.getHero();
 									Hero H2 = Map2.getHero();
 									Enemy O = Map2.getEnemies().get(0);
+									oos.writeObject(2);
 									oos.writeObject(G);
 									oos.writeObject(H1);
 									oos.writeObject(H2);
@@ -492,15 +499,17 @@ public class Main_Window{
 							}
 						}
 					});
-					btnSave.setBounds(389, 155, 89, 23);
+					btnSave.setBounds(389, 155, 100, 23);
 					frmDungeonKeep.getContentPane().add(btnSave);
+					frmDungeonKeep.getContentPane().repaint();
+					
 					panel.repaint();
 					}
 				}
 			}
 		});
 
-		NewGameButton.setBounds(389, 87, 89, 23);
+		NewGameButton.setBounds(389, 87, 100, 23);
 		frmDungeonKeep.getContentPane().add(NewGameButton);
 		
 		MovementButtonUp.addActionListener(new ActionListener() {
