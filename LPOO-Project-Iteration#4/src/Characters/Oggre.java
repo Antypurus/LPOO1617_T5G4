@@ -37,11 +37,16 @@ public class Oggre extends Enemy implements Serializable{
 		this.xPos = x;
 		this.yPos = y;
 	}
-	
+	/*
+	 	*sets this oggres map
+	 *@param map map to set 
+	 */
 	public void setMap(String[][] map){
 		this.map = map;
 	}
-	
+    /*
+ 		*moves the oggre in a random direction 
+ 	*/
 	public void moveOgre() {
 		Random generator = new Random();
 		int movement = generator.nextInt(4);
@@ -79,7 +84,9 @@ public class Oggre extends Enemy implements Serializable{
 		}
 		
 	}
-	
+    /*
+ 		* calls the movemetn logic
+ 	*/
 	public void move(){
 		if(!this.isStuned) {
 			moveOgre();
@@ -90,7 +97,9 @@ public class Oggre extends Enemy implements Serializable{
 			}
 		}
 	}
-
+    /*
+ 		* attack logic
+ 	*/
 	public void ogreAttack() {
 		if(weapons!=null){
 		Random generator = new Random();
@@ -118,19 +127,27 @@ public class Oggre extends Enemy implements Serializable{
 			this.ogreAttack();
 		}}
 	}
-	
+    /*
+ 		* calls the attack logic
+ 	*/
 	public void attack(){
 		ogreAttack();
 	}
-
+    /*
+ 		* return the type
+ 	*/
 	public String type() {
 		return type ;
 	}
-	
+    /*
+ 		* return the sub type
+ 	*/
 	public String subType(){
 		return subType;
 	}
-	
+    /*
+ 		* return this oggres current representation
+ 	*/
 	public String getRepresentation(){
 		return representation;
 	}

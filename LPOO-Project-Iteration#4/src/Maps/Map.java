@@ -46,79 +46,101 @@ public class Map implements GameMap, Serializable {
 	private ArrayList<Lever> nonStandardLever = new ArrayList<Lever>();
 	private ArrayList<Key> nonStandardKeys = new ArrayList<Key>();
 
+	/*
+	 	*allows to set the map that comes after this one in the logical flow of the game
+	 *@param nextMap a map object that represents the map that comes next
+	 */
 	public void setNextMap(Map nextMap) {
 		this.hasNextMap = true;
 		this.nextMap = nextMap;
 	}
-
+	//do not use
 	public void addDoor(Door door, Key associatedKey) {
 		this.nonStandardDoors.add(door);
 		this.nonStandardKeys.add(associatedKey);
 	}
-
+	//do not use
 	public Door[] getNonStandardDoors() {
 		return (Door[]) this.nonStandardDoors.toArray();
 	}
-
+	//do not use
 	public Key[] getNonStandardKeys() {
 		return (Key[]) this.nonStandardKeys.toArray();
 	}
-
+	//do not use
 	public Lever[] getNonStandardLever() {
 		return (Lever[]) this.nonStandardLever.toArray();
 	}
-
+	//do not use
 	public void addDoor(Door door, Lever associatedLever) {
 		this.nonStandardDoors.add(door);
 		this.nonStandardLever.add(associatedLever);
 	}
-
+	//do not use
 	public void addWall(Wall wall) {
 		this.nonStandardWall.add(wall);
 	}
-
+	//do not use
 	public void addWall(Wall[] walls) {
 		for (int i = 0; i < walls.length; i++) {
 			this.nonStandardWall.add(walls[i]);
 		}
 	}
-
+	//do not use
 	public Wall[] getWalls() {
 		return (Wall[]) this.nonStandardWall.toArray();
 	}
-
+	/*
+	 	*return a Map type object that represents the next map 
+	 */
 	public Map getNextMap() {
 		return this.nextMap;
 	}
-
+	/*
+	 	*returns the arraylist that holds all the enemis in this map 
+	 */
 	public ArrayList<Enemy> getEnemies() {
 		return this.enemies;
 	}
-
+	/*
+	 	*return this maps hero 
+	 */
 	public Hero getHero() {
 		return this.hero;
 	}
-
+	/*
+	 	*returns all the doors in the map 
+	 */
 	public Door[] getDoors() {
 		return this.doors;
 	}
-
+	/*
+ 		*returns all the levers in the map 
+ 	*/
 	public Lever[] getLevers() {
 		return this.levers;
 	}
-
+	/*
+		*returns all the keys in the map 
+	*/
 	public Key[] getKeys() {
 		return this.keys;
 	}
-
+	/*
+		*returns all the reference map in the map 
+	*/
 	public String[][] getReferenceMap() {
 		return this.resetMap;
 	}
-
+	/*
+		*returns the height of the map
+	*/
 	public int getHeight() {
 		return this.height;
 	}
-
+	/*
+		*returns the width of the map
+	*/
 	public int getWidth() {
 		return this.width;
 	}
@@ -132,7 +154,15 @@ public class Map implements GameMap, Serializable {
 			levers = null;
 		}
 	}
-
+	/*
+		*Map constructor
+	*@param map map to be edited
+	*@param referenceMap map that will be used to reset the previous parameter
+	*@param dimensions object of type MapDimension that represents the dimensions of the map
+	*@param hero hero of this map
+	*@param enemies enemies for this map
+	*@param key keys or levers for this map
+	*/
 	public Map(String[][] map, String[][] referenceMap, MapDimension dimensions, Hero hero, Enemy[] enemies,
 			Key[] key) {
 		this.map = map;
@@ -245,21 +275,30 @@ public class Map implements GameMap, Serializable {
 			this.enemies.add(enemies[i]);
 		}
 	}
-
+	/*
+		*allows to set the doors present in this map
+	*@param doors the doors that will be present in this map
+	*/
 	public void setDoor(Door[] doors) {
 		this.doors = doors;
 	}
-
+	/*
+		*allows to add enemies to the map
+	*@param enemies array of enemies to be added to the map
+	*/
 	public void addEnemies(Enemy[] enemies) {
 		for (int i = 0; i < enemies.length; i++) {
 			this.enemies.add(enemies[i]);
 		}
 	}
-
+	/*
+		*allows to add one enemy to the map
+	*@param enemie enemy object to be added to the map
+	*/
 	public void addEnemy(Enemy enemie) {
 		this.enemies.add(enemie);
 	}
-
+	//do not use
 	public void generateRandomOgres(int n_oggre) {
 		Random generator = new Random();
 		Weapon[] add = new Club[1];
@@ -277,7 +316,12 @@ public class Map implements GameMap, Serializable {
 		}
 		this.addEnemies(send);
 	}
-
+	/*
+		*returns if a given characters position is allowed to be changed by the passed offset
+	*@param x offset to the characters x position
+	*@param y offset to the characters y position
+	*@param character character whose movement will be tested 
+	*/
 	public boolean moveTo(int x, int y, Character character) {
 		int intX = character.getXPos() + x;
 		int intY = character.getYPos() + y;
@@ -299,7 +343,9 @@ public class Map implements GameMap, Serializable {
 		this.hasNextMap = true;
 		this.nextMap = nextMap;
 	}
-
+	/*
+		*returns a 2D array that constain the map 
+	*/
 	public String[][] getMap() {
 		return map;
 	}
@@ -311,7 +357,9 @@ public class Map implements GameMap, Serializable {
 			return null;
 		}
 	}
-
+	/*
+		*returns if the player has passed the level and can either win or move to the next map
+	*/
 	public boolean hasWon() {
 		int x = hero.getXPos();
 		int y = hero.getYPos();
@@ -338,7 +386,9 @@ public class Map implements GameMap, Serializable {
 		}
 		return false;
 	}
-
+	/*
+		*returns if the player has been caught
+	*/
 	public boolean hasLost() {
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).heroDetection(this.hero)) {
@@ -347,11 +397,15 @@ public class Map implements GameMap, Serializable {
 		}
 		return false;
 	}
-
+	/*
+		*returns if there is a next map in the logical flow of the game
+	*/
 	public boolean hasNextMap() {
 		return this.hasNextMap;
 	}
-
+	/*
+		*resets the map
+	*/
 	private void resetMap(String[][] map) {
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
@@ -359,7 +413,9 @@ public class Map implements GameMap, Serializable {
 			}
 		}
 	}
-
+	/*
+		*draws to the map the keys in the map
+	*/
 	private void drawkeys() {
 		if (keys != null) {
 			for (int i = 0; i < keys.length; i++) {
@@ -376,7 +432,9 @@ public class Map implements GameMap, Serializable {
 			}
 		}
 	}
-
+	/*
+		*draws to the map the levers in the map
+	*/
 	private void drawLevers() {
 		if (levers != null) {
 			for (int i = 0; i < levers.length; i++) {
@@ -389,7 +447,9 @@ public class Map implements GameMap, Serializable {
 					.getRepresentation();
 		}
 	}
-
+	/*
+		*draws to the map the doors in the map
+	*/
 	private void drawDoors() {
 		if (doors != null) {
 			for (int i = 0; i < doors.length; i++) {
@@ -402,7 +462,9 @@ public class Map implements GameMap, Serializable {
 					.getRepresentation();
 		}
 	}
-
+	/*
+		*draws to the map all the enemies in the map
+	*/
 	private void drawEnemies() {
 		for (int i = 0; i < enemies.size(); i++) {
 			map[enemies.get(i).getYPos()][enemies.get(i).getXPos()] = enemies.get(i).getRepresentation();
@@ -414,7 +476,9 @@ public class Map implements GameMap, Serializable {
 			}
 		}
 	}
-
+	/*
+		*draws the map to the console
+	*/
 	public void drawMap() {
 
 		this.resetMap(this.resetMap);// we must reset the map before drawing it
@@ -445,7 +509,10 @@ public class Map implements GameMap, Serializable {
 			System.out.print("\n");
 		}
 	}
-
+	/*
+		*draws the map to a swing gui
+	*@param textArea swing guy JTextArea to draw the map on
+	*/
 	public void SwingDrawMap(JTextArea textArea) {
 
 		textArea.setText("");
@@ -479,7 +546,9 @@ public class Map implements GameMap, Serializable {
 		}
 
 	}
-
+	/*
+		*draws the map using sprites
+	*/
 	public void SwingDrawMap() {
 
 		this.resetMap(this.resetMap);// we must reset the map before drawing it
@@ -505,7 +574,10 @@ public class Map implements GameMap, Serializable {
 		}*/
 
 	}
-	
+	/*
+		*interprets a characters movement given the direction in wich the character should move
+	*@param movement direction to move the character
+	*/
 	private void movementInterpreter(int movement){
 		switch (movement) {
 		case (1):
@@ -596,7 +668,9 @@ public class Map implements GameMap, Serializable {
 			break;
 		}
 	}
-
+	/*
+		*runs the logic associated the keys
+	*/
 	private void keyLogic(){
 		if (keys != null) {
 			for (int i = 0; i < keys.length; i++) {
@@ -607,7 +681,9 @@ public class Map implements GameMap, Serializable {
 			this.nonStandardKeys.get(i).detectPickup(this.hero);
 		}
 	}
-	
+	/*
+		*runs the logic associated to the levers in the map
+	*/
 	private void leverLogic(){
 		if (levers != null) {
 			for (int i = 0; i < levers.length; i++) {
@@ -618,7 +694,9 @@ public class Map implements GameMap, Serializable {
 			this.nonStandardLever.get(i).detectPress(this.hero);
 		}
 	}
-	
+	/*
+		*runs the map logic in the console
+	*/
 	public boolean mapLogic() {
 		int movement;
 
@@ -665,7 +743,10 @@ public class Map implements GameMap, Serializable {
 		return false;
 
 	}
-
+	/*
+		*runs the map logic using a swing gui
+	*@param movements direction in wich to move
+	*/
 	public boolean SwingmapLogic(int movement) {
 		
 		this.movementInterpreter(movement);

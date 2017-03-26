@@ -13,7 +13,7 @@ public class Guard extends Enemy implements Serializable{
 	private String sleepRep = "g";
 	private boolean isSleep = false;
 	private boolean reverse = false;
-	
+
 	public Guard(String[][] map){
 		type = "Guard";
 		Random generator = new Random();
@@ -81,7 +81,7 @@ public class Guard extends Enemy implements Serializable{
 		this.map=map;
 		System.out.println("\nThis guard is a "+this.subType+" Guard\n");
 	}
-	
+
 	private void rookieMoveGuard() {
 		if (guardMovStage == 0) {
 			xPos--;
@@ -350,7 +350,9 @@ public class Guard extends Enemy implements Serializable{
 			}
 		}
 	}
-
+	/*
+		* runs hte movement logic for this guard
+	*/
 	public void move() {
 
 	    if(this.subType.equals("rookie")){
@@ -361,19 +363,27 @@ public class Guard extends Enemy implements Serializable{
         	this.suspiciousMovement();
 		}
 	}
-
+	/*
+		*attack implentation in this case it does nothing 
+	*/
 	public void attack() {
 		return ;
 	}
-
+	/*
+		*return this enemy type 
+	*/
 	public String type() {
 		return type;
 	}
-	
+	/*
+		*returns thie enemies sub type 
+	*/
 	public String subType(){
 		return subType;
 	}
-
+	/*
+		*return this enemies current representation 
+	*/
 	public String getRepresentation(){
 		return representation;
 	}

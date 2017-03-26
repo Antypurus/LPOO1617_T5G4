@@ -15,16 +15,22 @@ public class TextInput implements Serializable{
     public TextInput(){
         inputreader=new Scanner(System.in);
     }
-
+    /*
+ 		*closes the scaner 
+ 	*/
     public void close(){
         inputreader.close();
     }
-
+    /*
+ 		*reads input from the keyboard 
+ 	*/
     private String read(){
         input=inputreader.next();
         return input;
     }
-    
+    /*
+ 		*return the input as an int if it corresponds to a direction 
+ 	*/
     public int getNextStep(){
 
     	System.out.print(" \n Direcção em que se pretende mover:");

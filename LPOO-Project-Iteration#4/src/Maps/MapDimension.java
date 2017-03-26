@@ -16,11 +16,15 @@ public class MapDimension implements Serializable{
         this.ySize=height_y;
 
     }
-
+    /*
+ 		* return the x size of the map
+ 	*/
     public int getxSize() {
         return xSize;
     }
-
+    /*
+ 		*return the y size of the map 
+ 	*/
     public int getySize() {
         return ySize;
     }

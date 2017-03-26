@@ -26,7 +26,9 @@ public class DistanceCalculator implements Serializable {
         distance=Math.sqrt(Math.pow((xPos1-xPos2),2)+Math.pow((yPos1-yPos2),2));
         return distance;
     }
-
+    /*
+ 		* return the distance between the specified hero and enemy
+ 	*/
     public double getDistance(){
         this.calculateDistance();
         return this.distance;
