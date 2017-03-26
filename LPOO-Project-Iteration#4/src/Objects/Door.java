@@ -26,15 +26,22 @@ public class Door extends Object implements Serializable{
     	this.yPos=yPos;
     	this.associatedKey=associatedkey;
     }
-
+    /*
+ 		*sets if a door is open
+ 	*@param state current state of the door 
+ 	*/
     public void setOpen(boolean state){
     	this.isOpean=state;
 	}
-
+    /*
+ 		*returns if the doors is open 
+ 	*/
 	public boolean getIsOpen(){
     	return this.isOpean;
 	}
-    
+    /*
+ 		* return this doors representation
+ 	*/
     public String getRepresentation(){
     	if(this.associatedKey==null){
     		if(this.associatedLever.getState()){
@@ -52,11 +59,15 @@ public class Door extends Object implements Serializable{
     		}
     	}
     }
-
+    /*
+ 		* return this doors x position
+ 	*/
 	public int getxPos() {
 		return xPos;
 	}
-
+    /*
+ 		* returns this doors y position
+ 	*/
 	public int getyPos() {
 		return yPos;
 	}
