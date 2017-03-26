@@ -16,7 +16,7 @@ import Characters.Oggre;
 import Maps.Map;
 
 
-public class EditMap extends JPanel implements MouseListener, KeyListener{
+public class EditMap extends JPanel implements MouseListener{
 	
 	private Oggre O;
 	private Image sprite;
@@ -30,12 +30,15 @@ public class EditMap extends JPanel implements MouseListener, KeyListener{
 	private ArrayList<Image> Images = new ArrayList<Image>();
 	private ArrayList<Integer> X = new ArrayList<Integer>();
 	private ArrayList<Integer> Y = new ArrayList<Integer>();
-	private int counter = 0;
 	private String type;
 	private static final int pixel_size = 30;
 	private static final int map_height = 10;
 	private static final int map_width = 10;
 	
+    /**
+	 * Load the images that will be drawn on screen
+     *
+     */
 	public EditMap()
 	{
 		addMouseListener(this);
@@ -45,11 +48,12 @@ public class EditMap extends JPanel implements MouseListener, KeyListener{
 		this.Hero = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/heroright.png")).getImage();
 	}
 	
-	public int getExit()
-	{
-		return 0;
-	}
-	
+    /**
+	 * Checks if the image that will be drawn is currently null
+	 * Check if the user pressed the exit button
+     *
+     * @param type the member type will be equal to this param
+     */
 	public void setType(String type)
 	{
 		this.type = type;
@@ -59,24 +63,37 @@ public class EditMap extends JPanel implements MouseListener, KeyListener{
 		 }
 	}
 	
+    /**
+	 * When the game is ready to be played this function is called
+     *
+     * @param b the member isreadytoplay will be equal to this param
+     */
 	public void setisReadyToPlay(boolean b)
 	{
 		this.isReadyToPlay = b;
 	}
-	
+    /**
+	 * Checks if the game is ready to be played
+     *
+     * @return value of isreadytoplay
+     */
 	public boolean isReadyToPlay()
 	{
 		return this.isReadyToPlay;
 	}
-	
+    /**
+	 * Checks which button was pressed with which image
+	 * Adds the images to the arrayList images
+	 * Draws all the images added to the image arrayList
+     *
+     * @param g draws the screen
+     */
 	@Override
 	protected void paintComponent(Graphics g)
 	{
 		 super.paintComponent(g);
 		 
 		 if(type != null) {
-		 if(type.equals("Exit"))
-			System.out.println("oi");
 		 if(type.equals("Ogre")){
 			Images.add(Ogre);
 			O = new Oggre(X.get(X.size()-1), Y.get(Y.size() -1));
@@ -100,6 +117,14 @@ public class EditMap extends JPanel implements MouseListener, KeyListener{
 //		 g.drawImage(sprite,x, y,this);
 	}
 
+    /**
+     * when the mouse is clicked in the panel
+     * the coordinates of the click will be verified
+     * and the final coordinates will be 
+     * the top left corner of a 30x30 square
+     *
+     * @param arg0 handles the mouse events
+     */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		for(int i = 1; i <= map_width; i++)
@@ -114,8 +139,6 @@ public class EditMap extends JPanel implements MouseListener, KeyListener{
 			}
 			}
 		}
-//		this.X.add(arg0.getX());
-//		this.Y.add(arg0.getY());
 		this.repaint();
 		
 		
@@ -141,52 +164,6 @@ public class EditMap extends JPanel implements MouseListener, KeyListener{
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			map.SwingmapLogic(1);
-			if(map.hasLost()){
-				repaint();
-				JOptionPane.showMessageDialog(null, "You Lost!");
-				System.exit(0);
-			}
-			
-			if(map.hasWon()){
-				repaint();
-				JOptionPane.showMessageDialog(null, "You Won!");
-				System.exit(0);
-			}
-			}
-		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			map.SwingmapLogic(2);
-			if(map.hasLost()){
-				repaint();
-				JOptionPane.showMessageDialog(null, "You Lost!");
-				System.exit(0);
-			}
-			
-			if(map.hasWon()){
-				repaint();
-				JOptionPane.showMessageDialog(null, "You Won!");
-				System.exit(0);
-			}
-			}
-		}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}

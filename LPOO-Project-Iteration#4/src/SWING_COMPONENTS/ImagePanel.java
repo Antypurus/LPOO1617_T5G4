@@ -30,20 +30,14 @@ import Objects.Key;
 import Objects.Lever;
 import Weapons.Club;
 
-public class ImagePanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener{
+public class ImagePanel extends JPanel implements KeyListener{
 
 	private int Direction;
 	private boolean nextStage = false;
-	private Hero H;
-	private ArrayList<Enemy> E1 = new ArrayList<Enemy>();
-	private ArrayList<Enemy> E2 = new ArrayList<Enemy>();
 	private boolean openDoor = false;
 	private boolean canProceed = false;
 	private Map map;
-	private Lever[] k;
-	private int level;
 	private Club Cl;
-	private Key[] K;
     private Image ogre;
     private Image club;
     private Image wall;
@@ -55,18 +49,18 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private Image lever;
     private Image turnedlever;
     private Image hero;
-    private Image ogreleft;
-    private Image ogreright;
-    private Image ogreup;
-    private Image ogredown;
     private Image key;
     private final int map_width = 10;
     private final int map_height = 10;
     private final int pixel_size = 30;
-//    public ImagePanel(Hero H, Guard G, Oggre O, Map map, Lever k, Key K, int level, Door mapDoors[], Club Cl) {
+    
+    /**
+     * This constructor is responsible of loading the game images and the map of the game
+     *
+     * @param  map  game map with it's logic
+     * @param  cl	ogre club
+     */
     public ImagePanel(Map map, Club Cl) {
-    	addMouseListener(this);
-    	addMouseMotionListener(this);
     	addKeyListener(this);
           wall = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/wall red.png")).getImage();
           closeddoor = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/closed door.png")).getImage();
@@ -82,39 +76,25 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
           club = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/club.png")).getImage();
           this.map = map;
           this.Cl = Cl;
-//          this.H = map.getHero();
-//       for(int i = 0; i < map.getEnemies().size(); i++)
-//       {
-//    	   E1.add(map.getEnemies().get(i));
-//       }
-//       for(int i = 0; i < map.getNextMap().getEnemies().size(); i++)
-//       {
-//    	   E2.add(map.getNextMap().getEnemies().get(i));
-//       }
-//          this.k = map.getLevers();
-//          this.K = map.getNextMap().getKeys();
-//          this.Cl = Cl;
-//          if(!this.nextStage)
-//       for(int i = 0 ; i < map.getDoors().length; i++)
-//       {
-//    	   this.map1Doors[i] = map.getDoors()[i];
-//       }
-//          else
-//          {
-//              for(int i = 0 ; i < map.getNextMap().getDoors().length; i++)
-//              {
-//           	   this.map2Doors[i] = map.getNextMap().getDoors()[i];
-//              }
-//          }
     }
 
-    
+    /**
+     * Receives a number between 1 and 4 that indicates which direction the hero will face
+     * Changes the member Direction to mov and calls the function playerMoved() 
+     *
+     * @param  mov  number between 1 and 4
+     */
     public void playerDirection(int mov)
     {
     	this.Direction = mov;
     	playerMoved();
     }
     
+    /**
+     * Checks the Direction member value and changes the Hero image
+     * If 1 loads facing up, 2 facing down, 3 facing left, 4 facing right
+     *
+     */
     public void playerMoved()
     {
     if(Direction == 1)
@@ -130,8 +110,6 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-     //   g.drawImage(ogre, 0, 0, this); // see javadoc for more info on the parameters          
-       // g.drawImage(wall, 40,40,this);
         if(!nextStage)
 {
         	if(map.getLevers()[0].getState()){
@@ -143,10 +121,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
             	g.drawImage(lever, pixel_size*(map.getLevers()[0].getxPos()), pixel_size*(map.getLevers()[0].getyPos()),this);
                 g.drawImage(hero, map.getHero().getXPos()*pixel_size,map.getHero().getYPos()*pixel_size,this);
         	}
-   /*     g.drawImage(heroleft, 2*pixel_size,pixel_size,this);
-        g.drawImage(herodown, 3*pixel_size,pixel_size,this);
-        g.drawImage(heroup, 3*pixel_size,2*pixel_size,this);
-        */
+        	
     	for(int i = 0; i < map.getDoors().length; i++)
     	{
     		if(map.getLevers()[0].getState())
@@ -196,8 +171,6 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         }
 }
         else { 
-        	//
-        	repaint();
         	if(!map.getNextMap().getKeys()[0].isPicked())
         	{
             g.drawImage(key,pixel_size*map.getNextMap().getKeys()[0].getxPos(),pixel_size*map.getNextMap().getKeys()[0].getyPos(),this);
@@ -223,9 +196,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         	g.drawImage(wall,pixel_size*i,0,this);
         	g.drawImage(wall,pixel_size*i,(map_height-1)*pixel_size,this);
         }
-//        g.drawImage(ogredown,pixel_size*5,3*pixel_size,this);
-//        g.drawImage(ogreleft,pixel_size*5,4*pixel_size,this);
-//        g.drawImage(ogreright,pixel_size*5,5*pixel_size,this);
+
         if(Cl.getxPos() < map.getNextMap().getEnemies().get(0).getXPos())
         	ogre = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/ogreleft.png")).getImage();
         else if(Cl.getxPos() > map.getNextMap().getEnemies().get(0).getXPos())
@@ -240,19 +211,33 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         this.requestFocusInWindow();
     }
     
+    /**
+     * Return the boolean nextStage that checks if the level has changed
+     *
+     * @return true if the level has changed, false if not
+     */
     public boolean getnextStage()
     {
     	return nextStage;
     }
-    
+    /**
+     * Sets the nextStage value
+     *
+     * @param nextStage the member nextStage will be equal to this param
+     */
     public void setnextStage(boolean nextStage)
     {
     	this.nextStage = nextStage;
     }
 
+    /**
+     * Read the arrows input and changes the hero position accordingly
+     *
+     * @param e read the keyboard input
+     */
     @Override
 	public void keyPressed(KeyEvent e) {
-		//int keycode = e.getKeyCode();
+		
 
 		if(e.getKeyCode() == KeyEvent.VK_UP)
 		{
@@ -369,7 +354,6 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 				
 				if(canProceed)
 					door = new ImageIcon(this.getClass().getResource("/SWING_COMPONENTS/openedDoor.png")).getImage();
-					repaint();
 				
 				if(map.getNextMap().getKeys()[0].isPicked() && map.getNextMap().getHero().getXPos() == map.getNextMap().getDoors()[0].getxPos() +1){
 					openDoor = true;
@@ -382,7 +366,6 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 					System.exit(0);
 				}
 			}
-			repaint();
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
@@ -431,54 +414,10 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
