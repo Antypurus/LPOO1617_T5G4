@@ -480,28 +480,21 @@ public class Map implements GameMap, Serializable {
 		*draws the map to the console
 	*/
 	public void drawMap() {
-
 		this.resetMap(this.resetMap);// we must reset the map before drawing it
 										// , this mustnt be done after drawing
 										// as we need to check certain
 										// conditions trough looking
 		// at the maps current state with the new positions for certain not
 		// native objects
-
 		this.drawkeys();
-
 		this.drawLevers();
-
 		this.drawDoors();
-
 		this.drawEnemies();
-
 		if (keys != null) {
 			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.keys);
 		} else {
 			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.levers);
 		}
-
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				System.out.print("|" + map[i][j] + "|");
@@ -514,24 +507,17 @@ public class Map implements GameMap, Serializable {
 	*@param textArea swing guy JTextArea to draw the map on
 	*/
 	public void SwingDrawMap(JTextArea textArea) {
-
 		textArea.setText("");
-
 		this.resetMap(this.resetMap);// we must reset the map before drawing it
 										// , this mustnt be done after drawing
 										// as we need to check certain
 										// conditions trough looking
 		// at the maps current state with the new positions for certain not
 		// native objects
-
 		this.drawkeys();
-
 		this.drawLevers();
-
 		this.drawDoors();
-
 		this.drawEnemies();
-		
 		if (keys != null) {
 			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.keys);
 		} else {
@@ -544,35 +530,21 @@ public class Map implements GameMap, Serializable {
 			}
 			textArea.append("\n");
 		}
-
 	}
 	/*
 		*draws the map using sprites
 	*/
 	public void SwingDrawMap() {
-
 		this.resetMap(this.resetMap);// we must reset the map before drawing it
 										// , this mustnt be done after drawing
 										// as we need to check certain
 										// conditions trough looking
 		// at the maps current state with the new positions for certain not
 		// native objects
-
 		this.drawkeys();
-
 		this.drawLevers();
-
 		this.drawDoors();
-
 		this.drawEnemies();
-		
-		/*
-		if (keys != null) {
-			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.keys);
-		} else {
-			map[hero.getYPos()][hero.getXPos()] = hero.getRepresentation(this.levers);
-		}*/
-
 	}
 	/*
 		*interprets a characters movement given the direction in wich the character should move
@@ -699,89 +671,60 @@ public class Map implements GameMap, Serializable {
 	*/
 	public boolean mapLogic() {
 		int movement;
-
 		while (!hasWon() && !hasLost()) {
-
 			this.drawMap();
-
 			movement = direction.getNextStep();
-
 			this.movementInterpreter(movement);
-			
 			if (this.hasLost()) {
 				System.out.println("\nYou Have Ben Caught !\n YOU LOSE!\n");
 				direction.close();
 				return false;
 			}
-
 			this.keyLogic();
-
 			this.leverLogic();
-
 			for (int i = 0; i < enemies.size(); i++) {
 				this.enemies.get(i).move();
 				if (!this.enemies.get(i).isStuned()) {
 					this.enemies.get(i).attack();
 				}
 			}
-
 			if (this.hasLost()) {
 				System.out.println("\nYou Have Ben Caught !\n YOU LOSE!\n");
 				direction.close();
 				return false;
 			}
-
 			if (hasWon() && (keys == null)) {
 				System.out.println("\nCongratulations you have won\n");
 				this.clearEnemies();
 				return true;
 			}
-
 		}
-
 		direction.close();
 		return false;
-
 	}
 	/*
 		*runs the map logic using a swing gui
 	*@param movements direction in wich to move
 	*/
 	public boolean SwingmapLogic(int movement) {
-		
 		this.movementInterpreter(movement);
-		
 		this.SwingDrawMap();
-
 		if (this.hasLost()) {
 			return false;
 		}
-
 		this.keyLogic();
-
 		this.leverLogic();
-
 		this.enemies.get(0).move();
 		if (!this.enemies.get(0).isStuned()) {
 			this.enemies.get(0).attack();
 		}
-		
-//		for (int i = 0; i < enemies.size(); i++) {
-//			this.enemies.get(i).move();
-//			if (!this.enemies.get(i).isStuned()) {
-//				this.enemies.get(i).attack();
-//			}
-//		}
-
 		if (this.hasLost()) {
 			return false;
 		}
-
 		if (hasWon() && (keys == null)) {
 			this.clearEnemies();
 			return true;
 		}
-
 		this.SwingDrawMap();
 		return false;
 	}
