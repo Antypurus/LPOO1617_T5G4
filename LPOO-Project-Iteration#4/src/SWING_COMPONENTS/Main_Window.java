@@ -31,18 +31,34 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.awt.Font;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
 
-public class Main_Window {
+public class Main_Window{
 
+	/**
+	 * 
+	 */
 	private JFrame frmDungeonKeep;
 	private JTextField OggreCounter;
 	private ImagePanel panel;
 	private boolean goodFormat = true;
+	private boolean nextLevel= false;
 	private Map Map1;
 	private Map Map2;
 	private Guard map1Guard;
+	private Hero ma1Hero;
+	private Hero map2Hero;
+	private Oggre map2Oggre;
 
 	/**
 	 * Launch the application.
@@ -128,10 +144,10 @@ public class Main_Window {
 	    
 	     MapDimension map2Dimension=new MapDimension(10,10);
 
-	     Hero ma1Hero= new Hero(map1,1,1);
-	     Hero map2Hero=new Hero(map2,1,8);
+	     ma1Hero= new Hero(map1,1,1);
+	     map2Hero=new Hero(map2,1,8);
 
-	     Oggre map2Oggre = new Oggre(map2);
+	     map2Oggre = new Oggre(map2);
 
 	     Lever map1Lever = new Lever(7,8);
 	     Key map2Key = new Key(8,1);
@@ -149,7 +165,7 @@ public class Main_Window {
 	     Club map2Club = new Club(map2Oggre);
 
 	     Weapon[] oggreMap2Weapons = new Weapon[1];
-
+	     
 
 		frmDungeonKeep = new JFrame();
 		frmDungeonKeep.setResizable(false);
@@ -270,7 +286,83 @@ public class Main_Window {
 		btnMapEditor.setBounds(389, 121, 89, 23);
 		frmDungeonKeep.getContentPane().add(btnMapEditor);
 		
-		
+		JButton btnLoad = new JButton("Load");
+		btnLoad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+//				Map1.writeExternal(Map1);
+				try {
+					
+					FileInputStream fi = new FileInputStream("C:/Users/Diogo/Desktop/Faculdade/test.ser");
+					ObjectInputStream oi = new ObjectInputStream(fi);
+
+					// Read objects
+					try {
+						String personality;
+						personality = GuardPersonalitySelector.getSelectedItem().toString();
+						map1Guard = (Guard) oi.readObject();
+						ma1Hero = (Hero) oi.readObject();
+						map2Hero = (Hero) oi.readObject();
+						map2Oggre = (Oggre) oi.readObject();
+						Enemy[] map2Enemies = new  Enemy[1];
+						map1Enemies[0]=map1Guard;
+				        map1Levers[0]=map1Lever;
+				        map1Doors[0]=new Door(0,5,map1Lever);
+				        map1Doors[1]=new Door(0,6,map1Lever);
+				        oggreMap2Weapons[0]=map2Club;
+				        map2Oggre.setWeapons(oggreMap2Weapons);
+				        for(int i = 0; i < 1; i++)
+				        map2Enemies[i]= map2Oggre;
+				        map2Keys[0]=map2Key;
+				        map2Doors[0]=new Door(0,1,map2Key);
+
+					Map1 = new Map(map1, referenceMap1, map1Dimension, ma1Hero, map1Enemies, map1Levers, true);
+					Map1.setDoor(map1Doors);
+					Map2 = new Map(map2, referenceMap2, map2Dimension, map2Hero, map2Enemies, map2Keys, true);
+					Map2.setDoor(map2Doors);
+					Map1.setNextMap(Map2);
+					if(!nextLevel){
+					panel = new ImagePanel(Map1, map2Club);
+					panel.setBackground(Color.WHITE);
+					panel.setBounds(10, 95, 300, 300);
+					frmDungeonKeep.getContentPane().add(panel);
+					panel.repaint();
+					}
+					else
+					{
+						panel = new ImagePanel(Map1, map2Club);
+						panel.setBackground(Color.WHITE);
+						panel.setBounds(10, 95, 300, 300);
+						frmDungeonKeep.getContentPane().add(panel);
+						panel.setnextStage(true);
+						panel.repaint();
+					}
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					oi.close();
+					fi.close();
+//					// read object from file
+//					FileInputStream fis = new FileInputStream("mybean.ser");
+//					ObjectInputStream ois = new ObjectInputStream(fis);
+//					MyBean result = (MyBean) ois.readObject();
+//					ois.close();
+
+				} catch (FileNotFoundException e) {
+					System.out.println("File not found");
+				} catch (IOException e) {
+					System.out.println("Error initializing stream");
+				}
+				MovementButtonUp.setEnabled(true);
+				MovementButtonDown.setEnabled(true);
+				MovementButtonRight.setEnabled(true);
+				MovementButtonLeft.setEnabled(true);
+			}
+		});
+		btnLoad.setBounds(389, 50, 89, 23);
+		frmDungeonKeep.getContentPane().add(btnLoad);
 
 		JButton NewGameButton = new JButton("New Game");
 		NewGameButton.addMouseListener(new MouseAdapter() {
@@ -346,10 +438,65 @@ public class Main_Window {
 					panel.setBounds(10, 95, 300, 300);
 					frmDungeonKeep.getContentPane().add(panel);
 					panel.repaint();
-					Map1.SwingDrawMap();
+					//Map1.SwingDrawMap();
+					
+					JButton btnSave = new JButton("Save");
+					btnSave.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+//							Map1.writeExternal(Map1);
+							panel.requestFocusInWindow();
+							try {
+								// write object to file
+								FileOutputStream fos = null;
+								ObjectOutputStream oos = null;
+								fos = new FileOutputStream(new File("C:/Users/Diogo/Desktop/Faculdade/test.ser"));
+								oos = new ObjectOutputStream(fos);
+//								oos.writeObject(Map1);
+								if(!Map1.hasWon()){
+								Enemy G = Map1.getEnemies().get(0);
+								Hero H1 = Map1.getHero();
+								Hero H2 = Map2.getHero();
+								Enemy O = Map2.getEnemies().get(0);
+								oos.writeObject(G);
+								oos.writeObject(H1);
+								oos.writeObject(H2);
+								oos.writeObject(O);
+								oos.close();
+								fos.close();
+								}
+								else
+								{
+									nextLevel = true;
+									Enemy G = new Guard(map1, "rookie");
+									Hero H1 = Map1.getHero();
+									Hero H2 = Map2.getHero();
+									Enemy O = Map2.getEnemies().get(0);
+									oos.writeObject(G);
+									oos.writeObject(H1);
+									oos.writeObject(H2);
+									oos.writeObject(O);
+									oos.close();
+									fos.close();
+								}
+//								// read object from file
+//								FileInputStream fis = new FileInputStream("mybean.ser");
+//								ObjectInputStream ois = new ObjectInputStream(fis);
+//								MyBean result = (MyBean) ois.readObject();
+//								ois.close();
+
+							} catch (FileNotFoundException e) {
+								System.out.println("File not found");
+							} catch (IOException e) {
+								System.out.println("Error initializing stream");
+							}
+						}
+					});
+					btnSave.setBounds(389, 155, 89, 23);
+					frmDungeonKeep.getContentPane().add(btnSave);
+					panel.repaint();
 					}
 				}
-
 			}
 		});
 
@@ -358,13 +505,15 @@ public class Main_Window {
 		
 		MovementButtonUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(Map2.getEnemies().get(0).getXPos());
+				System.out.println(Map2.getEnemies().get(0).getYPos());
 				if(!panel.getnextStage()) {
 				Map1.SwingmapLogic(1);
 				panel.playerDirection(1);
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
-					Map1.SwingDrawMap();
+					//Map1.SwingDrawMap();
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
@@ -387,6 +536,8 @@ public class Main_Window {
 				else
 				{
 					Map1.getNextMap().SwingmapLogic(1);
+					System.out.println(Map1.getNextMap().getEnemies().get(0).getXPos());
+					System.out.println(Map1.getNextMap().getEnemies().get(0).getYPos());
 					panel.playerDirection(1);
 					panel.repaint();
 					if(Map1.getNextMap().hasWon()){
@@ -408,6 +559,8 @@ public class Main_Window {
 						System.exit(0);
 					}
 				}
+				System.out.println(Map1.getNextMap().getEnemies().get(0).getXPos());
+				System.out.println(Map1.getNextMap().getEnemies().get(0).getYPos());
 			}
 		});
 		MovementButtonUp.setEnabled(false);
@@ -422,7 +575,7 @@ public class Main_Window {
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
-					Map1.SwingDrawMap();
+					//Map1.SwingDrawMap();
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
@@ -481,7 +634,7 @@ public class Main_Window {
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
-					Map1.SwingDrawMap();
+					//Map1.SwingDrawMap();
 					MovementButtonUp.setEnabled(false);
 					MovementButtonDown.setEnabled(false);
 					MovementButtonRight.setEnabled(false);
@@ -539,7 +692,7 @@ public class Main_Window {
 				panel.repaint();
 				if(Map1.hasLost()){
 					panel.repaint();
-					Map1.SwingDrawMap();
+					//Map1.SwingDrawMap();
 					JOptionPane.showMessageDialog(null, "You Lost!");
 					System.exit(0);
 				}
@@ -608,6 +761,7 @@ public class Main_Window {
 		});
 		ExitButton.setBounds(389, 373, 89, 23);
 		frmDungeonKeep.getContentPane().add(ExitButton);
+		
 	
 		
 	}

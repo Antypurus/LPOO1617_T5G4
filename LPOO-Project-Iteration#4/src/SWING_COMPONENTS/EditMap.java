@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -16,8 +17,12 @@ import Characters.Oggre;
 import Maps.Map;
 
 
-public class EditMap extends JPanel implements MouseListener{
+public class EditMap extends JPanel implements MouseListener, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Oggre O;
 	private Image sprite;
 	private Image Ogre;

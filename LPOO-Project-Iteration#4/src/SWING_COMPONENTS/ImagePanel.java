@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,8 +31,13 @@ import Objects.Key;
 import Objects.Lever;
 import Weapons.Club;
 
-public class ImagePanel extends JPanel implements KeyListener{
+public class ImagePanel extends JPanel implements KeyListener,  Serializable{
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9095359927657695376L;
 	private int Direction;
 	private boolean nextStage = false;
 	private boolean openDoor = false;
@@ -78,6 +84,11 @@ public class ImagePanel extends JPanel implements KeyListener{
           this.Cl = Cl;
     }
 
+    public Map getMap()
+    {
+    	return this.map;
+    }
+    
     /**
      * Receives a number between 1 and 4 that indicates which direction the hero will face
      * Changes the member Direction to mov and calls the function playerMoved() 

@@ -1,10 +1,15 @@
 package inputs;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class TextInput {
+public class TextInput implements Serializable{
 
-    private String input;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String input;
     private Scanner inputreader;
 
     public TextInput(){

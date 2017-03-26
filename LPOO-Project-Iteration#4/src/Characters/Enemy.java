@@ -1,9 +1,15 @@
 package Characters;
 
+import java.io.Serializable;
+
 import Weapons.Weapon;
 
-public abstract class Enemy extends Character {
+public abstract class Enemy extends Character implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String[][] map;
 	protected int xPos;
 	protected int yPos;

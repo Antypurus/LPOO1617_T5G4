@@ -13,13 +13,19 @@ import Weapons.Club;
 import Weapons.Weapon;
 import inputs.TextInput;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class Map implements GameMap {
+public class Map implements GameMap, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5432316826595997002L;
 
 	private String[][] map, resetMap;
 	// private Enemy[] enemies = null;

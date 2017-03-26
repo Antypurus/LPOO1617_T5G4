@@ -1,7 +1,13 @@
 package Objects;
 
-public class Door extends Object {
-    private int xPos;
+import java.io.Serializable;
+
+public class Door extends Object implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int xPos;
     private int yPos;
     private boolean isOpean=false;
     private String openRep="S";

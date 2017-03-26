@@ -2,10 +2,15 @@ package Characters;
 
 import Weapons.Club;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Oggre extends Enemy{
+public class Oggre extends Enemy implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int clubYPos = this.yPos;
 	private int clubXPos = this.xPos;
 	

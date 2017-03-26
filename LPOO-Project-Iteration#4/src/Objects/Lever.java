@@ -1,9 +1,15 @@
 package Objects;
 
+import java.io.Serializable;
+
 import Characters.Hero;
 
-public class Lever {
+public class Lever implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int xPos;
 	private int yPos;
 	private boolean wasPressed=false;

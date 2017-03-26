@@ -1,7 +1,13 @@
 package Characters;
 
-public abstract class Character {
-    private int xPos;
+import java.io.Serializable;
+
+public abstract class Character implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int xPos;
     private int yPos;
 
     public int getYPos() {

@@ -1,12 +1,18 @@
 package Weapons;
 
+import java.io.Serializable;
+
 import Characters.Hero;
 import Objects.Key;
 import Objects.Lever;
 
-public abstract class Weapon {
+public abstract class Weapon implements Serializable{
 
-    int xPos;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	int xPos;
     int yPos;
     Character owner=null;
     String weaponName=null;

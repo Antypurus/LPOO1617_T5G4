@@ -3,10 +3,15 @@ package Characters;
 import Objects.Key;
 import Objects.Lever;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Hero extends Character {
-    private int yPos;
+public class Hero extends Character implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int yPos;
     private int xPos;
     private boolean hasKey=false;
     private boolean pressedLever=false;

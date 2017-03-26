@@ -1,8 +1,13 @@
 package Characters;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Guard extends Enemy {
+public class Guard extends Enemy implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int guardMovStage = 0;
 	private String awakeRep = "G";
 	private String sleepRep = "g";

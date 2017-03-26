@@ -1,11 +1,17 @@
 package Tools;
 
+import java.io.Serializable;
+
 import Characters.Enemy;
 import Characters.Hero;
 
 
-public class DistanceCalculator {
-    public int xPos1,yPos1;
+public class DistanceCalculator implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public int xPos1,yPos1;
     public int xPos2,yPos2;
     public double distance;
 

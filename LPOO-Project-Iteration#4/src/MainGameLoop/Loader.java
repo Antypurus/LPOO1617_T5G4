@@ -1,5 +1,7 @@
 package MainGameLoop;
 
+import java.io.Serializable;
+
 import Characters.Enemy;
 import Characters.Guard;
 import Characters.Hero;
@@ -12,9 +14,13 @@ import Objects.Lever;
 import Weapons.Club;
 import Weapons.Weapon;
 
-public class Loader {
+public class Loader implements Serializable{
 
-    private String[][] map1=new String[][]{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String[][] map1=new String[][]{
         {"X","X","X","X","X","X","X","X","X","X"},
         {"X"," "," "," ","I"," ","X"," "," ","X"},
         {"X","X","X"," ","X","X","X"," "," ","X"},

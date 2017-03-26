@@ -1,10 +1,16 @@
 package Objects;
 
+import java.io.Serializable;
+
 import Characters.Hero;
 
-public class Key extends Object {
+public class Key extends Object implements Serializable{
 
-    private int xPos;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int xPos;
     private int yPos;
     private String Representation = "k";
     private boolean wasPicked=false;
