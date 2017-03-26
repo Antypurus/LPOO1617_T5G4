@@ -3,5 +3,5 @@
 
 Membros:
 
-- Diogo Reis - 2015.... up2015 ....@fe.up.pt
-- Tiago Magalhães - 201607931 - up201607931@fe.up.pt
+- Diogo	Afonso	Duarte	Reis - 201505472 - up201505472@fe.up.pt
+- Tiago	Jose	Sousa	Magalhães - 201607931 - up201607931@fe.up.pt
