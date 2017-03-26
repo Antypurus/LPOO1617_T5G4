@@ -45,8 +45,6 @@ public class Loader implements Serializable{
             {"X","X","X","X","X","X","X","X","X","X"}
     };
     private MapDimension map1Dimension=new MapDimension(10,10);
-
-
     private String[][] map2=new String[][]{
             {"X","X","X","X","X","X","X","X","X","X"},
             {" "," "," "," "," "," "," "," "," ","X"},
@@ -59,7 +57,6 @@ public class Loader implements Serializable{
             {"X"," "," "," "," "," "," "," "," ","X"},
             {"X","X","X","X","X","X","X","X","X","X"}
     };
-
     private String[][] referenceMap2=new String[][]{
             {"X","X","X","X","X","X","X","X","X","X"},
             {" "," "," "," "," "," "," "," "," ","X"},
@@ -72,34 +69,22 @@ public class Loader implements Serializable{
             {"X"," "," "," "," "," "," "," "," ","X"},
             {"X","X","X","X","X","X","X","X","X","X"}
     };
-
     private MapDimension map2Dimension=new MapDimension(10,10);
-
     private Hero ma1Hero= new Hero(map1,2,1);
     private Hero map2Hero=new Hero(map2,1,8);
-
     private Guard map1Guard = new Guard(map1);
     private Oggre map2Oggre = new Oggre(map2);
-
     private Lever map1Lever = new Lever(7,8);
     private Key map2Key = new Key(8,1);
-
     private Enemy[] map1Enemies=new Enemy[1];
     private Enemy[] map2Enemies = new  Enemy[1];
-
     private Lever[] map1Levers=new Lever[1];
-
     private Key[] map2Keys = new Key [1];
-
     private Door[] map1Doors = new Door[2];
     private Door[] map2Doors = new Door[1];
-
     private Club map2Club = new Club(map2Oggre);
-
     private Weapon[] oggreMap2Weapons = new Weapon[1];
-
     public Loader(){
-
         map1Enemies[0]=map1Guard;
         map1Levers[0]=map1Lever;
         map1Doors[0]=new Door(0,5,map1Lever);
@@ -109,9 +94,6 @@ public class Loader implements Serializable{
         map2Enemies[0]= map2Oggre;
         map2Keys[0]=map2Key;
         map2Doors[0]=new Door(0,1,map2Key);
-
-
-
         Map map1 = new Map(this.map1,this.referenceMap1,map1Dimension,ma1Hero,map1Enemies,map1Levers,true);
         map1.setDoor(map1Doors);
         if(map1.mapLogic()){

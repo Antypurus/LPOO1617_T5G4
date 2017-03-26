@@ -82,7 +82,6 @@ public class Oggre extends Enemy implements Serializable{
 				moveOgre();
 			}
 		}
-		
 	}
     /*
  		* calls the movemetn logic

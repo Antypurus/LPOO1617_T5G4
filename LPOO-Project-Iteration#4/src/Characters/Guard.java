@@ -354,7 +354,6 @@ public class Guard extends Enemy implements Serializable{
 		* runs hte movement logic for this guard
 	*/
 	public void move() {
-
 	    if(this.subType.equals("rookie")){
 		    rookieMoveGuard();}// move calls the method specific to the guards movement
         if(this.subType.equals("drunken")){

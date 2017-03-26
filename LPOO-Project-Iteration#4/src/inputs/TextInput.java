@@ -32,7 +32,6 @@ public class TextInput implements Serializable{
  		*return the input as an int if it corresponds to a direction 
  	*/
     public int getNextStep(){
-
     	System.out.print(" \n Direcção em que se pretende mover:");
 		String check = read();
     	
@@ -53,5 +52,4 @@ public class TextInput implements Serializable{
     	
     	return 0;
     }
-
 }
