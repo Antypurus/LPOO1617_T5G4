@@ -1,0 +1,6 @@
+exclude:
+- /LPOO-Project-Iteration#1/src/.*
+- /LPOO-Project-Iteration#2/src/.*
+component_depth: 1
+languages:
+- java
