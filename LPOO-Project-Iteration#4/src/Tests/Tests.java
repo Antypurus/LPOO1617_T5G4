@@ -51,7 +51,7 @@ public class Tests {
 	    };
 	    private     MapDimension map1Dimension=new MapDimension(10,10);
 
-//
+
 	    private     String[][] map2=new String[][]{
 	            {"X","X","X","X","X","X","X","X","X","X"},
 	            {" "," "," "," "," "," "," "," "," ","X"},
