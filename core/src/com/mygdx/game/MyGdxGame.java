@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import static com.badlogic.gdx.Gdx.input;
@@ -18,6 +19,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	Texture background;
 	Texture cursor;
 
+	private Sprite spr;
+
 	int x = 0;
 	int y = 0;
 
@@ -27,6 +30,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		img = new Texture("badlogic.jpg");
 		background = new Texture("Screenshot1.jpg");
 		cursor = new Texture("CR_Cursor.png");
+		spr = new Sprite(img);
+		spr.setScale(0.15f);
 		Gdx.input.setCursorCatched(true);
 		x = Gdx.graphics.getWidth()/2;
 		y = Gdx.graphics.getHeight()/2;
@@ -36,12 +41,12 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		fps = Gdx.graphics.getFramesPerSecond();
-		Gdx.graphics.setTitle("RPGame FPS:"+fps);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-		batch.draw(img, x-15, y-15,30,30);
+		spr.setPosition(x-15,y-15);
+		spr.draw(batch);
 		batch.draw(cursor,Gdx.input.getX(),Gdx.graphics.getHeight()-(Gdx.input.getY()+30),30,30);
 		if(Gdx.input.isKeyPressed(Input.Keys.UP)){
 			y++;
@@ -60,6 +65,8 @@ public class MyGdxGame extends ApplicationAdapter {
 			Gdx.app.exit();
 		}
 		batch.end();
+		int b = batch.renderCalls;
+		Gdx.graphics.setTitle("RPGame FPS:"+fps+" Draw Calls This Frame:"+b);
 	}
 	
 	@Override
