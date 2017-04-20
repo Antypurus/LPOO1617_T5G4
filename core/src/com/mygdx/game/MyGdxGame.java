@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -25,7 +26,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		background = new Texture("Screenshot1.jpg");
-		cursor = new Texture("badlogic.jpg");
+		cursor = new Texture("CR_Cursor.png");
+		Gdx.input.setCursorCatched(true);
 		x = Gdx.graphics.getWidth()/2;
 		y = Gdx.graphics.getHeight()/2;
 	}
