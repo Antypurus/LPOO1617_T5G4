@@ -1,6 +1,8 @@
 package Logic.Unit;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.ArrayList;
+
+import Logic.Abilities.Ability;
 
 public abstract class Unit {
     //basic information
@@ -15,13 +17,19 @@ public abstract class Unit {
     }
 
     //character stats
-    public double HP;//Health points
+    private double HP;//Health points
+    private double currentHP=HP;
     //maybe xp
     //maybe lvl
-    public double MP;//Mana points
-    public double inteligence;
-    public double strenght;
-    public double speed;
+    private double MP;//Mana points
+    private double currentMP = MP;
+
+    private double inteligence;//magic based abilities deal more damage or heal more, increases mana points
+    private double strenght;//physical based abilities deal more damage , increases defenses
+    private double vitality;//increases maximum HP
+    private double speed;//determines the units speed and therefore their order in the turn flow.
+
+    ArrayList<Ability> abilities;
 
     //character resistances
     private double ArmorRating;
@@ -32,5 +40,7 @@ public abstract class Unit {
     private double EarthResistance;
 
     public abstract void receiveAttack();
-    public abstract void attack();
+    public abstract void receiveHealth();
+    public abstract void attack(Ability select);
+    public abstract void move();
 }
