@@ -57,7 +57,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-			System.exit(0);
+			Gdx.app.exit();
 		}
 		batch.end();
 	}
