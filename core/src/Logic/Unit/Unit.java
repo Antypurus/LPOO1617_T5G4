@@ -1,46 +1,44 @@
 package Logic.Unit;
 
+import com.badlogic.gdx.utils.Array;
+
 import java.util.ArrayList;
 
 import Logic.Abilities.Ability;
+import Logic.Abilities.Statistic;
 
 public abstract class Unit {
-    //basic information
-    public int xPos;
-    public int yPos;
-    private String name;
+    boolean shouldUpdate = false;
 
+    String name=null;
+    ArrayList<Statistic> Stats = new ArrayList<Statistic>();
+    ArrayList<Ability> Abilities = new ArrayList<Ability>();
 
+    //Position
 
-    public String getName(){
-        return this.name;
+    //primary resources
+    Statistic HP = new Statistic("HP");// health points
+    Statistic MP = new Statistic("MP");// Mana points
+
+    //primary scaling stats
+    Statistic Speed = new Statistic("SPD"); //Speed Stat
+    Statistic Inteligent = new Statistic("INT"); //Intelligence Stat
+    Statistic Strength = new Statistic("STR"); //Strength Stat
+    Statistic Vitality = new Statistic("VIT"); //Vitality Stat
+
+    //Defensive Stats
+    Statistic Armor = new Statistic("ARM"); //Physical Resistance Stat
+    Statistic FireResistance = new Statistic("FRES"); //Magic Fire Resistance Stat
+    Statistic WaterResistence = new Statistic("WRES"); //Magic Water Resistance Stat
+    Statistic EarthResistence = new Statistic("ERES"); //Magic Earth Resistance Stat
+    Statistic AirResistence = new Statistic("ARES"); //Magic Air Resistance Stat
+
+    public void update(){
+        for(int i = 0;i<this.Stats.size();i++){
+            this.Stats.get(i).update();
+        }
+        this.shouldUpdate = false;
+        //reduce budd debuff duration.
     }
 
-    //character stats
-    private double HP;//Health points
-    private double currentHP=HP;
-    //maybe xp
-    //maybe lvl
-    private double MP;//Mana points
-    private double currentMP = MP;
-
-    private double inteligence;//magic based abilities deal more damage or heal more, increases mana points
-    private double strenght;//physical based abilities deal more damage , increases defenses
-    private double vitality;//increases maximum HP
-    private double speed;//determines the units speed and therefore their order in the turn flow.
-
-    ArrayList<Ability> abilities;
-
-    //character resistances
-    private double ArmorRating;
-    private double MagicResistance;//
-    private double FireResistance;
-    private double WaterResistance;
-    private double AirResistance;
-    private double EarthResistance;
-
-    public abstract void receiveAttack();
-    public abstract void receiveHealth();
-    public abstract void attack(Ability select);
-    public abstract void move();
 }
