@@ -33,7 +33,7 @@ public abstract class Unit {
 
     //character resistances
     private double ArmorRating;
-    private double MagicResistance;
+    private double MagicResistance;//
     private double FireResistance;
     private double WaterResistance;
     private double AirResistance;
