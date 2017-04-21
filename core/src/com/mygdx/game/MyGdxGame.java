@@ -13,17 +13,22 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 
+import Logic.Unit.Unit;
+
 import static com.badlogic.gdx.Gdx.input;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture background = null;
 
+	Unit test = null;
+
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		background = new Texture("Screenshot1.jpg");
+		test = new Unit("Test",1,1,1,1,1);
 	}
 	double fps;
 
