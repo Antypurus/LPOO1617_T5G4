@@ -28,7 +28,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		background = new Texture("Screenshot1.jpg");
-		test = new Unit("Test",1,1,1,1,1);
+		test = new Unit("Test",2,1,1,1,1);
 	}
 	double fps;
 

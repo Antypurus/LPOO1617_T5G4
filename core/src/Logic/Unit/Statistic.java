@@ -1,4 +1,4 @@
-package Logic.Abilities;
+package Logic.Unit;
 
 import java.util.ArrayList;
 

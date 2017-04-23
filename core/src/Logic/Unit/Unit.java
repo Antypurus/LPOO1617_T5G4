@@ -1,11 +1,8 @@
 package Logic.Unit;
 
-import com.badlogic.gdx.utils.Array;
-
 import java.util.ArrayList;
 
 import Logic.Abilities.Ability;
-import Logic.Abilities.Statistic;
 
 public class Unit {
     boolean shouldUpdate = false;
@@ -49,18 +46,35 @@ public class Unit {
         //reduce budd debuff duration.
     }
 
+    private int find_stat(String StatName){
+        for(int i=0;i<this.Stats.size();i++){
+            if(this.Stats.get(i).getName().equals(StatName)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void addStat(Statistic stat,double baseValue){
+        if(baseValue<=0){
+            baseValue = 1;
+        }
+        stat.BaseValue = baseValue;
+        int check = this.find_stat(stat.getName());
+        if(check==-1){
+            this.Stats.add(stat);
+        }
+        return;
+    }
+
     public Unit(String name,double INT,double STR,double SPD,double VIT,double Armor){
         this.name = name;
-        this.Inteligence.BaseValue = INT;
-        this.Stats.add(this.Inteligence);
-        this.Strength.BaseValue = STR;
-        this.Stats.add(this.Strength);
-        this.Vitality.BaseValue = VIT;
-        this.Stats.add(this.Vitality);
-        this.Speed.BaseValue = SPD;
-        this.Stats.add(this.Speed);
-        this.Armor.BaseValue = Armor;
-        this.Stats.add(this.Armor);
+        this.addStat(this.Inteligence,INT);
+        this.addStat(this.Strength,STR);
+        this.addStat(this.Speed,SPD);
+        this.addStat(this.Vitality,VIT);
+        this.addStat(this.Armor,Armor);
+        System.out.println(this.Stats.get(this.find_stat("INT")).BaseValue);
         this.update();
     }
 }
