@@ -2,6 +2,8 @@ package Logic.Unit;
 
 import java.util.ArrayList;
 
+import Logic.Abilities.Ability;
+
 public class Statistic {
 
     private String Name="";

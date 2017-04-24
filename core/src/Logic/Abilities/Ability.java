@@ -1,9 +1,18 @@
 package Logic.Abilities;
 
-/**
- * Created by craky on 4/20/2017.
- */
+import java.util.ArrayList;
+
+import Logic.Unit.Unit;
 
 public abstract class Ability {
-    enum type{HEAL,DAMAGE,BUFF};
+
+    String name = null;
+
+    public enum type{DAMAGE,HEAL,BUFF}
+    public double value;
+    public int effectRadius;
+
+    public ArrayList<type> Traits = new ArrayList<type>();
+
+    public abstract void AffectTarget(Unit target);
 }
