@@ -1,6 +1,7 @@
 package Logic.Unit;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import Logic.Abilities.Ability;
 
@@ -29,6 +30,17 @@ public class Unit {
     Statistic WaterResistence = new Statistic("WRES"); //Magic Water Resistance Stat
     Statistic EarthResistence = new Statistic("ERES"); //Magic Earth Resistance Stat
     Statistic AirResistence = new Statistic("ARES"); //Magic Air Resistance Stat
+
+    public double generateDodgeVal(){
+        double speed = this.Speed.EffectiveValue;
+        Random generator = new Random();
+        double dodge = generator.nextDouble()*100;
+        dodge+=speed;
+        if(dodge>100){
+            dodge = 100;
+        }
+        return dodge;
+    }
 
     public void update(){
         this.HP.BaseValue = this.Vitality.BaseValue * 10;
@@ -63,6 +75,25 @@ public class Unit {
         int check = this.find_stat(stat.getName());
         if(check==-1){
             this.Stats.add(stat);
+        }
+        return;
+    }
+
+    private int findAbility(String AbilityName){
+        for(int i = 0;i<Abilities.size();i++){
+            if(this.Abilities.get(i).name.equals(AbilityName)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void addAbility(Ability abl){
+        int pos = findAbility(abl.name);
+        if(pos==-1){
+            this.Abilities.add(abl);
+        }else{
+            return;
         }
         return;
     }
