@@ -1,4 +1,4 @@
-package ElementSystem;
+package Logic.ElementSystem;
 
 public class Element {
     public enum DamageType{Physical,Magical,TRUE}

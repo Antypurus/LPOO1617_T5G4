@@ -2,8 +2,7 @@ package Logic.Abilities;
 
 import java.util.ArrayList;
 
-import ElementSystem.Element;
-import Logic.Unit.Statistic;
+import Logic.ElementSystem.Element;
 import Logic.Unit.Unit;
 
 public abstract class Ability {
