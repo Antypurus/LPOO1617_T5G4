@@ -43,14 +43,6 @@ public class Unit {
     }
 
     public void update(){
-        this.HP.BaseValue = this.Vitality.BaseValue * 10;
-        this.MP.BaseValue = this.Inteligence.BaseValue * 5;
-
-        this.FireResistance.BaseValue = this.Armor.BaseValue * this.Inteligence.BaseValue * this.Vitality.BaseValue;
-        this.WaterResistence.BaseValue = this.Armor.BaseValue * this.Inteligence.BaseValue * this.Speed.BaseValue;
-        this.EarthResistence.BaseValue = this.Armor.BaseValue * this.Inteligence.BaseValue * this.Strength.BaseValue;
-        this.AirResistence.BaseValue = this.Inteligence.BaseValue * this.Strength.BaseValue * this.Vitality.BaseValue;
-
         for(int i = 0;i<this.Stats.size();i++){
             this.Stats.get(i).update();
         }
@@ -71,7 +63,7 @@ public class Unit {
         if(baseValue<=0){
             baseValue = 1;
         }
-        stat.BaseValue = baseValue;
+        stat.instantiate(baseValue);
         int check = this.find_stat(stat.getName());
         if(check==-1){
             this.Stats.add(stat);
@@ -105,7 +97,12 @@ public class Unit {
         this.addStat(this.Speed,SPD);
         this.addStat(this.Vitality,VIT);
         this.addStat(this.Armor,Armor);
-        System.out.println(this.Stats.get(this.find_stat("INT")).BaseValue);
+        this.addStat(this.HP,this.Vitality.BaseValue * 10);
+        this.addStat(this.MP,this.Inteligence.BaseValue * 5);
+        this.addStat(this.FireResistance,this.Armor.BaseValue * this.Inteligence.BaseValue * this.Vitality.BaseValue);
+        this.addStat(this.WaterResistence,this.Armor.BaseValue * this.Inteligence.BaseValue * this.Speed.BaseValue);
+        this.addStat(this.EarthResistence,this.Armor.BaseValue * this.Inteligence.BaseValue * this.Strength.BaseValue);
+        this.addStat(this.AirResistence,this.Inteligence.BaseValue * this.Strength.BaseValue * this.Vitality.BaseValue);
         this.update();
     }
 }

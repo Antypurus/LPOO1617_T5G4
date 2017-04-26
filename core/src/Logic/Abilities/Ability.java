@@ -3,6 +3,7 @@ package Logic.Abilities;
 import java.util.ArrayList;
 
 import ElementSystem.Element;
+import Logic.Unit.Statistic;
 import Logic.Unit.Unit;
 
 public abstract class Ability {
@@ -17,8 +18,10 @@ public abstract class Ability {
 
     public double value;
     public int effectRadius;
+    public int targetRange;
 
     public ArrayList<Element.type> Traits = new ArrayList<Element.type>();
 
     public abstract void AffectTarget(Unit target);
+    public abstract void setScalingStat(Statistic sta);
 }

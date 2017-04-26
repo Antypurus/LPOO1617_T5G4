@@ -1,6 +1,9 @@
 package Logic.Unit;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Queue;
 
 import Logic.Abilities.Ability;
 
@@ -8,11 +11,23 @@ public class Statistic {
 
     private String Name="";
     public double BaseValue=0;
-    public double EffectiveValue=0;
-    public ArrayList<Double> Deltas = new ArrayList<Double>();
+    public double maxValue =0;
+    public double EffectiveValue=0;//current stat value to work with
+    public ArrayList<Double> Deltas = new ArrayList<Double>();//buff related deltas
+    public Queue<Double> modifiers ;
+
+    public Statistic(String name,double baseValue){
+        this.Name = name;
+        this.instantiate(baseValue);
+    }
 
     public Statistic(String name){
         this.Name = name;
+    }
+
+    public void instantiate(double baseValue){
+        this.BaseValue = baseValue;
+        this.EffectiveValue = baseValue;
     }
 
     public void addDelta(double delta){
@@ -39,11 +54,21 @@ public class Statistic {
         return false;
     }
 
+    public void queueModifier(double modifier){
+        this.modifiers.add(modifier);
+    }
+
     public double update(){
-        this.EffectiveValue = 0;
-        this.EffectiveValue+=this.BaseValue;
+        this.maxValue = 0;
+        this.maxValue+=this.BaseValue;
         for(int i=0;i<this.Deltas.size();i++){
-            this.EffectiveValue+=this.Deltas.get(i);
+            this.maxValue+=this.Deltas.get(i);
+        }
+        while(this.modifiers.size()!=0){
+            this.EffectiveValue+=this.modifiers.poll();
+        }
+        if(this.EffectiveValue>=this.maxValue){
+            this.EffectiveValue = this.maxValue;
         }
         return this.EffectiveValue;
     }
