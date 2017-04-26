@@ -3,6 +3,7 @@ package Logic.Unit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import Logic.Abilities.Ability;
@@ -14,12 +15,7 @@ public abstract class Statistic {
     public double maxValue =0;
     public double EffectiveValue=0;//current stat value to work with
     public ArrayList<Double> Deltas = new ArrayList<Double>();//buff related deltas
-    public Queue<Double> modifiers ;
-
-    public void instantiate(double baseValue){
-        this.BaseValue = baseValue;
-        this.EffectiveValue = baseValue;
-    }
+    public Queue<Double> modifiers = new LinkedList<Double>();//queues generic modificcation to effective value
 
     public void addDelta(double delta){
         Deltas.add(delta);

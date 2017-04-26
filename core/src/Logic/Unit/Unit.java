@@ -106,11 +106,11 @@ public class Unit {
     public Unit(String name,double INT,double STR,double SPD,double VIT,double Armor){
         this.name = name;
         this.Inteligence = new Inteligence();
-        this.Strength = new Strenght();
-        this.Speed = new Speed();
+        this.Strength = new Strenght(STR);
+        this.Speed = new Speed(SPD);
         this.Vitality = new Vitality();
         this.Health = new HP(this.Vitality);
-        this.Mana = new MP();
+        this.Mana = new MP(this.Inteligence);
         this.Armor = new Armor(Armor);
         this.FireResistance = new FireRes(this.Armor,this.Inteligence,this.Vitality);
         this.WaterResistence = new WaterRes(this.Armor,this.Inteligence,this.Speed);
