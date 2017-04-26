@@ -23,5 +23,4 @@ public abstract class Ability {
     public ArrayList<Element.type> Traits = new ArrayList<Element.type>();
 
     public abstract void AffectTarget(Unit target);
-    public abstract void setScalingStat(Statistic sta);
 }

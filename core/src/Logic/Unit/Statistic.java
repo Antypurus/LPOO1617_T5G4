@@ -7,23 +7,14 @@ import java.util.Queue;
 
 import Logic.Abilities.Ability;
 
-public class Statistic {
+public abstract class Statistic {
 
-    private String Name="";
+    protected String Name="";
     public double BaseValue=0;
     public double maxValue =0;
     public double EffectiveValue=0;//current stat value to work with
     public ArrayList<Double> Deltas = new ArrayList<Double>();//buff related deltas
     public Queue<Double> modifiers ;
-
-    public Statistic(String name,double baseValue){
-        this.Name = name;
-        this.instantiate(baseValue);
-    }
-
-    public Statistic(String name){
-        this.Name = name;
-    }
 
     public void instantiate(double baseValue){
         this.BaseValue = baseValue;

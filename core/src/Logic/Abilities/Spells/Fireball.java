@@ -2,6 +2,7 @@ package Logic.Abilities.Spells;
 
 import Logic.Abilities.Ability;
 import Logic.Unit.Statistic;
+import Logic.Unit.Stats.Inteligence;
 import Logic.Unit.Unit;
 
 public class Fireball extends Ability{
@@ -22,10 +23,8 @@ public class Fireball extends Ability{
 
     }
 
-    public void setScalingStat(Statistic stat){
-        if(stat.getName().equals("INT")){
-            
-        }
+    public void setScalingStat(Inteligence stat){
+
     }
 
 }

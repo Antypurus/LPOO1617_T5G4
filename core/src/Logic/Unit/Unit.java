@@ -4,6 +4,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Logic.Abilities.Ability;
+import Logic.Unit.Stats.AirRes;
+import Logic.Unit.Stats.Armor;
+import Logic.Unit.Stats.EarthRes;
+import Logic.Unit.Stats.FireRes;
+import Logic.Unit.Stats.HP;
+import Logic.Unit.Stats.Inteligence;
+import Logic.Unit.Stats.MP;
+import Logic.Unit.Stats.Speed;
+import Logic.Unit.Stats.Strenght;
+import Logic.Unit.Stats.Vitality;
+import Logic.Unit.Stats.WaterRes;
 
 public class Unit {
     boolean shouldUpdate = false;
@@ -15,21 +26,21 @@ public class Unit {
     //Position
 
     //primary resources
-    Statistic HP = new Statistic("HP");// health points
-    Statistic MP = new Statistic("MP");// Mana points
+    HP Health;// health points
+    MP Mana;// Mana points
 
     //primary scaling stats
-    Statistic Speed = new Statistic("SPD"); //Speed Stat
-    Statistic Inteligence = new Statistic("INT"); //Intelligence Stat
-    Statistic Strength = new Statistic("STR"); //Strength Stat
-    Statistic Vitality = new Statistic("VIT"); //Vitality Stat
+    Speed Speed; //Speed Stat
+    Inteligence Inteligence; //Intelligence Stat
+    Strenght Strength; //Strength Stat
+    Vitality Vitality; //Vitality Stat
 
     //Defensive Stats
-    Statistic Armor = new Statistic("ARM"); //Physical Resistance Stat
-    Statistic FireResistance = new Statistic("FRES"); //Magic Fire Resistance Stat
-    Statistic WaterResistence = new Statistic("WRES"); //Magic Water Resistance Stat
-    Statistic EarthResistence = new Statistic("ERES"); //Magic Earth Resistance Stat
-    Statistic AirResistence = new Statistic("ARES"); //Magic Air Resistance Stat
+    Armor Armor; //Physical Resistance Stat
+    FireRes FireResistance; //Magic Fire Resistance Stat
+    WaterRes WaterResistence; //Magic Water Resistance Stat
+    EarthRes EarthResistence; //Magic Earth Resistance Stat
+    AirRes AirResistence; //Magic Air Resistance Stat
 
     public double generateDodgeVal(){
         double speed = this.Speed.EffectiveValue;
@@ -59,16 +70,18 @@ public class Unit {
         return -1;
     }
 
-    private void addStat(Statistic stat,double baseValue){
-        if(baseValue<=0){
-            baseValue = 1;
-        }
-        stat.instantiate(baseValue);
-        int check = this.find_stat(stat.getName());
-        if(check==-1){
-            this.Stats.add(stat);
-        }
-        return;
+    private void setStats(){
+        this.Stats.add(this.Inteligence);
+        this.Stats.add(this.Speed);
+        this.Stats.add(this.Armor);
+        this.Stats.add(this.Vitality);
+        this.Stats.add(this.Strength);
+        this.Stats.add(this.Health);
+        this.Stats.add(this.Mana);
+        this.Stats.add(this.AirResistence);
+        this.Stats.add(this.EarthResistence);
+        this.Stats.add(this.FireResistance);
+        this.Stats.add(this.WaterResistence);
     }
 
     private int findAbility(String AbilityName){
@@ -92,17 +105,18 @@ public class Unit {
 
     public Unit(String name,double INT,double STR,double SPD,double VIT,double Armor){
         this.name = name;
-        this.addStat(this.Inteligence,INT);
-        this.addStat(this.Strength,STR);
-        this.addStat(this.Speed,SPD);
-        this.addStat(this.Vitality,VIT);
-        this.addStat(this.Armor,Armor);
-        this.addStat(this.HP,this.Vitality.BaseValue * 10);
-        this.addStat(this.MP,this.Inteligence.BaseValue * 5);
-        this.addStat(this.FireResistance,this.Armor.BaseValue * this.Inteligence.BaseValue * this.Vitality.BaseValue);
-        this.addStat(this.WaterResistence,this.Armor.BaseValue * this.Inteligence.BaseValue * this.Speed.BaseValue);
-        this.addStat(this.EarthResistence,this.Armor.BaseValue * this.Inteligence.BaseValue * this.Strength.BaseValue);
-        this.addStat(this.AirResistence,this.Inteligence.BaseValue * this.Strength.BaseValue * this.Vitality.BaseValue);
+        this.Inteligence = new Inteligence();
+        this.Strength = new Strenght();
+        this.Speed = new Speed();
+        this.Vitality = new Vitality();
+        this.Health = new HP(this.Vitality);
+        this.Mana = new MP();
+        this.Armor = new Armor(Armor);
+        this.FireResistance = new FireRes(this.Armor,this.Inteligence,this.Vitality);
+        this.WaterResistence = new WaterRes(this.Armor,this.Inteligence,this.Speed);
+        this.EarthResistence = new EarthRes(this.Armor,this.Inteligence,this.Strength);
+        this.AirResistence = new AirRes(this.Inteligence,this.Strength,this.Vitality);
+        this.setStats();
         this.update();
     }
 }
