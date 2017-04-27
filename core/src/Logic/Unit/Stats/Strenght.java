@@ -28,7 +28,7 @@ public class Strenght extends Statistic{
             }
             this.prevHash = this.Deltas.hashCode();
         }
-        return 0;
+        return this.EffectiveValue;
     }
 
 }
