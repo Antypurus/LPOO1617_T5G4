@@ -4,13 +4,23 @@ import Logic.Unit.Statistic;
 
 public class Armor  extends Statistic{
 
-    int prevHash;
+    private int prevHash;
 
     public Armor(double val){
         this.BaseValue = val;
         this.EffectiveValue = this.BaseValue;
         this.Name = "ARMR";
         this.prevHash = this.Deltas.hashCode();
+    }
+
+    public void modifyArmor(double delta){
+        this.BaseValue += delta;
+        this.update();
+    }
+
+    public void setArmor(double armor){
+        this.BaseValue = armor;
+        this.update();
     }
 
     public double update(){

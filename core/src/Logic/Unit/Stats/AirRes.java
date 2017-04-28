@@ -11,9 +11,9 @@ public class AirRes extends Statistic{
     private Strenght strenght = null;
     private Vitality vitality = null;
 
-    private int intHash;
-    private int strHash;
-    private int vitHash;
+    private double intHash;
+    private double strHash;
+    private double vitHash;
 
     private int prevHash = this.Deltas.hashCode();
 
@@ -23,9 +23,9 @@ public class AirRes extends Statistic{
         this.strenght = str;
         this.vitality = vit;
 
-        this.intHash = this.inteligenc.hashCode();
-        this.strHash = this.strenght.hashCode();
-        this.vitHash = this.vitality.hashCode();
+        this.intHash = this.inteligenc.BaseValue;
+        this.strHash = this.strenght.BaseValue;
+        this.vitHash = this.vitality.BaseValue;
 
         this.BaseValue = intel.BaseValue + str.BaseValue + vit.BaseValue;
         this.EffectiveValue = BaseValue;
@@ -33,8 +33,8 @@ public class AirRes extends Statistic{
     }
 
     private void baseValueUpdate(){
-        if(this.vitHash!=this.vitality.hashCode()||this.intHash!=this.inteligenc.hashCode()||
-                this.strHash!=this.strenght.hashCode()){
+        if(this.vitHash!=this.vitality.BaseValue||this.intHash!=this.inteligenc.BaseValue||
+                this.strHash!=this.strenght.BaseValue){
             this.BaseValue = this.strenght.BaseValue + this.inteligenc.BaseValue +
                     this.vitality.BaseValue;
             this.EffectiveValue = this.BaseValue;
