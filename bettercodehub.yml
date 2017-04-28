@@ -1,6 +1,9 @@
 exclude:
-- /LPOO-Project-Iteration#1/src/.*
-- /LPOO-Project-Iteration#2/src/.*
+- /android/.*
+- /desktop/src/com/mygdx/game/desktop/DesktopLauncher.java
+- /html/.*
+- /ios/src/com/mygdx/game/IOSLauncher.java
 component_depth: 1
 languages:
 - java
+- Javascript
