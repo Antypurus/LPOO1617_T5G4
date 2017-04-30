@@ -1,6 +1,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/TiagoJoseMagalhaes/LPOO1617_T5G4?branch=AndroidProject&token=2599360d9ec3b850fd8e80383b4d93a7224027a1)](https://bettercodehub.com/)
 
 Mid Point Deliverables:
+
   Class UML: https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/AndroidProject/MidPointDelivery/UML/Class%20Model.pdf
   
   Class Documentation: https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/AndroidProject/MidPointDelivery/ClassDocumentation
