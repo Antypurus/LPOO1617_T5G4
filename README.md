@@ -2,10 +2,15 @@
 
 Mid Point Deliverables:
   Class UML: https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/AndroidProject/MidPointDelivery/UML/Class%20Model.pdf
+  
   Class Documentation: https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/AndroidProject/MidPointDelivery/ClassDocumentation
+  
   Design patterns: https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/AndroidProject/MidPointDelivery/GamePatterns.txt
+  
   List Of Tests: https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/AndroidProject/MidPointDelivery/listaTestes.txt
+  
   GUI Elements:https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/tree/AndroidProject/MidPointDelivery/GUI
+  
 
 Membros:
 
