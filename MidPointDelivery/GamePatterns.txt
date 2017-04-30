@@ -1,0 +1,18 @@
+Singleton:
+	The game needs one and only one instance of Game, InputHandler, AI system and Graphic System.
+
+Strategy:
+	The enemy needs to use several different strategies to try to beat the player.
+
+State: 
+	The game needs to know it's current state for example, using the main menu of the game. The game is currently on the menu state so it can only perform specific main menu operation.
+
+Game Loop:
+	Control the speed of the game.
+
+Double Buffer:
+	The game will use double buffering to display everything on screen at once without flickering and visual bugs.
+
+Update:
+	The characters in the game need an update method for their positions and current stats.
+	

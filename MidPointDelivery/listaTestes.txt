@@ -1,0 +1,29 @@
+Testes:
+
+-Teste de movimento do utilizador:
+	.Para esquerda, direita, cima, baixo, e limite máximo de quadrados que pode andar e poder atacar a seguir, e mais uma unidade de movimento mas sem a possibilidade de atacar.
+
+	.A personagem não se pode mover para posições lógicamente impossíveis como por exemplo para dentro de uma porta fechada ou uma parede.
+
+	.As personagens têm stats como a speed e esta permite andar mais casas, por isso determinar o número possível de quadrados de acordo com a speed the cada personagem.
+
+	.O utilizador pode escolher passar a ronda sem andar ou atacar.
+
+-Tipo de class:
+	.Ver se é warrior ou mage, etc.
+
+-Dano:
+	.Verificar o resultado de diferentes tipos de ataque contra diferentes tipos de protecao(como por exemplo ataque de fogo contra uma personagem com fraca defesa a esse elemento).
+	
+	.Calcular a vida final das personagens após receberem ataques.
+
+	.Se uma personagem sofrer dano e ficar com vida negativa ou igual a 0, o teste tem que confirmar a morte dessa personagem.
+
+-Abilidades:
+	.Quando uma personagem tem MANA inferior ao necessário para lançar um feitiço(por exemplo), o ataque não pode ser feito. O teste tem que verificar que a jogada dessa personagem não foi concluída.
+
+-Movimento aleatório do inimigo:
+	.Semelhante ao movimento do ogre, este teste tem de conseguir verificar a posição exata de todos os movimentos que o inimigo pode fazer aleatóriamente.
+
+	.Verificar o tipo de ataque do inimigo tendo em conta os ataques possíveis, por exemplo, uma personagem lança um feitiço de fogo entre fogo, água, terra e ar, e o teste tem que acertar neste caso e para todos os outros.
+
