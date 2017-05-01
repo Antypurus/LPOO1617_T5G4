@@ -105,7 +105,7 @@ public class Unit {
 
     public Unit(String name,double INT,double STR,double SPD,double VIT,double Armor){
         this.name = name;
-        this.Inteligence = new Inteligence();
+        this.Inteligence = new Inteligence(INT);
         this.Strength = new Strenght(STR);
         this.Speed = new Speed(SPD);
         this.Vitality = new Vitality();
