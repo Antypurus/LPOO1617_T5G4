@@ -4,8 +4,8 @@ import Logic.Unit.Statistic;
 
 public class MP extends Statistic{
 
-    Inteligence inteligence=null;
-    double scale = 10;
+    private Inteligence inteligence=null;
+    private double scale = 10;
 
     public MP(Inteligence inteligence){
         this.inteligence = inteligence;
