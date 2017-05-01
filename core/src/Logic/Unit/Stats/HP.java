@@ -17,6 +17,20 @@ public class HP extends Statistic{
     }
 
     public double update(){
-        return 0;
+        this.BaseValue = this.scale * this.vit.BaseValue;
+        this.maxValue = this.BaseValue;
+
+        for(int i=0;i<this.Deltas.size();++i){
+            this.maxValue+=this.Deltas.get(i);
+        }
+
+        while(this.modifiers.size()!=0){
+            this.EffectiveValue+=this.modifiers.poll();
+        }
+        if(this.EffectiveValue>this.maxValue){
+            this.EffectiveValue = this.maxValue;
+        }
+
+        return this.EffectiveValue;
     }
 }
