@@ -32,6 +32,7 @@ public class Strenght extends Statistic{
                 this.EffectiveValue+=this.Deltas.get(i);
             }
             this.prevHash = this.Deltas.hashCode();
+            this.needUpdate = false;
         }
         return this.EffectiveValue;
     }
