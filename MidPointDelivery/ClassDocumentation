@@ -1,0 +1,40 @@
+Classes:
+
+ -Unit: Esta classe representa uma unidade no campo de batalha , quer seja controlada por um jogador ou por um sistema de inteligencia artificial.Esta classe 
+ modela uma unidade pelo que apresenta certas caracteristica que afetaram a eficacia das sua ações , esta sao chamadas de estatisticas ou Stats; neste caso as 
+ estatisticas de uma unidade serão fundamentalmente a vitalidade , a sus inteligencia , a sua força , a sua velocidade e a sua armadura. 
+ Atraves destas caracteristicas calculamos os Pontos de vida (Health points / HP) da unidade fazendo uso da vitalidade da unidade, calculamos a quantidade de mana 
+ da unida (Mana points /MP) fazendo uso da inteligencia da unidade, a mana representa a fonte de energia para o uso de habilidade de origem magica de uma dada 
+ unidade. Por fim uma unidade apresenta resistencias a ataques magicos de um dado elemento basico, estes sao a sua resistenci a fogo, agua , terra e ar , todos 
+ estes valores sao calculados fazendo uso da inteligencia da unidade e mais duas caracteristicas especificas a cada tipo de defesa.
+ Esta classe para representar uma unidade apresenta metodos para mover a unidade , para executar um ataque a partir da unidade , a informação necessaria para que
+ se calcule quanto dano ira levar de um ataque e quanto dano pode um ataque seu dar, apresenta tambem um metodo update que ira tratar de atulizar todos os seu 
+ valores para que estes estejam atulizados. isto pode ser a sua mana a sua vida ou qualquer outra stat.
+
+ -Statistic: Esta classe representa uma estatistica ou stat de uma personagem , e no etanto ou uma classe puramente abstrata pois cada stat se comporta de uma 
+ maneira ligeiramente diferente.No estanto todas as estatisticas tem 3 coisas em comum em termos de membros , um valor base , um valor efetivo e uma lista de 
+ modificadores ao valor base , o valor efectivo e calculado atraves do valor base e da lista de modificadores.Todos os stats apresentam um metodo update que 
+ atualiza o valor efetivo atual do stat.Apresenta tambem metodos para adicionar e remover um dado modificador.
+
+ -Cell: Esta classe representa uma celula na grelha que será um dado mapa,contem uma referencia para as celulas adjacentes , uma referencia para qualuer unidade 
+ que esteja na ceula e se a celula esta bloqueada (se uma unidade pode andar em cima dela ou não).Apresenta metodos para calculo de menor distancia entre duas
+  celulas, e qual é a distancia euclidiana entre duas celulas.
+
+  -Mapa: Esta classe representa o mapa , tendo um array bi dimensional de celulas(objetos do tipo Cell) , e portanto responsavel por gerir o mapa e qualquer logica 
+  diretamente associada.
+
+  -Ability: Esta classe representa uma habilidade de uma personagem , pelo que tera um custo de mana , um tipo de habilidade , dano , recuperação de vida , 
+  aplicação de modificador,etc. Tera tambem um valor de modificação e terá um alvo e um alvo.
+
+  -Element: Esta classe apresente enumerações para a representação do sistema de dano elemental do jogo.Apresenta metodos para calculo de danos entre um
+  elemente atacante e um elemento que defende.
+
+  -Game: classe unica que representa o jogo em si trata de atualizar o estado do jogo, de invocar os metodos de update de toda a logica ; mapa e units; invoca
+  o update da inteligencia artificial e envia informação para a class de GraphicsSystem para que o ecra possa ser corretamente atualizado.
+
+  -AiSystem : system de inteligencia rtificial , controla as unidade inimigas em mode de um jogador, tendo em conta o estado de jogo e o atual nivel de dificuldade.
+
+  -InputHanlder: classe responsavel por receber e gerir todos as entradaas de dados por parte do utilizador.Envia esta informação para a classe jogo de maneira a 
+  que esta invoque qualquer metodo de atualização necessaria.
+
+  -GraphicsSystem: classes que representa os graphicos do jogo , fazendo inteface direta com o libGDX , recebe informação da classe game para atualizar o ecra.
