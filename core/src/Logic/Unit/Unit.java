@@ -108,7 +108,7 @@ public class Unit {
         this.Inteligence = new Inteligence(INT);
         this.Strength = new Strenght(STR);
         this.Speed = new Speed(SPD);
-        this.Vitality = new Vitality();
+        this.Vitality = new Vitality(VIT);
         this.Health = new HP(this.Vitality);
         this.Mana = new MP(this.Inteligence);
         this.Armor = new Armor(Armor);
