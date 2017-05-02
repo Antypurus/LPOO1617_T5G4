@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.GraphicSystem.Character;
@@ -23,18 +24,28 @@ public class MyGdxGame extends ApplicationAdapter {
 	private Character character=null;
 	private Map map = new Map("test",100,100);
 
+	private OrthographicCamera cam;
+
 	private int Scale = 0;
 
 	@Override
 	public void create () {
 		this.Scale = Gdx.graphics.getWidth()/this.map.width;
+
 		batch = new SpriteBatch();
 		background = new Texture("background.jpg");
 		gridBlock = new Texture("square.png");
 		character = new Character();
+
+		this.cam = new OrthographicCamera(250,250);
+		cam.update();
+
 		this.character.getUnit().setPosition(this.map.getCell(10,10));
 		character.update();
 		gameHandler = new GameHandler(this);
+
+		this.cam.position.set(this.character.getUnit().getX()*Scale,this.character.getUnit().getY()*Scale,0);
+		cam.update();
 
 		Gdx.input.setCursorCatched(true);
 	}
@@ -42,8 +53,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		//batch.setProjectionMatrix(cam.combined);
-		//cam.update();
+		batch.setProjectionMatrix(cam.combined);
+		cam.update();
 		fps = Gdx.graphics.getFramesPerSecond();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -57,6 +68,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		if(response!=null){
 		if(response.deltaY==1){
 			this.character.getUnit().moveUpward();
+			this.cam.position.set(this.character.getUnit().getX()*Scale,this.character.getUnit().getY()*Scale,0);
+			cam.update();
+			batch.setProjectionMatrix(cam.combined);
 		}}
 
 		//Start of Logic section
@@ -76,7 +90,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 
 		batch.draw(this.character.getSprite(),this.character.getUnit().getX()*Scale,
-				this.character.getUnit().getY()*Scale);
+				this.character.getUnit().getY()*Scale,Scale,Scale);
 
 		batch.end();
 		//end of draw section

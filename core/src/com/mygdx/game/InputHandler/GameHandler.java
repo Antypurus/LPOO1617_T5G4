@@ -11,7 +11,7 @@ public class GameHandler extends InputHandler{
     }
 
     public MovementDelta update(){
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             return new MovementDelta(0,1);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
