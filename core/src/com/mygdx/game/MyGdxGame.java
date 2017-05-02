@@ -27,11 +27,13 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		this.Scale = Gdx.graphics.getWidth()/this.map.width;
 		batch = new SpriteBatch();
 		background = new Texture("background.jpg");
 		gridBlock = new Texture("square.png");
 		character = new Character();
 		this.character.getUnit().setPosition(this.map.getCell(10,10));
+		character.update();
 		gameHandler = new GameHandler(this);
 
 		Gdx.input.setCursorCatched(true);
@@ -47,13 +49,15 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Start of Input Section
 
-		this.character.getUnit().moveUpward();
-
 		//end of input section
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
 		}
 		this.response = this.gameHandler.update();
+		if(response!=null){
+		if(response.deltaY==1){
+			this.character.getUnit().moveUpward();
+		}}
 
 		//Start of Logic section
 
@@ -71,7 +75,8 @@ public class MyGdxGame extends ApplicationAdapter {
 			}
 		}
 
-
+		batch.draw(this.character.getSprite(),this.character.getUnit().getX()*Scale,
+				this.character.getUnit().getY()*Scale);
 
 		batch.end();
 		//end of draw section
