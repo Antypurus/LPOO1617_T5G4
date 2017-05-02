@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.GraphicSystem.Character;
+import com.mygdx.game.InputHandler.GameHandler;
+import com.mygdx.game.InputHandler.MovementDelta;
 
 import Logic.Map.Map;
 
@@ -14,6 +16,9 @@ public class MyGdxGame extends ApplicationAdapter {
 	private SpriteBatch batch = null;
 	private Texture background = null;
 	private Texture gridBlock = null;
+
+	private GameHandler gameHandler = null;
+	private MovementDelta response = null;
 
 	private Character character=null;
 	private Map map = new Map("test",100,100);
@@ -26,6 +31,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		background = new Texture("background.jpg");
 		gridBlock = new Texture("square.png");
 		character = new Character();
+		this.character.getUnit().setPosition(this.map.getCell(10,10));
+		gameHandler = new GameHandler(this);
 
 		Gdx.input.setCursorCatched(true);
 	}
@@ -40,12 +47,13 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Start of Input Section
 
-
+		this.character.getUnit().moveUpward();
 
 		//end of input section
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
 		}
+		this.response = this.gameHandler.update();
 
 		//Start of Logic section
 

@@ -85,4 +85,12 @@ public class Cell {
     public void setUnit(Unit unit){
         this.unit=unit;
     }
+
+    public void update(){
+        if(this.unit!=null){
+            this.isWalckable=false;
+        }else{
+            this.isWalckable = true;
+        }
+    }
 }

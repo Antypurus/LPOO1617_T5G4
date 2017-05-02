@@ -41,6 +41,10 @@ public class Character {
         return this.sprite;
     }
 
+    public Unit getUnit(){
+        return this.unit;
+    }
+
     public void update(){
 
     }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Logic.Abilities.Ability;
+import Logic.Map.Cell;
+import Logic.Map.Map;
 import Logic.Unit.Stats.AirRes;
 import Logic.Unit.Stats.Armor;
 import Logic.Unit.Stats.EarthRes;
@@ -18,6 +20,8 @@ import Logic.Unit.Stats.WaterRes;
 
 public class Unit {
     boolean shouldUpdate = false;
+
+    private Cell position = null;
 
     private String name=null;
     private ArrayList<Statistic> Stats = new ArrayList<Statistic>();
@@ -127,5 +131,49 @@ public class Unit {
         this.AirResistence = new AirRes(this.Inteligence,this.Strength,this.Vitality);
         this.setStats();
         this.update();
+    }
+
+    public void setPosition(Cell position){
+        this.position = position;
+    }
+
+    public Cell getPosition(){
+        return this.position;
+    }
+
+    public int getX(){
+        if(this.position!=null){
+            return this.position.getxPos();
+        }else{
+            return 0;
+        }
+    }
+
+    public int getY(){
+        if(this.position!=null){
+            return this.position.getyPos();
+        }else{
+            return 0;
+        }
+    }
+
+    public boolean moveUpward(){
+        if(this.position==null){
+            return false;
+        }
+        int xPos=0;
+        int yPos=0;
+        xPos = this.getX();
+        yPos = this.getY();
+        Map map = this.position.getMap();
+        if(yPos+1>=map.height){
+            return false;
+        }else{
+            this.position.setUnit(null);
+            this.position = map.getCell(xPos,yPos+1);
+            this.position.setUnit(this);
+            map.update();
+            return true;
+        }
     }
 }

@@ -45,13 +45,32 @@ public class Map {
         for(int i=0;i<this.height;++i){
             for(int j=0;j<this.width;++j){
                 this.map[j][i]= new Cell(j,i);
+                this.map[j][i].setMap(this);
                 this.setCellSurroundings(j,i);
             }
         }
+        this.update();
     }
 
     public String getName(){
         return this.name;
+    }
+
+    public void update(){
+        for(int i=0;i<this.height;++i){
+            for(int j=0;j<this.width;++j){
+                this.map[j][i].update();
+            }
+        }
+    }
+
+    public Cell getCell(int x,int y){
+        if(x>=0&&x<this.width){
+            if(y>=0&&y<this.height){
+                return this.map[x][y];
+            }
+        }
+        return null;
     }
 
 
