@@ -4,18 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.MyGdxGame;
 
-public class InputHandler {
+public abstract class InputHandler {
+
     private MyGdxGame game=null;
 
     public InputHandler(MyGdxGame game){
         this.game = game;
     }
 
-    public void update(){
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-            //make current character go up;
-            //move menu
-        }
-        //same for other buttons
-    }
+    public abstract void update();
+
 }
