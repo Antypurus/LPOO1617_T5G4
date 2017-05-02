@@ -45,20 +45,7 @@ public abstract class Statistic {
         this.modifiers.add(modifier);
     }
 
-    public double update(){
-        this.maxValue = 0;
-        this.maxValue+=this.BaseValue;
-        for(int i=0;i<this.Deltas.size();i++){
-            this.maxValue+=this.Deltas.get(i);
-        }
-        while(this.modifiers.size()!=0){
-            this.EffectiveValue+=this.modifiers.poll();
-        }
-        if(this.EffectiveValue>=this.maxValue){
-            this.EffectiveValue = this.maxValue;
-        }
-        return this.EffectiveValue;
-    }
+    public abstract double update();
 
     public String getName(){
         return this.Name;

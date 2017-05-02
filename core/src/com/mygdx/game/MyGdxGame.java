@@ -3,17 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 
 import Logic.Map.Map;
 import Logic.Unit.Unit;
@@ -43,7 +38,26 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	private OrthographicCamera cam;
 
+	private int stat = 1;
 
+	private void specUpdate(){
+		switch(stat){
+			case(1):
+				stat = 2;
+				spr = new Sprite(spor[1]);
+				break;
+			case(2):
+				stat = 3;
+				spr = new Sprite(spor[2]);
+				break;
+			case(3):
+				stat = 1;
+				spr = new Sprite(spor[0]);
+				break;
+			default:break;
+		}
+		return;
+	}
 
 	@Override
 	public void create () {
@@ -76,6 +90,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		batch.setProjectionMatrix(cam.combined);
+		this.test.update();
 		cam.update();
 		fps = Gdx.graphics.getFramesPerSecond();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -87,7 +102,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
 		}
-		if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+		if(Gdx.input.isKeyPressed(Input.Keys.UP)){
 			if(ply+1<this.map.height){
 				ply++;
 				cam.translate(0,scaleX,0);
@@ -95,23 +110,26 @@ public class MyGdxGame extends ApplicationAdapter {
 				batch.setProjectionMatrix(cam.combined);
 			}
 		}
-		if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+		if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+			if(ply-1>=0){
 			ply--;
 			cam.translate(0,-scaleX,0);
 			cam.update();
-			batch.setProjectionMatrix(cam.combined);
+			batch.setProjectionMatrix(cam.combined);}
 		}
-		if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
+		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+			if(plx-1>=0){
 			plx--;
 			cam.translate(-scaleX,0,0);
 			cam.update();
-			batch.setProjectionMatrix(cam.combined);
+			batch.setProjectionMatrix(cam.combined);}
 		}
-		if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
+		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+			if (plx + 1 < this.map.width) {
 			plx++;
 			cam.translate(scaleX,0,0);
 			cam.update();
-			batch.setProjectionMatrix(cam.combined);
+			batch.setProjectionMatrix(cam.combined);}
 		}
 		//Start of Logic section
 
@@ -136,6 +154,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.draw(blue,plx*scaleX,(ply+1)*scaleX,scaleX,scaleX);
 
 		batch.draw(spr,plx*scaleX,ply*scaleX,scaleX,scaleX);
+		this.specUpdate();
 
 		batch.end();
 		//end of draw section
