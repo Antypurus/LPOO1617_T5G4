@@ -1,3 +1,8 @@
-component_depth: 1
+exclude:
+- /android/.*
+- /desktop/src/com/mygdx/game/desktop/DesktopLauncher.java
+- /html/src/com/mygdx/game/client/HtmlLauncher.java
+- /ios/src/com/mygdx/game/IOSLauncher.java
+component_depth: 10
 languages:
 - java
