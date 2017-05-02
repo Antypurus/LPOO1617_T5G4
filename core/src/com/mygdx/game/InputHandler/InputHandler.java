@@ -12,6 +12,4 @@ public abstract class InputHandler {
         this.game = game;
     }
 
-    public abstract void update();
-
 }

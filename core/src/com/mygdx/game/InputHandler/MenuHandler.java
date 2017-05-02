@@ -8,8 +8,8 @@ public class MenuHandler extends InputHandler{
         super(game);
     }
 
-    public void update(){
-
+    public MenuDelta update(){
+        return null;
     }
 
 }
