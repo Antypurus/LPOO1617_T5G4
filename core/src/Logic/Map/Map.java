@@ -2,17 +2,25 @@ package Logic.Map;
 
 public class Map {
 
-    private Cell[][] map = new Cell[100][100];
+    private Cell[][] map = null;
+
+    public int width;
+    public int height;
 
     private String name=null;
 
-    public Map(String name){
+    public Map(String name,int width,int height){
 
         this.name=name;
 
-        for(int i=0;i<100;++i){
-            for(int j=0;j<100;++j){
-                this.map[i][j]=null;
+        this.width = width;
+        this.height = height;
+
+        this.map = new Cell[width][height];
+
+        for(int i=0;i<this.height;++i){
+            for(int j=0;j<this.width;++j){
+                this.map[j][i]=null;
             }
         }
     }
