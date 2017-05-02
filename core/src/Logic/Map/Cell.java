@@ -1,10 +1,14 @@
 package Logic.Map;
 
+import Logic.Unit.Unit;
+
 public class Cell {
     private int xPos=0;
     private int yPos=0;
 
     private boolean isWalckable = true;
+
+    private Unit unit = null;
 
     private Map belongingMap=null;
 
@@ -72,5 +76,13 @@ public class Cell {
 
     public Cell getBottom() {
         return Bottom;
+    }
+
+    public Unit getUnit(){
+        return this.unit;
+    }
+
+    public void setUnit(Unit unit){
+        this.unit=unit;
     }
 }

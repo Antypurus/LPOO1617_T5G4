@@ -4,26 +4,30 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.game.GraphicSystem.Character;
 
 import Logic.Map.Map;
-import Logic.Unit.Unit;
-
-import static com.badlogic.gdx.Gdx.input;
 
 public class MyGdxGame extends ApplicationAdapter {
 	private SpriteBatch batch = null;
 	private Texture background = null;
+	private Texture gridBlock = null;
 
+	private Character character=null;
+	private Map map = new Map("test",100,100);
+
+	private int Scale = 0;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		background = new Texture("background.jpg");
+		gridBlock = new Texture("square.png");
+		character = new Character();
+
+		Gdx.input.setCursorCatched(true);
 	}
 	double fps;
 
@@ -35,9 +39,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Start of Input Section
-		//end of input section
-		Gdx.input.setCursorCatched(true);
 
+
+
+		//end of input section
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
 		}
@@ -51,6 +56,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.disableBlending();
 		batch.draw(background,-1000,-400);
 		batch.enableBlending();
+
+		for(int i=0;i<this.map.height;++i){
+			for(int j=0;j<this.map.width;++j){
+				batch.draw(this.gridBlock,i*Scale,j*Scale,Scale,Scale);
+			}
+		}
 
 
 
