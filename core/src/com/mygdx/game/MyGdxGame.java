@@ -24,6 +24,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture background = null;
 	Texture gridblock = null;
+	Sprite blue =null;
 
 	Texture sprite = null;
 	TextureRegion[][] sprites = null;
@@ -54,9 +55,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		sprite = new Texture("sprite.png");
 		sprites = TextureRegion.split(sprite,sprite.getWidth()/3,sprite.getHeight());
 		spor = new TextureRegion[3];
+		blue = new Sprite(new Texture("blue.png"));
+		blue.setOrigin(0f,0f);
 
 		System.arraycopy(sprites[0],0,spor,0,3);
-		spr = new Sprite(spor[1]);
+		spr = new Sprite(spor[0]);
 
 		test = new Unit("Test",2,1,1,1,1);
 		map = new Map("test",30,30);
@@ -125,6 +128,12 @@ public class MyGdxGame extends ApplicationAdapter {
 				batch.draw(gridblock,j*scaleX,i*scaleX,scaleX,scaleX);
 			}
 		}
+
+		batch.draw(blue,plx*scaleX,ply*scaleX,scaleX,scaleX);
+		batch.draw(blue,(plx+1)*scaleX,ply*scaleX,scaleX,scaleX);
+		batch.draw(blue,(plx-1)*scaleX,ply*scaleX,scaleX,scaleX);
+		batch.draw(blue,plx*scaleX,(ply-1)*scaleX,scaleX,scaleX);
+		batch.draw(blue,plx*scaleX,(ply+1)*scaleX,scaleX,scaleX);
 
 		batch.draw(spr,plx*scaleX,ply*scaleX,scaleX,scaleX);
 
