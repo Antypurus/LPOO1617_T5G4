@@ -19,28 +19,28 @@ import Logic.Unit.Stats.WaterRes;
 public class Unit {
     boolean shouldUpdate = false;
 
-    String name=null;
-    ArrayList<Statistic> Stats = new ArrayList<Statistic>();
-    ArrayList<Ability> Abilities = new ArrayList<Ability>();
+    private String name=null;
+    private ArrayList<Statistic> Stats = new ArrayList<Statistic>();
+    private ArrayList<Ability> Abilities = new ArrayList<Ability>();
 
     //Position
 
     //primary resources
-    HP Health;// health points
-    MP Mana;// Mana points
+    private HP Health;// health points
+    private MP Mana;// Mana points
 
     //primary scaling stats
-    Speed Speed; //Speed Stat
-    Inteligence Inteligence; //Intelligence Stat
-    Strenght Strength; //Strength Stat
-    Vitality Vitality; //Vitality Stat
+    private Speed Speed; //Speed Stat
+    private Inteligence Inteligence; //Intelligence Stat
+    private Strenght Strength; //Strength Stat
+    private Vitality Vitality; //Vitality Stat
 
     //Defensive Stats
-    Armor Armor; //Physical Resistance Stat
-    FireRes FireResistance; //Magic Fire Resistance Stat
-    WaterRes WaterResistence; //Magic Water Resistance Stat
-    EarthRes EarthResistence; //Magic Earth Resistance Stat
-    AirRes AirResistence; //Magic Air Resistance Stat
+    private Armor Armor; //Physical Resistance Stat
+    private FireRes FireResistance; //Magic Fire Resistance Stat
+    private WaterRes WaterResistence; //Magic Water Resistance Stat
+    private EarthRes EarthResistence; //Magic Earth Resistance Stat
+    private AirRes AirResistence; //Magic Air Resistance Stat
 
     public double generateDodgeVal(){
         double speed = this.Speed.EffectiveValue;
@@ -101,6 +101,15 @@ public class Unit {
             return;
         }
         return;
+    }
+
+    public double getHP(){
+        return this.Health.EffectiveValue;
+    }
+
+    public void takeDamage(double value){
+        this.Health.queueModifier(-value);
+        this.Health.update();
     }
 
     public Unit(String name,double INT,double STR,double SPD,double VIT,double Armor){
