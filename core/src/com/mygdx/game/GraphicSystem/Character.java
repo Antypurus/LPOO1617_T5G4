@@ -31,7 +31,7 @@ public class Character {
         interm = new Texture("characters.png");
         texts = TextureRegion.split(interm,interm.getWidth()/12,interm.getHeight()/8);
         textures = new TextureRegion[3];
-        System.arraycopy(texts[0],3,textures,0,3);
+        System.arraycopy(texts[1],3,textures,0,3);
         spr = new Sprite(textures[2]);
         DownAnimation = new Animation<TextureRegion>(0.30f, textures);
         DownAnimation.setPlayMode(Animation.PlayMode.LOOP);

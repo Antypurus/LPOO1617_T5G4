@@ -22,7 +22,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private MovementDelta response = null;
 
 	private Character character=null;
-	private Map map = new Map("test",100,100);
+	private Map map = new Map("test",30,30);
 
 	private OrthographicCamera cam;
 
@@ -37,7 +37,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		gridBlock = new Texture("square.png");
 		character = new Character();
 
-		this.cam = new OrthographicCamera(250,250);
+		this.cam = new OrthographicCamera(1280,720);
 		cam.update();
 
 		this.character.getUnit().setPosition(this.map.getCell(10,10));
