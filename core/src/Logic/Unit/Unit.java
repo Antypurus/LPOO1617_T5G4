@@ -157,7 +157,17 @@ public class Unit {
         }
     }
 
-    public boolean moveUpward(){
+    private Map map = null;
+
+    private void unlinkAndLink(int x,int y){
+        if(map!=null){
+            this.position.setUnit(null);
+            this.position = map.getCell(x,y);
+            this.position.setUnit(this);
+        }
+    }
+
+    public boolean move(int deltaX,int deltaY){
         if(this.position==null){
             return false;
         }
@@ -165,13 +175,14 @@ public class Unit {
         int yPos=0;
         xPos = this.getX();
         yPos = this.getY();
-        Map map = this.position.getMap();
-        if(yPos+1>=map.height){
+        this.map = this.position.getMap();
+        if(map.getCell(xPos+deltaX,yPos+deltaY)==null){
+            return false;
+        }
+        if(yPos+deltaY>=map.height||yPos+deltaY<0||xPos+deltaX>=map.width||xPos+deltaX<0){
             return false;
         }else{
-            this.position.setUnit(null);
-            this.position = map.getCell(xPos,yPos+1);
-            this.position.setUnit(this);
+            this.unlinkAndLink(xPos+deltaX,yPos+deltaY);
             map.update();
             return true;
         }

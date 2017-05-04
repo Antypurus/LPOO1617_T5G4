@@ -14,13 +14,13 @@ public class GameHandler extends InputHandler{
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             return new MovementDelta(0,1);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
             return new MovementDelta(0,-1);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
             return new MovementDelta(-1,0);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
             return new MovementDelta(1,0);
         }
         return null;

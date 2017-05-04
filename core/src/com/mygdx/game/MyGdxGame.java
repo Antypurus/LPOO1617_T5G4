@@ -35,7 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		background = new Texture("background.jpg");
 		gridBlock = new Texture("square.png");
-		character = new Character();
+		character = new Character(this.batch,this);
 
 		this.cam = new OrthographicCamera(1280,720);
 		cam.update();
@@ -66,12 +66,26 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 		this.response = this.gameHandler.update();
 		if(response!=null){
-		if(response.deltaY==1){
-			this.character.getUnit().moveUpward();
-			this.cam.position.set(this.character.getUnit().getX()*Scale,this.character.getUnit().getY()*Scale,0);
-			cam.update();
-			batch.setProjectionMatrix(cam.combined);
-		}}
+            if(response.deltaY==1){
+                this.character.moveUp();
+            }
+
+            if(response.deltaY==-1){
+				this.character.moveDown();
+            }
+
+            if(response.deltaX==-1){
+				this.character.moveLeft();
+            }
+
+            if(response.deltaX==1){
+				this.character.moveRight();
+            }
+
+            this.cam.position.set(this.character.getUnit().getX()*Scale,this.character.getUnit().getY()*Scale,0);
+            cam.update();
+            batch.setProjectionMatrix(cam.combined);
+		}
 
 		//Start of Logic section
 
