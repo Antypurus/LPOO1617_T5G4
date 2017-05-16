@@ -95,10 +95,32 @@ public class Unit {
     public double getHP(){
         return this.Health.EffectiveValue;
     }
+    public double getMP(){
+        return this.Mana.EffectiveValue;
+    }
+    public double getSTR(){
+        return this.Strength.EffectiveValue;
+    }
+    public double getINT(){
+        return this.Inteligence.EffectiveValue;
+    }
+    public double getVIT(){
+        return this.Vitality.EffectiveValue;
+    }
+    public double getArmor(){
+        return this.Armor.EffectiveValue;
+    }
+    public double getSPD(){
+        return this.Speed.EffectiveValue;
+    }
 
     public void takeDamage(double value){
         this.Health.queueModifier(-value);
         this.Health.update();
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     public Unit(String name,double INT,double STR,double SPD,double VIT,double Armor){
