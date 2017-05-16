@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Unit {
-    boolean shouldUpdate = false;
+    private boolean shouldUpdate = false;
+
+    private boolean dead = false;
 
     private main.Logic.Map.Cell position = null;
 
@@ -115,23 +117,30 @@ public class Unit {
     }
 
     public void takeDamage(double value){
+        if(!dead){
         this.Health.queueModifier(-value);
         this.Health.update();
+        if(this.isDead()){
+            this.dead = true;
+        }}
     }
 
     public void reduceMana(double value){
+        if(!dead){
         this.Mana.queueModifier(-value);
-        this.Mana.update();
+        this.Mana.update();}
     }
 
     public void takeHeal(double value){
+        if(!dead){
         this.Health.queueModifier(value);
-        this.Health.update();
+        this.Health.update();}
     }
 
     public void increaseMana(double value){
+        if(!dead){
         this.Mana.queueModifier(value);
-        this.Mana.update();
+        this.Mana.update();}
     }
 
     public String getName(){
