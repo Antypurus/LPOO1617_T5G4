@@ -119,6 +119,21 @@ public class Unit {
         this.Health.update();
     }
 
+    public void reduceMana(double value){
+        this.Mana.queueModifier(-value);
+        this.Mana.update();
+    }
+
+    public void takeHeal(double value){
+        this.Health.queueModifier(value);
+        this.Health.update();
+    }
+
+    public void increaseMana(double value){
+        this.Mana.queueModifier(value);
+        this.Mana.update();
+    }
+
     public String getName(){
         return this.name;
     }
@@ -193,5 +208,12 @@ public class Unit {
             map.update();
             return true;
         }
+    }
+
+    public boolean isDead(){
+        if(this.Health.EffectiveValue ==0){
+            return true;
+        }
+        return false;
     }
 }
