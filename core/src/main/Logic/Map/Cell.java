@@ -89,8 +89,6 @@ public class Cell {
     public void update(){
         if(this.unit!=null){
             this.isWalckable=false;
-        }else{
-            this.isWalckable = true;
         }
     }
 }

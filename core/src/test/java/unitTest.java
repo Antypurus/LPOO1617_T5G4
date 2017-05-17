@@ -125,8 +125,23 @@ public class unitTest {
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
         Map testMap = new Map("Test Map",1280,720);
 
+        testMap.getCell(11,11).setWalckable(false);
+        testMap.getCell(9,11).setWalckable(false);
+        testMap.getCell(10,12).setWalckable(false);
+        testMap.getCell(10,10).setWalckable(false);
+
         testUnit.setPosition(testMap.getCell(10,11));
         assertEquals(10,testUnit.getX());
+        assertEquals(11,testUnit.getY());
+
+        testUnit.move(1,0);
+        assertEquals(10,testUnit.getX());
+        testUnit.move(-1,0);
+        assertEquals(10,testUnit.getX());
+
+        testUnit.move(0,1);
+        assertEquals(11,testUnit.getY());
+        testUnit.move(0,-1);
         assertEquals(11,testUnit.getY());
     }
 }

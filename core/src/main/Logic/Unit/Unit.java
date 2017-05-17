@@ -193,6 +193,7 @@ public class Unit {
     private void unlinkAndLink(int x,int y){
         if(map!=null){
             this.position.setUnit(null);
+            this.position.setWalckable(true);
             this.position = map.getCell(x,y);
             this.position.setUnit(this);
         }
@@ -208,6 +209,9 @@ public class Unit {
         yPos = this.getY();
         this.map = this.position.getMap();
         if(map.getCell(xPos+deltaX,yPos+deltaY)==null){
+            return false;
+        }
+        if(!map.getCell(xPos+deltaX,yPos+deltaY).isWalckable()){
             return false;
         }
         if(yPos+deltaY>=map.height||yPos+deltaY<0||xPos+deltaX>=map.width||xPos+deltaX<0){
