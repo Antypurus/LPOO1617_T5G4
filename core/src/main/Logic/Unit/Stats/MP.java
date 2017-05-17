@@ -30,6 +30,9 @@ public class MP extends Statistic{
         if(this.EffectiveValue>this.maxValue){
             this.EffectiveValue = this.maxValue;
         }
+        if(this.EffectiveValue<0){
+            this.EffectiveValue = 0;
+        }
 
         return this.EffectiveValue;
     }

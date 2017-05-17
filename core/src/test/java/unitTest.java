@@ -77,4 +77,15 @@ public class unitTest {
         testUnit.takeHeal(1000);
         assertEquals(0,testUnit.getHP(),0.01);
     }
+
+    @Test
+    public void ManaUsage(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals( 50,testUnit.getMP(),0.01);
+        testUnit.reduceMana(10);
+        assertEquals( 40,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1000);
+        assertEquals(0,testUnit.getMP(),0.01);
+    }
 }
