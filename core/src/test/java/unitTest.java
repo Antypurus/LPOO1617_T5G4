@@ -1,6 +1,7 @@
 
 import org.junit.Test;
 
+import main.Logic.Map.Map;
 import main.Logic.Unit.Unit;
 
 import static org.junit.Assert.assertEquals;
@@ -87,5 +88,45 @@ public class unitTest {
         assertEquals( 40,testUnit.getMP(),0.01);
         testUnit.reduceMana(1000);
         assertEquals(0,testUnit.getMP(),0.01);
+    }
+
+    @Test
+    public void SetPositionTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",1280,720);
+
+        testUnit.setPosition(testMap.getCell(10,11));
+        assertEquals(10,testUnit.getX());
+        assertEquals(11,testUnit.getY());
+    }
+
+    @Test
+    public void MovementTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",1280,720);
+
+        testUnit.setPosition(testMap.getCell(10,11));
+        assertEquals(10,testUnit.getX());
+        assertEquals(11,testUnit.getY());
+
+        testUnit.move(1,0);
+        assertEquals(11,testUnit.getX());
+        testUnit.move(-1,0);
+        assertEquals(10,testUnit.getX());
+
+        testUnit.move(0,1);
+        assertEquals(12,testUnit.getY());
+        testUnit.move(0,-1);
+        assertEquals(11,testUnit.getY());
+    }
+
+    @Test
+    public void BlockedMovementTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",1280,720);
+
+        testUnit.setPosition(testMap.getCell(10,11));
+        assertEquals(10,testUnit.getX());
+        assertEquals(11,testUnit.getY());
     }
 }
