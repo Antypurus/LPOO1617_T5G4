@@ -91,6 +91,39 @@ public class unitTest {
     }
 
     @Test
+    public void ManaRegen(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals( 50,testUnit.getMP(),0.01);
+        testUnit.reduceMana(10);
+        assertEquals( 40,testUnit.getMP(),0.01);
+        testUnit.increaseMana(5);
+        assertEquals( 45,testUnit.getMP(),0.01);
+    }
+
+    @Test
+    public void ManaOverRegen(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals( 50,testUnit.getMP(),0.01);
+        testUnit.increaseMana(500);
+        assertEquals( 50,testUnit.getMP(),0.01);
+    }
+
+    @Test
+    public void ManaRegenWhileDead(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals( 50,testUnit.getMP(),0.01);
+        testUnit.reduceMana(500);
+        assertEquals( 0,testUnit.getMP(),0.01);
+        testUnit.takeDamage(1000);
+        assertEquals(0,testUnit.getHP(),0.01);
+        testUnit.increaseMana(1000);
+        assertEquals( 0,testUnit.getMP(),0.01);
+    }
+
+    @Test
     public void SetPositionTest(){
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
         Map testMap = new Map("Test Map",1280,720);
