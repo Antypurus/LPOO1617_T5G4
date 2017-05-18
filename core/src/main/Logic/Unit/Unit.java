@@ -47,6 +47,7 @@ public class Unit {
     public void update(){
         for(int i = 0;i<this.Stats.size();i++){
             this.Stats.get(i).update();
+           // System.out.println("Updated:"+this.Stats.get(i).getName());
         }
         this.shouldUpdate = false;
         //reduce budd debuff duration.
@@ -59,6 +60,14 @@ public class Unit {
             }
         }
         return -1;
+    }
+
+    public Statistic StatFind(String StatName){
+        int i = find_stat(StatName);
+        if(i!=-1) {
+            return this.Stats.get(i);
+        }
+        return null;
     }
 
     private void setStats(){
@@ -114,6 +123,18 @@ public class Unit {
     }
     public double getSPD(){
         return this.Speed.EffectiveValue;
+    }
+    public double getFireRes(){
+        return this.FireResistance.EffectiveValue;
+    }
+    public double getWaterRes(){
+        return this.WaterResistence.EffectiveValue;
+    }
+    public double getEarthRes(){
+        return this.EarthResistence.EffectiveValue;
+    }
+    public double getAirRes(){
+        return this.AirResistence.EffectiveValue;
     }
 
     public void takeDamage(double value){

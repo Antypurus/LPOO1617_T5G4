@@ -49,6 +49,9 @@ public class AirRes extends main.Logic.Unit.Statistic {
             }
             this.prevHash = this.Deltas.hashCode();
             this.shoudlUpdate = false;
+            this.vitHash = this.vitality.BaseValue;
+            this.intHash = this.inteligenc.BaseValue;
+            this.strHash = this.strenght.BaseValue;
         }
 
         return EffectiveValue;

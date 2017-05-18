@@ -30,7 +30,7 @@ public class EarthRes extends main.Logic.Unit.Statistic {
     private void baseValueUpdate(){
         if(this.intHash!=this.inteligence.BaseValue||this.armHash!=this.armor.BaseValue||
                 this.strHash!=this.strenght.BaseValue){
-            this.BaseValue = this.inteligence.BaseValue+this.inteligence.BaseValue+this.armor.BaseValue;
+            this.BaseValue = this.inteligence.BaseValue+this.strenght.BaseValue+this.armor.BaseValue;
             this.EffectiveValue = this.BaseValue;
             this.shouldUpdate = true;
         }
@@ -45,6 +45,9 @@ public class EarthRes extends main.Logic.Unit.Statistic {
             }
             this.prevHash = this.Deltas.hashCode();
             this.shouldUpdate = false;
+            this.intHash = this.inteligence.BaseValue;
+            this.strHash = this.strenght.BaseValue;
+            this.armHash = this.armor.BaseValue;
         }
         return this.EffectiveValue;
     }

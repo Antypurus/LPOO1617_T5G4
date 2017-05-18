@@ -24,8 +24,8 @@ public class Vitality extends main.Logic.Unit.Statistic {
     }
 
     public double update(){
+        this.EffectiveValue = this.BaseValue;
         if(this.prevHash!=this.Deltas.hashCode()||this.needUpdate){
-            this.EffectiveValue = this.BaseValue;
             for(int i=0;i<this.Deltas.size();++i){
                 this.EffectiveValue+=this.Deltas.get(i);
             }

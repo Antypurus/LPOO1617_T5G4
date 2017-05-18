@@ -43,6 +43,11 @@ public abstract class Statistic {
 
     public abstract double update();
 
+    public void modifyBase(double delta){
+        this.BaseValue+=delta;
+        this.update();
+    }
+
     public String getName(){
         return this.Name;
     }

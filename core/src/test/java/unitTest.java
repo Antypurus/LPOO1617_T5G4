@@ -1,7 +1,10 @@
 
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+
 import main.Logic.Map.Map;
+import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
 import static org.junit.Assert.assertEquals;
@@ -21,6 +24,177 @@ public class unitTest {
         assertEquals(6,testUnit.getVIT(),0.01);
         assertEquals(5,testUnit.getSPD(),0.01);
         assertEquals(2,testUnit.getArmor(),0.01);
+    }
+
+    @Test
+    public void DerivateStatTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+    }
+
+    @Test
+    public void ChangeDerivatedIntTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("INT").modifyBase(1);
+        testUnit.update();
+
+        assertEquals(6,testUnit.getINT(),0.01);
+
+        assertEquals(14,testUnit.getAirRes(),0.01);
+        assertEquals(10,testUnit.getEarthRes(),0.01);
+        assertEquals(14,testUnit.getFireRes(),0.01);
+        assertEquals(13,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("INT").modifyBase(-1);
+        testUnit.update();
+
+        assertEquals(5,testUnit.getINT(),0.01);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+    }
+
+    @Test
+    public void ChangeDerivatedStrTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("STR").modifyBase(1);
+        testUnit.update();
+
+        assertEquals(6,testUnit.getSTR(),0.01);
+
+        assertEquals(14,testUnit.getAirRes(),0.01);
+        assertEquals(10,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("STR").modifyBase(-1);
+        testUnit.update();
+
+        assertEquals(5,testUnit.getSTR(),0.01);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+    }
+
+    @Test
+    public void ChangeDerivatedSpdTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("SPD").modifyBase(1);
+        testUnit.update();
+
+        assertEquals(6,testUnit.getSPD(),0.01);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(13,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("SPD").modifyBase(-1);
+        testUnit.update();
+
+        assertEquals(5,testUnit.getSPD(),0.01);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+    }
+
+    @Test
+    public void ChangeDerivatedArmorTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("ARMR").modifyBase(1);
+        testUnit.update();
+
+        assertEquals(6,testUnit.getINT(),0.01);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(10,testUnit.getEarthRes(),0.01);
+        assertEquals(14,testUnit.getFireRes(),0.01);
+        assertEquals(13,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("ARMR").modifyBase(-1);
+        testUnit.update();
+
+        assertEquals(5,testUnit.getINT(),0.01);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+    }
+
+    @Test
+    public void ChangeDerivatedVitTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("VIT").modifyBase(1);
+        testUnit.update();
+
+        assertEquals(6,testUnit.getINT(),0.01);
+
+        assertEquals(14,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(14,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+
+        testUnit.StatFind("VIT").modifyBase(-1);
+        testUnit.update();
+
+        assertEquals(5,testUnit.getINT(),0.01);
+
+        assertEquals(13,testUnit.getAirRes(),0.01);
+        assertEquals(9,testUnit.getEarthRes(),0.01);
+        assertEquals(13,testUnit.getFireRes(),0.01);
+        assertEquals(12,testUnit.getWaterRes(),0.01);
+    }
+
+    @Test
+    public void StatFindTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+
+        assertEquals(testUnit.StatFind("SPD").EffectiveValue,testUnit.getSPD(),0.01);
+        assertEquals(testUnit.StatFind("VIT").EffectiveValue,testUnit.getVIT(),0.01);
+        assertEquals(testUnit.StatFind("INT").EffectiveValue,testUnit.getINT(),0.01);
+        assertEquals(testUnit.StatFind("STR").EffectiveValue,testUnit.getSTR(),0.01);
+        assertEquals(testUnit.StatFind("ARMR").EffectiveValue,testUnit.getArmor(),0.01);
     }
 
     @Test
@@ -264,4 +438,5 @@ public class unitTest {
         testUnit.setPosition(testMap.getCell(10,10));
         assertTrue(testMap.getCell(0,0).isWalckable());
     }
+
 }

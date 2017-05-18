@@ -47,6 +47,9 @@ public class FireRes extends Statistic{
             }
             this.prevHash = this.Deltas.hashCode();
             this.shouldUpdate = false;
+            this.intHash = this.inteligence.BaseValue;
+            this.armorHash = this.armor.BaseValue;
+            this.vitHash = this.vitality.BaseValue;
         }
         return 0;
     }

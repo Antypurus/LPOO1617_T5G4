@@ -45,6 +45,9 @@ public class WaterRes extends main.Logic.Unit.Statistic {
             }
             this.prevHash=this.Deltas.hashCode();
             this.needUpdate=false;
+            this.intHash = this.inteligence.BaseValue;
+            this.armorHash = this.armor.BaseValue;
+            this.speedHash = this.speed.BaseValue;
         }
         return this.EffectiveValue;
     }
