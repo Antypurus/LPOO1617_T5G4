@@ -166,6 +166,8 @@ public class Unit {
 
     public void setPosition(main.Logic.Map.Cell position){
         this.position = position;
+        position.setWalckable(false);
+        position.setUnit(this);
     }
 
     public main.Logic.Map.Cell getPosition(){

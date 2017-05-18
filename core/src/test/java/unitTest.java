@@ -154,6 +154,22 @@ public class unitTest {
     }
 
     @Test
+    public void cellWalkable(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",1280,720);
+
+        testUnit.setPosition(testMap.getCell(10,11));
+
+        assertEquals(10,testUnit.getX());
+        assertEquals(11,testUnit.getY());
+
+        assertFalse(testMap.getCell(10,11).isWalckable());
+        testUnit.move(1,0);
+        assertFalse(testMap.getCell(11,11).isWalckable());
+        assertTrue(testMap.getCell(10,11).isWalckable());
+    }
+
+    @Test
     public void BlockedMovementTest(){
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
         Map testMap = new Map("Test Map",1280,720);
@@ -176,5 +192,29 @@ public class unitTest {
         assertEquals(11,testUnit.getY());
         testUnit.move(0,-1);
         assertEquals(11,testUnit.getY());
+    }
+
+    @Test
+    public void MoveOutOfBoundsTest(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",1280,720);
+
+        testUnit.setPosition(testMap.getCell(0,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.move(-1,0);
+        assertEquals(0,testUnit.getX());
+        testUnit.move(0,-1);
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1279,719));
+        assertEquals(1279,testUnit.getX());
+        assertEquals(719,testUnit.getY());
+
+        testUnit.move(1,0);
+        assertEquals(1279,testUnit.getX());
+        testUnit.move(0,1);
+        assertEquals(719,testUnit.getY());
     }
 }
