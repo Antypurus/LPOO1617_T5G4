@@ -78,7 +78,7 @@ public class unitTest {
         testUnit.StatFind("STR").modifyBase(1);
         testUnit.update();
 
-        assertEquals(6,testUnit.getSTR(),0.01);
+        assertEquals(3,testUnit.getSTR(),0.01);
 
         assertEquals(14,testUnit.getAirRes(),0.01);
         assertEquals(10,testUnit.getEarthRes(),0.01);
@@ -88,7 +88,7 @@ public class unitTest {
         testUnit.StatFind("STR").modifyBase(-1);
         testUnit.update();
 
-        assertEquals(5,testUnit.getSTR(),0.01);
+        assertEquals(2,testUnit.getSTR(),0.01);
 
         assertEquals(13,testUnit.getAirRes(),0.01);
         assertEquals(9,testUnit.getEarthRes(),0.01);
@@ -138,7 +138,7 @@ public class unitTest {
         testUnit.StatFind("ARMR").modifyBase(1);
         testUnit.update();
 
-        assertEquals(6,testUnit.getINT(),0.01);
+        assertEquals(3,testUnit.getArmor(),0.01);
 
         assertEquals(13,testUnit.getAirRes(),0.01);
         assertEquals(10,testUnit.getEarthRes(),0.01);
@@ -148,7 +148,7 @@ public class unitTest {
         testUnit.StatFind("ARMR").modifyBase(-1);
         testUnit.update();
 
-        assertEquals(5,testUnit.getINT(),0.01);
+        assertEquals(2,testUnit.getArmor(),0.01);
 
         assertEquals(13,testUnit.getAirRes(),0.01);
         assertEquals(9,testUnit.getEarthRes(),0.01);
@@ -168,7 +168,7 @@ public class unitTest {
         testUnit.StatFind("VIT").modifyBase(1);
         testUnit.update();
 
-        assertEquals(6,testUnit.getINT(),0.01);
+        assertEquals(7,testUnit.getVIT(),0.01);
 
         assertEquals(14,testUnit.getAirRes(),0.01);
         assertEquals(9,testUnit.getEarthRes(),0.01);
@@ -178,7 +178,7 @@ public class unitTest {
         testUnit.StatFind("VIT").modifyBase(-1);
         testUnit.update();
 
-        assertEquals(5,testUnit.getINT(),0.01);
+        assertEquals(6,testUnit.getVIT(),0.01);
 
         assertEquals(13,testUnit.getAirRes(),0.01);
         assertEquals(9,testUnit.getEarthRes(),0.01);
