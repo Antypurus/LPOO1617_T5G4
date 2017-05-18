@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import Logic.Unit.GraphicsComponent.Character;
 import main.game.InputHandler.GameHandler;
 
 public class MyGdxGame extends ApplicationAdapter {
@@ -18,7 +19,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private GameHandler gameHandler = null;
 	private main.game.InputHandler.MovementDelta response = null;
 
-	private main.game.GraphicSystem.Character character=null;
+	private Character character=null;
 	private main.Logic.Map.Map map = new main.Logic.Map.Map("test",30,30);
 
 	private OrthographicCamera cam;
@@ -32,7 +33,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		background = new Texture("background.jpg");
 		gridBlock = new Texture("square.png");
-		character = new main.game.GraphicSystem.Character(this.batch,this);
+		character = new Character(this.batch,this);
 
 		this.cam = new OrthographicCamera(1280,720);
 		cam.update();

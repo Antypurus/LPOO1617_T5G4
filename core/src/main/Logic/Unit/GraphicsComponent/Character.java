@@ -1,4 +1,4 @@
-package main.game.GraphicSystem;
+package Logic.Unit.GraphicsComponent;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
