@@ -217,4 +217,51 @@ public class unitTest {
         testUnit.move(0,1);
         assertEquals(719,testUnit.getY());
     }
+
+    @Test
+    public void UnitInTheWayMovement(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",1280,720);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,10));
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+        assertEquals(11,testUnit2.getX());
+        assertEquals(10,testUnit2.getY());
+
+        testUnit.move(1,0);
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+        testUnit2.setPosition(testMap.getCell(9,10));
+
+        testUnit.move(-1,0);
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+        testUnit2.setPosition(testMap.getCell(10,11));
+
+        testUnit.move(0,1);
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+        testUnit2.setPosition(testMap.getCell(10,9));
+
+        testUnit.move(0,-1);
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+    }
+
+    @Test
+    public void PositionRedefinition(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",1280,720);
+
+        testUnit.setPosition(testMap.getCell(0,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        assertFalse(testMap.getCell(0,0).isWalckable());
+        testUnit.setPosition(testMap.getCell(10,10));
+        assertTrue(testMap.getCell(0,0).isWalckable());
+    }
 }
