@@ -31,7 +31,7 @@ public class fireballTest {
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
         Ability testFireBall = new Fireball(testUnit);
 
-        assertEquals(100,testFireBall.getBaseDamage(),0.01);
+        assertEquals(10,testFireBall.getBaseDamage(),0.01);
         assertEquals(100,testFireBall.getHitChance(),0.01);
         assertEquals(10,testFireBall.getManaCost(),0.01);
         assertEquals(10,testFireBall.getRange());
@@ -43,6 +43,7 @@ public class fireballTest {
         ArrayList<Element.type> traits  = new ArrayList<Element.type>();
         traits.add(Element.type.DAMAGE);
         assertEquals(traits,testFireBall.getTraits());
+        assertTrue(testFireBall.isElemental());
     }
 
     @Test
@@ -73,7 +74,7 @@ public class fireballTest {
 
         assertTrue(testFireBall.canHitTarget(testUnit2));
 
-        testUnit.reduceMana(1000);
+        testUnit.reduceMana(45);
         assertFalse(testFireBall.canHitTarget(testUnit2));
     }
 
@@ -122,4 +123,126 @@ public class fireballTest {
         assertTrue(testFireBall.canHitTarget(testUnit2));
     }
 
+    @Test
+    public void cantHitOwnerDead(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testFireBall = new Fireball(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,11));
+
+        assertTrue(testFireBall.canHitTarget(testUnit2));
+
+        testUnit.takeDamage(1000);
+        assertEquals(0,testUnit.getHP(),0.01);
+        assertFalse(testFireBall.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitTargetIsDead(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testFireBall = new Fireball(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,11));
+
+        assertTrue(testFireBall.canHitTarget(testUnit2));
+
+        testUnit2.takeDamage(1000);
+        assertEquals(0,testUnit2.getHP(),0.01);
+        assertFalse(testFireBall.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitNoOwner(){
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testFireBall = new Fireball(null);
+
+        testUnit2.setPosition(testMap.getCell(11,11));
+        assertFalse(testFireBall.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitNoTarget(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testFireBall = new Fireball(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        assertFalse(testFireBall.canHitTarget(null));
+    }
+
+    @Test
+    public void testAffectingTargetNoAffinity(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,0,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testFireBall = new Fireball(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,11));
+
+        testUnit2.setTestMode(true);
+        assertTrue(testUnit2.getTestMode());
+        testUnit2.setTestModeValue(10);
+        assertEquals(10,testUnit2.getTestModeValue(),0.01);
+
+        testFireBall.AffectTarget(testUnit2);
+        assertEquals(23,testUnit2.getHP(),0.01);
+        assertEquals(40,testUnit.getMP(),0.01);
+    }
+
+    @Test
+    public void testAffectingTargetWithAffinity(){
+        Unit testUnit = new Unit("Test Unit",10,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,0,60,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testFireBall = new Fireball(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,11));
+        testUnit2.setAfinity(Element.DamageElement.FIRE);
+
+        testUnit2.setTestMode(true);
+        assertTrue(testUnit2.getTestMode());
+        testUnit2.setTestModeValue(10);
+        assertEquals(10,testUnit2.getTestModeValue(),0.01);
+
+        testFireBall.AffectTarget(testUnit2);
+        assertEquals(567,testUnit2.getHP(),0.01);
+
+        testUnit2.setAfinity(Element.DamageElement.EARTH);
+        assertTrue(testFireBall.canHitTarget(testUnit2));
+        testFireBall.AffectTarget(testUnit2);
+        assertEquals(434,testUnit2.getHP(),0.01);
+
+        testUnit2.setAfinity(Element.DamageElement.WATER);
+        assertTrue(testFireBall.canHitTarget(testUnit2));
+        testFireBall.AffectTarget(testUnit2);
+        assertEquals(434,testUnit2.getHP(),0.01);
+    }
+
+    @Test
+    public void testAffectingTargetCriticalFail(){
+        Unit testUnit = new Unit("Test Unit",10,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,0,60,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testFireBall = new Fireball(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,11));
+
+        testUnit2.setTestMode(true);
+        assertTrue(testUnit2.getTestMode());
+        testUnit2.setTestModeValue(1);
+        assertEquals(1,testUnit2.getTestModeValue(),0.01);
+
+        testFireBall.AffectTarget(testUnit2);
+        assertEquals(467,testUnit2.getHP(),0.01);
+    }
 }
