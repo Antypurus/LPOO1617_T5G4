@@ -399,6 +399,13 @@
         <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/customtabs/25.0.0/customtabs-25.0.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="desktop.desktop-1.0">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/desktop/build/libs/desktop-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="facebook-android-sdk-4.18.0">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/android/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.18.0/res" />
