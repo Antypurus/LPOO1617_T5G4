@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Unit {
     private boolean shouldUpdate = false;
+    private boolean testMode = false;
+    private double testModeValue = 0;
 
     private boolean dead = false;
 
@@ -51,12 +53,33 @@ public class Unit {
     public double generateDodgeVal(){
         double speed = this.Speed.EffectiveValue;
         Random generator = new Random();
-        double dodge = generator.nextDouble()*100+1;
+        double dodge = 0;
+        if(!testMode) {
+             dodge = generator.nextDouble() * 100 + 1;
+        }else{
+             dodge = this.testModeValue;
+        }
         dodge+=speed;
         if(dodge>100){
             dodge = 100;
         }
         return dodge;
+    }
+
+    public void setTestMode(boolean value){
+        this.testMode = value;
+    }
+
+    public boolean getTestMode(){
+        return this.testMode;
+    }
+
+    public void setTestModeValue(double value){
+        this.testModeValue = value;
+    }
+
+    public double getTestModeValue(){
+        return this.testModeValue;
     }
 
     public void update(){
