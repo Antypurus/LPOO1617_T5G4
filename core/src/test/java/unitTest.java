@@ -439,4 +439,25 @@ public class unitTest {
         assertTrue(testMap.getCell(0,0).isWalckable());
     }
 
+    @Test
+    public void CellWalkacleAfterDeath(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",1280,720);
+
+        testUnit.setPosition(testMap.getCell(0,0));
+        testUnit2.setPosition(testMap.getCell(1,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+        assertEquals(1,testUnit2.getX());
+        assertEquals(0,testUnit2.getY());
+
+        testUnit.takeDamage(1000);
+        assertTrue(testUnit.isDead());
+        assertTrue(testMap.getCell(0,0).isWalckable());
+
+        testUnit2.move(-1,0);
+        assertEquals(0,testUnit2.getX());
+        assertEquals(0,testUnit2.getY());
+    }
 }

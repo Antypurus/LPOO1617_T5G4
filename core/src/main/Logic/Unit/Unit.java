@@ -154,6 +154,11 @@ public class Unit {
         this.Health.update();
         if(this.isDead()){
             this.dead = true;
+            if(this.position!=null) {
+                this.position.setWalckable(true);
+                this.position.setUnit(null);
+                this.position = null;
+            }
         }}
     }
 
