@@ -27,6 +27,10 @@ public class Unit {
         return this.Afinity;
     }
 
+    public ArrayList<main.Logic.Abilities.Ability> getAbilities(){
+        return this.Abilities;
+    }
+
     //primary resources
     private main.Logic.Unit.Stats.HP Health;// health points
     private main.Logic.Unit.Stats.MP Mana;// Mana points
