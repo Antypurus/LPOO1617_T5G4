@@ -4,9 +4,17 @@ import java.util.ArrayList;
 
 import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
+import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
 public class Charge implements Ability {
+
+    private  double Damage = 100;
+    private  int AOE = 0;
+    private  double Chance = 100;
+    private  int range  = 10;
+
+    private Unit owner = null;
 
     public void AffectTarget(Unit target){
 
@@ -49,6 +57,10 @@ public class Charge implements Ability {
     }
 
     public Unit getOwner(){
+        return null;
+    }
+
+    public Statistic getScalingStat(){
         return null;
     }
 }

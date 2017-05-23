@@ -2,6 +2,7 @@ package main.Logic.Abilities;
 
 import java.util.ArrayList;
 
+import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
 public interface Ability {
@@ -17,4 +18,5 @@ public interface Ability {
     public abstract String getName();
     public abstract ArrayList<main.Logic.ElementSystem.Element.type> getTraits();
     public abstract Unit getOwner();
+    public abstract Statistic getScalingStat();
 }
