@@ -15,8 +15,6 @@ public class PlayState extends State
     private SpriteBatch batch = null;
     private Texture background = null;
     private Texture gridBlock = null;
-
-    private GameHandler gameHandler = null;
     private main.game.InputHandler.MovementDelta response = null;
 
     private Character character=null;
@@ -30,7 +28,6 @@ public class PlayState extends State
     {
         super(gsm);
         this.Scale = Gdx.graphics.getWidth()/this.map.width;
-
         batch = new SpriteBatch();
         background = new Texture("background.jpg");
         gridBlock = new Texture("square.png");
@@ -79,7 +76,8 @@ public class PlayState extends State
     @Override
     public void render(SpriteBatch sb)
     {
-        batch.setProjectionMatrix(cam.combined);
+        sb = batch;
+        sb.setProjectionMatrix(cam.combined);
         cam.update();
         fps = Gdx.graphics.getFramesPerSecond();
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -118,11 +116,11 @@ public class PlayState extends State
 
         //End Of Logic Section
         //start of draw section
-        batch.begin();
+        sb.begin();
 
-        batch.disableBlending();
-        batch.draw(background,-1000,-400);
-        batch.enableBlending();
+        sb.disableBlending();
+        sb.draw(background,-1000,-400);
+        sb.enableBlending();
 
         for(int i=0;i<this.map.height;++i){
             for(int j=0;j<this.map.width;++j){
@@ -130,10 +128,10 @@ public class PlayState extends State
             }
         }
 
-        batch.draw(this.character.getSprite(),this.character.getUnit().getX()*Scale,
+        sb.draw(this.character.getSprite(),this.character.getUnit().getX()*Scale,
                 this.character.getUnit().getY()*Scale,Scale,Scale);
 
-        batch.end();
+        sb.end();
         //end of draw section
         Gdx.graphics.setTitle("RPGame FPS:"+fps);
     }
@@ -144,5 +142,6 @@ public class PlayState extends State
     public void dispose () {
         batch.dispose();
         background.dispose();
+        gridBlock.dispose();
     }
 }
