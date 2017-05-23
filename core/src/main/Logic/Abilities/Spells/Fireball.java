@@ -11,6 +11,7 @@ import main.Logic.Unit.Unit;
 public class Fireball implements Ability{
 
     private double Damage = 100;
+    private double ManaCost = 10;
     private Statistic scalingStat = null;
     private int AOE = 0;
     private double Chance = 100;
@@ -24,11 +25,20 @@ public class Fireball implements Ability{
     }
 
     public void AffectTarget(Unit target){
-
+        if(this.canHitTarget(target)){
+            this.owner.reduceMana(this.ManaCost);
+        }
     }
 
     public boolean canHitTarget(Unit target){
-        return false;
+        double dist = this.owner.getPosition().distanceToCell(target.getPosition());
+        if(dist > this.range){
+            return false;
+        }
+        if(this.owner.getMP()-this.ManaCost<0){
+            return false;
+        }
+        return true;
     }
 
     public double getBaseDamage(){
@@ -69,6 +79,10 @@ public class Fireball implements Ability{
 
     public Statistic getScalingStat(){
         return null;
+    }
+
+    public double getDamageToTarget(Unit target){
+        return 0;
     }
 
 }

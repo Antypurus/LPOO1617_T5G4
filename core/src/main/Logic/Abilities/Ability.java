@@ -19,4 +19,5 @@ public interface Ability {
     public abstract ArrayList<main.Logic.ElementSystem.Element.type> getTraits();
     public abstract Unit getOwner();
     public abstract Statistic getScalingStat();
+    public abstract double getDamageToTarget(Unit target);
 }

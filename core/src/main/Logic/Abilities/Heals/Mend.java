@@ -63,4 +63,9 @@ public class Mend implements Ability{
     public Statistic getScalingStat(){
         return null;
     }
+
+    public double getDamageToTarget(Unit target){
+        return 0;
+    }
+
 }
