@@ -122,7 +122,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 
 		batch.disableBlending();
-		batch.draw(background,-1000,-400);
+		batch.draw(background,-1000,-350);
 		batch.enableBlending();
 
 		for(int i=0;i<this.map.height;++i){

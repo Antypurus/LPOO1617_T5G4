@@ -8,13 +8,24 @@ public class Unit {
 
     private boolean dead = false;
 
+    private main.Logic.Map.Map map = null;
+
+    private main.Logic.ElementSystem.Element.DamageElement Afinity = null;
+
     private main.Logic.Map.Cell position = null;
 
     private String name=null;
     private ArrayList<Statistic> Stats = new ArrayList<Statistic>();
     private ArrayList<main.Logic.Abilities.Ability> Abilities = new ArrayList<main.Logic.Abilities.Ability>();
 
-    //Position
+    //Afinity
+    public void setAfinity(main.Logic.ElementSystem.Element.DamageElement Afinity){
+        this.Afinity = Afinity;
+    }
+
+    public main.Logic.ElementSystem.Element.DamageElement getAfinity(){
+        return this.Afinity;
+    }
 
     //primary resources
     private main.Logic.Unit.Stats.HP Health;// health points
@@ -36,7 +47,7 @@ public class Unit {
     public double generateDodgeVal(){
         double speed = this.Speed.EffectiveValue;
         Random generator = new Random();
-        double dodge = generator.nextDouble()*100;
+        double dodge = generator.nextDouble()*100+1;
         dodge+=speed;
         if(dodge>100){
             dodge = 100;
@@ -86,7 +97,7 @@ public class Unit {
 
     private int findAbility(String AbilityName){
         for(int i = 0;i<Abilities.size();i++){
-            if(this.Abilities.get(i).name.equals(AbilityName)){
+            if(this.Abilities.get(i).getName().equals(AbilityName)){
                 return i;
             }
         }
@@ -94,7 +105,7 @@ public class Unit {
     }
 
     public void addAbility(main.Logic.Abilities.Ability abl){
-        int pos = findAbility(abl.name);
+        int pos = findAbility(abl.getName());
         if(pos==-1){
             this.Abilities.add(abl);
         }else{
@@ -215,8 +226,6 @@ public class Unit {
         }
     }
 
-    private main.Logic.Map.Map map = null;
-
     private void unlinkAndLink(int x,int y){
         if(map!=null){
             this.position.setUnit(null);
@@ -255,5 +264,39 @@ public class Unit {
             return true;
         }
         return false;
+    }
+
+    public main.Logic.Unit.Stats.HP getHEALTH(){
+        return this.Health;
+    }
+    public main.Logic.Unit.Stats.MP getMANA(){
+        return this.Mana;
+    }
+    public main.Logic.Unit.Stats.Inteligence getINTELIGENCE(){
+        return this.Inteligence;
+    }
+    public main.Logic.Unit.Stats.Strenght getSTRENGHT(){
+        return this.Strength;
+    }
+    public main.Logic.Unit.Stats.Vitality getVITALITY(){
+        return this.Vitality;
+    }
+    public main.Logic.Unit.Stats.Armor getARMOR(){
+        return this.Armor;
+    }
+    public main.Logic.Unit.Stats.Speed getSPEED(){
+        return this.Speed;
+    }
+    public main.Logic.Unit.Stats.AirRes getAIRRES(){
+        return this.AirResistence;
+    }
+    public main.Logic.Unit.Stats.FireRes getFIRERES(){
+        return this.FireResistance;
+    }
+    public main.Logic.Unit.Stats.WaterRes getWATERRES(){
+        return this.WaterResistence;
+    }
+    public main.Logic.Unit.Stats.EarthRes getEARTHRES(){
+        return this.EarthResistence;
     }
 }
