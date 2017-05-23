@@ -18,6 +18,7 @@ public class Fireball implements Ability{
     private int range  = 10;
     private main.Logic.ElementSystem.Element.DamageElement dmgElem = Element.DamageElement.FIRE;
     private Unit owner = null;
+    private String name = "FireBall";
 
     public Fireball(Unit owner){
         this.owner = owner;
@@ -44,43 +45,45 @@ public class Fireball implements Ability{
     }
 
     public double getBaseDamage(){
-        return 0;
+        return this.Damage;
     }
 
     public double getRange(){
-        return 0;
+        return this.range;
     }
 
     public boolean isElemental(){
-        return false;
+        return true;
     }
 
     public main.Logic.ElementSystem.Element.type getType(){
-        return null;
+        return Element.type.DAMAGE;
     }
 
     public main.Logic.ElementSystem.Element.DamageElement getDamageElement(){
-        return null;
+        return Element.DamageElement.FIRE;
     }
 
     public main.Logic.ElementSystem.Element.DamageType getDamageType(){
-        return null;
+        return Element.DamageType.Magical;
     }
 
     public String getName(){
-        return null;
+        return this.name;
     }
 
     public ArrayList<Element.type> getTraits(){
-        return null;
+        ArrayList<Element.type>traits = new ArrayList<Element.type>();
+        traits.add(Element.type.DAMAGE);
+        return traits;
     }
 
     public Unit getOwner(){
-        return null;
+        return this.owner;
     }
 
     public Statistic getScalingStat(){
-        return null;
+        return this.scalingStat;
     }
 
     public double getDamageToTarget(Unit target){
