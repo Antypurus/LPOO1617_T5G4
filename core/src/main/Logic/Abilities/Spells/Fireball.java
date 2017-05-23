@@ -35,11 +35,23 @@ public class Fireball implements Ability{
     }
 
     public boolean canHitTarget(Unit target){
+        if(this.owner.getPosition()==null){
+            return false;
+        }
         double dist = this.owner.getPosition().distanceToCell(target.getPosition());
         if(dist > this.range){
             return false;
         }
+        if(dist == -1){
+            return false;
+        }
         if(this.owner.getMP()-this.ManaCost<0){
+            return false;
+        }
+        if(target.isDead()){
+            return false;
+        }
+        if(target==this.owner){
             return false;
         }
         return true;
