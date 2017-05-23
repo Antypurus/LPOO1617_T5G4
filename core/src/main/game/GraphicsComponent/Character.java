@@ -1,4 +1,4 @@
-package Logic.Unit.GraphicsComponent;
+package game.GraphicsComponent;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -36,7 +36,7 @@ public class Character {
     private SpriteBatch batch = null;
     private MyGdxGame game = null;
 
-    public Character(SpriteBatch batch, MyGdxGame game){
+    public Character(SpriteBatch batch){
         interm = new Texture("characters.png");
         texts = TextureRegion.split(interm,interm.getWidth()/12,interm.getHeight()/8);
         textures = new TextureRegion[3];

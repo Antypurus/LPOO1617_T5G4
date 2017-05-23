@@ -2,16 +2,46 @@ package main.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import Logic.Unit.GraphicsComponent.Character;
-import main.game.InputHandler.GameHandler;
+import game.States.GameStateManager;
+import game.States.MenuState;
 
 public class MyGdxGame extends ApplicationAdapter {
+	public static final int WIDTH  = 1280;
+	public static final int HEIGHT = 720;
+	private GameStateManager gsm;
+
+	private SpriteBatch batch;
+
+	Texture img;
+
+	@Override
+	public void create()
+	{
+		batch = new SpriteBatch();
+		gsm = new GameStateManager();
+		img = new Texture("red.png");
+		gsm.push(new MenuState(gsm));
+	}
+
+	@Override
+	public void render() {
+		Gdx.gl.glClearColor(1,0,0,1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.render(batch);
+	}
+
+	@Override
+	public void dispose()
+	{
+		batch.dispose();
+		img.dispose();
+	}
+/*
 	private SpriteBatch batch = null;
 	private Texture background = null;
 	private Texture gridBlock = null;
@@ -114,4 +144,5 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.dispose();
 		background.dispose();
 	}
+	*/
 }
