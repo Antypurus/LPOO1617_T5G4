@@ -16,7 +16,7 @@ public class Fireball implements Ability{
     private int AOE = 0;
     private double Chance = 100;
     private int range  = 10;
-
+    private main.Logic.ElementSystem.Element.DamageElement dmgElem = Element.DamageElement.FIRE;
     private Unit owner = null;
 
     public Fireball(Unit owner){
@@ -27,6 +27,8 @@ public class Fireball implements Ability{
     public void AffectTarget(Unit target){
         if(this.canHitTarget(target)){
             this.owner.reduceMana(this.ManaCost);
+            double dmg = this.getDamageToTarget(target);
+            target.takeDamage(dmg);
         }
     }
 
@@ -82,7 +84,20 @@ public class Fireball implements Ability{
     }
 
     public double getDamageToTarget(Unit target){
-        return 0;
+        double dmg = this.Damage;
+        dmg*=this.scalingStat.EffectiveValue;
+        dmg-=target.getFireRes();
+        Element elem = new Element();
+        if(target.getAfinity()!=null){
+            dmg*=elem.ElementComparation(target.getAfinity(),this.dmgElem);
+        }
+        double dodge = target.generateDodgeVal();
+        if(dodge>this.Chance){
+            dmg = 0;
+        }else if(dodge == 1){
+            dmg*=2;
+        }
+        return dmg;
     }
 
 }

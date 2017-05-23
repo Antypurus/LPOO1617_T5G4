@@ -10,13 +10,22 @@ public class Unit {
 
     private main.Logic.Map.Map map = null;
 
+    private main.Logic.ElementSystem.Element.DamageElement Afinity = null;
+
     private main.Logic.Map.Cell position = null;
 
     private String name=null;
     private ArrayList<Statistic> Stats = new ArrayList<Statistic>();
     private ArrayList<main.Logic.Abilities.Ability> Abilities = new ArrayList<main.Logic.Abilities.Ability>();
 
-    //Position
+    //Afinity
+    public void setAfinity(main.Logic.ElementSystem.Element.DamageElement Afinity){
+        this.Afinity = Afinity;
+    }
+
+    public main.Logic.ElementSystem.Element.DamageElement getAfinity(){
+        return this.Afinity;
+    }
 
     //primary resources
     private main.Logic.Unit.Stats.HP Health;// health points
@@ -38,7 +47,7 @@ public class Unit {
     public double generateDodgeVal(){
         double speed = this.Speed.EffectiveValue;
         Random generator = new Random();
-        double dodge = generator.nextDouble()*100;
+        double dodge = generator.nextDouble()*100+1;
         dodge+=speed;
         if(dodge>100){
             dodge = 100;
