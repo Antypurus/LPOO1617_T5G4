@@ -22,6 +22,7 @@ public class Fireball implements Ability{
 
     public Fireball(Unit owner){
         this.owner = owner;
+        this.owner.addAbility(this);
         this.scalingStat = owner.getINTELIGENCE();
     }
 
