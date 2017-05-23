@@ -28,7 +28,7 @@ public class Punch implements Ability{
         return 0;
     }
 
-    public double getRange(){
+    public int getRange(){
         return 0;
     }
 
@@ -65,6 +65,18 @@ public class Punch implements Ability{
     }
 
     public double getDamageToTarget(Unit target){
+        return 0;
+    }
+
+    public double getHitChance(){
+        return 0;
+    }
+
+    public int getAOE(){
+        return 0;
+    }
+
+    public double getManaCost(){
         return 0;
     }
 }

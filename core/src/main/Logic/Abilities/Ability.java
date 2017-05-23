@@ -10,7 +10,7 @@ public interface Ability {
     public abstract void AffectTarget(Unit target);
     public abstract boolean canHitTarget(Unit target);
     public abstract double getBaseDamage();
-    public abstract double getRange();
+    public abstract int getRange();
     public abstract boolean isElemental();
     public abstract main.Logic.ElementSystem.Element.type getType();
     public abstract main.Logic.ElementSystem.Element.DamageElement getDamageElement();
@@ -20,4 +20,7 @@ public interface Ability {
     public abstract Unit getOwner();
     public abstract Statistic getScalingStat();
     public abstract double getDamageToTarget(Unit target);
+    public abstract double getHitChance();
+    public abstract int getAOE();
+    public abstract double getManaCost();
 }

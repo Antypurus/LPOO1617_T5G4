@@ -48,7 +48,7 @@ public class Fireball implements Ability{
         return this.Damage;
     }
 
-    public double getRange(){
+    public int getRange(){
         return this.range;
     }
 
@@ -103,4 +103,15 @@ public class Fireball implements Ability{
         return dmg;
     }
 
+    public double getHitChance(){
+        return this.Chance;
+    }
+
+    public int getAOE(){
+        return this.AOE;
+    }
+
+    public double getManaCost(){
+        return this.ManaCost;
+    }
 }
