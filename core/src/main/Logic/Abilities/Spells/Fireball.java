@@ -19,6 +19,7 @@ public class Fireball implements Ability{
     private main.Logic.ElementSystem.Element.DamageElement dmgElem = Element.DamageElement.FIRE;
     private Unit owner = null;
     private String name = "FireBall";
+    private Element elem = new Element();
 
     public Fireball(Unit owner){
         this.owner = owner;
@@ -113,9 +114,8 @@ public class Fireball implements Ability{
     public double getDamageToTarget(Unit target){
         double dmg = this.Damage;
         dmg*=this.scalingStat.EffectiveValue;
-        Element elem = new Element();
         if(target.getAfinity()!=null){
-            dmg*=elem.ElementComparation(this.dmgElem,target.getAfinity());
+            dmg*=this.elem.ElementComparation(this.dmgElem,target.getAfinity());
         }
         double dodge = target.generateDodgeVal();
         if(dodge>this.Chance){
