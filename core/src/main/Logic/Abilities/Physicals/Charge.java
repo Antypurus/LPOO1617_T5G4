@@ -13,15 +13,55 @@ public class Charge implements Ability {
     private  int AOE = 0;
     private  double Chance = 100;
     private  int range  = 10;
+    private double manaCost = 0;
 
     private Unit owner = null;
 
     public void AffectTarget(Unit target){
+        if(this.canHitTarget(target)&&this.owner!=null){
 
+        }
     }
 
     public boolean canHitTarget(Unit target){
-        return false;
+        if(target==null){
+            return false;
+        }
+        if(this.owner==null){
+            return false;
+        }
+        if(this.owner==target){
+            return false;
+        }
+        if(this.owner.getPosition()==null){
+            return false;
+        }
+        if(target.getPosition()==null){
+            return false;
+        }
+        if(this.owner.getMP()-this.manaCost<0){
+            return false;
+        }
+        if(owner.isDead()){
+            return false;
+        }
+        if(target.isDead()){
+            return false;
+        }
+        double dist = this.owner.getPosition().distanceToCell(target.getPosition());
+        if(dist > this.range){
+            return false;
+        }
+        if(dist == -1){
+            return false;
+        }
+        if(this.owner.getX()==target.getX()&&this.owner.getY()==target.getY()){
+            return false;
+        }
+        if(this.owner.getY()!=target.getY()&&this.owner.getX()!=target.getX()){
+            return false;
+        }
+        return true;
     }
 
     public double getBaseDamage(){
