@@ -33,7 +33,7 @@ public class MenuState extends State
                     && (screenHeight - Gdx.input.getY()) >= ((400))
                     && (screenHeight - Gdx.input.getY()) <= ((400) + (playBtn.getHeight())))
             {
-                gsm.set(new PlayState(gsm));
+                gsm.set(new DifficultyStage(gsm));
             }
             else if(Gdx.input.getX() >= ((screenWidth / 2) - (optionsBtn.getWidth() / 2))
                     && Gdx.input.getX() <= ((screenWidth / 2) + (optionsBtn.getWidth()/2))
