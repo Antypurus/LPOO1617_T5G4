@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
+import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
@@ -78,5 +79,9 @@ public class Punch implements Ability{
 
     public double getManaCost(){
         return 0;
+    }
+
+    public boolean canHitCell(Cell cell){
+        return true;
     }
 }

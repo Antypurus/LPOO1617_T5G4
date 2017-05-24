@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
+import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
@@ -118,5 +119,22 @@ public class Charge implements Ability {
 
     public double getManaCost(){
         return 0;
+    }
+
+    public boolean canHitCell(Cell cell){
+        double dist = this.owner.getPosition().distanceToCell(cell);
+        if(dist > this.range){
+            return false;
+        }
+        if(dist == -1){
+            return false;
+        }
+        if(this.owner.getX()==cell.getxPos()&&this.owner.getY()==cell.getyPos()){
+            return false;
+        }
+        if(this.owner.getY()!=cell.getyPos()&&this.owner.getX()!=cell.getxPos()){
+            return false;
+        }
+        return true;
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
+import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Stats.Inteligence;
 import main.Logic.Unit.Unit;
@@ -140,5 +141,16 @@ public class Fireball implements Ability{
 
     public double getManaCost(){
         return this.ManaCost;
+    }
+
+    public boolean canHitCell(Cell cell){
+        double dist = this.owner.getPosition().distanceToCell(cell);
+        if(dist > this.range){
+            return false;
+        }
+        if(dist == -1){
+            return false;
+        }
+        return true;
     }
 }

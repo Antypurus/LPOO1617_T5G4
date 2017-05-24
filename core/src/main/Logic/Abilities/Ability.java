@@ -2,6 +2,7 @@ package main.Logic.Abilities;
 
 import java.util.ArrayList;
 
+import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
@@ -22,4 +23,5 @@ public interface Ability {
     public abstract double getHitChance();
     public abstract int getAOE();
     public abstract double getManaCost();
+    public abstract boolean canHitCell(Cell cell);
 }
