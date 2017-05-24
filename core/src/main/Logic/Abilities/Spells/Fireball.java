@@ -48,11 +48,8 @@ public class Fireball implements Ability{
         if(this.owner.getPosition()==null){
             return false;
         }
-        double dist = this.owner.getPosition().distanceToCell(target.getPosition());
-        if(dist > this.range){
-            return false;
-        }
-        if(dist == -1){
+        boolean ret = this.canHitCell(target.getPosition());
+        if(!ret){
             return false;
         }
         if(this.owner.getMP()-this.ManaCost<0){

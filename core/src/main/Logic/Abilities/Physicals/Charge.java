@@ -49,17 +49,8 @@ public class Charge implements Ability {
         if(target.isDead()){
             return false;
         }
-        double dist = this.owner.getPosition().distanceToCell(target.getPosition());
-        if(dist > this.range){
-            return false;
-        }
-        if(dist == -1){
-            return false;
-        }
-        if(this.owner.getX()==target.getX()&&this.owner.getY()==target.getY()){
-            return false;
-        }
-        if(this.owner.getY()!=target.getY()&&this.owner.getX()!=target.getX()){
+        boolean ret = this.canHitCell(target.getPosition());
+        if(!ret){
             return false;
         }
         return true;
