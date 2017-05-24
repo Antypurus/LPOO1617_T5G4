@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Unit {
     private boolean shouldUpdate = false;
+    private boolean testMode = false;
+    private double testModeValue = 0;
 
     private boolean dead = false;
 
@@ -27,6 +29,10 @@ public class Unit {
         return this.Afinity;
     }
 
+    public ArrayList<main.Logic.Abilities.Ability> getAbilities(){
+        return this.Abilities;
+    }
+
     //primary resources
     private main.Logic.Unit.Stats.HP Health;// health points
     private main.Logic.Unit.Stats.MP Mana;// Mana points
@@ -47,12 +53,33 @@ public class Unit {
     public double generateDodgeVal(){
         double speed = this.Speed.EffectiveValue;
         Random generator = new Random();
-        double dodge = generator.nextDouble()*100+1;
+        double dodge = 0;
+        if(!testMode) {
+             dodge = generator.nextDouble() * 100 + 1;
+        }else{
+             dodge = this.testModeValue;
+        }
         dodge+=speed;
         if(dodge>100){
             dodge = 100;
         }
         return dodge;
+    }
+
+    public void setTestMode(boolean value){
+        this.testMode = value;
+    }
+
+    public boolean getTestMode(){
+        return this.testMode;
+    }
+
+    public void setTestModeValue(double value){
+        this.testModeValue = value;
+    }
+
+    public double getTestModeValue(){
+        return this.testModeValue;
     }
 
     public void update(){
@@ -202,13 +229,15 @@ public class Unit {
     }
 
     public void setPosition(main.Logic.Map.Cell position){
-        if(this.position!=null){
-            this.position.setWalckable(true);
-            this.position.setUnit(null);
+        if(position.getUnit()==null) {
+            if (this.position != null) {
+                this.position.setWalckable(true);
+                this.position.setUnit(null);
+            }
+            this.position = position;
+            position.setWalckable(false);
+            position.setUnit(this);
         }
-        this.position = position;
-        position.setWalckable(false);
-        position.setUnit(this);
     }
 
     public main.Logic.Map.Cell getPosition(){
@@ -219,7 +248,7 @@ public class Unit {
         if(this.position!=null){
             return this.position.getxPos();
         }else{
-            return 0;
+            return -1;
         }
     }
 
@@ -227,7 +256,7 @@ public class Unit {
         if(this.position!=null){
             return this.position.getyPos();
         }else{
-            return 0;
+            return -1;
         }
     }
 

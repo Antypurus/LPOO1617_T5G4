@@ -10,7 +10,7 @@ import main.Logic.Unit.Unit;
 
 public class Fireball implements Ability{
 
-    private double Damage = 100;
+    private double Damage = 10;
     private double ManaCost = 10;
     private Statistic scalingStat = null;
     private int AOE = 0;
@@ -19,10 +19,14 @@ public class Fireball implements Ability{
     private main.Logic.ElementSystem.Element.DamageElement dmgElem = Element.DamageElement.FIRE;
     private Unit owner = null;
     private String name = "FireBall";
+    private Element elem = new Element();
 
     public Fireball(Unit owner){
         this.owner = owner;
-        this.scalingStat = owner.getINTELIGENCE();
+        if(owner!=null) {
+            this.owner.addAbility(this);
+            this.scalingStat = owner.getINTELIGENCE();
+        }
     }
 
     public void AffectTarget(Unit target){
@@ -34,11 +38,32 @@ public class Fireball implements Ability{
     }
 
     public boolean canHitTarget(Unit target){
+        if (this.owner == null) {
+            return false;
+        }
+        if(target==null){
+            return false;
+        }
+        if(this.owner.getPosition()==null){
+            return false;
+        }
         double dist = this.owner.getPosition().distanceToCell(target.getPosition());
         if(dist > this.range){
             return false;
         }
+        if(dist == -1){
+            return false;
+        }
         if(this.owner.getMP()-this.ManaCost<0){
+            return false;
+        }
+        if(this.owner.isDead()){
+           return false;
+        }
+        if(target.isDead()){
+            return false;
+        }
+        if(target==this.owner){
             return false;
         }
         return true;
@@ -89,16 +114,18 @@ public class Fireball implements Ability{
     public double getDamageToTarget(Unit target){
         double dmg = this.Damage;
         dmg*=this.scalingStat.EffectiveValue;
-        dmg-=target.getFireRes();
-        Element elem = new Element();
         if(target.getAfinity()!=null){
-            dmg*=elem.ElementComparation(target.getAfinity(),this.dmgElem);
+            dmg*=this.elem.ElementComparation(this.dmgElem,target.getAfinity());
         }
         double dodge = target.generateDodgeVal();
         if(dodge>this.Chance){
             dmg = 0;
         }else if(dodge == 1){
             dmg*=2;
+        }
+        dmg-=target.getFireRes();
+        if(dmg<0){
+            dmg=0;
         }
         return dmg;
     }

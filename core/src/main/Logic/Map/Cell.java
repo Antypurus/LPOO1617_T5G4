@@ -93,15 +93,18 @@ public class Cell {
     }
 
     public double distanceToCell(Cell cell){
-        int x1 = this.xPos;
-        int y1 = this.yPos;
-        int x2 = cell.getxPos();
-        int y2 = cell.getyPos();
-        double res = 0;
-        int yd = y2-y1;
-        int xd = x2-x1;
-        double toSqrt = Math.pow(xd,2) + Math.pow(yd,2);
-        res = Math.sqrt(toSqrt);
-        return res;
+        if(cell!=null) {
+            int x1 = this.xPos;
+            int y1 = this.yPos;
+            int x2 = cell.getxPos();
+            int y2 = cell.getyPos();
+            double res = 0;
+            int yd = y2 - y1;
+            int xd = x2 - x1;
+            double toSqrt = Math.pow(xd, 2) + Math.pow(yd, 2);
+            res = Math.sqrt(toSqrt);
+            return res;
+        }
+        return -1;
     }
 }

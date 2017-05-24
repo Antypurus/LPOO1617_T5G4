@@ -460,4 +460,84 @@ public class unitTest {
         assertEquals(0,testUnit2.getX());
         assertEquals(0,testUnit2.getY());
     }
+
+    @Test
+    public void testDodgeValueGeneration(){
+        Unit testUnit = new Unit("Test Unit",5,2,0,6,2);
+
+        for(int i=0;i<1000000;++i){
+            double val = testUnit.generateDodgeVal();
+            assertTrue(val>0);
+            assertTrue(val<=100);
+        }
+    }
+
+    @Test
+    public void testTestMode(){
+        Unit testUnit = new Unit("Test Unit",5,2,0,6,2);
+
+        assertFalse(testUnit.getTestMode());
+
+        testUnit.setTestMode(true);
+        assertTrue(testUnit.getTestMode());
+
+        testUnit.setTestModeValue(0);
+        assertEquals(0,testUnit.generateDodgeVal(),0.01);
+
+        testUnit.setTestModeValue(100);
+        assertEquals(100,testUnit.generateDodgeVal(),0.01);
+
+        testUnit.setTestModeValue(1000);
+        assertEquals(100,testUnit.generateDodgeVal(),0.01);
+    }
+
+    @Test
+    public void testTestModeWithSpeedModifier(){
+        Unit testUnit = new Unit("Test Unit",5,2,10,6,2);
+
+        assertFalse(testUnit.getTestMode());
+
+        testUnit.setTestMode(true);
+        assertTrue(testUnit.getTestMode());
+
+        testUnit.setTestModeValue(0);
+        assertEquals(10,testUnit.generateDodgeVal(),0.01);
+
+        testUnit.setTestModeValue(100);
+        assertEquals(100,testUnit.generateDodgeVal(),0.01);
+
+        testUnit.setTestModeValue(1000);
+        assertEquals(100,testUnit.generateDodgeVal(),0.01);
+    }
+
+    @Test
+    public void cantSetPositionUnitAlreadyThere(){
+        Unit testUnit =  new Unit("Test Unit",5,2,10,6,2);
+        Unit testUnit2 =  new Unit("Test Unit",5,2,10,6,2);
+        Map testMap = new Map("Test Map",10,10);
+
+        testUnit.setPosition(testMap.getCell(0,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit2.setPosition(testMap.getCell(0,0));
+        assertEquals(null,testUnit2.getPosition());
+
+        testUnit2.setPosition(testMap.getCell(1,0));
+        assertEquals(1,testUnit2.getX());
+        assertEquals(0,testUnit2.getY());
+    }
+
+    @Test
+    public void positionNotSetTest(){
+        Unit testUnit =  new Unit("Test Unit",5,2,10,6,2);
+        Map testMap = new Map("Test Map",10,10);
+
+        assertEquals(-1,testUnit.getY());
+        assertEquals(-1,testUnit.getX());
+
+        testUnit.setPosition(testMap.getCell(0,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+    }
 }
