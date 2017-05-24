@@ -1,5 +1,9 @@
 package main.Logic.Map;
 
+import java.util.ArrayList;
+
+import main.Logic.Abilities.Ability;
+
 public class Map {
 
     private Cell[][] map = null;
@@ -73,5 +77,16 @@ public class Map {
         return null;
     }
 
+    ArrayList<Cell> validCells(Ability ability){
+        ArrayList<Cell>ret = new ArrayList<Cell>();
+        for(int i=0;i<this.height;++i){
+            for(int j=0;j<this.width;++j){
+                if(ability.canHitCell(this.map[j][i])){
+                    ret.add(this.map[j][i]);
+                }
+            }
+        }
+        return ret;
+    }
 
 }
