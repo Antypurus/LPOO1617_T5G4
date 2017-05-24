@@ -509,4 +509,35 @@ public class unitTest {
         testUnit.setTestModeValue(1000);
         assertEquals(100,testUnit.generateDodgeVal(),0.01);
     }
+
+    @Test
+    public void cantSetPositionUnitAlreadyThere(){
+        Unit testUnit =  new Unit("Test Unit",5,2,10,6,2);
+        Unit testUnit2 =  new Unit("Test Unit",5,2,10,6,2);
+        Map testMap = new Map("Test Map",10,10);
+
+        testUnit.setPosition(testMap.getCell(0,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit2.setPosition(testMap.getCell(0,0));
+        assertEquals(null,testUnit2.getPosition());
+
+        testUnit2.setPosition(testMap.getCell(1,0));
+        assertEquals(1,testUnit2.getX());
+        assertEquals(0,testUnit2.getY());
+    }
+
+    @Test
+    public void positionNotSetTest(){
+        Unit testUnit =  new Unit("Test Unit",5,2,10,6,2);
+        Map testMap = new Map("Test Map",10,10);
+
+        assertEquals(-1,testUnit.getY());
+        assertEquals(-1,testUnit.getX());
+
+        testUnit.setPosition(testMap.getCell(0,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+    }
 }

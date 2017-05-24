@@ -229,13 +229,15 @@ public class Unit {
     }
 
     public void setPosition(main.Logic.Map.Cell position){
-        if(this.position!=null){
-            this.position.setWalckable(true);
-            this.position.setUnit(null);
+        if(position.getUnit()==null) {
+            if (this.position != null) {
+                this.position.setWalckable(true);
+                this.position.setUnit(null);
+            }
+            this.position = position;
+            position.setWalckable(false);
+            position.setUnit(this);
         }
-        this.position = position;
-        position.setWalckable(false);
-        position.setUnit(this);
     }
 
     public main.Logic.Map.Cell getPosition(){
@@ -246,7 +248,7 @@ public class Unit {
         if(this.position!=null){
             return this.position.getxPos();
         }else{
-            return 0;
+            return -1;
         }
     }
 
@@ -254,7 +256,7 @@ public class Unit {
         if(this.position!=null){
             return this.position.getyPos();
         }else{
-            return 0;
+            return -1;
         }
     }
 
