@@ -20,8 +20,10 @@ public class HP extends main.Logic.Unit.Statistic {
 
         for(int i=0;i<this.Deltas.size();++i){
             this.maxValue+=this.Deltas.get(i);
+            if(this.maxValue<=0){
+                this.maxValue = 1;
+            }
         }
-
         while(this.modifiers.size()!=0){
             this.EffectiveValue+=this.modifiers.poll();
         }
