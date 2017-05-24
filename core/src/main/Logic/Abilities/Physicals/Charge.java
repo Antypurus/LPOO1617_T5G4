@@ -110,7 +110,23 @@ public class Charge implements Ability {
     }
 
     public double getDamageToTarget(Unit target){
-        return 0;
+        double dmg = this.Damage;
+        dmg*=this.scalingStat.EffectiveValue;
+        double dodge = target.generateDodgeVal();
+        dodge-=this.owner.getSPD();
+        if(dodge<=0){
+            dodge = 1;
+        }
+        if(dodge>this.Chance){
+            dmg = 0;
+        }else if(dodge == 1){
+            dmg*=2;
+        }
+        dmg-=target.getArmor();
+        if(dmg<0){
+            dmg=0;
+        }
+        return dmg;
     }
 
     public double getHitChance(){
