@@ -10,17 +10,30 @@ import main.Logic.Unit.Unit;
 
 public class Charge implements Ability {
 
-    private  double Damage = 100;
-    private  int AOE = 0;
-    private  double Chance = 100;
-    private  int range  = 10;
+    private  double Damage = 20;
+    private  double Chance = 60;
+    private  int range  = 15;
     private double manaCost = 0;
-
+    private Statistic scalingStat = null;
     private Unit owner = null;
+    private String name = "Charge";
+
+    public Charge(Unit owner){
+        this.owner = owner;
+        if(this.owner!=null){
+            this.owner.addAbility(this);
+            this.scalingStat = this.owner.getSTRENGHT();
+        }
+    }
 
     public void AffectTarget(Unit target){
         if(this.canHitTarget(target)&&this.owner!=null){
-
+            this.owner.reduceMana(this.manaCost);
+            double dmg = this.getDamageToTarget(target);
+            target.takeDamage(dmg);
+            int deltaX = target.getX()-this.owner.getX();
+            int deltaY = target.getY()-this.owner.getY();
+            this.owner.move(deltaX,deltaY);
         }
     }
 
@@ -57,11 +70,11 @@ public class Charge implements Ability {
     }
 
     public double getBaseDamage(){
-        return 0;
+        return this.Damage;
     }
 
     public int getRange(){
-        return 0;
+        return this.range;
     }
 
     public boolean isElemental() {
@@ -69,7 +82,7 @@ public class Charge implements Ability {
     }
 
     public main.Logic.ElementSystem.Element.type getType(){
-        return null;
+        return Element.type.DAMAGE;
     }
 
     public main.Logic.ElementSystem.Element.DamageElement getDamageElement(){
@@ -77,11 +90,11 @@ public class Charge implements Ability {
     }
 
     public main.Logic.ElementSystem.Element.DamageType getDamageType(){
-        return null;
+        return Element.DamageType.Physical;
     }
 
     public String getName(){
-        return null;
+        return this.name;
     }
 
     public ArrayList<Element.type> getTraits(){
@@ -89,11 +102,11 @@ public class Charge implements Ability {
     }
 
     public Unit getOwner(){
-        return null;
+        return this.owner;
     }
 
     public Statistic getScalingStat(){
-        return null;
+        return this.scalingStat;
     }
 
     public double getDamageToTarget(Unit target){
@@ -101,7 +114,7 @@ public class Charge implements Ability {
     }
 
     public double getHitChance(){
-        return 0;
+        return this.Chance;
     }
 
     public int getAOE(){
@@ -109,7 +122,7 @@ public class Charge implements Ability {
     }
 
     public double getManaCost(){
-        return 0;
+        return this.manaCost;
     }
 
     public boolean canHitCell(Cell cell){
