@@ -8,7 +8,7 @@ import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
-public class WaterWip implements Ability
+public class WaterWip implements Ability{
 
         private double Damage = 5;
         private double ManaCost = 0;
