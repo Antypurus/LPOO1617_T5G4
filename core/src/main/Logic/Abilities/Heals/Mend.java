@@ -2,13 +2,14 @@ package main.Logic.Abilities.Heals;
 
 import java.util.ArrayList;
 
+import Logic.Abilities.BaseAbilityFunctions;
 import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
-public class Mend implements Ability{
+public class Mend extends BaseAbilityFunctions implements Ability{
 
     private  double Heal = 100;
     private double manaCost = 10;
@@ -36,32 +37,7 @@ public class Mend implements Ability{
     }
 
     public boolean canHitTarget(Unit target){
-        if (this.owner == null) {
-            return false;
-        }
-        if(target==null){
-            return false;
-        }
-        if(this.owner.getPosition()==null){
-            return false;
-        }
-        boolean ret = this.canHitCell(target.getPosition());
-        if(!ret){
-            return false;
-        }
-        if(this.owner.getMP()-this.manaCost<0){
-            return false;
-        }
-        if(this.owner.isDead()){
-            return false;
-        }
-        if(target.isDead()){
-            return false;
-        }
-        if(target==this.owner){
-            return false;
-        }
-        return true;
+        return this.baseCanHitTarget(this,target);
     }
 
     public double getBaseDamage(){
@@ -124,14 +100,7 @@ public class Mend implements Ability{
     }
 
     public boolean canHitCell(Cell cell){
-        double dist = this.owner.getPosition().distanceToCell(cell);
-        if(dist > this.range){
-            return false;
-        }
-        if(dist == -1){
-            return false;
-        }
-        return true;
+        return this.baseCanHitCell(this.owner,cell,this.range);
     }
 
 }

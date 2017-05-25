@@ -2,13 +2,14 @@ package main.Logic.Abilities.Physicals;
 
 import java.util.ArrayList;
 
+import Logic.Abilities.BaseAbilityFunctions;
 import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
-public class Charge implements Ability {
+public class Charge extends BaseAbilityFunctions implements Ability {
 
     private  double Damage = 20;
     private  double Chance = 60;
@@ -38,32 +39,10 @@ public class Charge implements Ability {
     }
 
     public boolean canHitTarget(Unit target){
-        if(target==null){
+        if(!this.baseNonDistanceRelatedHitCheck(this,target)){
             return false;
         }
-        if(this.owner==null){
-            return false;
-        }
-        if(this.owner==target){
-            return false;
-        }
-        if(this.owner.getPosition()==null){
-            return false;
-        }
-        if(target.getPosition()==null){
-            return false;
-        }
-        if(this.owner.getMP()-this.manaCost<0){
-            return false;
-        }
-        if(owner.isDead()){
-            return false;
-        }
-        if(target.isDead()){
-            return false;
-        }
-        boolean ret = this.canHitCell(target.getPosition());
-        if(!ret){
+        if(!this.canHitCell(target.getPosition())){
             return false;
         }
         return true;
