@@ -11,29 +11,28 @@ import main.Logic.Unit.Unit;
 
 public class WaterWip extends BaseAbilityFunctions implements Ability {
 
-        private double Damage = 5;
+        private double WaterWipBaseDamage = 5;
         private double ManaCost = 10;
-        private Statistic scalingStat = null;
-        private int AOE = 0;
-        private double Chance = 85;
-        private int range  = 15;
-        private main.Logic.ElementSystem.Element.DamageElement dmgElem = Element.DamageElement.WATER;
-        private Unit owner = null;
-        private String name = "WaterWip";
+        private Statistic WaterWipScalingStat = null;
+        private double WaterWipHitChance = 85;
+        private int WaterWipRange = 15;
+        private main.Logic.ElementSystem.Element.DamageElement WaterWipDamageElement = Element.DamageElement.WATER;
+        private Unit WaterWipOwner = null;
+        private String WaterWipName = "WaterWip";
         private Element elem = new Element();
 
-    public WaterWip(Unit owner) {
-        this.owner = owner;
-        if(this.owner!=null) {
-            this.owner.addAbility(this);
-            this.scalingStat = this.owner.getINTELIGENCE();
+    public WaterWip(Unit WaterWipOwner) {
+        this.WaterWipOwner = WaterWipOwner;
+        if(this.WaterWipOwner !=null) {
+            this.WaterWipOwner.addAbility(this);
+            this.WaterWipScalingStat = this.WaterWipOwner.getINTELIGENCE();
         }
     }
 
     @Override
     public void AffectTarget(Unit target) {
         if(this.canHitTarget(target)) {
-            this.owner.reduceMana(this.ManaCost);
+            this.WaterWipOwner.reduceMana(this.ManaCost);
             double dmg = this.getDamageToTarget(target);
             target.takeDamage(dmg);
         }
@@ -46,12 +45,12 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public double getBaseDamage() {
-        return this.Damage;
+        return this.WaterWipBaseDamage;
     }
 
     @Override
     public int getRange() {
-        return this.range;
+        return this.WaterWipRange;
     }
 
     @Override
@@ -66,7 +65,7 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public Element.DamageElement getDamageElement() {
-        return this.dmgElem;
+        return this.WaterWipDamageElement;
     }
 
     @Override
@@ -76,7 +75,7 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public String getName() {
-        return this.name;
+        return this.WaterWipName;
     }
 
     @Override
@@ -86,12 +85,12 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public Unit getOwner() {
-        return this.owner;
+        return this.WaterWipOwner;
     }
 
     @Override
     public Statistic getScalingStat() {
-        return this.scalingStat;
+        return this.WaterWipScalingStat;
     }
 
     @Override
@@ -101,7 +100,7 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public double getHitChance() {
-        return this.Chance;
+        return this.WaterWipHitChance;
     }
 
     @Override
@@ -116,6 +115,6 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public boolean canHitCell(Cell cell) {
-        return this.baseCanHitCell(this.owner,cell,this.range);
+        return this.baseCanHitCell(this.WaterWipOwner,cell,this.WaterWipRange);
     }
 }

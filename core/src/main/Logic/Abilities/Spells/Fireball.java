@@ -7,33 +7,32 @@ import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
-import main.Logic.Unit.Stats.Inteligence;
 import main.Logic.Unit.Unit;
 
 public class Fireball extends BaseAbilityFunctions implements Ability{
 
-    private double Damage = 10;
-    private double ManaCost = 10;
-    private Statistic scalingStat = null;
-    private int AOE = 0;
-    private double Chance = 100;
-    private int range  = 10;
-    private main.Logic.ElementSystem.Element.DamageElement dmgElem = Element.DamageElement.FIRE;
-    private Unit owner = null;
-    private String name = "FireBall";
+    private double FireBallBaseDamage = 10;
+    private double FireBallManaCost = 10;
+    private Statistic FireBallScallingStat = null;
+    private int FireballAOE = 0;
+    private double FireBallHitChance = 100;
+    private int FireBallRange = 10;
+    private main.Logic.ElementSystem.Element.DamageElement FireBallDamageElement = Element.DamageElement.FIRE;
+    private Unit FireBallOwner = null;
+    private String FireBallName = "FireBall";
     private Element elem = new Element();
 
-    public Fireball(Unit owner){
-        this.owner = owner;
-        if(owner!=null) {
-            this.owner.addAbility(this);
-            this.scalingStat = owner.getINTELIGENCE();
+    public Fireball(Unit FireBallOwner){
+        this.FireBallOwner = FireBallOwner;
+        if(FireBallOwner !=null) {
+            this.FireBallOwner.addAbility(this);
+            this.FireBallScallingStat = FireBallOwner.getINTELIGENCE();
         }
     }
 
     public void AffectTarget(Unit target){
         if(this.canHitTarget(target)){
-            this.owner.reduceMana(this.ManaCost);
+            this.FireBallOwner.reduceMana(this.FireBallManaCost);
             double dmg = this.getDamageToTarget(target);
             target.takeDamage(dmg);
         }
@@ -44,11 +43,11 @@ public class Fireball extends BaseAbilityFunctions implements Ability{
     }
 
     public double getBaseDamage(){
-        return this.Damage;
+        return this.FireBallBaseDamage;
     }
 
     public int getRange(){
-        return this.range;
+        return this.FireBallRange;
     }
 
     public boolean isElemental(){
@@ -68,7 +67,7 @@ public class Fireball extends BaseAbilityFunctions implements Ability{
     }
 
     public String getName(){
-        return this.name;
+        return this.FireBallName;
     }
 
     public ArrayList<Element.type> getTraits(){
@@ -78,21 +77,21 @@ public class Fireball extends BaseAbilityFunctions implements Ability{
     }
 
     public Unit getOwner(){
-        return this.owner;
+        return this.FireBallOwner;
     }
 
     public Statistic getScalingStat(){
-        return this.scalingStat;
+        return this.FireBallScallingStat;
     }
 
     public double getDamageToTarget(Unit target){
-        double dmg = this.Damage;
-        dmg*=this.scalingStat.EffectiveValue;
+        double dmg = this.FireBallBaseDamage;
+        dmg*=this.FireBallScallingStat.EffectiveValue;
         if(target.getAfinity()!=null){
-            dmg*=this.elem.ElementComparation(this.dmgElem,target.getAfinity());
+            dmg*=this.elem.ElementComparation(this.FireBallDamageElement,target.getAfinity());
         }
         double dodge = target.generateDodgeVal();
-        if(dodge>this.Chance){
+        if(dodge>this.FireBallHitChance){
             dmg = 0;
         }else if(dodge == 1){
             dmg*=2;
@@ -105,18 +104,18 @@ public class Fireball extends BaseAbilityFunctions implements Ability{
     }
 
     public double getHitChance(){
-        return this.Chance;
+        return this.FireBallHitChance;
     }
 
     public int getAOE(){
-        return this.AOE;
+        return this.FireballAOE;
     }
 
     public double getManaCost(){
-        return this.ManaCost;
+        return this.FireBallManaCost;
     }
 
     public boolean canHitCell(Cell cell){
-        return this.baseCanHitCell(this.owner,cell,this.range);
+        return this.baseCanHitCell(this.FireBallOwner,cell,this.FireBallRange);
     }
 }

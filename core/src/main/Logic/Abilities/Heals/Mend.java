@@ -11,26 +11,26 @@ import main.Logic.Unit.Unit;
 
 public class Mend extends BaseAbilityFunctions implements Ability{
 
-    private  double Heal = 100;
-    private double manaCost = 10;
-    private  int AOE = 0;
-    private  double Chance = 100;
-    private  int range  = 20;
-    private Statistic scalingStaat = null;
-    private Unit owner = null;
-    private String name = "Mend";
+    private  double MendBaseHeal = 100;
+    private double MendManaCost = 10;
+    private  int MendAOE = 0;
+    private  double MendHitChance = 100;
+    private  int MendRange = 20;
+    private Statistic MendScallingStat = null;
+    private Unit MendOwner = null;
+    private String MendName = "Mend";
 
-    public Mend(Unit owner){
-        this.owner = owner;
-        if(this.owner!=null){
-            this.scalingStaat = this.owner.getINTELIGENCE();
-            this.owner.addAbility(this);
+    public Mend(Unit MendOwner){
+        this.MendOwner = MendOwner;
+        if(this.MendOwner !=null){
+            this.MendScallingStat = this.MendOwner.getINTELIGENCE();
+            this.MendOwner.addAbility(this);
         }
     }
 
     public void AffectTarget(Unit target){
         if(this.canHitTarget(target)){
-            this.owner.reduceMana(this.manaCost);
+            this.MendOwner.reduceMana(this.MendManaCost);
             double heal = this.getDamageToTarget(target);
             target.takeHeal(heal);
         }
@@ -41,11 +41,11 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     }
 
     public double getBaseDamage(){
-        return -this.Heal;
+        return -this.MendBaseHeal;
     }
 
     public int getRange(){
-        return this.range;
+        return this.MendRange;
     }
 
     public boolean isElemental(){
@@ -65,7 +65,7 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     }
 
     public String getName(){
-        return this.name;
+        return this.MendName;
     }
 
     public ArrayList<Element.type> getTraits(){
@@ -73,16 +73,16 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     }
 
     public Unit getOwner(){
-        return this.owner;
+        return this.MendOwner;
     }
 
     public Statistic getScalingStat(){
-        return this.scalingStaat;
+        return this.MendScallingStat;
     }
 
     public double getDamageToTarget(Unit target){
-        double heal = this.Heal;
-        heal*=this.scalingStaat.EffectiveValue;
+        double heal = this.MendBaseHeal;
+        heal*=this.MendScallingStat.EffectiveValue;
         heal+=target.getINT()*2;
         return heal;
     }
@@ -96,11 +96,11 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     }
 
     public double getManaCost(){
-        return this.manaCost;
+        return this.MendManaCost;
     }
 
     public boolean canHitCell(Cell cell){
-        return this.baseCanHitCell(this.owner,cell,this.range);
+        return this.baseCanHitCell(this.MendOwner,cell,this.MendRange);
     }
 
 }

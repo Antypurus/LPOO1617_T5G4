@@ -11,27 +11,27 @@ import main.Logic.Unit.Unit;
 
 public class Punch extends BaseAbilityFunctions implements Ability{
 
-    private double Damage = 5;
-    private int AOE = 0;
-    private double Chance = 100;
-    private Statistic scalingStat = null;
-    private double manaCost = 0;
-    private int range  = 1;
-    private String name = "Punch";
+    private double PunchBaseDamage = 5;
+    private int PucnhAOE = 0;
+    private double PunchHitChance = 100;
+    private Statistic PucnhScallingStat = null;
+    private double PunchManaCost = 0;
+    private int PunchRange = 1;
+    private String PunchName = "Punch";
 
-    private Unit owner = null;
+    private Unit PunchOwner = null;
 
-    public Punch(Unit owner){
-        this.owner = owner;
-        if(this.owner!=null){
-            this.scalingStat = this.owner.getSTRENGHT();
-            this.owner.addAbility(this);
+    public Punch(Unit PunchOwner){
+        this.PunchOwner = PunchOwner;
+        if(this.PunchOwner !=null){
+            this.PucnhScallingStat = this.PunchOwner.getSTRENGHT();
+            this.PunchOwner.addAbility(this);
         }
     }
 
     public void AffectTarget(Unit target){
         if(this.canHitTarget(target)){
-            this.owner.reduceMana(this.manaCost);
+            this.PunchOwner.reduceMana(this.PunchManaCost);
             double dmg = this.getDamageToTarget(target);
             target.takeDamage(dmg);
         }
@@ -42,11 +42,11 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     }
 
     public double getBaseDamage(){
-        return this.Damage;
+        return this.PunchBaseDamage;
     }
 
     public int getRange(){
-        return this.range;
+        return this.PunchRange;
     }
 
     public boolean isElemental(){
@@ -66,7 +66,7 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     }
 
     public String getName(){
-        return this.name;
+        return this.PunchName;
     }
 
     public ArrayList<Element.type> getTraits(){
@@ -74,18 +74,18 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     }
 
     public Unit getOwner(){
-        return this.owner;
+        return this.PunchOwner;
     }
 
     public Statistic getScalingStat(){
-        return this.scalingStat;
+        return this.PucnhScallingStat;
     }
 
     public double getDamageToTarget(Unit target){
-        double dmg = this.Damage;
-        dmg*=this.scalingStat.EffectiveValue;
+        double dmg = this.PunchBaseDamage;
+        dmg*=this.PucnhScallingStat.EffectiveValue;
         double dodge = target.generateDodgeVal();
-        if(dodge>this.Chance){
+        if(dodge>this.PunchHitChance){
             dmg = 0;
         }else if(dodge == 1){
             dmg*=2;
@@ -98,7 +98,7 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     }
 
     public double getHitChance(){
-        return this.Chance;
+        return this.PunchHitChance;
     }
 
     public int getAOE(){
@@ -106,10 +106,10 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     }
 
     public double getManaCost(){
-        return this.manaCost;
+        return this.PunchManaCost;
     }
 
     public boolean canHitCell(Cell cell){
-        return this.baseCanHitCell(this.owner,cell,this.range);
+        return this.baseCanHitCell(this.PunchOwner,cell,this.PunchRange);
     }
 }

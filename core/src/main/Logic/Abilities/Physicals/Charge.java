@@ -11,30 +11,30 @@ import main.Logic.Unit.Unit;
 
 public class Charge extends BaseAbilityFunctions implements Ability {
 
-    private  double Damage = 20;
-    private  double Chance = 60;
-    private  int range  = 15;
-    private double manaCost = 0;
-    private Statistic scalingStat = null;
-    private Unit owner = null;
-    private String name = "Charge";
+    private  double ChargeBaseDamage = 20;
+    private  double ChargeHitChance = 60;
+    private  int ChargeRange = 15;
+    private double ChargeManaCost = 0;
+    private Statistic ChargeScalingStat = null;
+    private Unit ChargeOwner = null;
+    private String ChargeName = "Charge";
 
-    public Charge(Unit owner){
-        this.owner = owner;
-        if(this.owner!=null){
-            this.owner.addAbility(this);
-            this.scalingStat = this.owner.getSTRENGHT();
+    public Charge(Unit ChargeOwner){
+        this.ChargeOwner = ChargeOwner;
+        if(this.ChargeOwner !=null){
+            this.ChargeOwner.addAbility(this);
+            this.ChargeScalingStat = this.ChargeOwner.getSTRENGHT();
         }
     }
 
     public void AffectTarget(Unit target){
-        if(this.canHitTarget(target)&&this.owner!=null){
-            this.owner.reduceMana(this.manaCost);
+        if(this.canHitTarget(target)&&this.ChargeOwner !=null){
+            this.ChargeOwner.reduceMana(this.ChargeManaCost);
             double dmg = this.getDamageToTarget(target);
             target.takeDamage(dmg);
-            int deltaX = target.getX()-this.owner.getX();
-            int deltaY = target.getY()-this.owner.getY();
-            this.owner.move(deltaX,deltaY);
+            int deltaX = target.getX()-this.ChargeOwner.getX();
+            int deltaY = target.getY()-this.ChargeOwner.getY();
+            this.ChargeOwner.move(deltaX,deltaY);
         }
     }
 
@@ -49,11 +49,11 @@ public class Charge extends BaseAbilityFunctions implements Ability {
     }
 
     public double getBaseDamage(){
-        return this.Damage;
+        return this.ChargeBaseDamage;
     }
 
     public int getRange(){
-        return this.range;
+        return this.ChargeRange;
     }
 
     public boolean isElemental() {
@@ -73,7 +73,7 @@ public class Charge extends BaseAbilityFunctions implements Ability {
     }
 
     public String getName(){
-        return this.name;
+        return this.ChargeName;
     }
 
     public ArrayList<Element.type> getTraits(){
@@ -81,22 +81,22 @@ public class Charge extends BaseAbilityFunctions implements Ability {
     }
 
     public Unit getOwner(){
-        return this.owner;
+        return this.ChargeOwner;
     }
 
     public Statistic getScalingStat(){
-        return this.scalingStat;
+        return this.ChargeScalingStat;
     }
 
     public double getDamageToTarget(Unit target){
-        double dmg = this.Damage;
-        dmg*=this.scalingStat.EffectiveValue;
+        double dmg = this.ChargeBaseDamage;
+        dmg*=this.ChargeScalingStat.EffectiveValue;
         double dodge = target.generateDodgeVal();
-        dodge-=this.owner.getSPD();
+        dodge-=this.ChargeOwner.getSPD();
         if(dodge<=0){
             dodge = 1;
         }
-        if(dodge>this.Chance){
+        if(dodge>this.ChargeHitChance){
             dmg = 0;
         }else if(dodge == 1){
             dmg*=2;
@@ -109,7 +109,7 @@ public class Charge extends BaseAbilityFunctions implements Ability {
     }
 
     public double getHitChance(){
-        return this.Chance;
+        return this.ChargeHitChance;
     }
 
     public int getAOE(){
@@ -117,21 +117,21 @@ public class Charge extends BaseAbilityFunctions implements Ability {
     }
 
     public double getManaCost(){
-        return this.manaCost;
+        return this.ChargeManaCost;
     }
 
     public boolean canHitCell(Cell cell){
-        double dist = this.owner.getPosition().distanceToCell(cell);
-        if(dist > this.range){
+        double dist = this.ChargeOwner.getPosition().distanceToCell(cell);
+        if(dist > this.ChargeRange){
             return false;
         }
         if(dist == -1){
             return false;
         }
-        if(this.owner.getX()==cell.getxPos()&&this.owner.getY()==cell.getyPos()){
+        if(this.ChargeOwner.getX()==cell.getxPos()&&this.ChargeOwner.getY()==cell.getyPos()){
             return false;
         }
-        if(this.owner.getY()!=cell.getyPos()&&this.owner.getX()!=cell.getxPos()){
+        if(this.ChargeOwner.getY()!=cell.getyPos()&&this.ChargeOwner.getX()!=cell.getxPos()){
             return false;
         }
         return true;
