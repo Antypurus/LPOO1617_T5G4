@@ -305,6 +305,12 @@ public class unitTest {
         testUnit.setPosition(testMap.getCell(10,11));
         assertEquals(10,testUnit.getX());
         assertEquals(11,testUnit.getY());
+        testUnit.setPosition(testMap.getCell(5,5));
+        assertEquals(5,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+        testUnit.setPosition(testMap.getCell(15,15));
+        assertEquals(15,testUnit.getX());
+        assertEquals(15,testUnit.getY());
     }
 
     @Test
@@ -325,6 +331,30 @@ public class unitTest {
         assertEquals(12,testUnit.getY());
         testUnit.move(0,-1);
         assertEquals(11,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(10,11));
+        testUnit.move(1,0);
+        testUnit.move(0,1);
+        assertEquals(11,testUnit.getX());
+        assertEquals(12,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(10,11));
+        testUnit.move(-1,0);
+        testUnit.move(0,-1);
+        assertEquals(9,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(10,11));
+        testUnit.move(-1,0);
+        testUnit.move(0,1);
+        assertEquals(9,testUnit.getX());
+        assertEquals(12,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(10,11));
+        testUnit.move(1,0);
+        testUnit.move(0,-1);
+        assertEquals(11,testUnit.getX());
+        assertEquals(10,testUnit.getY());
     }
 
     @Test
@@ -337,10 +367,10 @@ public class unitTest {
         assertEquals(10,testUnit.getX());
         assertEquals(11,testUnit.getY());
 
-        assertFalse(testMap.getCell(10,11).isWalckable());
+        assertFalse(testMap.getCell(10,11).isWalkable());
         testUnit.move(1,0);
-        assertFalse(testMap.getCell(11,11).isWalckable());
-        assertTrue(testMap.getCell(10,11).isWalckable());
+        assertFalse(testMap.getCell(11,11).isWalkable());
+        assertTrue(testMap.getCell(10,11).isWalkable());
     }
 
     @Test
@@ -348,10 +378,10 @@ public class unitTest {
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
         Map testMap = new Map("Test Map",1280,720);
 
-        testMap.getCell(11,11).setWalckable(false);
-        testMap.getCell(9,11).setWalckable(false);
-        testMap.getCell(10,12).setWalckable(false);
-        testMap.getCell(10,10).setWalckable(false);
+        testMap.getCell(11,11).setWalkable(false);
+        testMap.getCell(9,11).setWalkable(false);
+        testMap.getCell(10,12).setWalkable(false);
+        testMap.getCell(10,10).setWalkable(false);
 
         testUnit.setPosition(testMap.getCell(10,11));
         assertEquals(10,testUnit.getX());
@@ -434,9 +464,9 @@ public class unitTest {
         assertEquals(0,testUnit.getX());
         assertEquals(0,testUnit.getY());
 
-        assertFalse(testMap.getCell(0,0).isWalckable());
+        assertFalse(testMap.getCell(0,0).isWalkable());
         testUnit.setPosition(testMap.getCell(10,10));
-        assertTrue(testMap.getCell(0,0).isWalckable());
+        assertTrue(testMap.getCell(0,0).isWalkable());
     }
 
     @Test
@@ -454,7 +484,7 @@ public class unitTest {
 
         testUnit.takeDamage(1000);
         assertTrue(testUnit.isDead());
-        assertTrue(testMap.getCell(0,0).isWalckable());
+        assertTrue(testMap.getCell(0,0).isWalkable());
 
         testUnit2.move(-1,0);
         assertEquals(0,testUnit2.getX());

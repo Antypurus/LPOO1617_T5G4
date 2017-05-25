@@ -182,7 +182,7 @@ public class Unit {
         if(this.isDead()){
             this.dead = true;
             if(this.position!=null) {
-                this.position.setWalckable(true);
+                this.position.setWalkable(true);
                 this.position.setUnit(null);
                 this.position = null;
             }
@@ -231,11 +231,11 @@ public class Unit {
     public void setPosition(main.Logic.Map.Cell position){
         if(position.getUnit()==null) {
             if (this.position != null) {
-                this.position.setWalckable(true);
+                this.position.setWalkable(true);
                 this.position.setUnit(null);
             }
             this.position = position;
-            position.setWalckable(false);
+            position.setWalkable(false);
             position.setUnit(this);
         }
     }
@@ -263,7 +263,7 @@ public class Unit {
     private void unlinkAndLink(int x,int y){
         if(map!=null){
             this.position.setUnit(null);
-            this.position.setWalckable(true);
+            this.position.setWalkable(true);
             this.position = map.getCell(x,y);
             this.position.setUnit(this);
         }
@@ -281,7 +281,7 @@ public class Unit {
         if(map.getCell(xPos+deltaX,yPos+deltaY)==null){
             return false;
         }
-        if(!map.getCell(xPos+deltaX,yPos+deltaY).isWalckable()){
+        if(!map.getCell(xPos+deltaX,yPos+deltaY).isWalkable()){
             return false;
         }
         if(yPos+deltaY>=map.height||yPos+deltaY<0||xPos+deltaX>=map.width||xPos+deltaX<0){

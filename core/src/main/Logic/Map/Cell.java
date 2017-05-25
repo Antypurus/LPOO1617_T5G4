@@ -6,7 +6,7 @@ public class Cell {
     private int xPos=0;
     private int yPos=0;
 
-    private boolean isWalckable = true;
+    private boolean isWalkable = true;
 
     private Unit unit = null;
 
@@ -22,8 +22,8 @@ public class Cell {
         this.yPos=y;
     }
 
-    public void setWalckable(boolean value){
-        this.isWalckable=value;
+    public void setWalkable(boolean value){
+        this.isWalkable=value;
     }
 
     public void setLeft(Cell left){
@@ -58,8 +58,8 @@ public class Cell {
         return this.yPos;
     }
 
-    public boolean isWalckable() {
-        return isWalckable;
+    public boolean isWalkable() {
+        return isWalkable;
     }
 
     public Cell getLeft() {
@@ -88,7 +88,7 @@ public class Cell {
 
     public void update(){
         if(this.unit!=null){
-            this.isWalckable=false;
+            this.isWalkable=false;
         }
     }
 
