@@ -85,7 +85,6 @@ public class Unit {
     public void update(){
         for(int i = 0;i<this.Stats.size();i++){
             this.Stats.get(i).update();
-           // System.out.println("Updated:"+this.Stats.get(i).getName());
         }
         this.shouldUpdate = false;
         //reduce budd debuff duration.
