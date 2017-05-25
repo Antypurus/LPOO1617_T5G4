@@ -2,6 +2,7 @@ package main.Logic.Abilities.Spells;
 
 import java.util.ArrayList;
 
+import Logic.Abilities.BaseAbilityFunctions;
 import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
@@ -9,7 +10,7 @@ import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Stats.Inteligence;
 import main.Logic.Unit.Unit;
 
-public class Fireball implements Ability{
+public class Fireball extends BaseAbilityFunctions implements Ability{
 
     private double Damage = 10;
     private double ManaCost = 10;
@@ -39,32 +40,7 @@ public class Fireball implements Ability{
     }
 
     public boolean canHitTarget(Unit target){
-        if (this.owner == null) {
-            return false;
-        }
-        if(target==null){
-            return false;
-        }
-        if(this.owner.getPosition()==null){
-            return false;
-        }
-        boolean ret = this.canHitCell(target.getPosition());
-        if(!ret){
-            return false;
-        }
-        if(this.owner.getMP()-this.ManaCost<0){
-            return false;
-        }
-        if(this.owner.isDead()){
-           return false;
-        }
-        if(target.isDead()){
-            return false;
-        }
-        if(target==this.owner){
-            return false;
-        }
-        return true;
+        return this.baseCanHitTarget(this,target);
     }
 
     public double getBaseDamage(){
@@ -141,13 +117,6 @@ public class Fireball implements Ability{
     }
 
     public boolean canHitCell(Cell cell){
-        double dist = this.owner.getPosition().distanceToCell(cell);
-        if(dist > this.range){
-            return false;
-        }
-        if(dist == -1){
-            return false;
-        }
-        return true;
+        return this.baseCanHitCell(this.owner,cell,this.range);
     }
 }

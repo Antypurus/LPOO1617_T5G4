@@ -2,16 +2,17 @@ package Logic.Abilities.Spells;
 
 import java.util.ArrayList;
 
+import Logic.Abilities.BaseAbilityFunctions;
 import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Statistic;
 import main.Logic.Unit.Unit;
 
-public class WaterWip implements Ability{
+public class WaterWip extends BaseAbilityFunctions implements Ability {
 
         private double Damage = 5;
-        private double ManaCost = 0;
+        private double ManaCost = 10;
         private Statistic scalingStat = null;
         private int AOE = 0;
         private double Chance = 85;
@@ -26,57 +27,56 @@ public class WaterWip implements Ability{
         if(this.owner!=null) {
             this.owner.addAbility(this);
             this.scalingStat = this.owner.getINTELIGENCE();
-            this.ManaCost = this.owner.getMANA().maxValue;
         }
     }
 
     @Override
     public void AffectTarget(Unit target) {
         if(this.canHitTarget(target)) {
-            this.getManaCost();
             this.owner.reduceMana(this.ManaCost);
             double dmg = this.getDamageToTarget(target);
+            target.takeDamage(dmg);
         }
     }
 
     @Override
     public boolean canHitTarget(Unit target) {
-        return false;
+        return this.baseCanHitTarget(this,target);
     }
 
     @Override
     public double getBaseDamage() {
-        return 0;
+        return this.Damage;
     }
 
     @Override
     public int getRange() {
-        return 0;
+        return this.range;
     }
 
     @Override
     public boolean isElemental() {
-        return false;
+        return true;
     }
 
     @Override
     public Element.type getType() {
-        return null;
+        return Element.type.DAMAGE;
     }
 
     @Override
     public Element.DamageElement getDamageElement() {
-        return null;
+        return this.dmgElem;
     }
 
     @Override
     public Element.DamageType getDamageType() {
-        return null;
+        return Element.DamageType.Magical;
     }
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     @Override
@@ -86,12 +86,12 @@ public class WaterWip implements Ability{
 
     @Override
     public Unit getOwner() {
-        return null;
+        return this.owner;
     }
 
     @Override
     public Statistic getScalingStat() {
-        return null;
+        return this.scalingStat;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class WaterWip implements Ability{
 
     @Override
     public double getHitChance() {
-        return 0;
+        return this.Chance;
     }
 
     @Override
@@ -111,11 +111,11 @@ public class WaterWip implements Ability{
 
     @Override
     public double getManaCost() {
-        return 0;
+        return this.ManaCost;
     }
 
     @Override
     public boolean canHitCell(Cell cell) {
-        return false;
+        return this.baseCanHitCell(this.owner,cell,this.range);
     }
 }
