@@ -13,6 +13,8 @@ public class DifficultyStage extends State
     private Texture background;
     private Texture easyBtn;
     private Texture hardBtn;
+    private static final int EASY = 0;
+    private static final int HARD = 0;
 
     public DifficultyStage(GameStateManager gsm) {
         super(gsm);
@@ -30,7 +32,7 @@ public class DifficultyStage extends State
                     && (screenHeight - Gdx.input.getY()) >= ((400))
                     && (screenHeight - Gdx.input.getY()) <= ((400) + (easyBtn.getHeight())))
             {
-                gsm.set(new PlayState(gsm));
+                gsm.set(new PlayState(gsm, EASY));
             }
 
             else if (Gdx.input.getX() >= ((screenWidth / 2) - (hardBtn.getWidth() / 2))
@@ -38,7 +40,7 @@ public class DifficultyStage extends State
                     && (screenHeight - Gdx.input.getY()) >= ((250))
                     && (screenHeight - Gdx.input.getY()) <= ((250) + (hardBtn.getHeight())))
             {
-                gsm.set(new PlayState(gsm));
+                gsm.set(new PlayState(gsm ,HARD));
             }
         }
     }
