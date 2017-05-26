@@ -18,6 +18,10 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     private double PunchManaCost = 0;
     private int PunchRange = 1;
     private String PunchName = "Punch";
+    private Element.type PunchType = Element.type.DAMAGE;
+    private Element.DamageElement PunchDamageElement = null;
+    private Element.DamageType PunchDamageType = Element.DamageType.Physical;
+    private boolean PunchIsElemental = false;
 
     private Unit PunchOwner = null;
 
@@ -50,19 +54,19 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     }
 
     public boolean isElemental(){
-        return false;
+        return this.PunchIsElemental;
     }
 
     public main.Logic.ElementSystem.Element.type getType(){
-        return Element.type.DAMAGE;
+        return this.PunchType;
     }
 
     public main.Logic.ElementSystem.Element.DamageElement getDamageElement(){
-        return null;
+        return this.PunchDamageElement;
     }
 
     public main.Logic.ElementSystem.Element.DamageType getDamageType(){
-        return Element.DamageType.Physical;
+        return this.PunchDamageType;
     }
 
     public String getName(){
@@ -102,7 +106,7 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     }
 
     public int getAOE(){
-        return 0;
+        return this.PucnhAOE;
     }
 
     public double getManaCost(){
