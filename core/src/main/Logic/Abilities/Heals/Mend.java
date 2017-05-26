@@ -92,7 +92,7 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     }
 
     public double getHitChance(){
-        return this.MendRange;
+        return this.MendHitChance;
     }
 
     public int getAOE(){
