@@ -17,7 +17,10 @@ public class Fireball extends BaseAbilityFunctions implements Ability{
     private int FireballAOE = 0;
     private double FireBallHitChance = 100;
     private int FireBallRange = 10;
-    private main.Logic.ElementSystem.Element.DamageElement FireBallDamageElement = Element.DamageElement.FIRE;
+    private Element.DamageElement FireBallDamageElement = Element.DamageElement.FIRE;
+    private Element.type FireBallType = Element.type.DAMAGE;
+    private Element.DamageType FireBallDamageType = Element.DamageType.Magical;
+    private boolean FireBallIsElemental = true;
     private Unit FireBallOwner = null;
     private String FireBallName = "FireBall";
     private Element elem = new Element();
@@ -51,19 +54,19 @@ public class Fireball extends BaseAbilityFunctions implements Ability{
     }
 
     public boolean isElemental(){
-        return true;
+        return this.FireBallIsElemental;
     }
 
     public main.Logic.ElementSystem.Element.type getType(){
-        return Element.type.DAMAGE;
+        return this.FireBallType;
     }
 
     public main.Logic.ElementSystem.Element.DamageElement getDamageElement(){
-        return Element.DamageElement.FIRE;
+        return this.FireBallDamageElement;
     }
 
     public main.Logic.ElementSystem.Element.DamageType getDamageType(){
-        return Element.DamageType.Magical;
+        return this.FireBallDamageType;
     }
 
     public String getName(){
