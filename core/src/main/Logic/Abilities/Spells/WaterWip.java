@@ -95,7 +95,22 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public double getDamageToTarget(Unit target) {
-        return 0;
+        double dmg = this.WaterWipBaseDamage;
+        dmg*=this.WaterWipScalingStat.EffectiveValue;
+        if(target.getAfinity()!=null){
+            dmg*=this.elem.ElementComparation(this.WaterWipDamageElement,target.getAfinity());
+        }
+        double dodge = target.generateDodgeVal();
+        if(dodge>this.WaterWipHitChance){
+            dmg = 0;
+        }else if(dodge == 1){
+            dmg*=2;
+        }
+        dmg-=target.getFireRes();
+        if(dmg<0){
+            dmg=0;
+        }
+        return dmg;
     }
 
     @Override
