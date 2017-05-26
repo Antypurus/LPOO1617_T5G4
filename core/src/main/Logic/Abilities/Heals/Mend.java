@@ -19,6 +19,10 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     private Statistic MendScallingStat = null;
     private Unit MendOwner = null;
     private String MendName = "Mend";
+    private boolean MendIsElemental = false;
+    private Element.type MendType = Element.type.HEAL;
+    private Element.DamageElement MendDamageElement = null;
+    private Element.DamageType MendDamageType = null;
 
     public Mend(Unit MendOwner){
         this.MendOwner = MendOwner;
@@ -49,19 +53,19 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     }
 
     public boolean isElemental(){
-        return false;
+        return this.MendIsElemental;
     }
 
     public main.Logic.ElementSystem.Element.type getType(){
-        return Element.type.HEAL;
+        return this.MendType;
     }
 
     public main.Logic.ElementSystem.Element.DamageElement getDamageElement(){
-        return null;
+        return this.MendDamageElement;
     }
 
     public main.Logic.ElementSystem.Element.DamageType getDamageType(){
-        return null;
+        return this.MendDamageType;
     }
 
     public String getName(){
@@ -88,11 +92,11 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     }
 
     public double getHitChance(){
-        return 100;
+        return this.MendRange;
     }
 
     public int getAOE(){
-        return 0;
+        return this.MendAOE;
     }
 
     public double getManaCost(){
