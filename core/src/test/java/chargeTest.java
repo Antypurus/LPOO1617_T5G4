@@ -7,6 +7,7 @@ import main.Logic.Map.Map;
 import main.Logic.Unit.Unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class chargeTest {
@@ -84,5 +85,17 @@ public class chargeTest {
         testUnit2.setPosition(testMap.getCell(20,14));
         testUnit.setPosition(testMap.getCell(20,29));
         assertTrue(testCharge.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitInDiagonal(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,11));
+        assertFalse(testCharge.canHitTarget(testUnit2));
     }
 }
