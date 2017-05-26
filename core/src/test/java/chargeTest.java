@@ -97,5 +97,26 @@ public class chargeTest {
         testUnit.setPosition(testMap.getCell(10,10));
         testUnit2.setPosition(testMap.getCell(11,11));
         assertFalse(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setPosition(testMap.getCell(9,9));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setPosition(testMap.getCell(11,9));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setPosition(testMap.getCell(9,11));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setPosition(testMap.getCell(6,11));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setPosition(testMap.getCell(9,14));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setPosition(testMap.getCell(15,16));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setPosition(testMap.getCell(17,0));
+        assertFalse(testCharge.canHitTarget(testUnit2));
     }
 }
