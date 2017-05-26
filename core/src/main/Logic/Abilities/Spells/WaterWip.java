@@ -13,10 +13,14 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
         private double WaterWipBaseDamage = 5;
         private double ManaCost = 10;
+        private int WaterWipAOE = 0;
+        private boolean WaterWipIsElemental = true;
         private Statistic WaterWipScalingStat = null;
         private double WaterWipHitChance = 85;
         private int WaterWipRange = 15;
-        private main.Logic.ElementSystem.Element.DamageElement WaterWipDamageElement = Element.DamageElement.WATER;
+        private Element.DamageElement WaterWipDamageElement = Element.DamageElement.WATER;
+        private Element.DamageType WaterWipDamageType = Element.DamageType.Magical;
+        private Element.type WaterWipType = Element.type.DAMAGE;
         private Unit WaterWipOwner = null;
         private String WaterWipName = "WaterWip";
         private Element elem = new Element();
@@ -55,12 +59,12 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public boolean isElemental() {
-        return true;
+        return this.WaterWipIsElemental;
     }
 
     @Override
     public Element.type getType() {
-        return Element.type.DAMAGE;
+        return this.WaterWipType;
     }
 
     @Override
@@ -70,7 +74,7 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public Element.DamageType getDamageType() {
-        return Element.DamageType.Magical;
+        return this.WaterWipDamageType;
     }
 
     @Override
@@ -120,7 +124,7 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
 
     @Override
     public int getAOE() {
-        return 0;
+        return this.WaterWipAOE;
     }
 
     @Override
