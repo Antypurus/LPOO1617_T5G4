@@ -18,6 +18,11 @@ public class Charge extends BaseAbilityFunctions implements Ability {
     private Statistic ChargeScalingStat = null;
     private Unit ChargeOwner = null;
     private String ChargeName = "Charge";
+    private boolean ChargeIsElemental = false;
+    private Element.type ChargeType = Element.type.DAMAGE;
+    private Element.DamageType ChargeDamageType = Element.DamageType.Physical;
+    private Element.DamageElement ChargeDamageElement = null;
+    private int ChargeAOE = 0;
 
     public Charge(Unit ChargeOwner){
         this.ChargeOwner = ChargeOwner;
@@ -57,19 +62,19 @@ public class Charge extends BaseAbilityFunctions implements Ability {
     }
 
     public boolean isElemental() {
-        return false;
+        return this.ChargeIsElemental;
     }
 
     public main.Logic.ElementSystem.Element.type getType(){
-        return Element.type.DAMAGE;
+        return this.ChargeType;
     }
 
     public main.Logic.ElementSystem.Element.DamageElement getDamageElement(){
-        return null;
+        return this.ChargeDamageElement;
     }
 
     public main.Logic.ElementSystem.Element.DamageType getDamageType(){
-        return Element.DamageType.Physical;
+        return this.ChargeDamageType;
     }
 
     public String getName(){
@@ -113,7 +118,7 @@ public class Charge extends BaseAbilityFunctions implements Ability {
     }
 
     public int getAOE(){
-        return 0;
+        return this.ChargeAOE;
     }
 
     public double getManaCost(){
