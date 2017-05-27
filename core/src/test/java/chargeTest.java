@@ -134,4 +134,87 @@ public class chargeTest {
         testUnit2.setPosition(testMap.getCell(10,29));
         assertFalse(testCharge.canHitTarget(testUnit2));
     }
+
+    @Test
+    public void cantHitSelf(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+        testUnit.setPosition(testMap.getCell(10,10));
+        assertFalse(testCharge.canHitTarget(testUnit));
+    }
+
+    @Test
+    public void cantHitOwnerPositionNotSet(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+        testUnit2.setPosition(testMap.getCell(10,10));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitTargetPositionNotSet(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+        testUnit.setPosition(testMap.getCell(10,10));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitOwnerDead(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,10));
+
+        testUnit.takeDamage(1000);
+        assertFalse(testCharge.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitTargetDead(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,10));
+
+        testUnit2.takeDamage(1000);
+        assertFalse(testCharge.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitNoOwner(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(null);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,10));
+
+        assertFalse(testCharge.canHitTarget(testUnit2));
+    }
+
+    @Test
+    public void cantHitNoTarget(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(11,10));
+
+        assertFalse(testCharge.canHitTarget(null));
+    }
 }
