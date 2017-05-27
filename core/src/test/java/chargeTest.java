@@ -119,4 +119,19 @@ public class chargeTest {
         testUnit2.setPosition(testMap.getCell(17,0));
         assertFalse(testCharge.canHitTarget(testUnit2));
     }
+
+    @Test
+    public void catnHitOutOfRange(){
+        Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,6,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(29,10));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setPosition(testMap.getCell(10,29));
+        assertFalse(testCharge.canHitTarget(testUnit2));
+    }
 }
