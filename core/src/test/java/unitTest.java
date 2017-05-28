@@ -531,7 +531,7 @@ public class unitTest {
         assertTrue(testUnit.getTestMode());
 
         testUnit.setTestModeValue(0);
-        assertEquals(10,testUnit.generateDodgeVal(),0.01);
+        assertEquals(0,testUnit.generateDodgeVal(),0.01);
 
         testUnit.setTestModeValue(100);
         assertEquals(100,testUnit.generateDodgeVal(),0.01);

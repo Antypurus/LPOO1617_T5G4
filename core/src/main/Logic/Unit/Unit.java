@@ -76,6 +76,9 @@ public class Unit {
     }
 
     public void setTestModeValue(double value){
+        if(value>100){
+            value = 100;
+        }
         this.testModeValue = value;
     }
 
