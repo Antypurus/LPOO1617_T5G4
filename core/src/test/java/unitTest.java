@@ -541,6 +541,21 @@ public class unitTest {
     }
 
     @Test
+    public void testModeValueCannotGoOver100(){
+        Unit testUnit = new Unit("Test Unit",5,2,10,6,2);
+
+        assertFalse(testUnit.getTestMode());
+
+        testUnit.setTestMode(true);
+        assertTrue(testUnit.getTestMode());
+
+        testUnit.setTestModeValue(100000);
+        assertEquals(100,testUnit.getTestModeValue(),0.01);
+
+        assertEquals(100,testUnit.getTestModeValue(),0.01);
+    }
+
+    @Test
     public void cantSetPositionUnitAlreadyThere(){
         Unit testUnit =  new Unit("Test Unit",5,2,10,6,2);
         Unit testUnit2 =  new Unit("Test Unit",5,2,10,6,2);
