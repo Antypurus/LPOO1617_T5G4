@@ -217,4 +217,114 @@ public class chargeTest {
 
         assertFalse(testCharge.canHitTarget(null));
     }
+
+    @Test
+    public void affectTargetTest(){
+        Unit testUnit = new Unit("Test Unit",10,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,60,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(10,11));
+        assertTrue(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setTestMode(true);
+        assertTrue(testUnit2.getTestMode());
+        testUnit2.setTestModeValue(10);
+        assertEquals(10,testUnit2.generateDodgeVal(),0.01);
+
+        testCharge.AffectTarget(testUnit2);
+        assertEquals(562,testUnit2.getHP(),0.01);
+    }
+
+    @Test
+    public void affectTargetCriticalHitTest(){
+        Unit testUnit = new Unit("Test Unit",10,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,60,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(10,11));
+        assertTrue(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setTestMode(true);
+        assertTrue(testUnit2.getTestMode());
+        testUnit2.setTestModeValue(6);
+        assertEquals(6,testUnit2.generateDodgeVal(),0.01);
+
+        testCharge.AffectTarget(testUnit2);
+        assertEquals(522,testUnit2.getHP(),0.01);
+    }
+
+    @Test
+    public void affectTargetCriticalFailTest(){
+        Unit testUnit = new Unit("Test Unit",10,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,60,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(10,11));
+        assertTrue(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setTestMode(true);
+        assertTrue(testUnit2.getTestMode());
+        testUnit2.setTestModeValue(1);
+        assertEquals(1,testUnit2.generateDodgeVal(),0.01);
+
+        testCharge.AffectTarget(testUnit2);
+        assertEquals(522,testUnit2.getHP(),0.01);
+    }
+
+    @Test
+    public void affectTargetMoveOwnerTest(){
+        Unit testUnit = new Unit("Test Unit",10,2,5,6,2);
+        Unit testUnit2 = new Unit("Test Unit",5,2,5,60,2);
+        Map testMap = new Map("Test Map",30,30);
+        Ability testCharge = new Charge(testUnit);
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(10,20));
+        assertTrue(testCharge.canHitTarget(testUnit2));
+
+        testUnit2.setTestMode(true);
+        assertTrue(testUnit2.getTestMode());
+        testUnit2.setTestModeValue(10);
+        assertEquals(10,testUnit2.generateDodgeVal(),0.01);
+
+        testCharge.AffectTarget(testUnit2);
+        assertEquals(562,testUnit2.getHP(),0.01);
+
+        assertEquals(10,testUnit.getX());
+        assertEquals(19,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(20,10));
+        assertTrue(testCharge.canHitTarget(testUnit2));
+
+        testCharge.AffectTarget(testUnit2);
+
+        assertEquals(19,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(0,10));
+        assertTrue(testCharge.canHitTarget(testUnit2));
+
+        testCharge.AffectTarget(testUnit2);
+
+        assertEquals(1,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit2.setPosition(testMap.getCell(10,0));
+        assertTrue(testCharge.canHitTarget(testUnit2));
+
+        testCharge.AffectTarget(testUnit2);
+
+        assertEquals(10,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+    }
 }

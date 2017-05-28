@@ -58,6 +58,7 @@ public class Unit {
              dodge = generator.nextDouble() * 100 + 1;
         }else{
              dodge = this.testModeValue;
+            return dodge;
         }
         dodge+=speed;
         if(dodge>100){

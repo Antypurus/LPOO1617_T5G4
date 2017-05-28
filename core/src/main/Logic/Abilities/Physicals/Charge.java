@@ -39,6 +39,16 @@ public class Charge extends BaseAbilityFunctions implements Ability {
             target.takeDamage(dmg);
             int deltaX = target.getX()-this.ChargeOwner.getX();
             int deltaY = target.getY()-this.ChargeOwner.getY();
+            if(deltaX<0){
+                deltaX++;
+            }else if(deltaX>0){
+                deltaX--;
+            }
+            if(deltaY<0){
+                deltaY++;
+            }else if(deltaY>0){
+                deltaY--;
+            }
             this.ChargeOwner.move(deltaX,deltaY);
         }
     }
@@ -103,6 +113,7 @@ public class Charge extends BaseAbilityFunctions implements Ability {
         }
         if(dodge>this.ChargeHitChance){
             dmg = 0;
+            return dmg;
         }else if(dodge == 1){
             dmg*=2;
         }
