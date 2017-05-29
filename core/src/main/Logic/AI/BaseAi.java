@@ -1,5 +1,11 @@
 package Logic.AI;
 
-public class BaseAi {
+import Logic.GameController;
+import main.Logic.Unit.Unit;
 
+public interface BaseAi {
+    public void DefensiveBehavior();
+    public void OffensiveBehavior();
+    public Unit getControledUnit();
+    public GameController getCurrentGameController();
 }
