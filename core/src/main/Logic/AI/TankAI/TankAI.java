@@ -6,6 +6,16 @@ import Logic.GameController;
 import main.Logic.Unit.Unit;
 
 public class TankAI implements BaseAi{
+
+    private Unit TankAIUnit = null;
+    private GameController CurrentGame = null;
+
+    public TankAI(Unit owner,GameController game){
+        this.TankAIUnit = owner;
+        this.CurrentGame = game;
+    }
+
+
     @Override
     public void DefensiveBehavior() {
 
@@ -18,7 +28,8 @@ public class TankAI implements BaseAi{
 
     @Override
     public void FullTurnBehavior() {
-
+        this.OffensiveBehavior();
+        this.DefensiveBehavior();
     }
 
     @Override
