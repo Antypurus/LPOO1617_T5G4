@@ -1,12 +1,19 @@
 package main.Logic.Unit;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
-public class Unit {
+public class Unit implements Comparable<Unit> {
+
+    private static int Identifier = 0;
+    private int ID = -1;
+
     private boolean shouldUpdate = false;
     private boolean testMode = false;
     private double testModeValue = 0;
+
+    private boolean isAlly = false;
 
     private boolean dead = false;
 
@@ -49,6 +56,14 @@ public class Unit {
     private main.Logic.Unit.Stats.WaterRes WaterResistence; //Magic Water Resistance Stat
     private main.Logic.Unit.Stats.EarthRes EarthResistence; //Magic Earth Resistance Stat
     private main.Logic.Unit.Stats.AirRes AirResistence; //Magic Air Resistance Stat
+
+    public boolean getIsAlly(){
+        return this.isAlly;
+    }
+
+    public void setIsAlly(boolean value){
+        this.isAlly = value;
+    }
 
     public double generateDodgeVal(){
         double speed = this.Speed.EffectiveValue;
@@ -229,6 +244,7 @@ public class Unit {
         this.AirResistence = new main.Logic.Unit.Stats.AirRes(this.Inteligence,this.Strength,this.Vitality);
         this.setStats();
         this.update();
+        this.ID = this.Identifier++;
     }
 
     public void setPosition(main.Logic.Map.Cell position){
@@ -241,6 +257,10 @@ public class Unit {
             position.setWalkable(false);
             position.setUnit(this);
         }
+    }
+
+    public int getID(){
+        return this.ID;
     }
 
     public main.Logic.Map.Cell getPosition(){
@@ -335,5 +355,27 @@ public class Unit {
     }
     public main.Logic.Unit.Stats.EarthRes getEARTHRES(){
         return this.EarthResistence;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Unit){
+            if(this.ID==((Unit) o).getID()){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public int compareTo(Unit o) {
+        if(this.Speed.BaseValue<o.getSPD()){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }
