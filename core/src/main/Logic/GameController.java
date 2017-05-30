@@ -88,8 +88,13 @@ public class GameController {
         this.currentChar = this.units.peek();
         if(this.currentChar!=null){
             this.currentChar.beginTurn();
+        }else{
+            return ;
         }
-        //if current char is ai do ai things and end turn else return so that player can do his shit.
+        if(this.currentChar.isAIControlled()){
+            //do AI SHIT
+            this.endTurn();
+        }
     }
 
     public void endTurn(){
@@ -97,5 +102,6 @@ public class GameController {
         if(this.units.size()==0){
             this.rebuildUnitQueue();
         }
+        this.startNextTurn();
     }
 }

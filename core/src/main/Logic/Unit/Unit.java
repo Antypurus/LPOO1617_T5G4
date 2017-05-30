@@ -14,6 +14,7 @@ public class Unit implements Comparable<Unit> {
     private boolean shouldUpdate = false;
     private boolean testMode = false;
     private double testModeValue = 0;
+    private boolean isAIControlled = false;
 
     private boolean isAlly = false;
 
@@ -406,5 +407,13 @@ public class Unit implements Comparable<Unit> {
         }else{
             return 0;
         }
+    }
+
+    public boolean isAIControlled(){
+        return this.isAIControlled;
+    }
+
+    public void setIsAiControlled(boolean value){
+        this.isAIControlled = value;
     }
 }
