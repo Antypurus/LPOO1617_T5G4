@@ -17,6 +17,9 @@ public class Unit implements Comparable<Unit> {
 
     private boolean dead = false;
 
+    private int movementsPerTurn = 0;
+    private int remainingMovement = 0;
+
     private main.Logic.Map.Map map = null;
 
     private main.Logic.ElementSystem.Element.DamageElement Afinity = null;
@@ -26,19 +29,6 @@ public class Unit implements Comparable<Unit> {
     private String name=null;
     private ArrayList<Statistic> Stats = new ArrayList<Statistic>();
     private ArrayList<main.Logic.Abilities.Ability> Abilities = new ArrayList<main.Logic.Abilities.Ability>();
-
-    //Afinity
-    public void setAfinity(main.Logic.ElementSystem.Element.DamageElement Afinity){
-        this.Afinity = Afinity;
-    }
-
-    public main.Logic.ElementSystem.Element.DamageElement getAfinity(){
-        return this.Afinity;
-    }
-
-    public ArrayList<main.Logic.Abilities.Ability> getAbilities(){
-        return this.Abilities;
-    }
 
     //primary resources
     private main.Logic.Unit.Stats.HP Health;// health points
@@ -56,6 +46,19 @@ public class Unit implements Comparable<Unit> {
     private main.Logic.Unit.Stats.WaterRes WaterResistence; //Magic Water Resistance Stat
     private main.Logic.Unit.Stats.EarthRes EarthResistence; //Magic Earth Resistance Stat
     private main.Logic.Unit.Stats.AirRes AirResistence; //Magic Air Resistance Stat
+
+    //Afinity
+    public void setAfinity(main.Logic.ElementSystem.Element.DamageElement Afinity){
+        this.Afinity = Afinity;
+    }
+
+    public main.Logic.ElementSystem.Element.DamageElement getAfinity(){
+        return this.Afinity;
+    }
+
+    public ArrayList<main.Logic.Abilities.Ability> getAbilities(){
+        return this.Abilities;
+    }
 
     public boolean getIsAlly(){
         return this.isAlly;
@@ -244,6 +247,8 @@ public class Unit implements Comparable<Unit> {
         this.AirResistence = new main.Logic.Unit.Stats.AirRes(this.Inteligence,this.Strength,this.Vitality);
         this.setStats();
         this.update();
+        this.movementsPerTurn = (int)this.Speed.EffectiveValue*5;
+        this.remainingMovement = this.movementsPerTurn;
         this.ID = this.Identifier++;
     }
 
@@ -304,6 +309,10 @@ public class Unit implements Comparable<Unit> {
         if(map.getCell(xPos+deltaX,yPos+deltaY)==null){
             return false;
         }
+        int dist = (int)this.position.distanceToCell(map.getCell(xPos+deltaX,yPos+deltaY));
+        if(this.remainingMovement-dist<0){
+            return false;
+        }
         if(!map.getCell(xPos+deltaX,yPos+deltaY).isWalkable()){
             return false;
         }
@@ -311,6 +320,7 @@ public class Unit implements Comparable<Unit> {
             return false;
         }else{
             this.unlinkAndLink(xPos+deltaX,yPos+deltaY);
+            this.remainingMovement-=dist;
             map.update();
             return true;
         }
