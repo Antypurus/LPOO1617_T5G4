@@ -3,6 +3,7 @@ package main.Logic.Map;
 import java.util.ArrayList;
 
 import main.Logic.Abilities.Ability;
+import main.Logic.Unit.Unit;
 
 public class Map {
 
@@ -77,11 +78,24 @@ public class Map {
         return null;
     }
 
-    ArrayList<Cell> validCells(Ability ability){
+    public ArrayList<Cell> validCells(Ability ability){
         ArrayList<Cell>ret = new ArrayList<Cell>();
         for(int i=0;i<this.height;++i){
             for(int j=0;j<this.width;++j){
                 if(ability.canHitCell(this.map[j][i])){
+                    ret.add(this.map[j][i]);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public ArrayList<Cell> validCells(Unit unit){
+        ArrayList<Cell>ret = new ArrayList<Cell>();
+        for(int i=0;i<this.height;++i){
+            for(int j=0;j<this.width;++j){
+                int dist = (int)unit.getPosition().distanceToCell(this.map[j][i]);
+                if(unit.getRemainingMovement()-dist>=0){
                     ret.add(this.map[j][i]);
                 }
             }

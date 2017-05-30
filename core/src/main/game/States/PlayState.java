@@ -123,11 +123,6 @@ public class PlayState extends State
                     batch.draw(this.character.getSprite(),this.character.getUnit().getX()*Scale,
                             this.character.getUnit().getY()*Scale,Scale,Scale);
                     batch.end();
-                    try {
-                        Thread.sleep(1000);
-                    } catch(InterruptedException ex) {
-                        Thread.currentThread().interrupt();
-                    }
                     cam.update();
                 }
                 else if(movements.get(i) == "DOWN")

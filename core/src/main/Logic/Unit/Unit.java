@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
+import main.Logic.Map.Cell;
+
 public class Unit implements Comparable<Unit> {
 
     private static int Identifier = 0;
@@ -331,6 +333,23 @@ public class Unit implements Comparable<Unit> {
             return true;
         }
         return false;
+    }
+
+    public void beginTurn(){
+        this.remainingMovement = this.movementsPerTurn;
+        this.increaseMana(this.Inteligence.EffectiveValue);
+    }
+
+    public int getMovementsPerTurn(){
+        return this.movementsPerTurn;
+    }
+
+    public int getRemainingMovement(){
+        return this.remainingMovement;
+    }
+
+    public ArrayList<Cell> getCellsThatCanMoveTo(){
+        return this.map.validCells(this);
     }
 
     public main.Logic.Unit.Stats.HP getHEALTH(){
