@@ -157,6 +157,9 @@ public class Unit implements Comparable<Unit> {
 
     public void addAbility(main.Logic.Abilities.Ability abl){
         int pos = findAbility(abl.getName());
+        if(abl==null){
+            return;
+        }
         if(pos==-1){
             this.Abilities.add(abl);
         }else{
@@ -411,6 +414,22 @@ public class Unit implements Comparable<Unit> {
 
     public boolean isAIControlled(){
         return this.isAIControlled;
+    }
+
+    public double getCurrentHPPercent(){
+        double curr = this.Health.EffectiveValue;
+        double max = this.Health.maxValue;
+        double val = (double)curr/max;
+        return val*100;
+    }
+
+    public double attack(int abilityID,Unit target){
+        double delta = 0;
+        double init = target.getHP();
+        this.Abilities.get(abilityID).AffectTarget(target);
+        double end = target.getHP();
+        delta = end-init;
+        return delta;
     }
 
     public void setIsAiControlled(boolean value){

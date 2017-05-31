@@ -18,12 +18,24 @@ public class TankAI implements BaseAi{
 
     @Override
     public void DefensiveBehavior() {
-
+        if(this.CurrentGame.getCurrentDifficulty().equals(Difficulty.DifficultyStage.EASY)){
+            return;
+        }else{
+            if(this.TankAIUnit.getCurrentHPPercent()>=25){
+                return ;
+            }
+        }
+        //Do The Modeled AI Behavior
     }
 
     @Override
     public void OffensiveBehavior() {
-
+        if(this.CurrentGame.getCurrentDifficulty().equals(Difficulty.DifficultyStage.HARD)){
+            if(this.TankAIUnit.getCurrentHPPercent()<25){
+                return ;
+            }
+        }
+        //Do The AI Behavior Modeled
     }
 
     @Override
@@ -34,16 +46,16 @@ public class TankAI implements BaseAi{
 
     @Override
     public Unit getControledUnit() {
-        return null;
+        return this.TankAIUnit;
     }
 
     @Override
     public GameController getCurrentGameController() {
-        return null;
+        return this.CurrentGame;
     }
 
     @Override
     public Difficulty.DifficultyStage getDifficulty() {
-        return null;
+        return this.CurrentGame.getCurrentDifficulty();
     }
 }
