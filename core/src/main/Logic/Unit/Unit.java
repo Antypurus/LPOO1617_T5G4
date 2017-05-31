@@ -424,6 +424,12 @@ public class Unit implements Comparable<Unit> {
     }
 
     public double attack(int abilityID,Unit target){
+        if(abilityID<0||abilityID>this.Abilities.size()){
+            return 0;
+        }
+        if(this.Abilities.get(abilityID)==null){
+            return 0;
+        }
         double delta = 0;
         double init = target.getHP();
         this.Abilities.get(abilityID).AffectTarget(target);
