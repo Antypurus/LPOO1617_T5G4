@@ -3,7 +3,7 @@ package Logic.AI;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Unit.Unit;
 
-public class BaseAIFeatures {
+public abstract class BaseAIFeatures {
 
     public int numberOfOffensivAbilitiesAvailableToUse(Unit owner){
         int ret = 0;

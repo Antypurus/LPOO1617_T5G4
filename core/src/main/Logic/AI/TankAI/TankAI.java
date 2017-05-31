@@ -1,11 +1,12 @@
 package Logic.AI.TankAI;
 
+import Logic.AI.BaseAIFeatures;
 import Logic.AI.BaseAi;
 import Logic.Difficulty;
 import Logic.GameController;
 import main.Logic.Unit.Unit;
 
-public class TankAI implements BaseAi{
+public class TankAI extends BaseAIFeatures implements BaseAi{
 
     private Unit TankAIUnit = null;
     private GameController CurrentGame = null;
@@ -25,6 +26,9 @@ public class TankAI implements BaseAi{
                 return ;
             }
         }
+        if(this.TankAIUnit.getRemainingMovement()==0){
+            return;
+        }
         //Do The Modeled AI Behavior
     }
 
@@ -35,7 +39,9 @@ public class TankAI implements BaseAi{
                 return ;
             }
         }
-        //Do The AI Behavior Modeled
+        if(this.numberOfOffensivAbilitiesAvailableToUse(this.TankAIUnit)==0){
+            return;
+        }
     }
 
     @Override
