@@ -55,4 +55,23 @@ public abstract class BaseAbilityFunctions {
         return true;
     }
 
+    public boolean baseCanUseAbility(Ability ability,Unit owner){
+        if(owner.isDead()){
+            return false;
+        }
+        if(owner.getMP()==0){
+            return false;
+        }
+        if(owner == null){
+            return false;
+        }
+        if(ability == null){
+            return false;
+        }
+        if(owner.getMP()-ability.getManaCost()<0){
+            return false;
+        }
+        return true;
+    }
+
 }

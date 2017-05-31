@@ -116,4 +116,9 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     public boolean canHitCell(Cell cell){
         return this.baseCanHitCell(this.PunchOwner,cell,this.PunchRange);
     }
+
+    @Override
+    public boolean canUse() {
+        return this.baseCanUseAbility(this,this.getOwner());
+    }
 }

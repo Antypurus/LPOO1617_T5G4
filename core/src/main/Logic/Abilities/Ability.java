@@ -24,4 +24,5 @@ public interface Ability {
     public abstract int getAOE();
     public abstract double getManaCost();
     public abstract boolean canHitCell(Cell cell);
+    public boolean canUse();
 }

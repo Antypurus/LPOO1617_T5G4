@@ -152,4 +152,9 @@ public class Charge extends BaseAbilityFunctions implements Ability {
         }
         return true;
     }
+
+    @Override
+    public boolean canUse() {
+        return this.baseCanUseAbility(this,this.getOwner());
+    }
 }

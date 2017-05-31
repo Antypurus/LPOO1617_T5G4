@@ -107,4 +107,9 @@ public class Mend extends BaseAbilityFunctions implements Ability{
         return this.baseCanHitCell(this.MendOwner,cell,this.MendRange);
     }
 
+    @Override
+    public boolean canUse() {
+        return this.baseCanUseAbility(this,this.getOwner());
+    }
+
 }

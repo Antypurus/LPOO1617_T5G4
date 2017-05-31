@@ -136,4 +136,9 @@ public class WaterWip extends BaseAbilityFunctions implements Ability {
     public boolean canHitCell(Cell cell) {
         return this.baseCanHitCell(this.WaterWipOwner,cell,this.WaterWipRange);
     }
+
+    @Override
+    public boolean canUse() {
+        return this.baseCanUseAbility(this,this.getOwner());
+    }
 }
