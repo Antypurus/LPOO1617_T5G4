@@ -49,7 +49,7 @@ public class Charge extends BaseAbilityFunctions implements Ability {
             }else if(deltaY>0){
                 deltaY--;
             }
-            this.ChargeOwner.move(deltaX,deltaY);
+            this.ChargeOwner.unhinderedMove(deltaX,deltaY);
         }
     }
 

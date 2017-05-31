@@ -287,6 +287,11 @@ public class chargeTest {
 
         testUnit.setPosition(testMap.getCell(10,10));
         testUnit2.setPosition(testMap.getCell(10,20));
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+        assertEquals(10,testUnit2.getX());
+        assertEquals(20,testUnit2.getY());
+
         assertTrue(testCharge.canHitTarget(testUnit2));
 
         testUnit2.setTestMode(true);
@@ -302,6 +307,10 @@ public class chargeTest {
 
         testUnit.setPosition(testMap.getCell(10,10));
         testUnit2.setPosition(testMap.getCell(20,10));
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+        assertEquals(20,testUnit2.getX());
+        assertEquals(10,testUnit2.getY());
         assertTrue(testCharge.canHitTarget(testUnit2));
 
         testCharge.AffectTarget(testUnit2);
@@ -311,6 +320,10 @@ public class chargeTest {
 
         testUnit.setPosition(testMap.getCell(10,10));
         testUnit2.setPosition(testMap.getCell(0,10));
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+        assertEquals(0,testUnit2.getX());
+        assertEquals(10,testUnit2.getY());
         assertTrue(testCharge.canHitTarget(testUnit2));
 
         testCharge.AffectTarget(testUnit2);
@@ -320,6 +333,10 @@ public class chargeTest {
 
         testUnit.setPosition(testMap.getCell(10,10));
         testUnit2.setPosition(testMap.getCell(10,0));
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+        assertEquals(10,testUnit2.getX());
+        assertEquals(0,testUnit2.getY());
         assertTrue(testCharge.canHitTarget(testUnit2));
 
         testCharge.AffectTarget(testUnit2);

@@ -303,6 +303,30 @@ public class Unit implements Comparable<Unit> {
         }
     }
 
+    public boolean unhinderedMove(int deltaX,int deltaY){
+        if(this.position==null){
+            return false;
+        }
+        int xPos=0;
+        int yPos=0;
+        xPos = this.getX();
+        yPos = this.getY();
+        this.map = this.position.getMap();
+        if(map.getCell(xPos+deltaX,yPos+deltaY)==null){
+            return false;
+        }
+        if(!map.getCell(xPos+deltaX,yPos+deltaY).isWalkable()){
+            return false;
+        }
+        if(yPos+deltaY>=map.height||yPos+deltaY<0||xPos+deltaX>=map.width||xPos+deltaX<0){
+            return false;
+        }else{
+            this.unlinkAndLink(xPos+deltaX,yPos+deltaY);
+            map.update();
+            return true;
+        }
+    }
+
     public boolean move(int deltaX,int deltaY){
         if(this.position==null){
             return false;
