@@ -57,16 +57,35 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
         return ret;
     }
 
-    private boolean isThereACellWhereAttackCanBeUsed(Ability ability,Unit target,ArrayList<Cell>cellsToRet){
+    private boolean isThereACellWhereAttackCanBeUsed(Ability ability,ArrayList<Cell>cellsToRet){
         ArrayList<Cell>retCells = new ArrayList<Cell>();
         boolean ret = false;
         ArrayList<Cell>cells = this.TankAIUnit.getCellsThatCanMoveTo();
         for(int i=0;i<cells.size();++i){
-            if(ability.canHitTarget(target)){
+            if(ability.canHitCell(cells.get(i))){
                 retCells.add(cells.get(i));
                 ret = true;
             }
         }
+        cellsToRet = retCells;
+        return ret;
+    }
+
+    private boolean cellsFromWhereCanHitTargetWithAbility(Ability ability,Unit target,ArrayList<Cell>cellsToRet){
+        boolean ret = false;
+        ArrayList<Cell>retCells = new ArrayList<Cell>();
+        ArrayList<Cell>cells = this.TankAIUnit.getCellsThatCanMoveTo();
+        Cell originalPos = this.TankAIUnit.getPosition();
+
+        for(int i=0;i<cells.size();++i){
+            TankAIUnit.setPosition(cells.get(i));
+            if(ability.canHitTarget(target)){
+                ret = true;
+                retCells.add(cells.get(i));
+            }
+        }
+        TankAIUnit.setPosition(originalPos);
+        cellsToRet = retCells;
         return ret;
     }
 

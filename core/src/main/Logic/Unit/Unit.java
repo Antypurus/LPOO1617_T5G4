@@ -270,6 +270,10 @@ public class Unit implements Comparable<Unit> {
             position.setWalkable(false);
             position.setUnit(this);
         }
+        if(position==null){
+            this.position.setWalkable(true);
+            this.position.setUnit(null);
+        }
     }
 
     public int getID(){
