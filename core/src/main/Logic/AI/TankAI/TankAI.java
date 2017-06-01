@@ -44,7 +44,16 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
     }
 
     private Ability abilityWithMostDamage(){
-        return null;
+        ArrayList<Ability>abilities = this.TankAIUnit.getAbilities();
+        Ability ret = null;
+        double ret_dmg = 0;
+        for(int i=0;i<abilities.size();++i){
+            if(abilities.get(i).getBaseDamage()>ret_dmg){
+                ret_dmg = abilities.get(i).getBaseDamage();
+                ret = abilities.get(i);
+            }
+        }
+        return ret;
     }
 
     private void easyOffenseBehavior(){
