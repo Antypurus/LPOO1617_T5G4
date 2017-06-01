@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
 import game.GraphicsComponent.Character;
+import main.Logic.Abilities.Physicals.Charge;
+import main.Logic.Map.Cell;
 import main.game.InputHandler.GameHandler;
 
 public class PlayState extends State
@@ -51,6 +53,7 @@ public class PlayState extends State
         cam.update();
 
         this.character.getUnit().setPosition(this.map.getCell(10,10));
+        this.character.getUnit().addAbility(new Charge(this.character.getUnit()));
         character.update();
         //gameHandler = new GameHandler(this);
 
@@ -66,6 +69,9 @@ public class PlayState extends State
     @Override
     protected void handleInput()
     {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+            this.character.getUnit().beginTurn();
+        }
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             //this.character.moveUp();
             movements.add("UP");
@@ -221,6 +227,11 @@ public class PlayState extends State
         sb.disableBlending();
         sb.draw(background,-1000,-400);
         sb.enableBlending();
+
+        ArrayList<Cell>blocks = this.character.getUnit().getCellsThatCanMoveTo();
+        for(int i=0;i<blocks.size();i++){
+            sb.draw(redBlock,blocks.get(i).getxPos()*Scale,blocks.get(i).getyPos()*Scale,Scale,Scale);
+        }
 
         for(int i=0;i<this.map.height;++i){
             for(int j=0;j<this.map.width;++j){

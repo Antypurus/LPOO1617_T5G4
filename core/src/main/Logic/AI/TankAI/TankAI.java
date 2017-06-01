@@ -17,6 +17,13 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
     }
 
 
+
+    private Unit easyDeterminBestTarget(){
+        Unit ret = null;
+
+        return ret;
+    }
+
     @Override
     public void DefensiveBehavior() {
         if(this.CurrentGame.getCurrentDifficulty().equals(Difficulty.DifficultyStage.EASY)){

@@ -118,6 +118,11 @@ public class Punch extends BaseAbilityFunctions implements Ability{
     }
 
     @Override
+    public ArrayList<Cell> getCellsThatCanHit() {
+        return this.getOwner().getMap().validCells(this);
+    }
+
+    @Override
     public boolean canUse() {
         return this.baseCanUseAbility(this,this.getOwner());
     }

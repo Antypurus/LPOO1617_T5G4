@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 import main.Logic.Map.Cell;
+import main.Logic.Map.Map;
 
 public class Unit implements Comparable<Unit> {
 
@@ -264,6 +265,7 @@ public class Unit implements Comparable<Unit> {
                 this.position.setWalkable(true);
                 this.position.setUnit(null);
             }
+            this.map = position.getMap();
             this.position = position;
             position.setWalkable(false);
             position.setUnit(this);
@@ -464,5 +466,9 @@ public class Unit implements Comparable<Unit> {
 
     public void setIsAiControlled(boolean value){
         this.isAIControlled = value;
+    }
+
+    public Map getMap(){
+        return this.map;
     }
 }
