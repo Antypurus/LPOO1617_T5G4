@@ -7,6 +7,7 @@ import Logic.AI.BaseAi;
 import Logic.Difficulty;
 import Logic.GameController;
 import main.Logic.Abilities.Ability;
+import main.Logic.Map.Cell;
 import main.Logic.Unit.Stats.Inteligence;
 import main.Logic.Unit.Unit;
 
@@ -56,8 +57,35 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
         return ret;
     }
 
-    private void easyOffenseBehavior(){
+    private boolean isThereACellWhereAttackCanBeUsed(Ability ability,Unit target,ArrayList<Cell>cellsToRet){
+        ArrayList<Cell>retCells = new ArrayList<Cell>();
+        boolean ret = false;
+        ArrayList<Cell>cells = this.TankAIUnit.getCellsThatCanMoveTo();
+        for(int i=0;i<cells.size();++i){
+            if(ability.canHitTarget(target)){
+                retCells.add(cells.get(i));
+                ret = true;
+            }
+        }
+        return ret;
+    }
 
+    private Cell cellAtSmalestDistance(ArrayList<Cell>cells){
+        Cell ret = null;
+        int retDist = Integer.MAX_VALUE;
+        for(int i=0;i<cells.size();i++){
+            int dist = (int)this.TankAIUnit.getPosition().distanceToCell(cells.get(i));
+            if(dist<retDist){
+                retDist=dist;
+                ret = cells.get(i);
+            }
+        }
+        return ret;
+    }
+
+    private void easyOffenseBehavior(){
+        Cell ret = null;
+        int retDist = Integer.MAX_VALUE;
     }
 
     @Override
