@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import game.GraphicsComponent.Character;
 import main.Logic.Abilities.Physicals.Charge;
+import main.Logic.Abilities.Spells.Fireball;
 import main.Logic.Map.Cell;
 import main.game.InputHandler.GameHandler;
 
@@ -53,7 +54,7 @@ public class PlayState extends State
         cam.update();
 
         this.character.getUnit().setPosition(this.map.getCell(10,10));
-        this.character.getUnit().addAbility(new Charge(this.character.getUnit()));
+        this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
         character.update();
         //gameHandler = new GameHandler(this);
 
@@ -69,6 +70,18 @@ public class PlayState extends State
     @Override
     protected void handleInput()
     {
+        if(Gdx.input.isKeyPressed(Input.Keys.PAGE_UP)){
+            this.cam.zoom-=0.02;
+            if(cam.zoom<=0.15){
+                cam.zoom=0.15f;
+            }
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.PAGE_DOWN)){
+            this.cam.zoom+=0.02;
+            if(cam.zoom>=1.7){
+                cam.zoom=1.7f;
+            }
+        }
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
             this.character.getUnit().beginTurn();
         }
@@ -265,7 +278,7 @@ public class PlayState extends State
 
         sb.end();
         //end of draw section
-        Gdx.graphics.setTitle("RPGame FPS:"+fps);
+        Gdx.graphics.setTitle("RPGame FPS:"+fps+" Camara Zoom Value:"+cam.zoom);
     }
 
     double fps;

@@ -104,4 +104,12 @@ public class GameController {
         }
         this.startNextTurn();
     }
+
+    public ArrayList<Unit>getEnemies(){
+        return this.enemies;
+    }
+
+    public ArrayList<Unit>getAllies(){
+        return this.allies;
+    }
 }
