@@ -234,4 +234,35 @@ public abstract class BaseAIFeatures {
         }
         return ret;
     }
+
+    protected Unit easyDeterminBestTarget(GameController CurrentGame,Unit owner){
+        Unit ret = null;
+        ret = this.determineClosestEnemy(CurrentGame,owner);
+        return ret;
+    }
+
+    protected void basEasyOffenseBehavior(GameController CurrentGame,Unit owner){
+        Unit toHit = this.easyDeterminBestTarget(CurrentGame,owner);
+        Ability abl = this.abilityWithMostDamage(owner);
+        ArrayList<Cell>cells = null;
+        if(!this.cellsFromWhereCanHitTargetWithAbility(abl,toHit,cells,owner)){
+            ArrayList<Ability>abls = this.abilitiesThatCanBeUsedOnTarget(owner,toHit);
+            if(abls.size()==0){
+                Cell toGO = this.cellThatGetsClosestToTarget(owner,toHit);
+                if(toGO==null){
+                    return;
+                }
+                owner.moveToCell(toGO);
+                return;
+            }
+            this.cellsFromWhereCanHitTargetWithAbility(abls.get(0),toHit,cells,owner);
+            Cell hit = this.cellAtSmalestDistance(cells,owner);
+            owner.moveToCell(hit);
+            abl.AffectTarget(toHit);
+        }else{
+            Cell hit = this.cellAtSmalestDistance(cells,owner);
+            owner.moveToCell(hit);
+            abl.AffectTarget(toHit);
+        }
+    }
 }

@@ -1,11 +1,15 @@
 package Logic.AI.HealerAI;
 
 
+import java.util.ArrayList;
+
 import Logic.AI.BaseAIFeatures;
 import Logic.AI.BaseAi;
 import Logic.AI.TankAI.TankAI;
 import Logic.Difficulty;
 import Logic.GameController;
+import main.Logic.Abilities.Ability;
+import main.Logic.Map.Cell;
 import main.Logic.Unit.Unit;
 
 public class HealerAI extends BaseAIFeatures implements BaseAi{
