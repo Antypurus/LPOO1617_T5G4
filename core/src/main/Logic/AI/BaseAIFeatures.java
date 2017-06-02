@@ -9,6 +9,7 @@ import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Unit;
+import sun.management.counter.Units;
 
 public abstract class BaseAIFeatures {
 
@@ -264,5 +265,33 @@ public abstract class BaseAIFeatures {
             owner.moveToCell(hit);
             abl.AffectTarget(toHit);
         }
+    }
+
+    protected Ability getAbilityWithMostHealThatCanBeUsed(Unit owner){
+        Ability abl = null;
+        int ablHeal = Integer.MAX_VALUE;
+        for(int i=0;i<owner.getAbilities().size();i++){
+            if(owner.getAbilities().get(i).getType().equals(Element.type.HEAL)){
+                if(owner.getAbilities().get(i).canUse()){
+                    if(ablHeal>owner.getAbilities().get(i).getBaseDamage()){
+                        ablHeal=(int)owner.getAbilities().get(i).getBaseDamage();
+                        abl = owner.getAbilities().get(i);
+                    }
+                }
+            }
+        }
+        return abl;
+    }
+
+    protected int getAlliesWithOverPercentHealth(ArrayList<Unit>units,Unit owner,int percent){
+        int c = 0;
+        for(int i=0;i<units.size();++i){
+            if(!units.get(i).equals(owner)){
+                if(units.get(i).getCurrentHPPercent()>=percent){
+                    c++;
+                }
+            }
+        }
+        return c;
     }
 }

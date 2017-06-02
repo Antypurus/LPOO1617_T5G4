@@ -41,6 +41,8 @@ public class HealerAI extends BaseAIFeatures implements BaseAi{
             Cell toMove = this.cellAtBiggestDistance(cells,this.HealerAIUnit);
             this.HealerAIUnit.moveToCell(toMove);
         }
+        Ability abl = this.getAbilityWithMostHealThatCanBeUsed(this.HealerAIUnit);
+        abl.AffectTarget(this.HealerAIUnit);
     }
 
     @Override
@@ -56,16 +58,16 @@ public class HealerAI extends BaseAIFeatures implements BaseAi{
 
     @Override
     public Unit getControledUnit() {
-        return null;
+        return this.HealerAIUnit;
     }
 
     @Override
     public GameController getCurrentGameController() {
-        return null;
+        return this.CurrentGame;
     }
 
     @Override
     public Difficulty.DifficultyStage getDifficulty() {
-        return null;
+        return this.CurrentGame.getCurrentDifficulty();
     }
 }

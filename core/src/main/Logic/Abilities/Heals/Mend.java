@@ -41,7 +41,7 @@ public class Mend extends BaseAbilityFunctions implements Ability{
     }
 
     public boolean canHitTarget(Unit target){
-        return this.baseCanHitTarget(this,target);
+        return this.targetIsOwnerAbilityCheck(this,target);
     }
 
     public double getBaseDamage(){
