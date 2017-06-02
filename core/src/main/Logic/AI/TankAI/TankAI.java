@@ -128,6 +128,56 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
         return ret;
     }
 
+    private void listEnemyQuadrants(int topLeft,int topRight,int botLeft,int botRight){
+        topLeft=0;
+        topRight=0;
+        botLeft=0;
+        botRight=0;
+        ArrayList<Unit>enemies = this.CurrentGame.getAllies();
+        for(int i=0;i<enemies.size();i++){
+            if(enemies.get(i).getX()<=this.TankAIUnit.getX()){
+                if(enemies.get(i).getY()>this.TankAIUnit.getX()){
+                    topLeft++;
+                }else{
+                    botLeft++;
+                }
+            }else {
+                if(enemies.get(i).getX()<=this.TankAIUnit.getX()) {
+                    if (enemies.get(i).getY() > this.TankAIUnit.getX()) {
+                        topRight++;
+                    } else {
+                        botRight++;
+                    }
+                }
+            }
+        }
+    }
+
+    private String determineSafestQuadrant(){
+        String ret = "";
+        int topLeft=0;
+        int topRight=0;
+        int botLeft=0;
+        int botRight=0;
+        this.listEnemyQuadrants(topLeft,topRight,botLeft,botRight);
+        if(topLeft<=topRight&&topLeft<=botRight&&topLeft<=botLeft){
+            return "topLeft";
+        }
+        if(topRight<=topLeft&&topRight<=botRight&&topRight<=botLeft){
+            return "topRight";
+        }
+        if(botRight<=topLeft&&botRight<=topRight&&botRight<=botLeft){
+            return "botRight";
+        }
+        if(botLeft<=topLeft&&botLeft<=botRight&&botLeft<=topRight){
+            return "botLeft";
+        }
+        if(botLeft==botRight&&botLeft==topLeft&&botLeft==topRight){
+            return "Center";
+        }
+        return ret;
+    }
+
     private void easyOffenseBehavior(){
         Unit toHit = this.easyDeterminBestTarget();
         Ability abl = this.abilityWithMostDamage();
@@ -153,6 +203,55 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
         }
     }
 
+    private Cell cellAtBiggestDistance(ArrayList<Cell>cells){
+        Cell ret = null;
+        int dist = 0;
+        for(int i=0;i<cells.size();++i){
+            int distance = (int)this.TankAIUnit.getPosition().distanceToCell(cells.get(i));
+            if(dist<distance){
+                dist = distance;
+                ret = cells.get(i);
+            }
+        }
+        return ret;
+    }
+
+    private ArrayList<Cell>cellsInAQuadrantThatCanMoveTo(String quad){
+        ArrayList<Cell>cells = this.TankAIUnit.getCellsThatCanMoveTo();
+        ArrayList<Cell>ret = new ArrayList<Cell>();
+        for(int i=0;i<cells.size();++i){
+            if(quad.equals("topLeft")){
+                if(cells.get(i).getxPos()<=this.TankAIUnit.getX()){
+                    if(cells.get(i).getyPos()>=this.TankAIUnit.getY()){
+                        ret.add(cells.get(i));
+                    }
+                }
+            }
+            if(quad.equals("topRight")){
+                if(cells.get(i).getxPos()>=this.TankAIUnit.getX()){
+                    if(cells.get(i).getyPos()>=this.TankAIUnit.getY()){
+                        ret.add(cells.get(i));
+                    }
+                }
+            }
+            if(quad.equals("botRight")){
+                if(cells.get(i).getxPos()>=this.TankAIUnit.getX()){
+                    if(cells.get(i).getyPos()<=this.TankAIUnit.getY()){
+                        ret.add(cells.get(i));
+                    }
+                }
+            }
+            if(quad.equals("botLeft")){
+                if(cells.get(i).getxPos()<=this.TankAIUnit.getX()){
+                    if(cells.get(i).getyPos()>=this.TankAIUnit.getY()){
+                        ret.add(cells.get(i));
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
     @Override
     public void DefensiveBehavior() {
         if(this.CurrentGame.getCurrentDifficulty().equals(Difficulty.DifficultyStage.EASY)){
@@ -165,7 +264,14 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
         if(this.TankAIUnit.getRemainingMovement()==0){
             return;
         }
-        //Do The Modeled AI Behavior
+        String quad = this.determineSafestQuadrant();
+        if(quad.equals("Center")){
+            return;
+        }else{
+            ArrayList<Cell>cells = this.cellsInAQuadrantThatCanMoveTo(quad);
+            Cell toMove = this.cellAtBiggestDistance(cells);
+            this.TankAIUnit.moveToCell(toMove);
+        }
     }
 
     @Override
