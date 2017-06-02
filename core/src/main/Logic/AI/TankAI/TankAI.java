@@ -23,7 +23,7 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
     }
 
     private Unit determineClosestEnemy(){
-        ArrayList<Unit>enemies = this.CurrentGame.getEnemies();
+        ArrayList<Unit>enemies = this.CurrentGame.getAllies();
         Unit ret = null;
         int ret_dist = Integer.MAX_VALUE;
         for(int i=0;i<enemies.size();i++){
