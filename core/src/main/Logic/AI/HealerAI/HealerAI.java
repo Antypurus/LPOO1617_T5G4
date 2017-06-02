@@ -23,7 +23,24 @@ public class HealerAI extends BaseAIFeatures implements BaseAi{
 
     @Override
     public void DefensiveBehavior() {
-        
+        if(this.CurrentGame.getCurrentDifficulty().equals(Difficulty.DifficultyStage.EASY)){
+            return;
+        }else{
+            if(this.HealerAIUnit.getCurrentHPPercent()>=25){
+                return ;
+            }
+        }
+        if(this.HealerAIUnit.getRemainingMovement()==0){
+            return;
+        }
+        String quad = this.determineSafestQuadrant(this.CurrentGame,this.HealerAIUnit);
+        if(quad.equals("Center")){
+            return;
+        }else{
+            ArrayList<Cell>cells = this.cellsInAQuadrantThatCanMoveTo(quad,this.HealerAIUnit);
+            Cell toMove = this.cellAtBiggestDistance(cells,this.HealerAIUnit);
+            this.HealerAIUnit.moveToCell(toMove);
+        }
     }
 
     @Override
@@ -33,7 +50,8 @@ public class HealerAI extends BaseAIFeatures implements BaseAi{
 
     @Override
     public void FullTurnBehavior() {
-
+        this.OffensiveBehavior();
+        this.DefensiveBehavior();
     }
 
     @Override

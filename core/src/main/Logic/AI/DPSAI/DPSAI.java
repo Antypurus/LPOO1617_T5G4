@@ -24,7 +24,7 @@ public class DPSAI extends BaseAIFeatures implements BaseAi{
         Unit target = this.determineClosestEnemy(this.CurrentGame,this.DPSAIUnit);
         if(this.DPSAIUnit.getMP()>0){
             Ability abl = this.abilityWithMostDamage(this.DPSAIUnit);
-            if(this.getDifficulty().equals(Difficulty.DifficultyStage.HARD)){
+            if(this.getDifficulty().equals(Difficulty.DifficultyStage.HARD)){//looking for an ability that will utilize the affinity power
                 if(target.getAfinity()!=null){
                     Element el = new Element();
                     for(int i=0;i<this.DPSAIUnit.getAbilities().size();++i){
@@ -99,16 +99,16 @@ public class DPSAI extends BaseAIFeatures implements BaseAi{
 
     @Override
     public Unit getControledUnit() {
-        return null;
+        return this.DPSAIUnit;
     }
 
     @Override
     public GameController getCurrentGameController() {
-        return null;
+        return this.CurrentGame;
     }
 
     @Override
     public Difficulty.DifficultyStage getDifficulty() {
-        return null;
+        return this.CurrentGame.getCurrentDifficulty();
     }
 }
