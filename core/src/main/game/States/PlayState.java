@@ -51,7 +51,7 @@ public class PlayState extends State
         redBlock = new Texture("red3.png");
         redBorder = new Texture("redborder.png");
         character = new Character(this.batch);
-        hud = new HUD(this.batch);
+        hud = new HUD(this.batch, this.character);
 
         this.cam = new OrthographicCamera(1280,720);
         cam.update();
