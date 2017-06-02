@@ -472,6 +472,12 @@ public class Unit implements Comparable<Unit> {
         this.isAIControlled = value;
     }
 
+    public void moveToCell(Cell cell){
+        int deltaX = cell.getxPos()-this.getX();
+        int deltaY = cell.getyPos()-this.getY();
+        this.move(deltaX,deltaY);
+    }
+
     public Map getMap(){
         return this.map;
     }
