@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
+import game.Buttons.HUD;
 import game.GraphicsComponent.Character;
 import main.Logic.Abilities.Physicals.Charge;
 import main.Logic.Abilities.Spells.Fireball;
@@ -25,6 +26,7 @@ public class PlayState extends State
     private Texture redBorder = null;
     private ArrayList<String> movements = new ArrayList<String>();
     private main.game.InputHandler.MovementDelta response = null;
+    private HUD hud;
 
     private int xPos = 0;
     private int yPos = 0;
@@ -49,6 +51,7 @@ public class PlayState extends State
         redBlock = new Texture("red3.png");
         redBorder = new Texture("redborder.png");
         character = new Character(this.batch);
+        hud = new HUD(this.batch);
 
         this.cam = new OrthographicCamera(1280,720);
         cam.update();
@@ -279,6 +282,9 @@ public class PlayState extends State
         sb.end();
         //end of draw section
         Gdx.graphics.setTitle("RPGame FPS:"+fps+" Camara Zoom Value:"+cam.zoom);
+
+        sb.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     double fps;
