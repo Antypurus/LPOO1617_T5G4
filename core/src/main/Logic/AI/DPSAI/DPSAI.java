@@ -65,7 +65,14 @@ public class DPSAI extends BaseAIFeatures implements BaseAi{
         if(this.DPSAIUnit.getRemainingMovement()==0){
             return;
         }
-        //Do The Shit
+        String quad = this.determineSafestQuadrant(this.CurrentGame,this.DPSAIUnit);
+        if(quad.equals("Center")){
+            return;
+        }else{
+            ArrayList<Cell>cells = this.cellsInAQuadrantThatCanMoveTo(quad,this.DPSAIUnit);
+            Cell toMove = this.cellAtBiggestDistance(cells,this.DPSAIUnit);
+            this.DPSAIUnit.moveToCell(toMove);
+        }
     }
 
     @Override
@@ -75,7 +82,8 @@ public class DPSAI extends BaseAIFeatures implements BaseAi{
 
     @Override
     public void FullTurnBehavior() {
-
+        this.OffensiveBehavior();
+        this.DefensiveBehavior();
     }
 
     @Override
