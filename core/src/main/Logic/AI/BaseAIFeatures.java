@@ -283,11 +283,17 @@ public abstract class BaseAIFeatures {
         return abl;
     }
 
-    protected int getAlliesWithOverPercentHealth(ArrayList<Unit>units,Unit owner,int percent){
+    protected int getAlliesWithOverPercentHealth(ArrayList<Unit>units,Unit owner,int percent,ArrayList<Unit>ret){
         int c = 0;
+        if(ret!=null){
+            ret.clear();
+        }
         for(int i=0;i<units.size();++i){
             if(!units.get(i).equals(owner)){
                 if(units.get(i).getCurrentHPPercent()>=percent){
+                    if(ret!=null){
+                        ret.add(units.get(i));
+                    }
                     c++;
                 }
             }
