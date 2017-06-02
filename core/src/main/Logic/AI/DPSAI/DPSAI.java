@@ -7,6 +7,7 @@ import Logic.AI.BaseAi;
 import Logic.Difficulty;
 import Logic.GameController;
 import main.Logic.Abilities.Ability;
+import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Unit;
 
@@ -23,6 +24,16 @@ public class DPSAI extends BaseAIFeatures implements BaseAi{
         Unit target = this.determineClosestEnemy(this.CurrentGame,this.DPSAIUnit);
         if(this.DPSAIUnit.getMP()>0){
             Ability abl = this.abilityWithMostDamage(this.DPSAIUnit);
+            if(this.getDifficulty().equals(Difficulty.DifficultyStage.HARD)){
+                if(target.getAfinity()!=null){
+                    Element el = new Element();
+                    for(int i=0;i<this.DPSAIUnit.getAbilities().size();++i){
+                        if(el.ElementComparation(this.DPSAIUnit.getAbilities().get(i).getDamageElement(),target.getAfinity())==2){
+                            abl = this.DPSAIUnit.getAbilities().get(i);
+                        }
+                    }
+                }
+            }
             ArrayList<Cell> cells = null;
             this.cellsFromWhereCanHitTargetWithAbility(abl,target,cells,this.DPSAIUnit);
             if(cells.size()==0){//cant thit
