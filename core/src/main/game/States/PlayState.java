@@ -38,6 +38,8 @@ public class PlayState extends State
     private int yCounter = 0;
 
     private Character character=null;
+    private Character char2 = null;
+    private Character char3 = null;
     private main.Logic.Map.Map map = new main.Logic.Map.Map("test",30,30);
 
     private OrthographicCamera cam;
@@ -66,6 +68,18 @@ public class PlayState extends State
         this.character.getUnit().setPosition(this.map.getCell(10,10));
         this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
         character.update();
+
+        this.char2 = new Character(this.batch);
+        this.char3 = new Character(this.batch);
+
+        this.char2.getUnit().setPosition(this.map.getCell(5,5));
+        this.char2.getUnit().addAbility(new Fireball(this.char2.getUnit()));
+        char2.update();
+
+        this.char3.getUnit().setPosition(this.map.getCell(15,15));
+        this.char3.getUnit().addAbility(new Fireball(this.char3.getUnit()));
+        char3.update();
+
         //gameHandler = new GameHandler(this);
 
         xPos = this.character.getUnit().getX() * Scale;
@@ -264,6 +278,12 @@ public class PlayState extends State
 
         sb.draw(this.character.getSprite(),this.character.getUnit().getX()*Scale,
                 this.character.getUnit().getY()*Scale,Scale,Scale);
+
+        sb.draw(this.char2.getSprite(),this.char2.getUnit().getX()*Scale,
+                this.char2.getUnit().getY()*Scale,Scale,Scale);
+
+        sb.draw(this.char3.getSprite(),this.char3.getUnit().getX()*Scale,
+                this.char3.getUnit().getY()*Scale,Scale,Scale);
 
 
      /*   sb.draw(blueBlock,(this.character.getUnit().getX()+1)*Scale,
