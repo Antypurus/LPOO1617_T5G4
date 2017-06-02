@@ -61,12 +61,12 @@ public class HUD
 
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas("images/Images.pack");
+        buttonAtlas = new TextureAtlas("MenuImages/MenuImages.pack");
         skin.addRegions(buttonAtlas);
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("pause");
-        textButtonStyle.checked = skin.getDrawable("play");
+        textButtonStyle.up = skin.getDrawable("SoundOn");
+        textButtonStyle.checked = skin.getDrawable("SoundOff");
         button = new TextButton("", textButtonStyle);
 
         button.addListener(new InputListener()
@@ -95,10 +95,12 @@ public class HUD
         player = new Label("MARIO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(player).expandX().padTop(10);
-        table.add(button).expandX().padTop(10);
         table.row();
         table.add(health);
 
+        button.setPosition(0,580);
+
         stage.addActor(table);
+        stage.addActor(button);
     }
 }
