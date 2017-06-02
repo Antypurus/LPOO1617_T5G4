@@ -62,7 +62,7 @@ public class Character {
 
         currKeyframe = 0;
 
-        unit = new Unit("test",1,1,1,1,1);
+        unit = new Unit("Test",1,1,1,1,1);
     }
 
     public Sprite getSprite(){

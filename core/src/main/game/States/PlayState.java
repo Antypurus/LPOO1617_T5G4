@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
@@ -27,6 +28,9 @@ public class PlayState extends State
     private ArrayList<String> movements = new ArrayList<String>();
     private main.game.InputHandler.MovementDelta response = null;
     private HUD hud;
+
+    private BitmapFont font=null;
+    CharSequence str ;
 
     private int xPos = 0;
     private int yPos = 0;
@@ -52,6 +56,9 @@ public class PlayState extends State
         redBorder = new Texture("redborder.png");
         character = new Character(this.batch);
         hud = new HUD(this.batch, this.character);
+
+        font = new BitmapFont();
+        str = this.character.getUnit().getName();
 
         this.cam = new OrthographicCamera(1280,720);
         cam.update();
@@ -186,7 +193,7 @@ public class PlayState extends State
         }
         */
 
-        this.cam.position.set(this.character.getUnit().getX()*Scale,this.character.getUnit().getY()*Scale,0);
+        this.cam.position.set(this.character.getUnit().getX()*Scale+Scale/2,this.character.getUnit().getY()*Scale+Scale/2,0);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
     }
