@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import game.GraphicsComponent.Character;
 import main.game.MyGdxGame;
 
 /**
@@ -31,6 +32,7 @@ public class HUD
     private Viewport viewport;
     private Music music;
     private boolean isPlaying = true;
+    private Character character = null;
 
     TextButton button;
     TextButton.TextButtonStyle textButtonStyle;
@@ -38,14 +40,20 @@ public class HUD
     Skin skin;
     TextureAtlas buttonAtlas;
 
+    TextButton button2;
+    TextButton.TextButtonStyle textButtonStyle2;
+    BitmapFont font2;
+    Skin skin2;
+    TextureAtlas buttonAtlas2;
+
     private Integer worldTimer;
     private float timeCount;
     private Integer score;
+    private Double health;
 
-    Label health;
     Label player;
 
-    public HUD(SpriteBatch sb)
+    public HUD(SpriteBatch sb, Character character)
     {
         music = MyGdxGame.manager.get("Audio/audio.mp3", Music.class);
         music.setLooping(true);
@@ -54,6 +62,8 @@ public class HUD
         worldTimer = 300;
         timeCount = 0;
         score = 0;
+        this.character = character;
+        health = this.character.getUnit().getHP();
 
         viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,sb);
@@ -68,6 +78,16 @@ public class HUD
         textButtonStyle.up = skin.getDrawable("SoundOn");
         textButtonStyle.checked = skin.getDrawable("SoundOff");
         button = new TextButton("", textButtonStyle);
+
+        font2 = new BitmapFont();
+        skin2 = new Skin();
+        buttonAtlas2 = new TextureAtlas("Health/Health.pack");
+        skin2.addRegions(buttonAtlas2);
+        textButtonStyle2 = new TextButton.TextButtonStyle();
+        textButtonStyle2.font = font2;
+        textButtonStyle2.up = skin2.getDrawable("HP");
+        //textButtonStyle2.checked = skin.getDrawable("SoundOff");
+        button2 = new TextButton(health.toString(), textButtonStyle2);
 
         button.addListener(new InputListener()
         {
@@ -91,16 +111,18 @@ public class HUD
         table.top();
         table.setFillParent(true);
 
-        health  = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        //health  = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         player = new Label("MARIO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(player).expandX().padTop(10);
         table.row();
-        table.add(health);
+        //table.add(health);
 
-        button.setPosition(0,580);
+        button.setPosition(1100,580);
+        button2.setPosition(0,500);
 
         stage.addActor(table);
         stage.addActor(button);
+        stage.addActor(button2);
     }
 }

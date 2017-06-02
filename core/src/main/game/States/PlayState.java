@@ -55,7 +55,7 @@ public class PlayState extends State
         redBlock = new Texture("red3.png");
         redBorder = new Texture("redborder.png");
         character = new Character(this.batch);
-        hud = new HUD(this.batch);
+        hud = new HUD(this.batch, this.character);
 
         font = new BitmapFont();
         str = this.character.getUnit().getName();
