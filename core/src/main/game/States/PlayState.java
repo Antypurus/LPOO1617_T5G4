@@ -403,6 +403,12 @@ public class PlayState extends State
 
         sb.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+        if(this.gameController.hasLost()){
+            Gdx.app.exit();
+        }
+        if(this.gameController.hasWon()){
+            Gdx.app.exit();
+        }
     }
 
     double fps;
