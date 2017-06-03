@@ -309,7 +309,7 @@ public class PlayState extends State
 
         ArrayList<Cell>blocks = this.character.getUnit().getCellsThatCanMoveTo();
         for(int i=0;i<blocks.size();i++){
-            sb.draw(redBlock,blocks.get(i).getxPos()*Scale,blocks.get(i).getyPos()*Scale,Scale,Scale);
+            sb.draw(blueBlock,blocks.get(i).getxPos()*Scale,blocks.get(i).getyPos()*Scale,Scale,Scale);
         }
 
         for(int i=0;i<this.map.height;++i){

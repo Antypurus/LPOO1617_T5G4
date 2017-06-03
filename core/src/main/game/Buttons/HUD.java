@@ -109,7 +109,13 @@ public class HUD
     {
         music = MyGdxGame.manager.get("Audio/audio.mp3", Music.class);
         music.setLooping(true);
-        music.play();
+        if(this.isPlaying) {
+            music.play();
+            isPlaying = true;
+        }else{
+            music.pause();
+            isPlaying = false;
+        }
 
         worldTimer = 300;
         timeCount = 0;
