@@ -155,7 +155,6 @@ public class PlayState extends State
 
             if(yPos < this.map.height*Scale -Scale) {
                 yCounter++;
-               // this.character.getUnit().takeDamage(1);
                 yPos = (this.character.getUnit().getY() + yCounter) * Scale;
             }
         }
@@ -233,7 +232,6 @@ public class PlayState extends State
             yPos = this.character.getUnit().getY() * Scale;
             yCounter = 0;
             xCounter = 0;
-            hud = new HUD(batch, charArray, enemiesArray);
         }
 
        /* if(Gdx.input.justTouched())
@@ -258,6 +256,7 @@ public class PlayState extends State
     public void update(float dt)
     {
         handleInput();
+        hud.update(batch, charArray, enemiesArray);
     }
 
     @Override
