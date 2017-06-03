@@ -66,7 +66,7 @@ public class PlayState extends State
         blueBlock = new Texture("blue3.png");
         redBlock = new Texture("red3.png");
         redBorder = new Texture("redborder.png");
-        character = new Character(this.batch, "Diogo");
+        character = new Character("Diogo",1);
 
 
         font = new BitmapFont();
@@ -80,8 +80,8 @@ public class PlayState extends State
         character.update();
         charArray.add(this.character);
 
-        this.char2 = new Character(this.batch, "Manuel");
-        this.char3 = new Character(this.batch, "Tiago");
+        this.char2 = new Character("Manuel",2);
+        this.char3 = new Character("Tiago",0);
 
 
         this.char2.getUnit().setPosition(this.map.getCell(5,5));
@@ -94,9 +94,9 @@ public class PlayState extends State
         char3.update();
         charArray.add(this.char3);
 
-        this.enemy1 = new Character(this.batch, "Ogre");
-        this.enemy2 = new Character(this.batch, "Maluco");
-        this.enemy3 = new Character(this.batch, "Bebado");
+        this.enemy1 = new Character("Ogre",1);
+        this.enemy2 = new Character("Maluco",2);
+        this.enemy3 = new Character("Bebado",0);
 
         this.enemy1.getUnit().setPosition(this.map.getCell(16,16));
         this.enemy1.getUnit().addAbility(new Fireball(this.enemy1.getUnit()));
