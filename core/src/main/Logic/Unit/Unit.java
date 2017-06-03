@@ -491,4 +491,8 @@ public class Unit implements Comparable<Unit> {
     public BaseAi getAI(){
         return this.AI;
     }
+
+    public void setAi(BaseAi AI){
+        this.AI = AI;
+    }
 }
