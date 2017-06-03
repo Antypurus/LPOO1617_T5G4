@@ -94,4 +94,46 @@ public class GameControllerTest {
         assertEquals(allyTestUnit3,currentGame.getUnits().poll());
     }
 
+    @Test
+    public void turnEndTest(){
+        Unit[] allies = new Unit[3];
+        Unit[] enemies = new Unit[3];
+        Map map = new Map("Test Map",30,30);
+
+        Unit allyTestUnit1 = new Unit("Ally Unit 1",5,2,6,5,4);
+        Unit allyTestUnit2 = new Unit("Ally Unit 2",5,2,8,5,4);
+        Unit allyTestUnit3 = new Unit("Ally Unit 3",5,2,2,5,4);
+
+        Unit enemyTestUnit1 = new Unit("Enemy Unit 1",5,2,4,5,4);
+        Unit enemyTestUnit2 = new Unit("Enemy Unit 2",5,2,7,5,4);
+        Unit enemyTestUnit3 = new Unit("Enemy Unit 3",5,2,3,5,4);
+
+        allies[0] = allyTestUnit1;
+        allies[1] = allyTestUnit2;
+        allies[2] = allyTestUnit3;
+
+        enemies[0] = enemyTestUnit1;
+        enemies[1] = enemyTestUnit2;
+        enemies[2] = enemyTestUnit3;
+
+        allyTestUnit1.setPosition(map.getCell(10,10));
+        allyTestUnit2.setPosition(map.getCell(11,10));
+        allyTestUnit3.setPosition(map.getCell(12,10));
+
+        enemyTestUnit1.setPosition(map.getCell(10,20));
+        enemyTestUnit1.setIsAiControlled(true);
+        enemyTestUnit2.setPosition(map.getCell(11,20));
+        enemyTestUnit2.setIsAiControlled(true);
+        enemyTestUnit3.setPosition(map.getCell(12,20));
+        enemyTestUnit3.setIsAiControlled(true);
+
+
+        GameController currentGame = new GameController(allies,enemies, Difficulty.DifficultyStage.EASY,map);
+        assertEquals(allyTestUnit2,currentGame.getCurrentChar());
+        currentGame.endTurn();
+        assertEquals(allyTestUnit1,currentGame.getCurrentChar());
+        currentGame.endTurn();
+        assertEquals(allyTestUnit3,currentGame.getCurrentChar());
+    }
+
 }
