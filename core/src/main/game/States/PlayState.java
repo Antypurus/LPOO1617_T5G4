@@ -26,6 +26,7 @@ public class PlayState extends State
 {
     private boolean attackMode = false;
     private boolean moveMode = false;
+    private boolean hasAttacked = false;
     Ability currAbl = null;
 
     private SpriteBatch batch = null;
@@ -316,7 +317,7 @@ public class PlayState extends State
             }
             if(attackMode){
                 Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
-                if(currAbl!=null){
+                if(currAbl!=null&&!hasAttacked){
                     if(cell.getUnit()!=null) {
                         System.out.print("Attack \n");
                         this.currAbl.AffectTarget(cell.getUnit());
