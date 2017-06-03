@@ -11,11 +11,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
+import Logic.Difficulty;
+import Logic.GameController;
 import game.Buttons.HUD;
 import game.GraphicsComponent.Character;
 import main.Logic.Abilities.Physicals.Charge;
 import main.Logic.Abilities.Spells.Fireball;
 import main.Logic.Map.Cell;
+import main.Logic.Unit.Unit;
 import main.game.InputHandler.GameHandler;
 
 public class PlayState extends State
@@ -38,17 +41,22 @@ public class PlayState extends State
     private int xCounter = 0;
     private int yCounter = 0;
 
+    Unit[] allies = new Unit[3];
+
     private ArrayList<Character> charArray = new ArrayList<Character>();
     private Character character=null;
     private Character char2 = null;
     private Character char3 = null;
+
+    Unit[] enemies = new Unit[3];
 
     private ArrayList<Character> enemiesArray = new ArrayList<Character>();
     private Character enemy1 = null;
     private Character enemy2 = null;
     private Character enemy3 = null;
 
-
+    GameController gameController = null;
+    Unit currentChar = null;
 
     private main.Logic.Map.Map map = new main.Logic.Map.Map("test",30,30);
 
@@ -75,13 +83,20 @@ public class PlayState extends State
         this.cam = new OrthographicCamera(1280,720);
         cam.update();
 
+        //this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
         this.character.getUnit().setPosition(this.map.getCell(10,10));
         this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
+        allies[0] = this.character.getUnit();
         character.update();
         charArray.add(this.character);
 
         this.char2 = new Character("Manuel",2);
+        //char2.setUnit(new Unit("Manuel - Healer",10,1,4,8,2));
+        allies[1] = this.char2.getUnit();
+
         this.char3 = new Character("Tiago",0);
+        //char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
+        allies[2] = this.char3.getUnit();
 
 
         this.char2.getUnit().setPosition(this.map.getCell(5,5));
@@ -95,8 +110,14 @@ public class PlayState extends State
         charArray.add(this.char3);
 
         this.enemy1 = new Character("Ogre",1);
+        enemy1.getUnit().setIsAiControlled(true);
+        enemies[0]=enemy1.getUnit();
         this.enemy2 = new Character("Maluco",2);
+        enemy2.getUnit().setIsAiControlled(true);
+        enemies[1]=enemy2.getUnit();
         this.enemy3 = new Character("Bebado",0);
+        enemy3.getUnit().setIsAiControlled(true);
+        enemies[2]=enemy3.getUnit();
 
         this.enemy1.getUnit().setPosition(this.map.getCell(16,16));
         this.enemy1.getUnit().addAbility(new Fireball(this.enemy1.getUnit()));
@@ -116,15 +137,19 @@ public class PlayState extends State
 
         //gameHandler = new GameHandler(this);
 
-        xPos = this.character.getUnit().getX() * Scale;
-        yPos = this.character.getUnit().getY() * Scale;
+        cam.update();
 
-        this.cam.position.set(this.character.getUnit().getX()*Scale,this.character.getUnit().getY()*Scale,0);
+        gameController = new GameController(allies,enemies, Logic.Difficulty.DifficultyStage.EASY,map);
+        currentChar = gameController.getCurrentChar();
+
+        xPos = this.currentChar.getX() * Scale;
+        yPos = this.currentChar.getY() * Scale;
+
+        this.cam.position.set(this.currentChar.getX()*Scale,this.currentChar.getY()*Scale,0);
         cam.update();
 
         Gdx.input.setCursorCatched(false);
 
-        //char3.getUnit().takeDamage(2);
         hud = new HUD(this.batch, this.charArray, this.enemiesArray);
     }
 
@@ -144,10 +169,19 @@ public class PlayState extends State
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
-            this.character.getUnit().beginTurn();
+            this.currentChar.beginTurn();
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            this.character.getUnit().setPosition(this.map.getCell(10,10));
+            this.currentChar.setPosition(this.map.getCell(10,10));
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
+            this.gameController.endTurn();
+            currentChar = this.gameController.getCurrentChar();
+
+            xPos = this.currentChar.getX() * Scale;
+            yPos = this.currentChar.getY() * Scale;
+            yCounter = 0;
+            xCounter = 0;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             //this.character.moveUp();
@@ -155,7 +189,7 @@ public class PlayState extends State
 
             if(yPos < this.map.height*Scale -Scale) {
                 yCounter++;
-                yPos = (this.character.getUnit().getY() + yCounter) * Scale;
+                yPos+=Scale;
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
@@ -165,7 +199,7 @@ public class PlayState extends State
             if(yPos > 0) {
                 yCounter--;
 
-                yPos = (this.character.getUnit().getY() + yCounter) * Scale;
+                yPos -= Scale;
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
@@ -175,7 +209,7 @@ public class PlayState extends State
             if(xPos > 0) {
                 xCounter--;
 
-                xPos = (this.character.getUnit().getX() + xCounter) * Scale;
+                xPos -=Scale;
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
@@ -185,7 +219,7 @@ public class PlayState extends State
             if(xPos < this.map.width*Scale - Scale) {
                 xCounter++;
 
-                xPos = (this.character.getUnit().getX() + xCounter) * Scale;
+                xPos += Scale;
             }
         }
 
@@ -196,58 +230,57 @@ public class PlayState extends State
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER))
         {
+            Character currChar = null;
+
+            for(int i=0;i<this.charArray.size();i++){
+                if(charArray.get(i).getUnit().equals(this.currentChar)){
+                    currChar = charArray.get(i);
+                    break;
+                }
+            }
+
+            if(currChar==null){
+                return;
+            }
 
             for(int i = 0; i < movements.size(); i++)
             {
                 if(movements.get(i) == "UP")
                 {
-                    character.moveUp();
+                    currChar.moveUp();
                     batch.begin();
-                    batch.draw(this.character.getSprite(),this.character.getUnit().getX()*Scale,
-                            this.character.getUnit().getY()*Scale,Scale,Scale);
+                    batch.draw(currChar.getSprite(),currChar.getUnit().getX()*Scale,
+                            currChar.getUnit().getY()*Scale,Scale,Scale);
                     batch.end();
                     cam.update();
                 }
                 else if(movements.get(i) == "DOWN")
                 {
-                    character.moveDown();
+                    currChar.moveDown();
                     cam.update();
                 }
 
                 else if(movements.get(i) == "LEFT")
                 {
-                    character.moveLeft();
+                    currChar.moveLeft();
                     cam.update();
                 }
 
                 else if(movements.get(i) == "RIGHT")
                 {
-                    character.moveRight();
+                    currChar.moveRight();
                     cam.update();
                 }
                 movements.remove(i);
                 i--;
             }
-            xPos = this.character.getUnit().getX() * Scale;
-            yPos = this.character.getUnit().getY() * Scale;
+            xPos = this.currentChar.getX() * Scale;
+            yPos = this.currentChar.getY() * Scale;
             yCounter = 0;
             xCounter = 0;
         }
 
-       /* if(Gdx.input.justTouched())
-        {
-            if(Gdx.input.getX()*Scale >= (this.character.getUnit().getX() + 1)*Scale
-                    && Gdx.input.getX()*Scale <= (this.character.getUnit().getX()+2)*Scale
-                    && (screenHeight - Gdx.input.getY())*Scale >= (this.character.getUnit().getY())*Scale
-                    && (screenHeight - Gdx.input.getY())*Scale <= (this.character.getUnit().getY() + 1)*Scale)
-            {
-                this.character.moveRight();
-            }
-
-        }
-        */
-
-        this.cam.position.set(this.character.getUnit().getX()*Scale+Scale/2,this.character.getUnit().getY()*Scale+Scale/2,0);
+        this.cam.position.set(currentChar.getX()*Scale+Scale/2,currentChar.getY()*Scale+Scale/2,0);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
     }
@@ -268,45 +301,14 @@ public class PlayState extends State
         fps = Gdx.graphics.getFramesPerSecond();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //Start of Input Section
 
-        //end of input section
-
-        //this.response = this.handleInput();
-
-      /* if(response!=null){
-            if(response.deltaY==1){
-                this.character.moveUp();
-            }
-
-            if(response.deltaY==-1){
-                this.character.moveDown();
-            }
-
-            if(response.deltaX==-1){
-                this.character.moveLeft();
-            }
-
-            if(response.deltaX==1){
-                this.character.moveRight();
-            }
-
-            this.cam.position.set(this.character.getUnit().getX()*Scale,this.character.getUnit().getY()*Scale,0);
-            cam.update();
-            batch.setProjectionMatrix(cam.combined);
-        } */
-
-        //Start of Logic section
-
-        //End Of Logic Section
-        //start of draw section
         sb.begin();
 
         sb.disableBlending();
         sb.draw(background,-1000,-400);
         sb.enableBlending();
 
-        ArrayList<Cell>blocks = this.character.getUnit().getCellsThatCanMoveTo();
+        ArrayList<Cell>blocks = this.currentChar.getCellsThatCanMoveTo();
         for(int i=0;i<blocks.size();i++){
             sb.draw(blueBlock,blocks.get(i).getxPos()*Scale,blocks.get(i).getyPos()*Scale,Scale,Scale);
         }
@@ -319,30 +321,13 @@ public class PlayState extends State
 
         for(int i = 0; i < charArray.size() && i < enemiesArray.size(); i++)
         {
-            sb.draw(charArray.get(i).getSprite(),charArray.get(i).getUnit().getX()*Scale,
-                    charArray.get(i).getUnit().getY()*Scale,Scale,Scale);
-            sb.draw(enemiesArray.get(i).getSprite(),enemiesArray.get(i).getUnit().getX()*Scale,
-                    enemiesArray.get(i).getUnit().getY()*Scale,Scale,Scale);
+            if(!charArray.get(i).getUnit().isDead()) {
+                sb.draw(charArray.get(i).getSprite(), charArray.get(i).getUnit().getX() * Scale,
+                        charArray.get(i).getUnit().getY() * Scale, Scale, Scale);
+                sb.draw(enemiesArray.get(i).getSprite(), enemiesArray.get(i).getUnit().getX() * Scale,
+                        enemiesArray.get(i).getUnit().getY() * Scale, Scale, Scale);
+            }
         }
-
-
-     /*   sb.draw(blueBlock,(this.character.getUnit().getX()+1)*Scale,
-                (this.character.getUnit().getY()+1)*Scale,Scale,Scale);
-        sb.draw(blueBlock,(this.character.getUnit().getX()-1)*Scale,
-                (this.character.getUnit().getY()+1)*Scale,Scale,Scale);
-        sb.draw(blueBlock,(this.character.getUnit().getX()+1)*Scale,
-                (this.character.getUnit().getY()-1)*Scale,Scale,Scale);
-        sb.draw(blueBlock,(this.character.getUnit().getX()-1)*Scale,
-                (this.character.getUnit().getY()-1)*Scale,Scale,Scale);
-        sb.draw(blueBlock,(this.character.getUnit().getX())*Scale,
-                (this.character.getUnit().getY()+1)*Scale,Scale,Scale);
-        sb.draw(blueBlock,(this.character.getUnit().getX())*Scale,
-                (this.character.getUnit().getY()-1)*Scale,Scale,Scale);
-        sb.draw(blueBlock,(this.character.getUnit().getX()+1)*Scale,
-                (this.character.getUnit().getY())*Scale,Scale,Scale);
-        sb.draw(blueBlock,(this.character.getUnit().getX()-1)*Scale,
-                (this.character.getUnit().getY())*Scale,Scale,Scale);
-                */
 
         sb.draw(redBorder,xPos, yPos, Scale, Scale);
 
@@ -354,7 +339,7 @@ public class PlayState extends State
 
         sb.end();
         //end of draw section
-        Gdx.graphics.setTitle("RPGame FPS:"+fps+" Camara Zoom Value:"+cam.zoom);
+        Gdx.graphics.setTitle("RPGame FPS:"+fps+" Camara Zoom Value:"+cam.zoom+" Curr Char:"+this.currentChar.getName());
 
         sb.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();

@@ -31,6 +31,7 @@ public class GameController {
             numberOfChars++;
         }
         this.currentChar = this.units.peek();
+        this.startNextTurn();
     }
 
     public Unit getCurrentChar(){

@@ -442,17 +442,7 @@ public class Unit implements Comparable<Unit> {
     @Override
     public int compareTo(Unit o) {
         if(this.Speed.BaseValue==o.getSPD()){
-            double val1 = this.generateDodgeVal();
-            double val2 = o.generateDodgeVal();
-            while(val1==val2){
-                val1 = this.generateDodgeVal();
-                val2 = o.generateDodgeVal();
-            }
-            if(val1>val2){
-                return 1;
-            }else{
-                return -1;
-            }
+            return this.getName().compareTo(o.getName());
         }
         if(this.Speed.BaseValue<o.getSPD()){
             return 1;
