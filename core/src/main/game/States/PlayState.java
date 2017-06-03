@@ -146,13 +146,16 @@ public class PlayState extends State
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
             this.character.getUnit().beginTurn();
         }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            this.character.getUnit().setPosition(this.map.getCell(10,10));
+        }
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             //this.character.moveUp();
             movements.add("UP");
 
             if(yPos < this.map.height*Scale -Scale) {
                 yCounter++;
-                this.character.getUnit().takeDamage(1);
+               // this.character.getUnit().takeDamage(1);
                 yPos = (this.character.getUnit().getY() + yCounter) * Scale;
             }
         }

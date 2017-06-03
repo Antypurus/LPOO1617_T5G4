@@ -94,9 +94,11 @@ public class Map {
         ArrayList<Cell>ret = new ArrayList<Cell>();
         for(int i=0;i<this.height;++i){
             for(int j=0;j<this.width;++j){
-                int dist = (int)unit.getPosition().distanceToCell(this.map[j][i]);
-                if(unit.getRemainingMovement()-dist>=0&&(this.map[j][i].isWalkable()||this.map[j][i].getUnit().equals(unit))){
-                    ret.add(this.map[j][i]);
+                if(unit.getPosition()!=null) {
+                    int dist = (int) unit.getPosition().distanceToCell(this.map[j][i]);
+                    if (unit.getRemainingMovement() - dist >= 0 && (this.map[j][i].isWalkable() || this.map[j][i].getUnit().equals(unit))) {
+                        ret.add(this.map[j][i]);
+                    }
                 }
             }
         }

@@ -260,6 +260,9 @@ public class Unit implements Comparable<Unit> {
     }
 
     public void setPosition(main.Logic.Map.Cell position){
+        if(position==null){
+            return;
+        }
         if(position.getUnit()==null) {
             if (this.position != null) {
                 this.position.setWalkable(true);
