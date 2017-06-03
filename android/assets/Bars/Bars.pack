@@ -1,0 +1,26 @@
+
+Bars.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+EmptyBar
+  rotate: false
+  xy: 1, 2
+  size: 251, 25
+  orig: 251, 25
+  offset: 0, 0
+  index: -1
+BlueColor
+  rotate: false
+  xy: 254, 15
+  size: 233, 12
+  orig: 233, 12
+  offset: 0, 0
+  index: -1
+RedColor
+  rotate: false
+  xy: 254, 1
+  size: 233, 12
+  orig: 233, 12
+  offset: 0, 0
+  index: -1

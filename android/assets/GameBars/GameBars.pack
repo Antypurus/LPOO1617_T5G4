@@ -1,0 +1,33 @@
+
+GameBars.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BlueBar
+  rotate: false
+  xy: 1, 1
+  size: 206, 28
+  orig: 206, 28
+  offset: 0, 0
+  index: -1
+EmptyBar
+  rotate: false
+  xy: 209, 1
+  size: 206, 28
+  orig: 206, 28
+  offset: 0, 0
+  index: -1
+GreenBar
+  rotate: false
+  xy: 417, 1
+  size: 206, 28
+  orig: 206, 28
+  offset: 0, 0
+  index: -1
+RedBar
+  rotate: false
+  xy: 625, 1
+  size: 206, 28
+  orig: 206, 28
+  offset: 0, 0
+  index: -1

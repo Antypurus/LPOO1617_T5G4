@@ -2,6 +2,7 @@ package game.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,7 +30,7 @@ public class PlayState extends State
     private main.game.InputHandler.MovementDelta response = null;
     private HUD hud;
 
-    private BitmapFont font=null;
+    BitmapFont font;
     CharSequence str ;
 
     private int xPos = 0;
@@ -37,9 +38,18 @@ public class PlayState extends State
     private int xCounter = 0;
     private int yCounter = 0;
 
+    private ArrayList<Character> charArray = new ArrayList<Character>();
     private Character character=null;
     private Character char2 = null;
     private Character char3 = null;
+
+    private ArrayList<Character> enemiesArray = new ArrayList<Character>();
+    private Character enemy1 = null;
+    private Character enemy2 = null;
+    private Character enemy3 = null;
+
+
+
     private main.Logic.Map.Map map = new main.Logic.Map.Map("test",30,30);
 
     private OrthographicCamera cam;
@@ -56,8 +66,8 @@ public class PlayState extends State
         blueBlock = new Texture("blue3.png");
         redBlock = new Texture("red3.png");
         redBorder = new Texture("redborder.png");
-        character = new Character(this.batch);
-        hud = new HUD(this.batch, this.character);
+        character = new Character(this.batch, "Diogo");
+
 
         font = new BitmapFont();
         str = this.character.getUnit().getName();
@@ -68,17 +78,41 @@ public class PlayState extends State
         this.character.getUnit().setPosition(this.map.getCell(10,10));
         this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
         character.update();
+        charArray.add(this.character);
 
-        this.char2 = new Character(this.batch);
-        this.char3 = new Character(this.batch);
+        this.char2 = new Character(this.batch, "Manuel");
+        this.char3 = new Character(this.batch, "Tiago");
+
 
         this.char2.getUnit().setPosition(this.map.getCell(5,5));
         this.char2.getUnit().addAbility(new Fireball(this.char2.getUnit()));
         char2.update();
+        charArray.add(this.char2);
 
         this.char3.getUnit().setPosition(this.map.getCell(15,15));
         this.char3.getUnit().addAbility(new Fireball(this.char3.getUnit()));
         char3.update();
+        charArray.add(this.char3);
+
+        this.enemy1 = new Character(this.batch, "Ogre");
+        this.enemy2 = new Character(this.batch, "Maluco");
+        this.enemy3 = new Character(this.batch, "Bebado");
+
+        this.enemy1.getUnit().setPosition(this.map.getCell(16,16));
+        this.enemy1.getUnit().addAbility(new Fireball(this.enemy1.getUnit()));
+        enemy1.update();
+        enemiesArray.add(this.enemy1);
+
+        this.enemy2.getUnit().setPosition(this.map.getCell(17,17));
+        this.enemy2.getUnit().addAbility(new Fireball(this.enemy2.getUnit()));
+        enemy2.update();
+        enemiesArray.add(this.enemy2);
+
+        this.enemy3.getUnit().setPosition(this.map.getCell(18,18));
+        this.enemy3.getUnit().addAbility(new Fireball(this.enemy3.getUnit()));
+        enemy3.update();
+        enemiesArray.add(this.enemy3);
+
 
         //gameHandler = new GameHandler(this);
 
@@ -89,6 +123,9 @@ public class PlayState extends State
         cam.update();
 
         Gdx.input.setCursorCatched(false);
+
+        //char3.getUnit().takeDamage(2);
+        hud = new HUD(this.batch, this.charArray, this.enemiesArray);
     }
 
     @Override
@@ -115,7 +152,7 @@ public class PlayState extends State
 
             if(yPos < this.map.height*Scale -Scale) {
                 yCounter++;
-
+                this.character.getUnit().takeDamage(1);
                 yPos = (this.character.getUnit().getY() + yCounter) * Scale;
             }
         }
@@ -157,6 +194,7 @@ public class PlayState extends State
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER))
         {
+
             for(int i = 0; i < movements.size(); i++)
             {
                 if(movements.get(i) == "UP")
@@ -192,6 +230,7 @@ public class PlayState extends State
             yPos = this.character.getUnit().getY() * Scale;
             yCounter = 0;
             xCounter = 0;
+            hud = new HUD(batch, charArray, enemiesArray);
         }
 
        /* if(Gdx.input.justTouched())
@@ -276,14 +315,13 @@ public class PlayState extends State
             }
         }
 
-        sb.draw(this.character.getSprite(),this.character.getUnit().getX()*Scale,
-                this.character.getUnit().getY()*Scale,Scale,Scale);
-
-        sb.draw(this.char2.getSprite(),this.char2.getUnit().getX()*Scale,
-                this.char2.getUnit().getY()*Scale,Scale,Scale);
-
-        sb.draw(this.char3.getSprite(),this.char3.getUnit().getX()*Scale,
-                this.char3.getUnit().getY()*Scale,Scale,Scale);
+        for(int i = 0; i < charArray.size() && i < enemiesArray.size(); i++)
+        {
+            sb.draw(charArray.get(i).getSprite(),charArray.get(i).getUnit().getX()*Scale,
+                    charArray.get(i).getUnit().getY()*Scale,Scale,Scale);
+            sb.draw(enemiesArray.get(i).getSprite(),enemiesArray.get(i).getUnit().getX()*Scale,
+                    enemiesArray.get(i).getUnit().getY()*Scale,Scale,Scale);
+        }
 
 
      /*   sb.draw(blueBlock,(this.character.getUnit().getX()+1)*Scale,
@@ -305,6 +343,12 @@ public class PlayState extends State
                 */
 
         sb.draw(redBorder,xPos, yPos, Scale, Scale);
+
+        font.setColor(Color.WHITE);
+        for(int i = 0; i < charArray.size(); i++)
+        {
+            font.draw(sb, charArray.get(i).getUnit().getName(), (charArray.get(i).getUnit().getX())*Scale + 3,(charArray.get(i).getUnit().getY())*Scale + 60);
+        }
 
         sb.end();
         //end of draw section

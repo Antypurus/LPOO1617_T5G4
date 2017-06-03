@@ -36,7 +36,7 @@ public class Character {
     private SpriteBatch batch = null;
     private MyGdxGame game = null;
 
-    public Character(SpriteBatch batch){
+    public Character(SpriteBatch batch, String name){
         interm = new Texture("characters.png");
         texts = TextureRegion.split(interm,interm.getWidth()/12,interm.getHeight()/8);
         textures = new TextureRegion[3];
@@ -62,7 +62,7 @@ public class Character {
 
         currKeyframe = 0;
 
-        unit = new Unit("Test",1,1,1,1,1);
+        unit = new Unit(name,1,1,1,1,1);
     }
 
     public Sprite getSprite(){
