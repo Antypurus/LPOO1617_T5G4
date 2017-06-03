@@ -319,8 +319,10 @@ public class PlayState extends State
                 Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
                 if(currAbl!=null&&!hasAttacked){
                     if(cell.getUnit()!=null) {
-                        System.out.print("Attack \n");
-                        this.currAbl.AffectTarget(cell.getUnit());
+                        if(cell.getUnit().getIsAlly()==false) {
+                            System.out.print("Attack \n");
+                            this.currAbl.AffectTarget(cell.getUnit());
+                        }
                     }
                 }
             }
