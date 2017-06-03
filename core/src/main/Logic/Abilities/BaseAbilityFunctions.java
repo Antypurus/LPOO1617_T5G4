@@ -17,6 +17,22 @@ public abstract class BaseAbilityFunctions {
         return true;
     }
 
+    public boolean targetIsOwnerAbilityCheck(Ability ability, Unit target){
+        boolean check = this.baseNonDistanceRelatedHitCheck(ability,target);
+        if(!check){
+            if(target==ability.getOwner()){
+                return true;
+            }
+            return false;
+        }
+        boolean ret = this.baseCanHitCell(ability.getOwner(),target.getPosition(),ability.getRange());
+        if(!ret){
+            return false;
+        }
+
+        return true;
+    }
+
     public boolean baseNonDistanceRelatedHitCheck(Ability ability, Unit target){
         if (ability.getOwner() == null) {
             return false;

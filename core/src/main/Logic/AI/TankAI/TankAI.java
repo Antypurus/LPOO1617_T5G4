@@ -22,35 +22,8 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
         this.CurrentGame = game;
     }
 
-    private Unit easyDeterminBestTarget(){
-        Unit ret = null;
-        ret = this.determineClosestEnemy(this.CurrentGame,this.TankAIUnit);
-        return ret;
-    }
-
     private void easyOffenseBehavior(){
-        Unit toHit = this.easyDeterminBestTarget();
-        Ability abl = this.abilityWithMostDamage(this.TankAIUnit);
-        ArrayList<Cell>cells = null;
-        if(!this.cellsFromWhereCanHitTargetWithAbility(abl,toHit,cells,this.TankAIUnit)){
-            ArrayList<Ability>abls = this.abilitiesThatCanBeUsedOnTarget(this.TankAIUnit,toHit);
-            if(abls.size()==0){
-                Cell toGO = this.cellThatGetsClosestToTarget(this.TankAIUnit,toHit);
-                if(toGO==null){
-                    return;
-                }
-                this.TankAIUnit.moveToCell(toGO);
-                return;
-            }
-            this.cellsFromWhereCanHitTargetWithAbility(abls.get(0),toHit,cells,this.TankAIUnit);
-            Cell hit = this.cellAtSmalestDistance(cells,this.TankAIUnit);
-            this.TankAIUnit.moveToCell(hit);
-            abl.AffectTarget(toHit);
-        }else{
-            Cell hit = this.cellAtSmalestDistance(cells,this.TankAIUnit);
-            this.TankAIUnit.moveToCell(hit);
-            abl.AffectTarget(toHit);
-        }
+        this.basEasyOffenseBehavior(this.CurrentGame,this.TankAIUnit);
     }
 
     @Override
