@@ -15,6 +15,7 @@ import Logic.Difficulty;
 import Logic.GameController;
 import game.Buttons.HUD;
 import game.GraphicsComponent.Character;
+import main.Logic.Abilities.Ability;
 import main.Logic.Abilities.Physicals.Charge;
 import main.Logic.Abilities.Spells.Fireball;
 import main.Logic.Map.Cell;
@@ -23,6 +24,10 @@ import main.game.InputHandler.GameHandler;
 
 public class PlayState extends State
 {
+    private boolean attackMode = false;
+    private boolean moveMode = false;
+    Ability currAbl = null;
+
     private SpriteBatch batch = null;
     private Texture background = null;
     private Texture gridBlock = null;
@@ -174,14 +179,54 @@ public class PlayState extends State
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
             this.currentChar.setPosition(this.map.getCell(10,10));
         }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A)){
+            this.attackMode = true;
+            this.moveMode = false;
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.M)){
+            this.attackMode = false;
+            this.moveMode = true;
+            xPos = this.currentChar.getX() * Scale;
+            yPos = this.currentChar.getY() * Scale;
+            xCounter = 0;
+            yCounter = 0;
+            movements.clear();
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            this.currentChar.setPosition(this.map.getCell(10,10));
+        }
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
             this.gameController.endTurn();
             currentChar = this.gameController.getCurrentChar();
+            this.currAbl = null;
 
             xPos = this.currentChar.getX() * Scale;
             yPos = this.currentChar.getY() * Scale;
-            yCounter = 0;
-            xCounter = 0;
+            this.movements.clear();
+
+            this.attackMode = false;
+            this.moveMode = false;
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
+            if(this.currentChar.getAbilities().size()==0){
+                currAbl = null;
+                return;
+            }
+            currAbl = this.currentChar.getAbilities().get(0);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
+            if(this.currentChar.getAbilities().size()==1){
+                currAbl = null;
+                return;
+            }
+            currAbl = this.currentChar.getAbilities().get(1);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)){
+            if(this.currentChar.getAbilities().size()<=2){
+                currAbl = null;
+                return;
+            }
+            currAbl = this.currentChar.getAbilities().get(2);
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             //this.character.moveUp();
@@ -228,58 +273,55 @@ public class PlayState extends State
             Gdx.app.exit();
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER))
-        {
-            Character currChar = null;
+        if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            if (moveMode) {
+                Character currChar = null;
 
-            for(int i=0;i<this.charArray.size();i++){
-                if(charArray.get(i).getUnit().equals(this.currentChar)){
-                    currChar = charArray.get(i);
-                    break;
+                for (int i = 0; i < this.charArray.size(); i++) {
+                    if (charArray.get(i).getUnit().equals(this.currentChar)) {
+                        currChar = charArray.get(i);
+                        break;
+                    }
+                }
+
+                if (currChar == null) {
+                    return;
+                }
+
+                for (int i = 0; i < movements.size(); i++) {
+                    if (movements.get(i) == "UP") {
+                        currChar.moveUp();
+                        batch.begin();
+                        batch.draw(currChar.getSprite(), currChar.getUnit().getX() * Scale,
+                                currChar.getUnit().getY() * Scale, Scale, Scale);
+                        batch.end();
+                        cam.update();
+                    } else if (movements.get(i) == "DOWN") {
+                        currChar.moveDown();
+                        cam.update();
+                    } else if (movements.get(i) == "LEFT") {
+                        currChar.moveLeft();
+                        cam.update();
+                    } else if (movements.get(i) == "RIGHT") {
+                        currChar.moveRight();
+                        cam.update();
+                    }
+                    movements.remove(i);
+                    i--;
+                }
+                xPos = this.currentChar.getX() * Scale;
+                yPos = this.currentChar.getY() * Scale;
+                yCounter = 0;
+                xCounter = 0;
+            }
+        }else{
+            Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
+            if(currAbl!=null){
+                if(cell.getUnit()!=null) {
+                    this.currAbl.AffectTarget(cell.getUnit());
                 }
             }
-
-            if(currChar==null){
-                return;
-            }
-
-            for(int i = 0; i < movements.size(); i++)
-            {
-                if(movements.get(i) == "UP")
-                {
-                    currChar.moveUp();
-                    batch.begin();
-                    batch.draw(currChar.getSprite(),currChar.getUnit().getX()*Scale,
-                            currChar.getUnit().getY()*Scale,Scale,Scale);
-                    batch.end();
-                    cam.update();
-                }
-                else if(movements.get(i) == "DOWN")
-                {
-                    currChar.moveDown();
-                    cam.update();
-                }
-
-                else if(movements.get(i) == "LEFT")
-                {
-                    currChar.moveLeft();
-                    cam.update();
-                }
-
-                else if(movements.get(i) == "RIGHT")
-                {
-                    currChar.moveRight();
-                    cam.update();
-                }
-                movements.remove(i);
-                i--;
-            }
-            xPos = this.currentChar.getX() * Scale;
-            yPos = this.currentChar.getY() * Scale;
-            yCounter = 0;
-            xCounter = 0;
         }
-
         this.cam.position.set(currentChar.getX()*Scale+Scale/2,currentChar.getY()*Scale+Scale/2,0);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
@@ -308,10 +350,24 @@ public class PlayState extends State
         sb.draw(background,-1000,-400);
         sb.enableBlending();
 
-        ArrayList<Cell>blocks = this.currentChar.getCellsThatCanMoveTo();
-        for(int i=0;i<blocks.size();i++){
-            sb.draw(blueBlock,blocks.get(i).getxPos()*Scale,blocks.get(i).getyPos()*Scale,Scale,Scale);
+        ArrayList<Cell> blocks = null;
+
+        if(moveMode) {
+            blocks = this.currentChar.getCellsThatCanMoveTo();
+            for (int i = 0; i < blocks.size(); i++) {
+                sb.draw(blueBlock, blocks.get(i).getxPos() * Scale, blocks.get(i).getyPos() * Scale, Scale, Scale);
+            }
         }
+
+        if(attackMode){
+            if(currAbl!=null) {
+                blocks = this.currAbl.getCellsThatCanHit();
+                for (int i = 0; i < blocks.size(); i++) {
+                    sb.draw(redBlock, blocks.get(i).getxPos() * Scale, blocks.get(i).getyPos() * Scale, Scale, Scale);
+                }
+            }
+        }
+
 
         for(int i=0;i<this.map.height;++i){
             for(int j=0;j<this.map.width;++j){
