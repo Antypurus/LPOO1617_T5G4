@@ -95,7 +95,10 @@ public abstract class BaseAIFeatures {
             }
         }
         unit.setPosition(originalPos);
-        cellsToRet = retCells;
+        cellsToRet.clear();
+        for(int i=0;i<retCells.size();++i){
+            cellsToRet.add(retCells.get(i));
+        }
         return ret;
     }
 
@@ -245,7 +248,7 @@ public abstract class BaseAIFeatures {
     protected void basEasyOffenseBehavior(GameController CurrentGame,Unit owner){
         Unit toHit = this.easyDeterminBestTarget(CurrentGame,owner);
         Ability abl = this.abilityWithMostDamage(owner);
-        ArrayList<Cell>cells = null;
+        ArrayList<Cell>cells = new ArrayList<Cell>();
         if(!this.cellsFromWhereCanHitTargetWithAbility(abl,toHit,cells,owner)){
             ArrayList<Ability>abls = this.abilitiesThatCanBeUsedOnTarget(owner,toHit);
             if(abls.size()==0){
@@ -260,10 +263,12 @@ public abstract class BaseAIFeatures {
             Cell hit = this.cellAtSmalestDistance(cells,owner);
             owner.moveToCell(hit);
             abl.AffectTarget(toHit);
+            System.out.println(owner.getName()+" Uses" +abl.getName()+" On"+toHit.getName());
         }else{
             Cell hit = this.cellAtSmalestDistance(cells,owner);
             owner.moveToCell(hit);
             abl.AffectTarget(toHit);
+            System.out.println(owner.getName()+" Uses" +abl.getName()+" On"+toHit.getName());
         }
     }
 

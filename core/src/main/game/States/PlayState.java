@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
+import Logic.AI.TankAI.TankAI;
 import Logic.Difficulty;
 import Logic.GameController;
 import game.Buttons.HUD;
@@ -89,7 +90,7 @@ public class PlayState extends State
         this.cam = new OrthographicCamera(1280,720);
         cam.update();
 
-        //this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
+        this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
         this.character.getUnit().setPosition(this.map.getCell(10,10));
         this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
         allies[0] = this.character.getUnit();
@@ -97,11 +98,11 @@ public class PlayState extends State
         charArray.add(this.character);
 
         this.char2 = new Character("Manuel",2);
-        //char2.setUnit(new Unit("Manuel - Healer",10,1,4,8,2));
+        char2.setUnit(new Unit("Manuel - Healer",10,1,4,8,2));
         allies[1] = this.char2.getUnit();
 
         this.char3 = new Character("Tiago",0);
-        //char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
+        char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
         allies[2] = this.char3.getUnit();
 
 
@@ -147,6 +148,8 @@ public class PlayState extends State
 
         gameController = new GameController(allies,enemies, Logic.Difficulty.DifficultyStage.EASY,map);
         currentChar = gameController.getCurrentChar();
+
+       // enemy1.getUnit().setAi(new TankAI(enemy1.getUnit(),gameController));
 
         xPos = this.currentChar.getX() * Scale;
         yPos = this.currentChar.getY() * Scale;

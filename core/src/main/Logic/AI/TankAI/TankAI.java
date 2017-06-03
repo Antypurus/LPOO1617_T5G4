@@ -45,6 +45,7 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
             ArrayList<Cell>cells = this.cellsInAQuadrantThatCanMoveTo(quad,this.TankAIUnit);
             Cell toMove = this.cellAtBiggestDistance(cells,this.TankAIUnit);
             this.TankAIUnit.moveToCell(toMove);
+            System.out.println(this.TankAIUnit.getName()+ "Moves To: ("+toMove.getxPos()+","+toMove.getyPos()+")");
         }
     }
 
