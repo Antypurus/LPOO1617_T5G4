@@ -314,17 +314,20 @@ public class PlayState extends State
                 yCounter = 0;
                 xCounter = 0;
             }
-        }else{
-            Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
-            if(currAbl!=null){
-                if(cell.getUnit()!=null) {
-                    this.currAbl.AffectTarget(cell.getUnit());
+            if(attackMode){
+                Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
+                if(currAbl!=null){
+                    if(cell.getUnit()!=null) {
+                        System.out.print("Attack \n");
+                        this.currAbl.AffectTarget(cell.getUnit());
+                    }
                 }
             }
         }
         this.cam.position.set(currentChar.getX()*Scale+Scale/2,currentChar.getY()*Scale+Scale/2,0);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
+        return;
     }
 
     @Override
