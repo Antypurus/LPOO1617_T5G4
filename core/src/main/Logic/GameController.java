@@ -114,4 +114,8 @@ public class GameController {
     public ArrayList<Unit>getAllies(){
         return this.allies;
     }
+
+    public PriorityQueue<Unit> getUnits(){
+        return this.units;
+    }
 }
