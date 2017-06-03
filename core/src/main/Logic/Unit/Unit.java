@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
+import Logic.AI.BaseAi;
 import main.Logic.Map.Cell;
 import main.Logic.Map.Map;
 
 public class Unit implements Comparable<Unit> {
+
+    private BaseAi AI = null;
 
     private static int Identifier = 0;
     private int ID = -1;
@@ -483,5 +486,9 @@ public class Unit implements Comparable<Unit> {
 
     public Map getMap(){
         return this.map;
+    }
+
+    public BaseAi getAI(){
+        return this.AI;
     }
 }

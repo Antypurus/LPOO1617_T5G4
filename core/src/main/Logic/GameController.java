@@ -92,8 +92,10 @@ public class GameController {
             return ;
         }
         if(this.currentChar.isAIControlled()){
-            //do AI SHIT
-            this.endTurn();
+            if(this.currentChar.getAI()!=null) {
+                this.currentChar.getAI().FullTurnBehavior();
+            }
+            this.endTurn();//do we want this ?
         }
     }
 
