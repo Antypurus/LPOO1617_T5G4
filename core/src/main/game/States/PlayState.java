@@ -35,6 +35,8 @@ public class PlayState extends State
     private boolean hasAttacked = false;
     Ability currAbl = null;
 
+    Difficulty.DifficultyStage diff = null;
+
     private SpriteBatch batch = null;
     private Texture background = null;
     private Texture gridBlock = null;
@@ -87,6 +89,11 @@ public class PlayState extends State
         redBlock = new Texture("red3.png");
         redBorder = new Texture("redborder.png");
 
+        if(Difficulty==1){
+            this.diff = Logic.Difficulty.DifficultyStage.HARD;
+        }else{
+            this.diff = Logic.Difficulty.DifficultyStage.EASY;
+        }
 
         font = new BitmapFont();
 
@@ -154,7 +161,7 @@ public class PlayState extends State
 
         cam.update();
 
-        gameController = new GameController(allies,enemies, Logic.Difficulty.DifficultyStage.EASY,map);
+        gameController = new GameController(allies,enemies, this.diff,map);
         currentChar = gameController.getCurrentChar();
 
         enemy1.getUnit().addAbility(new Mend(enemy1.getUnit()));
