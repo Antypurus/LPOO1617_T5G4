@@ -413,7 +413,15 @@ public class PlayState extends State
         font.setColor(Color.WHITE);
         for(int i = 0; i < charArray.size(); i++)
         {
-            font.draw(sb, charArray.get(i).getUnit().getName(), (charArray.get(i).getUnit().getX())*Scale + 3,(charArray.get(i).getUnit().getY())*Scale + 60);
+            if(!charArray.get(i).getUnit().isDead())
+                font.draw(sb, charArray.get(i).getUnit().getName(),
+                        (charArray.get(i).getUnit().getX())*Scale + 3,
+                        (charArray.get(i).getUnit().getY())*Scale + 60);
+
+            if(!enemiesArray.get(i).getUnit().isDead())
+                font.draw(sb, enemiesArray.get(i).getUnit().getName(),
+                        (enemiesArray.get(i).getUnit().getX())*Scale + 3,
+                        (enemiesArray.get(i).getUnit().getY())*Scale + 60);
         }
 
         sb.end();
