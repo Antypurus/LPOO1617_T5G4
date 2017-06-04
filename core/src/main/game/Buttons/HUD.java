@@ -4,18 +4,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -37,6 +41,11 @@ public class HUD
     private Character character = null;
     private ArrayList<Character> allies = new ArrayList<Character>();
     private ArrayList<Character> enemies = new ArrayList<Character>();
+
+    private Texture xText;
+    private TextureRegion xTextureRegion;
+    private TextureRegionDrawable xRegionDrawable;
+    private ImageButton stopRound;
 
     TextButton button;
     TextButton.TextButtonStyle textButtonStyle;
@@ -121,6 +130,11 @@ public class HUD
 
     public HUD(SpriteBatch sb, ArrayList<Character> allies, ArrayList<Character> enemies)
     {
+        xText = new Texture("RoundsImages/x.png");
+        xTextureRegion = new TextureRegion(xText);
+        xRegionDrawable = new TextureRegionDrawable(xTextureRegion);
+        stopRound = new ImageButton(xRegionDrawable);
+
         music = MyGdxGame.manager.get("Audio/audio.mp3", Music.class);
         music.setLooping(true);
         if(this.isPlaying) {
@@ -274,6 +288,15 @@ public class HUD
                 return true;
             }
         });
+
+     /*   stopRound.addListener(new InputListener()
+        {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+
+            }
+        });
+        */
 
         Table table = new Table();
         table.top();
@@ -478,32 +501,32 @@ public class HUD
 
 
         red.setTransform(true);
-        red.setScaleX(health.floatValue()*0.1f);
+        red.setScaleX(health.floatValue()/healthMax.floatValue());
         red2.setTransform(true);
-        red2.setScaleX(health2.floatValue()*0.1f);
+        red2.setScaleX(health2.floatValue()/healthMax2.floatValue());
         red3.setTransform(true);
-        red3.setScaleX(health3.floatValue()*0.1f);
+        red3.setScaleX(health3.floatValue()/healthMax3.floatValue());
 
         enemyHealthRed.setTransform(true);
-        enemyHealthRed.setScaleX(enemyHealth.floatValue()*0.1f);
+        enemyHealthRed.setScaleX(enemyHealth.floatValue()/enemyHealthMax.floatValue());
         enemyHealthRed2.setTransform(true);
-        enemyHealthRed2.setScaleX(enemyHealth2.floatValue()*0.1f);
+        enemyHealthRed2.setScaleX(enemyHealth2.floatValue()/enemyHealthMax2.floatValue());
         enemyHealthRed3.setTransform(true);
-        enemyHealthRed3.setScaleX(enemyHealth3.floatValue()*0.1f);
+        enemyHealthRed3.setScaleX(enemyHealth3.floatValue()/enemyHealthMax3.floatValue());
 
         blue.setTransform(true);
-        blue.setScaleX(mana.floatValue()*0.1f);
+        blue.setScaleX(mana.floatValue()/manaMax.floatValue());
         blue2.setTransform(true);
-        blue2.setScaleX(mana2.floatValue()*0.1f);
+        blue2.setScaleX(mana2.floatValue()/manaMax2.floatValue());
         blue3.setTransform(true);
-        blue3.setScaleX(mana3.floatValue()*0.1f);
+        blue3.setScaleX(mana3.floatValue()/manaMax3.floatValue());
 
         enemyManaBlue.setTransform(true);
-        enemyManaBlue.setScaleX(enemyMana.floatValue()*0.1f);
+        enemyManaBlue.setScaleX(enemyMana.floatValue()/enemyManaMax.floatValue());
         enemyManaBlue2.setTransform(true);
-        enemyManaBlue2.setScaleX(enemyMana2.floatValue()*0.1f);
+        enemyManaBlue2.setScaleX(enemyMana2.floatValue()/enemyManaMax.floatValue());
         enemyManaBlue3.setTransform(true);
-        enemyManaBlue3.setScaleX(enemyMana3.floatValue()*0.1f);
+        enemyManaBlue3.setScaleX(enemyMana3.floatValue()/enemyManaMax.floatValue());
 
         blue.setPosition(10,543);
         blue2.setPosition(10,393);
@@ -572,6 +595,9 @@ public class HUD
         stage.addActor(enemyName1);
         stage.addActor(enemyName2);
         stage.addActor(enemyName3);
+
+        stopRound.setPosition(500, 0);
+        //stage.addActor(stopRound);
 
     }
 }
