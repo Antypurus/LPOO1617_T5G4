@@ -14,7 +14,7 @@ public class DifficultyStage extends State
     private Texture easyBtn;
     private Texture hardBtn;
     private static final int EASY = 0;
-    private static final int HARD = 0;
+    private static final int HARD = 1;
 
     public DifficultyStage(GameStateManager gsm) {
         super(gsm);

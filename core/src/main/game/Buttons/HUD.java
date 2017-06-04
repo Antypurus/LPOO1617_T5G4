@@ -624,9 +624,9 @@ public class HUD
         enemyManaBlue.setTransform(true);
         enemyManaBlue.setScaleX(enemyMana.floatValue()/enemyManaMax.floatValue());
         enemyManaBlue2.setTransform(true);
-        enemyManaBlue2.setScaleX(enemyMana2.floatValue()/enemyManaMax.floatValue());
+        enemyManaBlue2.setScaleX(enemyMana2.floatValue()/enemyManaMax2.floatValue());
         enemyManaBlue3.setTransform(true);
-        enemyManaBlue3.setScaleX(enemyMana3.floatValue()/enemyManaMax.floatValue());
+        enemyManaBlue3.setScaleX(enemyMana3.floatValue()/enemyManaMax3.floatValue());
 
         blue.setPosition(10,543);
         blue2.setPosition(10,393);

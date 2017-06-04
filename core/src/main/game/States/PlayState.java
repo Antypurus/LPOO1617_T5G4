@@ -87,7 +87,6 @@ public class PlayState extends State
         redBlock = new Texture("red3.png");
         redBorder = new Texture("redborder.png");
 
-
         font = new BitmapFont();
 
         this.cam = new OrthographicCamera(1280,720);
