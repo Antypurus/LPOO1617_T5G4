@@ -36,7 +36,6 @@ public class Charge extends BaseAbilityFunctions implements Ability {
         if(this.canHitTarget(target)&&this.ChargeOwner !=null){
             this.ChargeOwner.reduceMana(this.ChargeManaCost);
             double dmg = this.getDamageToTarget(target);
-            target.takeDamage(dmg);
             int deltaX = target.getX()-this.ChargeOwner.getX();
             int deltaY = target.getY()-this.ChargeOwner.getY();
             if(deltaX<0){
@@ -50,6 +49,7 @@ public class Charge extends BaseAbilityFunctions implements Ability {
                 deltaY--;
             }
             this.ChargeOwner.unhinderedMove(deltaX,deltaY);
+            target.takeDamage(dmg);
         }
     }
 
