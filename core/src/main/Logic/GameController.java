@@ -67,9 +67,33 @@ public class GameController {
         return true;
     }
 
+    public int aliveAllies(){
+        int c=0;
+
+        for(int i=0;i<this.allies.size();i++){
+            if(!allies.get(i).isDead()){
+                c++;
+            }
+        }
+
+        return c;
+    }
+
+    public int aliveEnemies(){
+        int c=0;
+
+        for(int i=0;i<this.enemies.size();i++){
+            if(!enemies.get(i).isDead()){
+                c++;
+            }
+        }
+
+        return c;
+    }
+
     public boolean hasWon(){
-        if(this.allies.size()!=0){
-            if(this.enemies.size()==0){
+        if(this.aliveAllies()!=0){
+            if(this.aliveEnemies()==0){
                 return true;
             }
         }
@@ -77,8 +101,8 @@ public class GameController {
     }
 
     public boolean hasLost(){
-        if(this.allies.size()==0){
-            if(this.enemies.size()!=0){
+        if(this.aliveAllies()==0){
+            if(this.aliveEnemies()!=0){
                 return true;
             }
         }

@@ -103,11 +103,11 @@ public class PlayState extends State
         charArray.add(this.character);
 
         this.char2 = new Character("Manuel",2);
-        //char2.setUnit(new Unit("Manuel - Healer",10,1,4,8,2));
+        char2.setUnit(new Unit("Manuel - Healer",10,1,4,8,2));
         allies[1] = this.char2.getUnit();
 
         this.char3 = new Character("Tiago",0);
-        //char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
+        char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
         allies[2] = this.char3.getUnit();
 
 
@@ -124,6 +124,7 @@ public class PlayState extends State
         charArray.add(this.char3);
 
         this.enemy1 = new Character("Ogre",1);
+        enemy1.setUnit(new Unit("Ogre",10,10,10,10,10));
         enemy1.getUnit().setIsAiControlled(true);
         enemies[0]=enemy1.getUnit();
         this.enemy2 = new Character("Maluco",2);

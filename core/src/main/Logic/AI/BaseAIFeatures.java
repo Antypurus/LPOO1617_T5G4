@@ -135,6 +135,9 @@ public abstract class BaseAIFeatures {
         if(cells==null){
             return ret;
         }
+        if(target==null){
+            return ret;
+        }
         for(int i=0;i<cells.size();i++){
             int distance = (int)cells.get(i).distanceToCell(target.getPosition());
             if(dist>distance){
