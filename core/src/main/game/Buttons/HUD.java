@@ -650,7 +650,7 @@ public class HUD
                     }
                 });
 
-          /*  attack2Text = new Texture("RoundsImages/attack.png");
+            attack2Text = new Texture("RoundsImages/" + current.getAbilities().get(1).getName() + ".png");
             attack2TextureRegion = new TextureRegion(attack2Text);
             attack2RegionDrawable = new TextureRegionDrawable(attack2TextureRegion);
             attack2 = new ImageButton(attack2RegionDrawable);
@@ -665,7 +665,7 @@ public class HUD
                     return true;
                 }
             });
-            */
+
         }
 
 

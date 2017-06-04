@@ -17,6 +17,7 @@ import Logic.GameController;
 import game.Buttons.HUD;
 import game.GraphicsComponent.Character;
 import main.Logic.Abilities.Ability;
+import main.Logic.Abilities.Basics.Punch;
 import main.Logic.Abilities.Physicals.Charge;
 import main.Logic.Abilities.Spells.Fireball;
 import main.Logic.Map.Cell;
@@ -94,6 +95,7 @@ public class PlayState extends State
         this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
         this.character.getUnit().setPosition(this.map.getCell(10,10));
         this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
+        this.character.getUnit().addAbility(new Punch(this.character.getUnit()));
         allies[0] = this.character.getUnit();
         character.update();
         charArray.add(this.character);
@@ -109,11 +111,13 @@ public class PlayState extends State
 
         this.char2.getUnit().setPosition(this.map.getCell(5,5));
         this.char2.getUnit().addAbility(new Fireball(this.char2.getUnit()));
+        this.char2.getUnit().addAbility(new Punch(this.char2.getUnit()));
         char2.update();
         charArray.add(this.char2);
 
         this.char3.getUnit().setPosition(this.map.getCell(15,15));
         this.char3.getUnit().addAbility(new Fireball(this.char3.getUnit()));
+        this.char3.getUnit().addAbility(new Punch(this.char3.getUnit()));
         char3.update();
         charArray.add(this.char3);
 
