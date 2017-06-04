@@ -22,6 +22,7 @@ import main.Logic.Abilities.Basics.Punch;
 import main.Logic.Abilities.Heals.Mend;
 import main.Logic.Abilities.Physicals.Charge;
 import main.Logic.Abilities.Spells.Fireball;
+import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Unit;
 import main.game.InputHandler.GameHandler;
@@ -218,6 +219,7 @@ public class PlayState extends State
 
             MyGdxGame.attackMode = false;
             this.moveMode = false;
+            this.hasAttacked = false;
             MyGdxGame.changedTurn = false;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1) || MyGdxGame.attack1){
@@ -335,9 +337,10 @@ public class PlayState extends State
                 Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
                 if(currAbl!=null&&!hasAttacked){
                     if(cell.getUnit()!=null) {
-                        if(cell.getUnit().getIsAlly()==false) {
+                        if(cell.getUnit().getIsAlly()==false||currAbl.getType().equals(Element.type.HEAL)) {
                             System.out.print("Attack \n");
                             this.currAbl.AffectTarget(cell.getUnit());
+                            this.hasAttacked=true;
                         }
                     }
                 }
