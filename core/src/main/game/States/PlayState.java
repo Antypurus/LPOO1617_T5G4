@@ -86,16 +86,14 @@ public class PlayState extends State
         blueBlock = new Texture("blue3.png");
         redBlock = new Texture("red3.png");
         redBorder = new Texture("redborder.png");
-        character = new Character("Diogo",1);
 
 
         font = new BitmapFont();
-        str = this.character.getUnit().getName();
 
         this.cam = new OrthographicCamera(1280,720);
         cam.update();
 
-        //this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
+        this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
         this.character.getUnit().setPosition(this.map.getCell(10,10));
         this.character.getUnit().addAbility(new WaterWip(this.character.getUnit()));
         this.character.getUnit().addAbility(new Punch(this.character.getUnit()));
