@@ -43,12 +43,11 @@ public abstract class BaseAIFeatures {
         int ret_dist = Integer.MAX_VALUE;
         for(int i=0;i<enemies.size();i++){
             int dist = (int)unit.getPosition().distanceToCell(enemies.get(i).getPosition());
-            if(ret == null){
-                ret = enemies.get(i);
-            }
             if(dist < ret_dist){
-                ret_dist = dist;
-                ret = enemies.get(i);
+                if(!enemies.get(i).isDead()) {
+                    ret_dist = dist;
+                    ret = enemies.get(i);
+                }
             }
         }
         return ret;
@@ -133,6 +132,9 @@ public abstract class BaseAIFeatures {
         Cell ret = null;
         int dist = Integer.MAX_VALUE;
         ArrayList<Cell>cells = owner.getCellsThatCanMoveTo();
+        if(cells==null){
+            return ret;
+        }
         for(int i=0;i<cells.size();i++){
             int distance = (int)cells.get(i).distanceToCell(target.getPosition());
             if(dist>distance){
@@ -265,13 +267,15 @@ public abstract class BaseAIFeatures {
             this.cellsFromWhereCanHitTargetWithAbility(abls.get(0),toHit,cells,owner);
             Cell hit = this.cellAtSmalestDistance(cells,owner);
             owner.moveToCell(hit);
+            System.out.println(owner.getName()+" Moves To: ("+hit.getxPos()+","+hit.getyPos()+")");
             abl.AffectTarget(toHit);
-            System.out.println(owner.getName()+" Uses" +abl.getName()+" On"+toHit.getName());
+            System.out.println(owner.getName()+" Uses " +abl.getName()+" On "+toHit.getName());
         }else{
             Cell hit = this.cellAtSmalestDistance(cells,owner);
             owner.moveToCell(hit);
+            System.out.println(owner.getName()+" Moves To: ("+hit.getxPos()+","+hit.getyPos()+")");
             abl.AffectTarget(toHit);
-            System.out.println(owner.getName()+" Uses" +abl.getName()+" On"+toHit.getName());
+            System.out.println(owner.getName()+" Uses " +abl.getName()+" On "+toHit.getName());
         }
     }
 

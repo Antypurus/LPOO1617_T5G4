@@ -88,13 +88,17 @@ public class GameController {
     private void startNextTurn(){
         this.currentChar = this.units.peek();
         if(this.currentChar!=null){
-            this.currentChar.beginTurn();
+            if(!this.currentChar.isDead()) {
+                this.currentChar.beginTurn();
+            }
         }else{
             return ;
         }
         if(this.currentChar.isAIControlled()){
             if(this.currentChar.getAI()!=null) {
-                this.currentChar.getAI().FullTurnBehavior();
+                if(!this.currentChar.isDead()) {
+                    this.currentChar.getAI().FullTurnBehavior();
+                }
             }
             this.endTurn();//do we want this ?
         }

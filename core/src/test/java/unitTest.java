@@ -585,4 +585,18 @@ public class unitTest {
         assertEquals(0,testUnit.getX());
         assertEquals(0,testUnit.getY());
     }
+
+    @Test
+    public void movetoCellTest(){
+        Unit testUnit =  new Unit("Test Unit",5,2,10,6,2);
+        Map testMap = new Map("Test Map",10,10);
+        testUnit.setPosition(testMap.getCell(10,10));
+
+        assertEquals(10,testUnit.getX());
+        assertEquals(10,testUnit.getY());
+
+        testUnit.moveToCell(testMap.getCell(13,16));
+        assertEquals(13,testUnit.getX());
+        assertEquals(16,testUnit.getY());
+    }
 }
