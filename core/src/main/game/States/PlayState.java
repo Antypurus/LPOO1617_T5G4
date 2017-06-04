@@ -122,6 +122,7 @@ public class PlayState extends State
         charArray.add(this.char3);
 
         this.enemy1 = new Character("Ogre",1);
+        enemy1.setUnit(new Unit("Ogre",10,10,10,10,10));
         enemy1.getUnit().setIsAiControlled(true);
         enemies[0]=enemy1.getUnit();
         this.enemy2 = new Character("Maluco",2);
