@@ -53,9 +53,11 @@ public class HealerAI extends BaseAIFeatures implements BaseAi{
         Unit ret = null;
 
         for(int i=0;i<allies.size();++i){
-            if(allies.get(i).getHP()<HP){
-                HP = (int)allies.get(i).getHP();
-                ret = allies.get(i);
+            if(allies.get(i).getCurrentHPPercent()<HP){
+                if(!allies.get(i).isDead()) {
+                    HP = (int) allies.get(i).getCurrentHPPercent();
+                    ret = allies.get(i);
+                }
             }
         }
 
@@ -71,12 +73,11 @@ public class HealerAI extends BaseAIFeatures implements BaseAi{
             }
         }
         ArrayList<Unit>allies = new ArrayList<Unit>();
-        this.CurrentGame.getEnemies();
+        allies = this.CurrentGame.getEnemies();
         Unit target = this.unitWithLeastHp(allies);
         if(target == null){
             return;
         }
-        System.out.println(target.getName());
         Ability abl = this.getAbilityWithMostHealThatCanBeUsed(this.HealerAIUnit);
         if(abl == null){
             return;
