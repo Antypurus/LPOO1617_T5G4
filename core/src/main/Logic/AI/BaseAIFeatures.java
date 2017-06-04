@@ -95,6 +95,9 @@ public abstract class BaseAIFeatures {
             }
         }
         unit.setPosition(originalPos);
+        if(cellsToRet==null){
+            cellsToRet = new ArrayList<Cell>();
+        }
         cellsToRet.clear();
         for(int i=0;i<retCells.size();++i){
             cellsToRet.add(retCells.get(i));
