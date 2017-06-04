@@ -30,8 +30,6 @@ import main.game.MyGdxGame;
 
 public class PlayState extends State
 {
-    private boolean attackMode = false;
-    private boolean moveMode = false;
     private boolean hasAttacked = false;
     Ability currAbl = null;
 
@@ -194,11 +192,11 @@ public class PlayState extends State
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.A) || MyGdxGame.attackMode){
             MyGdxGame.attackMode = true;
-            this.moveMode = false;
+            MyGdxGame.moveMode = false;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.M)){
             MyGdxGame.attackMode = false;
-            this.moveMode = true;
+            MyGdxGame.moveMode = true;
             xPos = this.currentChar.getX() * Scale;
             yPos = this.currentChar.getY() * Scale;
             xCounter = 0;
@@ -218,7 +216,7 @@ public class PlayState extends State
             this.movements.clear();
 
             MyGdxGame.attackMode = false;
-            this.moveMode = false;
+            MyGdxGame.moveMode = false;
             this.hasAttacked = false;
             MyGdxGame.changedTurn = false;
         }
@@ -293,7 +291,7 @@ public class PlayState extends State
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-            if (moveMode) {
+            if (MyGdxGame.moveMode) {
                 Character currChar = null;
 
                 for (int i = 0; i < this.charArray.size(); i++) {
@@ -377,7 +375,7 @@ public class PlayState extends State
 
         ArrayList<Cell> blocks = null;
 
-        if(moveMode) {
+        if(MyGdxGame.moveMode) {
             blocks = this.currentChar.getCellsThatCanMoveTo();
             for (int i = 0; i < blocks.size(); i++) {
                 sb.draw(blueBlock, blocks.get(i).getxPos() * Scale, blocks.get(i).getyPos() * Scale, Scale, Scale);

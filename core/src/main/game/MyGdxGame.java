@@ -17,6 +17,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	public static final int HEIGHT = 720;
 	public static boolean changedTurn = false;
 	public static boolean attackMode = false;
+	public static boolean moveMode = false;
 	public static boolean attack = false;
 	public static boolean attack1 = false;
 	public static boolean attack2 = false;

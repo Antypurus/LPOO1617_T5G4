@@ -48,6 +48,11 @@ public class HUD
     private TextureRegionDrawable xRegionDrawable;
     private ImageButton stopRound;
 
+    private Texture mText;
+    private TextureRegion mTextureRegion;
+    private TextureRegionDrawable mRegionDrawable;
+    private ImageButton moveStart;
+
     private Texture attackText;
     private TextureRegion attackTextureRegion;
     private TextureRegionDrawable attackRegionDrawable;
@@ -146,6 +151,11 @@ public class HUD
 
     public HUD(SpriteBatch sb, ArrayList<Character> allies, ArrayList<Character> enemies, Unit current)
     {
+        mText = new Texture("RoundsImages/Movement.png");
+        mTextureRegion = new TextureRegion(mText);
+        mRegionDrawable = new TextureRegionDrawable(mTextureRegion);
+        moveStart = new ImageButton(mRegionDrawable);
+
         xText = new Texture("RoundsImages/x_orange.png");
         xTextureRegion = new TextureRegion(xText);
         xRegionDrawable = new TextureRegionDrawable(xTextureRegion);
@@ -319,10 +329,21 @@ public class HUD
             }
         });
 
+        moveStart.addListener(new InputListener()
+        {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+                MyGdxGame.attackMode = false;
+                MyGdxGame.moveMode = true;
+                return true;
+            }
+        });
+
         attack.addListener(new InputListener()
         {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+                MyGdxGame.moveMode = false;
                 MyGdxGame.attackMode = true;
                 return true;
             }
@@ -628,7 +649,9 @@ public class HUD
 
         stopRound.setPosition(0, 150);
         stage.addActor(stopRound);
-        attack.setPosition(40, 150);
+        moveStart.setPosition(40, 150);
+        stage.addActor(moveStart);
+        attack.setPosition(80, 150);
         stage.addActor(attack);
         if(MyGdxGame.attackMode) {
 
@@ -638,7 +661,7 @@ public class HUD
                 attack1RegionDrawable = new TextureRegionDrawable(attack1TextureRegion);
                 attack1 = new ImageButton(attack1RegionDrawable);
 
-                attack1.setPosition(80, 150);
+                attack1.setPosition(120, 150);
                 stage.addActor(attack1);
 
                 attack1.addListener(new InputListener()
@@ -654,7 +677,7 @@ public class HUD
             attack2TextureRegion = new TextureRegion(attack2Text);
             attack2RegionDrawable = new TextureRegionDrawable(attack2TextureRegion);
             attack2 = new ImageButton(attack2RegionDrawable);
-            attack2.setPosition(120, 150);
+            attack2.setPosition(160, 150);
             stage.addActor(attack2);
 
             attack2.addListener(new InputListener()
