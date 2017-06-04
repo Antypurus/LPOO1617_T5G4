@@ -48,6 +48,31 @@ public class HUD
     private TextureRegionDrawable xRegionDrawable;
     private ImageButton stopRound;
 
+    private Texture Number1Text;
+    private TextureRegion Number1TextureRegion;
+    private TextureRegionDrawable Number1RegionDrawable;
+    private ImageButton Number1;
+
+    private Texture Number2Text;
+    private TextureRegion Number2TextureRegion;
+    private TextureRegionDrawable Number2RegionDrawable;
+    private ImageButton Number2;
+
+    private Texture AText;
+    private TextureRegion ATextureRegion;
+    private TextureRegionDrawable ARegionDrawable;
+    private ImageButton LetterA;
+
+    private Texture MText;
+    private TextureRegion MTextureRegion;
+    private TextureRegionDrawable MRegionDrawable;
+    private ImageButton LetterM;
+
+    private Texture EText;
+    private TextureRegion ETextureRegion;
+    private TextureRegionDrawable ERegionDrawable;
+    private ImageButton LetterE;
+
     private Texture mText;
     private TextureRegion mTextureRegion;
     private TextureRegionDrawable mRegionDrawable;
@@ -155,6 +180,21 @@ public class HUD
         mTextureRegion = new TextureRegion(mText);
         mRegionDrawable = new TextureRegionDrawable(mTextureRegion);
         moveStart = new ImageButton(mRegionDrawable);
+
+        MText = new Texture("RoundsImages/M.png");
+        MTextureRegion = new TextureRegion(MText);
+        MRegionDrawable = new TextureRegionDrawable(MTextureRegion);
+        LetterM = new ImageButton(MRegionDrawable);
+
+        EText = new Texture("RoundsImages/E.png");
+        ETextureRegion = new TextureRegion(EText);
+        ERegionDrawable = new TextureRegionDrawable(ETextureRegion);
+        LetterE = new ImageButton(ERegionDrawable);
+
+        AText = new Texture("RoundsImages/A.png");
+        ATextureRegion = new TextureRegion(AText);
+        ARegionDrawable = new TextureRegionDrawable(ATextureRegion);
+        LetterA = new ImageButton(ARegionDrawable);
 
         xText = new Texture("RoundsImages/x_orange.png");
         xTextureRegion = new TextureRegion(xText);
@@ -431,6 +471,15 @@ public class HUD
         enemyManaBtn2.setPosition(105 + 950,393);
         enemyManaBtn3.setPosition(105 + 950,243);
 
+        LetterM.setPosition(moveStart.getX() + 8, moveStart.getY() - 15);
+        stage.addActor(LetterM);
+
+        LetterA.setPosition(attack.getX() + 8, attack.getY() - 15);
+        stage.addActor(LetterA);
+
+        LetterE.setPosition(stopRound.getX() + 8, stopRound.getY() - 15);
+        stage.addActor(LetterE);
+
         stage.addActor(table);
         stage.addActor(button);
         stage.addActor(button2);
@@ -673,6 +722,15 @@ public class HUD
                     }
                 });
 
+            Number1Text = new Texture("RoundsImages/1.png");
+            Number1TextureRegion = new TextureRegion(Number1Text);
+            Number1RegionDrawable = new TextureRegionDrawable(Number1TextureRegion);
+            Number1 = new ImageButton(Number1RegionDrawable);
+
+            Number1.setPosition(attack1.getX()+8, attack1.getY()-15);
+            stage.addActor(Number1);
+
+
             attack2Text = new Texture("RoundsImages/" + current.getAbilities().get(1).getName() + ".png");
             attack2TextureRegion = new TextureRegion(attack2Text);
             attack2RegionDrawable = new TextureRegionDrawable(attack2TextureRegion);
@@ -689,9 +747,24 @@ public class HUD
                 }
             });
 
+            Number2Text = new Texture("RoundsImages/2.png");
+            Number2TextureRegion = new TextureRegion(Number2Text);
+            Number2RegionDrawable = new TextureRegionDrawable(Number2TextureRegion);
+            Number2 = new ImageButton(Number2RegionDrawable);
+
+            Number2.setPosition(attack2.getX()+8, attack2.getY()-15);
+            stage.addActor(Number2);
+
         }
 
+        LetterM.setPosition(moveStart.getX() + 8, moveStart.getY() - 15);
+        stage.addActor(LetterM);
 
+        LetterA.setPosition(attack.getX() + 8, attack.getY() - 15);
+        stage.addActor(LetterA);
+
+        LetterE.setPosition(stopRound.getX() + 8, stopRound.getY() - 15);
+        stage.addActor(LetterE);
 
     }
 }
