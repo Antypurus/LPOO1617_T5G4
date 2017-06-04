@@ -34,7 +34,7 @@ public class DPSAI extends BaseAIFeatures implements BaseAi{
                     }
                 }
             }
-            ArrayList<Cell> cells = null;
+            ArrayList<Cell> cells = new ArrayList<Cell>();
             this.cellsFromWhereCanHitTargetWithAbility(abl,target,cells,this.DPSAIUnit);
             if(cells.size()==0){//cant thit
                 if(this.DPSAIUnit.getMP()-abl.getManaCost()<0){//cant hit because of lack of mana
@@ -88,7 +88,7 @@ public class DPSAI extends BaseAIFeatures implements BaseAi{
 
     @Override
     public void OffensiveBehavior() {
-
+        this.easyOffensiveBehavior();
     }
 
     @Override
