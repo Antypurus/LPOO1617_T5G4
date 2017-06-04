@@ -71,9 +71,12 @@ public class HealerAI extends BaseAIFeatures implements BaseAi{
             }
         }
         ArrayList<Unit>allies = new ArrayList<Unit>();
-        this.getAlliesWithOverPercentHealth(CurrentGame.getEnemies(),this.HealerAIUnit,
-                MINIMUM_HEALTH_PERCENT_TO_HEAL_IN_HARD,allies);
+        this.CurrentGame.getEnemies();
         Unit target = this.unitWithLeastHp(allies);
+        if(target == null){
+            return;
+        }
+        System.out.println(target.getName());
         Ability abl = this.getAbilityWithMostHealThatCanBeUsed(this.HealerAIUnit);
         if(abl == null){
             return;

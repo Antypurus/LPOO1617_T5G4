@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
+import Logic.AI.DPSAI.DPSAI;
+import Logic.AI.HealerAI.HealerAI;
 import Logic.AI.TankAI.TankAI;
 import Logic.Abilities.Spells.WaterWip;
 import Logic.Difficulty;
@@ -155,7 +157,8 @@ public class PlayState extends State
         gameController = new GameController(allies,enemies, Logic.Difficulty.DifficultyStage.EASY,map);
         currentChar = gameController.getCurrentChar();
 
-        enemy1.getUnit().setAi(new TankAI(enemy1.getUnit(),gameController));
+        enemy1.getUnit().addAbility(new Mend(enemy1.getUnit()));
+        enemy1.getUnit().setAi(new HealerAI(enemy1.getUnit(),gameController));
 
         xPos = this.currentChar.getX() * Scale;
         yPos = this.currentChar.getY() * Scale;
