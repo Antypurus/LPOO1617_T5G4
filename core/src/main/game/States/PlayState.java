@@ -22,6 +22,7 @@ import main.Logic.Abilities.Spells.Fireball;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Unit;
 import main.game.InputHandler.GameHandler;
+import main.game.MyGdxGame;
 
 public class PlayState extends State
 {
@@ -159,7 +160,7 @@ public class PlayState extends State
 
         Gdx.input.setCursorCatched(false);
 
-        hud = new HUD(this.batch, this.charArray, this.enemiesArray);
+        hud = new HUD(this.batch, this.charArray, this.enemiesArray, currentChar);
     }
 
     @Override
@@ -183,12 +184,12 @@ public class PlayState extends State
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
             this.currentChar.setPosition(this.map.getCell(10,10));
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.A)){
-            this.attackMode = true;
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A) || MyGdxGame.attackMode){
+            MyGdxGame.attackMode = true;
             this.moveMode = false;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.M)){
-            this.attackMode = false;
+            MyGdxGame.attackMode = false;
             this.moveMode = true;
             xPos = this.currentChar.getX() * Scale;
             yPos = this.currentChar.getY() * Scale;
@@ -199,7 +200,7 @@ public class PlayState extends State
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
             this.currentChar.setPosition(this.map.getCell(10,10));
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E) || MyGdxGame.changedTurn){
             this.gameController.endTurn();
             currentChar = this.gameController.getCurrentChar();
             this.currAbl = null;
@@ -208,22 +209,27 @@ public class PlayState extends State
             yPos = this.currentChar.getY() * Scale;
             this.movements.clear();
 
-            this.attackMode = false;
+            MyGdxGame.attackMode = false;
             this.moveMode = false;
+            MyGdxGame.changedTurn = false;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1) || MyGdxGame.attack1){
             if(this.currentChar.getAbilities().size()==0){
+                MyGdxGame.attack1 = false;
                 currAbl = null;
                 return;
             }
             currAbl = this.currentChar.getAbilities().get(0);
+            MyGdxGame.attack1 = false;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2) || MyGdxGame.attack2){
             if(this.currentChar.getAbilities().size()==1){
                 currAbl = null;
+                MyGdxGame.attack2 = false;
                 return;
             }
             currAbl = this.currentChar.getAbilities().get(1);
+            MyGdxGame.attack2 = false;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)){
             if(this.currentChar.getAbilities().size()<=2){
@@ -318,7 +324,7 @@ public class PlayState extends State
                 yCounter = 0;
                 xCounter = 0;
             }
-            if(attackMode){
+            if(MyGdxGame.attackMode){
                 Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
                 if(currAbl!=null&&!hasAttacked){
                     if(cell.getUnit()!=null) {
@@ -340,7 +346,7 @@ public class PlayState extends State
     public void update(float dt)
     {
         handleInput();
-        hud.update(batch, charArray, enemiesArray);
+        hud.update(batch, charArray, enemiesArray, currentChar);
     }
 
     @Override
@@ -368,7 +374,7 @@ public class PlayState extends State
             }
         }
 
-        if(attackMode){
+        if(MyGdxGame.attackMode){
             if(currAbl!=null) {
                 blocks = this.currAbl.getCellsThatCanHit();
                 for (int i = 0; i < blocks.size(); i++) {

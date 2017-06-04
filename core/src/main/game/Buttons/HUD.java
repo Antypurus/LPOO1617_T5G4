@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
 
 import game.GraphicsComponent.Character;
+import main.Logic.Unit.Unit;
 import main.game.MyGdxGame;
 
 /**
@@ -46,6 +47,21 @@ public class HUD
     private TextureRegion xTextureRegion;
     private TextureRegionDrawable xRegionDrawable;
     private ImageButton stopRound;
+
+    private Texture attackText;
+    private TextureRegion attackTextureRegion;
+    private TextureRegionDrawable attackRegionDrawable;
+    private ImageButton attack;
+
+    private Texture attack1Text;
+    private TextureRegion attack1TextureRegion;
+    private TextureRegionDrawable attack1RegionDrawable;
+    private ImageButton attack1;
+
+    private Texture attack2Text;
+    private TextureRegion attack2TextureRegion;
+    private TextureRegionDrawable attack2RegionDrawable;
+    private ImageButton attack2;
 
     TextButton button;
     TextButton.TextButtonStyle textButtonStyle;
@@ -128,12 +144,17 @@ public class HUD
 
     Label player;
 
-    public HUD(SpriteBatch sb, ArrayList<Character> allies, ArrayList<Character> enemies)
+    public HUD(SpriteBatch sb, ArrayList<Character> allies, ArrayList<Character> enemies, Unit current)
     {
-        xText = new Texture("RoundsImages/x.png");
+        xText = new Texture("RoundsImages/x_orange.png");
         xTextureRegion = new TextureRegion(xText);
         xRegionDrawable = new TextureRegionDrawable(xTextureRegion);
         stopRound = new ImageButton(xRegionDrawable);
+
+        attackText = new Texture("RoundsImages/attack.png");
+        attackTextureRegion = new TextureRegion(attackText);
+        attackRegionDrawable = new TextureRegionDrawable(attackTextureRegion);
+        attack = new ImageButton(attackRegionDrawable);
 
         music = MyGdxGame.manager.get("Audio/audio.mp3", Music.class);
         music.setLooping(true);
@@ -289,14 +310,23 @@ public class HUD
             }
         });
 
-     /*   stopRound.addListener(new InputListener()
+        stopRound.addListener(new InputListener()
         {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
-
+                MyGdxGame.changedTurn = true;
+                return true;
             }
         });
-        */
+
+        attack.addListener(new InputListener()
+        {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+                MyGdxGame.attackMode = true;
+                return true;
+            }
+        });
 
         Table table = new Table();
         table.top();
@@ -425,7 +455,7 @@ public class HUD
         stage.addActor(name3);
     }
 
-    public void update(SpriteBatch sb, ArrayList<Character> allies, ArrayList<Character> enemies)
+    public void update(SpriteBatch sb, ArrayList<Character> allies, ArrayList<Character> enemies, Unit current)
     {
         this.allies = allies;
         this.enemies = enemies;
@@ -596,8 +626,49 @@ public class HUD
         stage.addActor(enemyName2);
         stage.addActor(enemyName3);
 
-        stopRound.setPosition(500, 0);
-        //stage.addActor(stopRound);
+        stopRound.setPosition(0, 150);
+        stage.addActor(stopRound);
+        attack.setPosition(40, 150);
+        stage.addActor(attack);
+        if(MyGdxGame.attackMode) {
+
+                attack1Text = new Texture("RoundsImages/" + current.getAbilities().get(0).getName() +".png");
+
+                attack1TextureRegion = new TextureRegion(attack1Text);
+                attack1RegionDrawable = new TextureRegionDrawable(attack1TextureRegion);
+                attack1 = new ImageButton(attack1RegionDrawable);
+
+                attack1.setPosition(80, 150);
+                stage.addActor(attack1);
+
+                attack1.addListener(new InputListener()
+                {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+                        MyGdxGame.attack1 = true;
+                        return true;
+                    }
+                });
+
+          /*  attack2Text = new Texture("RoundsImages/attack.png");
+            attack2TextureRegion = new TextureRegion(attack2Text);
+            attack2RegionDrawable = new TextureRegionDrawable(attack2TextureRegion);
+            attack2 = new ImageButton(attack2RegionDrawable);
+            attack2.setPosition(120, 150);
+            stage.addActor(attack2);
+
+            attack2.addListener(new InputListener()
+            {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+                    MyGdxGame.attack2 = true;
+                    return true;
+                }
+            });
+            */
+        }
+
+
 
     }
 }
