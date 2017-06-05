@@ -176,7 +176,6 @@ public class PlayState extends State
         Gdx.input.setCursorCatched(false);
 
         hud = new HUD(this.batch, this.charArray, this.enemiesArray, currentChar);
-        this.character.getUnit().takeDamage(2);
     }
 
     @Override
