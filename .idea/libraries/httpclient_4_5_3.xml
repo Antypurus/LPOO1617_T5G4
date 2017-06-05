@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="httpclient-4.5.3">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/android/assets/selenium-java-3.4.0/lib/httpclient-4.5.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/face/libs/httpclient-4.5.3.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

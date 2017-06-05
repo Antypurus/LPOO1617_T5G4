@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="xml-apis-1.4.01">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/android/assets/selenium-java-3.4.0/lib/xml-apis-1.4.01.jar!/" />
+      <root url="jar://$PROJECT_DIR$/face/libs/xml-apis-1.4.01.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

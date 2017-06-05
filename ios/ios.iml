@@ -28,6 +28,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="core" exported="" />
+    <orderEntry type="module" module-name="face" exported="" />
     <orderEntry type="library" exported="" name="robovm-rt-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="robovm-cocoatouch-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="gdx-backend-robovm-1.9.6" level="project" />
@@ -62,39 +63,39 @@
     <orderEntry type="library" exported="" name="robopods-facebook-ios-notifications-2.2.1" level="project" />
     <orderEntry type="library" exported="" name="robopods-facebook-ios-share-2.2.1" level="project" />
     <orderEntry type="library" exported="" name="robopods-bolts-ios-2.2.1" level="project" />
-    <orderEntry type="library" exported="" name="restfb-1.41.0" level="project" />
-    <orderEntry type="library" exported="" name="client-combined-3.4.0-nodeps" level="project" />
-    <orderEntry type="library" exported="" name="xml-apis-1.4.01" level="project" />
-    <orderEntry type="library" exported="" name="xercesImpl-2.11.0" level="project" />
-    <orderEntry type="library" exported="" name="xalan-2.7.2" level="project" />
-    <orderEntry type="library" exported="" name="websocket-common-9.4.3.v20170317" level="project" />
-    <orderEntry type="library" exported="" name="websocket-client-9.4.3.v20170317" level="project" />
-    <orderEntry type="library" exported="" name="websocket-api-9.4.3.v20170317" level="project" />
-    <orderEntry type="library" exported="" name="serializer-2.7.2" level="project" />
-    <orderEntry type="library" exported="" name="sac-1.3" level="project" />
-    <orderEntry type="library" exported="" name="phantomjsdriver-1.4.0" level="project" />
-    <orderEntry type="library" exported="" name="neko-htmlunit-2.25" level="project" />
-    <orderEntry type="library" exported="" name="junit-4.12" level="project" />
-    <orderEntry type="library" exported="" name="jna-platform-4.1.0" level="project" />
-    <orderEntry type="library" exported="" name="jna-4.1.0" level="project" />
-    <orderEntry type="library" exported="" name="jetty-util-9.4.1.v20170120" level="project" />
-    <orderEntry type="library" exported="" name="jetty-io-9.4.1.v20170120" level="project" />
-    <orderEntry type="library" exported="" name="javax.servlet-api-3.1.0" level="project" />
-    <orderEntry type="library" exported="" name="httpmime-4.5.3" level="project" />
-    <orderEntry type="library" exported="" name="httpcore-4.4.6" level="project" />
-    <orderEntry type="library" exported="" name="httpclient-4.5.3" level="project" />
-    <orderEntry type="library" exported="" name="htmlunit-driver-2.26" level="project" />
-    <orderEntry type="library" exported="" name="htmlunit-core-js-2.26" level="project" />
-    <orderEntry type="library" exported="" name="htmlunit-2.26" level="project" />
-    <orderEntry type="library" exported="" name="hamcrest-core-1.3" level="project" />
-    <orderEntry type="library" exported="" name="guava-21.0" level="project" />
-    <orderEntry type="library" exported="" name="gson-2.8.0" level="project" />
-    <orderEntry type="library" exported="" name="cssparser-0.9.22" level="project" />
-    <orderEntry type="library" exported="" name="commons-logging-1.2" level="project" />
-    <orderEntry type="library" exported="" name="commons-lang3-3.5" level="project" />
-    <orderEntry type="library" exported="" name="commons-io-2.5" level="project" />
-    <orderEntry type="library" exported="" name="commons-exec-1.3" level="project" />
-    <orderEntry type="library" exported="" name="commons-codec-1.10" level="project" />
     <orderEntry type="library" exported="" name="cglib-nodep-3.2.4" level="project" />
+    <orderEntry type="library" exported="" name="client-combined-3.4.0-nodeps" level="project" />
+    <orderEntry type="library" exported="" name="commons-codec-1.10" level="project" />
+    <orderEntry type="library" exported="" name="commons-exec-1.3" level="project" />
+    <orderEntry type="library" exported="" name="commons-io-2.5" level="project" />
+    <orderEntry type="library" exported="" name="commons-lang3-3.5" level="project" />
+    <orderEntry type="library" exported="" name="commons-logging-1.2" level="project" />
+    <orderEntry type="library" exported="" name="cssparser-0.9.22" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.8.0" level="project" />
+    <orderEntry type="library" exported="" name="guava-21.0" level="project" />
+    <orderEntry type="library" exported="" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" name="htmlunit-2.26" level="project" />
+    <orderEntry type="library" exported="" name="htmlunit-core-js-2.26" level="project" />
+    <orderEntry type="library" exported="" name="htmlunit-driver-2.26" level="project" />
+    <orderEntry type="library" exported="" name="httpclient-4.5.3" level="project" />
+    <orderEntry type="library" exported="" name="httpcore-4.4.6" level="project" />
+    <orderEntry type="library" exported="" name="httpmime-4.5.3" level="project" />
+    <orderEntry type="library" exported="" name="javax.servlet-api-3.1.0" level="project" />
+    <orderEntry type="library" exported="" name="jetty-io-9.4.1.v20170120" level="project" />
+    <orderEntry type="library" exported="" name="jetty-util-9.4.1.v20170120" level="project" />
+    <orderEntry type="library" exported="" name="jna-4.1.0" level="project" />
+    <orderEntry type="library" exported="" name="jna-platform-4.1.0" level="project" />
+    <orderEntry type="library" exported="" name="junit-4.12" level="project" />
+    <orderEntry type="library" exported="" name="neko-htmlunit-2.25" level="project" />
+    <orderEntry type="library" exported="" name="phantomjsdriver-1.4.0" level="project" />
+    <orderEntry type="library" exported="" name="restfb-1.41.0" level="project" />
+    <orderEntry type="library" exported="" name="sac-1.3" level="project" />
+    <orderEntry type="library" exported="" name="serializer-2.7.2" level="project" />
+    <orderEntry type="library" exported="" name="websocket-api-9.4.3.v20170317" level="project" />
+    <orderEntry type="library" exported="" name="websocket-client-9.4.3.v20170317" level="project" />
+    <orderEntry type="library" exported="" name="websocket-common-9.4.3.v20170317" level="project" />
+    <orderEntry type="library" exported="" name="xalan-2.7.2" level="project" />
+    <orderEntry type="library" exported="" name="xercesImpl-2.11.0" level="project" />
+    <orderEntry type="library" exported="" name="xml-apis-1.4.01" level="project" />
   </component>
 </module>

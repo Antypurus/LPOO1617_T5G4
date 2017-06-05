@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="jetty-util-9.4.1.v20170120">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/android/assets/selenium-java-3.4.0/lib/jetty-util-9.4.1.v20170120.jar!/" />
+      <root url="jar://$PROJECT_DIR$/face/libs/jetty-util-9.4.1.v20170120.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

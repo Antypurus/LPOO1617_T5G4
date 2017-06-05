@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="restfb-1.41.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/android/assets/restfb-1.41.0/restfb-1.41.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/face/libs/restfb-1.41.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

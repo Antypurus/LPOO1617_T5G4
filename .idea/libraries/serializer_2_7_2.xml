@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="serializer-2.7.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/android/assets/selenium-java-3.4.0/lib/serializer-2.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/face/libs/serializer-2.7.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
