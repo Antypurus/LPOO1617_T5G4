@@ -199,7 +199,7 @@ public class HUD
         xRegionDrawable = new TextureRegionDrawable(xTextureRegion);
         stopRound = new ImageButton(xRegionDrawable);
 
-        attackText = new Texture("RoundsImages/attack.png");
+        attackText = new Texture("RoundsImages/Attack.png");
         attackTextureRegion = new TextureRegion(attackText);
         attackRegionDrawable = new TextureRegionDrawable(attackTextureRegion);
         attack = new ImageButton(attackRegionDrawable);
@@ -213,6 +213,7 @@ public class HUD
             music.pause();
             isPlaying = false;
         }
+
 
 
         //TODO: repeated code
@@ -765,5 +766,27 @@ public class HUD
     public void dispose()
     {
         music.dispose();
+        stage.dispose();
+        xText.dispose();
+        Number1Text.dispose();
+        Number2Text.dispose();
+        AText.dispose();
+        MText.dispose();
+        EText.dispose();
+        mText.dispose();
+        attackText.dispose();
+        attack1Text.dispose();
+        attack2Text.dispose();
+        font.dispose();
+        skin.dispose();
+        buttonAtlas.dispose();
+        font2.dispose();
+        skin2.dispose();
+        buttonAtlas2.dispose();
+        redfont.dispose();
+        redskin.dispose();
+        redatlas.dispose();
+        healthfont.dispose();
+        healthskin.dispose();
     }
 }

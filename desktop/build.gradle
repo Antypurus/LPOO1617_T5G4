@@ -45,6 +45,3 @@ task afterEclipseImport(description: "Post processing after project generation",
         printer.print(classpath)
     }
 }
-dependencies {
-    compile files('build/libs/restfb-1.41.0.jar')
-}

@@ -301,7 +301,8 @@ public class PlayState extends State
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            Gdx.app.exit();
+            gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, false));
+            //Gdx.app.exit();
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
@@ -369,9 +370,10 @@ public class PlayState extends State
     {
         handleInput();
         if(this.gameController.hasLost()){
-            Gdx.app.exit();
+            this.dispose();
+            gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, false));
         }
-        if(this.gameController.hasWon()){
+        else if(this.gameController.hasWon()){
            this.dispose();
             gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, true));
         }
@@ -448,7 +450,7 @@ public class PlayState extends State
 
         sb.end();
         //end of draw section
-        Gdx.graphics.setTitle("RPGame FPS:"+fps+" Camara Zoom Value:"+cam.zoom+" Curr Char:"+this.currentChar.getName());
+        //Gdx.graphics.setTitle("RPGame FPS:"+fps+" Camara Zoom Value:"+cam.zoom+" Curr Char:"+this.currentChar.getName());
 
         sb.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -465,7 +467,6 @@ public class PlayState extends State
         blueBlock.dispose();
         redBlock.dispose();
         redBorder.dispose();
-        hud.stage.clear();
         hud.dispose();
 
     }

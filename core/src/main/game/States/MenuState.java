@@ -21,6 +21,7 @@ public class MenuState extends State
     private Texture playBtn;
     private Texture quitBtn;
     private Texture facebookBtn;
+
     private boolean facebook = true;
 
 
