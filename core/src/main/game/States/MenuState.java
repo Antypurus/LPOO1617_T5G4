@@ -21,6 +21,7 @@ public class MenuState extends State
     private Texture playBtn;
     private Texture quitBtn;
     private Texture facebookBtn;
+    private boolean facebook = true;
 
 
     public MenuState(GameStateManager gsm) {
@@ -72,7 +73,7 @@ public class MenuState extends State
                 FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("message",  "Currently playing LPOOP game"), Parameter.with("link", "http://www.staggeringbeauty.com/"));
 */
 
-
+                //TODO: mudar este link para um site onde seja possivel fazer download do jogo
                String domain = "https://github.com/";
                String appId = "433157270402383";
 
@@ -85,20 +86,21 @@ public class MenuState extends State
                 WebDriver driver = new ChromeDriver();
                 driver.get(authUrl);
                 String accessToken;
-                while(true)
+                while(facebook)
                 {
                     if(!driver.getCurrentUrl().contains("facebook.com")) {
                         String url = driver.getCurrentUrl();
                         accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
 
-                        driver.quit();
 
                        FacebookClient fbClient = new DefaultFacebookClient(accessToken);
 
                         FacebookType response = fbClient.publish("me/feed",
                                 FacebookType.class, Parameter.with("message",
-                                        "Currently playing LPOOP game"),
+                                        "Currently playing LPOO game"),
                                 Parameter.with("link", "http://www.staggeringbeauty.com/"));
+
+                        facebook = false;
 
                     }
                 }
