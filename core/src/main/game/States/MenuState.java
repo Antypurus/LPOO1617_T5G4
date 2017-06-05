@@ -4,6 +4,13 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.types.FacebookType;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import main.game.MyGdxGame;
 
@@ -13,6 +20,7 @@ public class MenuState extends State
     private Texture optionsBtn;
     private Texture playBtn;
     private Texture quitBtn;
+    private Texture facebookBtn;
 
 
     public MenuState(GameStateManager gsm) {
@@ -21,6 +29,7 @@ public class MenuState extends State
         playBtn = new Texture("SinglePlayer.png");
         optionsBtn = new Texture("Options.png");
         quitBtn = new Texture("quit.png");
+        facebookBtn = new Texture("FacebookImages/Facebook.png");
     }
 
     @Override
@@ -50,6 +59,50 @@ public class MenuState extends State
             {
                 Gdx.app.exit();
             }
+
+            else if (Gdx.input.getX() >= (screenWidth - 200)
+                    && Gdx.input.getX() <= (screenWidth - 200 + (facebookBtn.getWidth()))
+                    && (screenHeight - Gdx.input.getY()) >= ((50))
+                    && (screenHeight - Gdx.input.getY()) <= ((50) + (facebookBtn.getHeight())))
+            {
+               /* String acessToken = "EAACEdEose0cBALVlZAORGSWIacZCUuXbwNN0M8GoKXcaKnNZA1i1lbO5TO4JIeNYalz9iSdRwHMHGN6flfvejtl1ZBQrIdUT4VlAvXXWlVQVltSHjBkr1lEaASCGgtKylA6JZCSfZCGxmHpnpZChKD4yOvOzIZA7kD76xwRgh60eyPTeCml97JMZCvt3TlxlMFcgZD";
+
+                FacebookClient fbClient = new DefaultFacebookClient(acessToken);//
+
+                FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("message",  "Currently playing LPOOP game"), Parameter.with("link", "http://www.staggeringbeauty.com/"));
+*/
+
+
+               String domain = "https://github.com/";
+               String appId = "433157270402383";
+
+                String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id="+appId + "&redirect_uri="+domain+"&scope=user_about_me,"
+                        + "publish_actions";
+
+                System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+
+
+                WebDriver driver = new ChromeDriver();
+                driver.get(authUrl);
+                String accessToken;
+                while(true)
+                {
+                    if(!driver.getCurrentUrl().contains("facebook.com")) {
+                        String url = driver.getCurrentUrl();
+                        accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
+
+                        driver.quit();
+
+                       FacebookClient fbClient = new DefaultFacebookClient(accessToken);
+
+                        FacebookType response = fbClient.publish("me/feed",
+                                FacebookType.class, Parameter.with("message",
+                                        "Currently playing LPOOP game"),
+                                Parameter.with("link", "http://www.staggeringbeauty.com/"));
+
+                    }
+                }
+            }
         }
     }
 
@@ -67,6 +120,7 @@ public class MenuState extends State
         sb.draw(playBtn, (screenWidth/2)- (playBtn.getWidth()/2), 400);
         sb.draw(optionsBtn, (screenWidth/2)- (playBtn.getWidth()/2), 250);
         sb.draw(quitBtn, (screenWidth/2)- (playBtn.getWidth()/2), 100);
+        sb.draw(facebookBtn, screenWidth - 200, 50);
         sb.end();
     }
 
