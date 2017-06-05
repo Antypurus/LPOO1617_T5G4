@@ -40,8 +40,6 @@ public class HUD
     private Music music;
     private boolean isPlaying = true;
     private Character character = null;
-    private ArrayList<Character> allies = new ArrayList<Character>();
-    private ArrayList<Character> enemies = new ArrayList<Character>();
 
     private Texture xText;
     private TextureRegion xTextureRegion;
@@ -174,7 +172,7 @@ public class HUD
 
     Label player;
 
-    public HUD(SpriteBatch sb, ArrayList<Character> allies, ArrayList<Character> enemies, Unit current)
+    public HUD(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
     {
         mText = new Texture("RoundsImages/Movement.png");
         mTextureRegion = new TextureRegion(mText);
@@ -216,39 +214,37 @@ public class HUD
             isPlaying = false;
         }
 
-        this.allies = allies;
-        this.enemies = enemies;
 
         //TODO: repeated code
-        health = allies.get(0).getUnit().getHP();
-        healthMax = allies.get(0).getUnit().getHP();
-        mana = allies.get(0).getUnit().getMANA().EffectiveValue;
-        manaMax = allies.get(0).getUnit().getMANA().EffectiveValue;
+        health = allies[0].getHP();
+        healthMax = allies[0].getHP();
+        mana = allies[0].getMANA().EffectiveValue;
+        manaMax = allies[0].getMANA().EffectiveValue;
 
-        health2 = allies.get(1).getUnit().getHP();
-        healthMax2 = allies.get(1).getUnit().getHP();
-        mana2 = allies.get(1).getUnit().getMANA().EffectiveValue;
-        manaMax2 = allies.get(1).getUnit().getMANA().EffectiveValue;
+        health2 = allies[1].getHP();
+        healthMax2 = allies[1].getHP();
+        mana2 = allies[1].getMANA().EffectiveValue;
+        manaMax2 = allies[1].getMANA().EffectiveValue;
 
-        health3 = allies.get(2).getUnit().getHP();
-        healthMax3 = allies.get(2).getUnit().getHP();
-        mana3 = allies.get(2).getUnit().getMANA().EffectiveValue;
-        manaMax3 = allies.get(2).getUnit().getMANA().EffectiveValue;
+        health3 = allies[2].getHP();
+        healthMax3 = allies[2].getHP();
+        mana3 = allies[2].getMANA().EffectiveValue;
+        manaMax3 = allies[2].getMANA().EffectiveValue;
 
-        enemyHealth = enemies.get(0).getUnit().getHP();
-        enemyHealthMax = enemies.get(0).getUnit().getHP();
-        enemyMana = enemies.get(0).getUnit().getMANA().EffectiveValue;
-        enemyManaMax = enemies.get(0).getUnit().getMANA().EffectiveValue;
+        enemyHealth = enemies[0].getHP();
+        enemyHealthMax = enemies[0].getHP();
+        enemyMana = enemies[0].getMANA().EffectiveValue;
+        enemyManaMax = enemies[0].getMANA().EffectiveValue;
 
-        enemyHealth2 = enemies.get(1).getUnit().getHP();
-        enemyHealthMax2 = enemies.get(1).getUnit().getHP();
-        enemyMana2 = enemies.get(1).getUnit().getMANA().EffectiveValue;
-        enemyManaMax2 = enemies.get(1).getUnit().getMANA().EffectiveValue;
+        enemyHealth2 = enemies[1].getHP();
+        enemyHealthMax2 = enemies[1].getHP();
+        enemyMana2 = enemies[1].getMANA().EffectiveValue;
+        enemyManaMax2 = enemies[1].getMANA().EffectiveValue;
 
-        enemyHealth3 = enemies.get(2).getUnit().getHP();
-        enemyHealthMax3 = enemies.get(2).getUnit().getHP();
-        enemyMana3 = enemies.get(2).getUnit().getMANA().EffectiveValue;
-        enemyManaMax3 = enemies.get(2).getUnit().getMANA().EffectiveValue;
+        enemyHealth3 = enemies[2].getHP();
+        enemyHealthMax3 = enemies[2].getHP();
+        enemyMana3 = enemies[2].getMANA().EffectiveValue;
+        enemyManaMax3 = enemies[2].getMANA().EffectiveValue;
 
         viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport,sb);
@@ -279,13 +275,13 @@ public class HUD
         button6 = new TextButton("", textButtonStyle2);
         button7 = new TextButton("", textButtonStyle2);
 
-        name1 = new TextButton(allies.get(0).getUnit().getName(), textButtonStyle2);
-        name2 = new TextButton(allies.get(1).getUnit().getName(), textButtonStyle2);
-        name3 = new TextButton(allies.get(2).getUnit().getName(), textButtonStyle2);
+        name1 = new TextButton(allies[0].getName(), textButtonStyle2);
+        name2 = new TextButton(allies[1].getName(), textButtonStyle2);
+        name3 = new TextButton(allies[2].getName(), textButtonStyle2);
 
-        enemyName1 = new TextButton(enemies.get(0).getUnit().getName(), textButtonStyle2);
-        enemyName2 = new TextButton(enemies.get(1).getUnit().getName(), textButtonStyle2);
-        enemyName3  = new TextButton(enemies.get(2).getUnit().getName(), textButtonStyle2);
+        enemyName1 = new TextButton(enemies[0].getName(), textButtonStyle2);
+        enemyName2 = new TextButton(enemies[1].getName(), textButtonStyle2);
+        enemyName3  = new TextButton(enemies[2].getName(), textButtonStyle2);
 
         enemyButton = new TextButton("", textButtonStyle2);
         enemyButton2 = new TextButton("", textButtonStyle2);
@@ -525,28 +521,26 @@ public class HUD
         stage.addActor(name3);
     }
 
-    public void update(SpriteBatch sb, ArrayList<Character> allies, ArrayList<Character> enemies, Unit current)
+    public void update(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
     {
-        this.allies = allies;
-        this.enemies = enemies;
 
-        health = this.allies.get(0).getUnit().getHP();
-        mana = this.allies.get(0).getUnit().getMANA().EffectiveValue;
+        health = allies[0].getHP();
+        mana = allies[0].getMANA().EffectiveValue;
 
-        health2 = this.allies.get(1).getUnit().getHP();
-        mana2 = this.allies.get(1).getUnit().getMANA().EffectiveValue;
+        health2 = allies[1].getHP();
+        mana2 = allies[1].getMANA().EffectiveValue;
 
-        health3 = this.allies.get(2).getUnit().getHP();
-        mana3 = this.allies.get(2).getUnit().getMANA().EffectiveValue;
+        health3 = allies[2].getHP();
+        mana3 = allies[2].getMANA().EffectiveValue;
 
-        enemyHealth = this.enemies.get(0).getUnit().getHP();
-        enemyMana = this.enemies.get(0).getUnit().getMANA().EffectiveValue;
+        enemyHealth = enemies[0].getHP();
+        enemyMana = enemies[0].getMANA().EffectiveValue;
 
-        enemyHealth2 = this.enemies.get(1).getUnit().getHP();
-        enemyMana2 = this.enemies.get(1).getUnit().getMANA().EffectiveValue;
+        enemyHealth2 = enemies[1].getHP();
+        enemyMana2 = enemies[1].getMANA().EffectiveValue;
 
-        enemyHealth3 = this.enemies.get(2).getUnit().getHP();
-        enemyMana3 = this.enemies.get(2).getUnit().getMANA().EffectiveValue;
+        enemyHealth3 = enemies[2].getHP();
+        enemyMana3 = enemies[2].getMANA().EffectiveValue;
 
         viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
 
@@ -766,5 +760,10 @@ public class HUD
         LetterE.setPosition(stopRound.getX() + 8, stopRound.getY() - 15);
         stage.addActor(LetterE);
 
+    }
+
+    public void dispose()
+    {
+        music.dispose();
     }
 }

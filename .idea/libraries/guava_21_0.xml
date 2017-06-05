@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="guava-21.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/android/assets/selenium-java-3.4.0/lib/guava-21.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

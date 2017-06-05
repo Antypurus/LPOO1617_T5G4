@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="xercesImpl-2.11.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/android/assets/selenium-java-3.4.0/lib/xercesImpl-2.11.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

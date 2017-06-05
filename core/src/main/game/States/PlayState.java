@@ -32,6 +32,8 @@ import main.game.MyGdxGame;
 
 public class PlayState extends State
 {
+
+    private long startTime;
     private boolean hasAttacked = false;
     Ability currAbl = null;
 
@@ -81,6 +83,9 @@ public class PlayState extends State
     public PlayState(GameStateManager gsm, int Difficulty)
     {
         super(gsm);
+
+        startTime = System.currentTimeMillis();
+
         this.Scale = Gdx.graphics.getWidth()/this.map.width;
         batch = new SpriteBatch();
         background = new Texture("background.jpg");
@@ -175,7 +180,7 @@ public class PlayState extends State
 
         Gdx.input.setCursorCatched(false);
 
-        hud = new HUD(this.batch, this.charArray, this.enemiesArray, currentChar);
+        hud = new HUD(this.batch, allies, enemies, currentChar);
     }
 
     @Override
@@ -363,7 +368,15 @@ public class PlayState extends State
     public void update(float dt)
     {
         handleInput();
-        hud.update(batch, charArray, enemiesArray, currentChar);
+        if(this.gameController.hasLost()){
+            Gdx.app.exit();
+        }
+        if(this.gameController.hasWon()){
+           this.dispose();
+            gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, true));
+        }
+        else
+            hud.update(batch, allies, enemies, currentChar);
     }
 
     @Override
@@ -439,12 +452,6 @@ public class PlayState extends State
 
         sb.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-        if(this.gameController.hasLost()){
-            Gdx.app.exit();
-        }
-        if(this.gameController.hasWon()){
-            Gdx.app.exit();
-        }
     }
 
     double fps;
@@ -458,6 +465,8 @@ public class PlayState extends State
         blueBlock.dispose();
         redBlock.dispose();
         redBorder.dispose();
+        hud.stage.clear();
+        hud.dispose();
 
     }
 }

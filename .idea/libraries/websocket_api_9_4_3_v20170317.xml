@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="websocket-api-9.4.3.v20170317">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/android/assets/selenium-java-3.4.0/lib/websocket-api-9.4.3.v20170317.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
