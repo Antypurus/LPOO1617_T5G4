@@ -42,10 +42,10 @@ public class InstructionsState extends State
         Images.add(ChargeImage = new Texture("InstructionsImages/ChargeImage.png"));
         Images.add(FireBallImage = new Texture("InstructionsImages/FireBallImage.png"));
         Images.add(HealingImage = new Texture("InstructionsImages/HealingImage.png"));
-        Images.add(MovementImage = new Texture("InstructionsImages/MovementImage.png"));
-        Images.add(PunchImage = new Texture("InstructionsImages/PunchImage.png"));
-        Images.add(StopImage = new Texture("InstructionsImages/StopImage.png"));
         Images.add(WaterWhip = new Texture("InstructionsImages/WaterWhip.png"));
+        Images.add(PunchImage = new Texture("InstructionsImages/PunchImage.png"));
+        Images.add(MovementImage = new Texture("InstructionsImages/MovementImage.png"));
+        Images.add(StopImage = new Texture("InstructionsImages/StopImage.png"));
 
         this.quitBtnCenterX = quitBtn.getWidth() / 2;
     }

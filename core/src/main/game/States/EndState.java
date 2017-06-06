@@ -20,7 +20,7 @@ import main.game.MyGdxGame;
 
 public class EndState extends State {
 
-    private final int quitYCoord = 100;
+    private final int quitYCoord = 140;
     private final int facebookYCoord = 50;
     private final int facebookXCoord = MyGdxGame.WIDTH - 200;
 

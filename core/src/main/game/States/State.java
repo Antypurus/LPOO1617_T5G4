@@ -9,8 +9,6 @@ import main.game.MyGdxGame;
 
 public abstract class State {
     protected GameStateManager gsm;
-    protected int screenHeight = MyGdxGame.HEIGHT;
-    protected int screenWidth  = MyGdxGame.WIDTH;
 
     protected State(GameStateManager gsm)
     {

@@ -20,20 +20,23 @@ import main.game.MyGdxGame;
 
 public class MenuState extends State
 {
-    private final int playBtnYCoord = 400;
-    private final int InstructionsYCoord = 250;
-    private final int quitYCoord = 100;
+    private final int titleYCoord = 580;
+    private final int playBtnYCoord = 420;
+    private final int InstructionsYCoord = 280;
+    private final int quitYCoord = 140;
     private final int facebookYCoord = 50;
     private final int facebookXCoord = MyGdxGame.WIDTH - 200;
 
     private int playBtnCenterX;
     private int instructionsBtnCenterX;
     private int quitBtnCenterX;
+    private int titleCenterX;
 
     private Texture instructionsBtn;
     private Texture playBtn;
     private Texture quitBtn;
     private Texture facebookBtn;
+    private Texture gameTitle;
 
     private long startTime;
     private long elapsedTime;
@@ -44,6 +47,7 @@ public class MenuState extends State
     public MenuState(GameStateManager gsm) {
         super(gsm);
 
+        gameTitle = new Texture("MenusImages/GameTitleImage.png");
         playBtn = new Texture("MenusImages/PlayImage.png");
         instructionsBtn = new Texture("MenusImages/HowToPlayImage.png");
         quitBtn = new Texture("MenusImages/QuitImage.png");
@@ -52,6 +56,7 @@ public class MenuState extends State
         this.playBtnCenterX = playBtn.getWidth() / 2;
         this.instructionsBtnCenterX = instructionsBtn.getWidth()/2;
         this.quitBtnCenterX = quitBtn.getWidth() / 2;
+        this.titleCenterX = MyGdxGame.centerXCoord - gameTitle.getWidth()/2;
     }
 
     @Override
@@ -151,6 +156,8 @@ public class MenuState extends State
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         sb.begin();
+        sb.draw(gameTitle,
+                titleCenterX, titleYCoord);
         sb.draw(playBtn,
                 (MyGdxGame.centerXCoord) - (playBtnCenterX), playBtnYCoord);
         sb.draw(instructionsBtn,
@@ -169,5 +176,6 @@ public class MenuState extends State
         instructionsBtn.dispose();
         playBtn.dispose();
         facebookBtn.dispose();
+        gameTitle.dispose();
     }
 }

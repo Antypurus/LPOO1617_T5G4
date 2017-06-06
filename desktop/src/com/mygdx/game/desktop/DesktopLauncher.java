@@ -21,6 +21,7 @@ public class DesktopLauncher {
 		config.vSyncEnabled = false;
 		config.foregroundFPS = 0;
 		config.backgroundFPS = 0;
+		config.title = "RPG Game";
 		new LwjglApplication(new MyGdxGame(), config);
     }
 }

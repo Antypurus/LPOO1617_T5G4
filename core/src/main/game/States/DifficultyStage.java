@@ -11,9 +11,9 @@ import main.game.MyGdxGame;
 
 public class DifficultyStage extends State
 {
-    private final int easyBtnYCoord = 400;
-    private final int hardBtnYCoord = 250;
-    private final int quitYCoord = 100;
+    private final int easyBtnYCoord = 420;
+    private final int hardBtnYCoord = 280;
+    private final int quitYCoord = 140;
 
     private int easyBtnCenterX;
     private int hardBtnCenterX;
