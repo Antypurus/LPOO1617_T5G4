@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class MenuState extends State
 {
     private Texture instructionsBtn, playBtn ,quitBtn ,facebookBtn;
+    private long startTime, elapsedTime;
 
     private boolean facebook = true;
 
@@ -60,12 +61,6 @@ public class MenuState extends State
                     && (screenHeight - Gdx.input.getY()) >= ((50))
                     && (screenHeight - Gdx.input.getY()) <= ((50) + (facebookBtn.getHeight())))
             {
-               /* String acessToken = "EAACEdEose0cBALVlZAORGSWIacZCUuXbwNN0M8GoKXcaKnNZA1i1lbO5TO4JIeNYalz9iSdRwHMHGN6flfvejtl1ZBQrIdUT4VlAvXXWlVQVltSHjBkr1lEaASCGgtKylA6JZCSfZCGxmHpnpZChKD4yOvOzIZA7kD76xwRgh60eyPTeCml97JMZCvt3TlxlMFcgZD";
-
-                FacebookClient fbClient = new DefaultFacebookClient(acessToken);//
-
-                FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("message",  "Currently playing LPOOP game"), Parameter.with("link", "http://www.staggeringbeauty.com/"));
-*/
 
                 //TODO: mudar este link para um site onde seja possivel fazer download do jogo
                 String domain = "https://github.com/";
@@ -79,13 +74,16 @@ public class MenuState extends State
 
                 WebDriver driver = new ChromeDriver();
                 driver.get(authUrl);
+                startTime = System.currentTimeMillis();
                 String accessToken;
                 while(facebook)
                 {
+                    elapsedTime = (System.currentTimeMillis() - startTime) / 1000;
                     if(!driver.getCurrentUrl().contains("facebook.com")) {
                         String url = driver.getCurrentUrl();
                         accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
 
+                        driver.close();
 
                         FacebookClient fbClient = new DefaultFacebookClient(accessToken);
 
@@ -96,6 +94,10 @@ public class MenuState extends State
 
                         facebook = false;
 
+                    }
+                    else if(elapsedTime >= 60) {
+                        driver.close();
+                        facebook = false;
                     }
                 }
             }

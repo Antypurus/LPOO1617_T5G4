@@ -20,6 +20,7 @@ public class EndState extends State {
     private boolean facebook = true;
     private boolean gameWon = false;
     private int elapsedTime;
+    private long facebookStartTime, facebookElapsedTime;
 
 
     protected EndState(GameStateManager gsm, Long elapsedTime, Boolean gameWon)
@@ -57,9 +58,11 @@ public class EndState extends State {
 
                 WebDriver driver = new ChromeDriver();
                 driver.get(authUrl);
+                facebookStartTime = System.currentTimeMillis();
                 String accessToken;
                 while(facebook)
                 {
+                    facebookElapsedTime = (System.currentTimeMillis() - facebookStartTime) / 1000;
                     if(!driver.getCurrentUrl().contains("facebook.com")) {
                         String url = driver.getCurrentUrl();
                         accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
@@ -83,6 +86,11 @@ public class EndState extends State {
 
                         facebook = false;
 
+                    }
+
+                    else if(facebookElapsedTime >= 60) {
+                        driver.close();
+                        facebook = false;
                     }
                 }
             }
