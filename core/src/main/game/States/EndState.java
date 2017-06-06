@@ -1,6 +1,7 @@
 package game.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.restfb.DefaultFacebookClient;
@@ -11,13 +12,9 @@ import com.restfb.types.FacebookType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-/**
- * Created by Diogo on 05/06/2017.
- */
 
 public class EndState extends State {
 
-    private Texture background;
     private Texture facebookBtn;
     private Texture quitBtn;
     private boolean facebook = true;
@@ -28,9 +25,8 @@ public class EndState extends State {
     protected EndState(GameStateManager gsm, Long elapsedTime, Boolean gameWon)
     {
         super(gsm);
-        background = new Texture("black.png");
         facebookBtn = new Texture("FacebookImages/Facebook.png");
-        quitBtn = new Texture("quit.png");
+        quitBtn = new Texture("MenusImages/QuitImage.png");
         this.elapsedTime = elapsedTime.intValue();
         this.gameWon = gameWon;
     }
@@ -50,14 +46,6 @@ public class EndState extends State {
                     && (screenHeight - Gdx.input.getY()) >= ((50))
                     && (screenHeight - Gdx.input.getY()) <= ((50) + (facebookBtn.getHeight())))
             {
-               /* String acessToken = "EAACEdEose0cBALVlZAORGSWIacZCUuXbwNN0M8GoKXcaKnNZA1i1lbO5TO4JIeNYalz9iSdRwHMHGN6flfvejtl1ZBQrIdUT4VlAvXXWlVQVltSHjBkr1lEaASCGgtKylA6JZCSfZCGxmHpnpZChKD4yOvOzIZA7kD76xwRgh60eyPTeCml97JMZCvt3TlxlMFcgZD";
-
-                FacebookClient fbClient = new DefaultFacebookClient(acessToken);//
-
-                FacebookType response = fbClient.publish("me/feed", FacebookType.class, Parameter.with("message",  "Currently playing LPOOP game"), Parameter.with("link", "http://www.staggeringbeauty.com/"));
-*/
-
-                //TODO: mudar este link para um site onde seja possivel fazer download do jogo
                 String domain = "https://github.com/";
                 String appId = "433157270402383";
 
@@ -98,6 +86,14 @@ public class EndState extends State {
                     }
                 }
             }
+
+            else if (Gdx.input.getX() >= ((this.screenWidth / 2) - (quitBtn.getWidth() / 2))
+                    && Gdx.input.getX() <= ((screenWidth / 2) + (quitBtn.getWidth() / 2))
+                    && (screenHeight - Gdx.input.getY()) >= ((100))
+                    && (screenHeight - Gdx.input.getY()) <= ((100) + (quitBtn.getHeight())))
+            {
+                gsm.set(new MenuState(gsm));
+            }
         }
     }
 
@@ -108,15 +104,16 @@ public class EndState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.begin();
-        sb.draw(background, 0, 0);
         sb.draw(facebookBtn, screenWidth - 200, 50);
+        sb.draw(quitBtn, (screenWidth/2)- (quitBtn.getWidth()/2), 100);
         sb.end();
     }
 
     @Override
     public void dispose() {
-        background.dispose();
         facebookBtn.dispose();
         quitBtn.dispose();
     }

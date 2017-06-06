@@ -29,9 +29,6 @@ import game.GraphicsComponent.Character;
 import main.Logic.Unit.Unit;
 import main.game.MyGdxGame;
 
-/**
- * Created by Diogo on 01/06/2017.
- */
 
 public class HUD
 {
@@ -341,18 +338,18 @@ public class HUD
         {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
-               if(isPlaying)
-               {
-                   music.pause();
-                   button.getStyle().up = skin.getDrawable("SoundOff");
-                   isPlaying = false;
-               }
+                if(isPlaying)
+                {
+                    music.pause();
+                    button.getStyle().up = skin.getDrawable("SoundOff");
+                    isPlaying = false;
+                }
                 else
-               {
-                   music.play();
-                   button.getStyle().up = skin.getDrawable("SoundOn");
-                   isPlaying = true;
-               }
+                {
+                    music.play();
+                    button.getStyle().up = skin.getDrawable("SoundOn");
+                    isPlaying = true;
+                }
                 return true;
             }
         });
@@ -699,23 +696,23 @@ public class HUD
         stage.addActor(attack);
         if(MyGdxGame.attackMode) {
 
-                attack1Text = new Texture("RoundsImages/" + current.getAbilities().get(0).getName() +".png");
+            attack1Text = new Texture("RoundsImages/" + current.getAbilities().get(0).getName() +".png");
 
-                attack1TextureRegion = new TextureRegion(attack1Text);
-                attack1RegionDrawable = new TextureRegionDrawable(attack1TextureRegion);
-                attack1 = new ImageButton(attack1RegionDrawable);
+            attack1TextureRegion = new TextureRegion(attack1Text);
+            attack1RegionDrawable = new TextureRegionDrawable(attack1TextureRegion);
+            attack1 = new ImageButton(attack1RegionDrawable);
 
-                attack1.setPosition(120, 150);
-                stage.addActor(attack1);
+            attack1.setPosition(120, 150);
+            stage.addActor(attack1);
 
-                attack1.addListener(new InputListener()
-                {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
-                        MyGdxGame.attack1 = true;
-                        return true;
-                    }
-                });
+            attack1.addListener(new InputListener()
+            {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+                    MyGdxGame.attack1 = true;
+                    return true;
+                }
+            });
 
             Number1Text = new Texture("RoundsImages/1.png");
             Number1TextureRegion = new TextureRegion(Number1Text);
@@ -767,26 +764,51 @@ public class HUD
     {
         music.dispose();
         stage.dispose();
-        xText.dispose();
-        Number1Text.dispose();
-        Number2Text.dispose();
-        AText.dispose();
-        MText.dispose();
-        EText.dispose();
-        mText.dispose();
-        attackText.dispose();
-        attack1Text.dispose();
-        attack2Text.dispose();
-        font.dispose();
-        skin.dispose();
-        buttonAtlas.dispose();
-        font2.dispose();
-        skin2.dispose();
-        buttonAtlas2.dispose();
-        redfont.dispose();
-        redskin.dispose();
-        redatlas.dispose();
-        healthfont.dispose();
-        healthskin.dispose();
+        if(xText != null)
+            xText.dispose();
+        if(Number1Text != null)
+            Number1Text.dispose();
+        if(Number2Text != null)
+            Number2Text.dispose();
+        if(AText != null)
+            AText.dispose();
+        if(MText != null)
+            MText.dispose();
+        if(EText != null)
+            EText.dispose();
+        if(mText != null)
+            mText.dispose();
+        if(attackText != null)
+            attackText.dispose();
+        if(attack1Text != null)
+            attack1Text.dispose();
+        if(attack2Text != null)
+            attack2Text.dispose();
+        if(font != null)
+            font.dispose();
+        if(skin != null)
+            skin.dispose();
+        if(buttonAtlas != null)
+            buttonAtlas.dispose();
+        if(font2 != null)
+            font2.dispose();
+        if(skin2 != null)
+            skin2.dispose();
+        if(buttonAtlas2 != null)
+            buttonAtlas2.dispose();
+        if(font3 != null)
+            font3.dispose();
+        if(skin3 != null)
+            skin3.dispose();
+        if(redfont != null)
+            redfont.dispose();
+        if(redskin != null)
+            redskin.dispose();
+        if(redatlas != null)
+            redatlas.dispose();
+        if(healthfont != null)
+            healthfont.dispose();
+        if(healthskin != null)
+            healthskin.dispose();
     }
 }

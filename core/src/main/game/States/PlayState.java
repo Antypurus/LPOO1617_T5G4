@@ -162,8 +162,6 @@ public class PlayState extends State
         enemiesArray.add(this.enemy3);
 
 
-        //gameHandler = new GameHandler(this);
-
         cam.update();
 
         gameController = new GameController(allies,enemies, this.diff,map);
@@ -260,7 +258,6 @@ public class PlayState extends State
             currAbl = this.currentChar.getAbilities().get(2);
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            //this.character.moveUp();
             movements.add("UP");
 
             if(yPos < this.map.height*Scale -Scale) {
@@ -269,7 +266,6 @@ public class PlayState extends State
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
-            //this.character.moveDown();
             movements.add("DOWN");
 
             if(yPos > 0) {
@@ -279,7 +275,6 @@ public class PlayState extends State
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
-            //this.character.moveLeft();
             movements.add("LEFT");
 
             if(xPos > 0) {
@@ -289,7 +284,6 @@ public class PlayState extends State
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-            //this.character.moveRight();
             movements.add("RIGHT");
 
             if(xPos < this.map.width*Scale - Scale) {
@@ -301,8 +295,14 @@ public class PlayState extends State
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, false));
-            //Gdx.app.exit();
+            this.dispose();
+            MyGdxGame.changedTurn = false;
+            MyGdxGame.attackMode = false;
+            MyGdxGame.moveMode = false;
+            MyGdxGame.attack = false;
+            MyGdxGame.attack1 = false;
+            MyGdxGame.attack2 = false;
+            gsm.set(new MenuState(gsm));
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
@@ -374,7 +374,7 @@ public class PlayState extends State
             gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, false));
         }
         else if(this.gameController.hasWon()){
-           this.dispose();
+            this.dispose();
             gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, true));
         }
         else
@@ -449,8 +449,7 @@ public class PlayState extends State
         }
 
         sb.end();
-        //end of draw section
-        //Gdx.graphics.setTitle("RPGame FPS:"+fps+" Camara Zoom Value:"+cam.zoom+" Curr Char:"+this.currentChar.getName());
+        Gdx.graphics.setTitle("RPG Game FPS:"+fps+" Camara Zoom Value:"+cam.zoom+" Curr Char:"+this.currentChar.getName());
 
         sb.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -468,7 +467,6 @@ public class PlayState extends State
         redBlock.dispose();
         redBorder.dispose();
         hud.dispose();
-
+        font.dispose();
     }
 }
-///////////////////////////////////////
