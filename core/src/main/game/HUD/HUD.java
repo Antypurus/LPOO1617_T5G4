@@ -1,4 +1,4 @@
-package game.Buttons;
+package game.HUD;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -166,9 +166,6 @@ public class HUD
     private TextButton enemyManaBlue, enemyManaBlue2, enemyManaBlue3;
     private TextButton enemyName1, enemyName2, enemyName3;
 
-
-    Label player;
-
     public HUD(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
     {
         mText = new Texture("RoundsImages/Movement.png");
@@ -212,8 +209,6 @@ public class HUD
         }
 
 
-
-        //TODO: repeated code
         health = allies[0].getHP();
         healthMax = allies[0].getHP();
         mana = allies[0].getMANA().EffectiveValue;
@@ -263,7 +258,6 @@ public class HUD
         buttonAtlas2 = new TextureAtlas("Bars/Bars.pack");
         skin2.addRegions(buttonAtlas2);
         textButtonStyle2 = new TextButton.TextButtonStyle();
-        //font2.getData().setScale(1.4f, 1.5f);
         textButtonStyle2.font = font2;
         textButtonStyle2.up = skin2.getDrawable("EmptyBar");
         button2 = new TextButton("", textButtonStyle2);
@@ -386,16 +380,6 @@ public class HUD
         Table table = new Table();
         table.top();
         table.setFillParent(true);
-
-        //health  = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        //player = new Label("MARIO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-        //table.add(player).expandX().padTop(10);
-        //table.row();
-        //table.add(health);
-
-        //TODO: too much code
-        //button.setPosition(1100,580);
 
         name1.setPosition(0,600);
         button2.setPosition(0,570);

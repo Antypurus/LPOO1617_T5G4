@@ -11,13 +11,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
-import Logic.AI.DPSAI.DPSAI;
 import Logic.AI.HealerAI.HealerAI;
-import Logic.AI.TankAI.TankAI;
 import Logic.Abilities.Spells.WaterWip;
 import Logic.Difficulty;
 import Logic.GameController;
-import game.Buttons.HUD;
+import game.HUD.HUD;
 import game.GraphicsComponent.Character;
 import main.Logic.Abilities.Ability;
 import main.Logic.Abilities.Basics.Punch;
@@ -27,7 +25,6 @@ import main.Logic.Abilities.Spells.Fireball;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Unit;
-import main.game.InputHandler.GameHandler;
 import main.game.MyGdxGame;
 
 public class PlayState extends State
@@ -108,7 +105,7 @@ public class PlayState extends State
         this.character = new Character("Diogo",1);
         this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
         this.character.getUnit().setPosition(this.map.getCell(10,10));
-        this.character.getUnit().addAbility(new WaterWip(this.character.getUnit()));
+        this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
         this.character.getUnit().addAbility(new Punch(this.character.getUnit()));
         allies[0] = this.character.getUnit();
         character.update();
@@ -118,16 +115,16 @@ public class PlayState extends State
         char2.setUnit(new Unit("Manuel - Healer",10,1,4,8,2));
         allies[1] = this.char2.getUnit();
 
-        this.char3 = new Character("Tiago",0);
-        char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
-        allies[2] = this.char3.getUnit();
-
-
         this.char2.getUnit().setPosition(this.map.getCell(5,5));
         this.char2.getUnit().addAbility(new Mend(this.char2.getUnit()));
         this.char2.getUnit().addAbility(new Punch(this.char2.getUnit()));
         char2.update();
         charArray.add(this.char2);
+
+
+        this.char3 = new Character("Tiago",0);
+        char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
+        allies[2] = this.char3.getUnit();
 
         this.char3.getUnit().setPosition(this.map.getCell(15,15));
         this.char3.getUnit().addAbility(new Charge(this.char3.getUnit()));
