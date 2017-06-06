@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -12,9 +15,25 @@ import com.restfb.types.FacebookType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import main.game.MyGdxGame;
+
 public class MenuState extends State
 {
-    private Texture instructionsBtn, playBtn ,quitBtn ,facebookBtn;
+    private static final int playBtnYCoord = 400;
+    private static final int InstructionsYCoord = 250;
+    private static final int quitYCoord = 100;
+    private static final int facebookYCoord = 50;
+    private static final int facebookXCoord = MyGdxGame.WIDTH - 200;
+
+    private int playBtnCenterX;
+    private int instructionsBtnCenterX;
+    private int quitBtnCenterX;
+
+    private Texture instructionsBtn;
+    private Texture playBtn;
+    private Texture quitBtn;
+    private Texture facebookBtn;
+
     private long startTime, elapsedTime;
 
     private boolean facebook = true;
@@ -22,10 +41,15 @@ public class MenuState extends State
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
+
         playBtn = new Texture("MenusImages/PlayImage.png");
         instructionsBtn = new Texture("MenusImages/HowToPlayImage.png");
         quitBtn = new Texture("MenusImages/QuitImage.png");
         facebookBtn = new Texture("FacebookImages/Facebook.png");
+
+        this.playBtnCenterX = playBtn.getWidth() / 2;
+        this.instructionsBtnCenterX = instructionsBtn.getWidth()/2;
+        this.quitBtnCenterX = quitBtn.getWidth() / 2;
     }
 
     @Override
@@ -33,33 +57,33 @@ public class MenuState extends State
     {
         if(Gdx.input.justTouched())
         {
-            if (Gdx.input.getX() >= ((this.screenWidth / 2) - (playBtn.getWidth() / 2))
-                    && Gdx.input.getX() <= ((screenWidth / 2) + (playBtn.getWidth()/2))
-                    && (screenHeight - Gdx.input.getY()) >= ((400))
-                    && (screenHeight - Gdx.input.getY()) <= ((400) + (playBtn.getHeight())))
+            if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (playBtnCenterX))
+                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (playBtnCenterX))
+                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((playBtnYCoord))
+                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((playBtnYCoord) + (playBtn.getHeight())))
             {
                 gsm.set(new DifficultyStage(gsm));
             }
-            else if(Gdx.input.getX() >= ((screenWidth / 2) - (instructionsBtn.getWidth() / 2))
-                    && Gdx.input.getX() <= ((screenWidth / 2) + (instructionsBtn.getWidth()/2))
-                    && (screenHeight - Gdx.input.getY()) >= ((250))
-                    && (screenHeight - Gdx.input.getY()) <= ((250) + (instructionsBtn.getHeight())))
+            else if(Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (instructionsBtnCenterX))
+                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (instructionsBtnCenterX))
+                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((InstructionsYCoord))
+                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((InstructionsYCoord) + (instructionsBtn.getHeight())))
             {
                 gsm.set(new InstructionsState(gsm));
             }
 
-            else if (Gdx.input.getX() >= ((this.screenWidth / 2) - (quitBtn.getWidth() / 2))
-                    && Gdx.input.getX() <= ((screenWidth / 2) + (quitBtn.getWidth() / 2))
-                    && (screenHeight - Gdx.input.getY()) >= ((100))
-                    && (screenHeight - Gdx.input.getY()) <= ((100) + (quitBtn.getHeight())))
+            else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
+                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
+                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
+                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
             {
                 Gdx.app.exit();
             }
 
-            else if (Gdx.input.getX() >= (screenWidth - 200)
-                    && Gdx.input.getX() <= (screenWidth - 200 + (facebookBtn.getWidth()))
-                    && (screenHeight - Gdx.input.getY()) >= ((50))
-                    && (screenHeight - Gdx.input.getY()) <= ((50) + (facebookBtn.getHeight())))
+            else if (Gdx.input.getX() >= (facebookXCoord)
+                    && Gdx.input.getX() <= (facebookXCoord + (facebookBtn.getWidth()))
+                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((facebookYCoord))
+                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((facebookYCoord) + (facebookBtn.getHeight())))
             {
 
                 //TODO: mudar este link para um site onde seja possivel fazer download do jogo
@@ -79,6 +103,7 @@ public class MenuState extends State
                 while(facebook)
                 {
                     elapsedTime = (System.currentTimeMillis() - startTime) / 1000;
+
                     if(!driver.getCurrentUrl().contains("facebook.com")) {
                         String url = driver.getCurrentUrl();
                         accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
@@ -115,11 +140,16 @@ public class MenuState extends State
     {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
         sb.begin();
-        sb.draw(playBtn, (screenWidth/2)- (playBtn.getWidth()/2), 400);
-        sb.draw(instructionsBtn, (screenWidth/2)- (instructionsBtn.getWidth()/2), 250);
-        sb.draw(quitBtn, (screenWidth/2)- (quitBtn.getWidth()/2), 100);
-        sb.draw(facebookBtn, screenWidth - 200, 50);
+        sb.draw(playBtn,
+                (MyGdxGame.centerXCoord) - (playBtnCenterX), playBtnYCoord);
+        sb.draw(instructionsBtn,
+                (MyGdxGame.centerXCoord) - (instructionsBtnCenterX), InstructionsYCoord);
+        sb.draw(quitBtn,
+                (MyGdxGame.centerXCoord) - (quitBtnCenterX), quitYCoord);
+        sb.draw(facebookBtn,
+                facebookXCoord, facebookYCoord);
         sb.end();
     }
 
