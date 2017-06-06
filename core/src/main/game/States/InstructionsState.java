@@ -8,17 +8,35 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
+import main.game.MyGdxGame;
+
 
 public class InstructionsState extends State
 {
-    private Texture InstructionsImage, QuitBtn, AttackImage, ChargeImage, FireBallImage,
-            HealingImage, MovementImage, PunchImage, StopImage, WaterWhip;
+    private final int quitYCoord = 50;
+    private final int instructionsXPos = 300;
+    private final int instructionsYPos = 550;
+    private final int titleYPos = instructionsYPos + 70;
+
+    private int quitBtnCenterX;
+
+    private Texture InstructionsImage;
+    private Texture quitBtn;
+    private Texture AttackImage;
+    private Texture ChargeImage;
+    private Texture FireBallImage;
+    private Texture HealingImage;
+    private Texture MovementImage;
+    private Texture PunchImage;
+    private Texture StopImage;
+    private Texture WaterWhip;
 
     private ArrayList<Texture> Images = new ArrayList<Texture>();
 
     public InstructionsState(GameStateManager gsm) {
         super(gsm);
-        QuitBtn = new Texture("MenusImages/QuitImage.png");
+
+        quitBtn = new Texture("MenusImages/QuitImage.png");
         InstructionsImage = new Texture("InstructionsImages/InstructionsImage.png");
         Images.add(AttackImage = new Texture("InstructionsImages/AttackImage.png"));
         Images.add(ChargeImage = new Texture("InstructionsImages/ChargeImage.png"));
@@ -28,6 +46,8 @@ public class InstructionsState extends State
         Images.add(PunchImage = new Texture("InstructionsImages/PunchImage.png"));
         Images.add(StopImage = new Texture("InstructionsImages/StopImage.png"));
         Images.add(WaterWhip = new Texture("InstructionsImages/WaterWhip.png"));
+
+        this.quitBtnCenterX = quitBtn.getWidth() / 2;
     }
 
     @Override
@@ -35,16 +55,19 @@ public class InstructionsState extends State
     {
         if(Gdx.input.justTouched())
         {
-            if (Gdx.input.getX() >= ((this.screenWidth / 2) - (QuitBtn.getWidth() / 2))
-                    && Gdx.input.getX() <= ((screenWidth / 2) + (QuitBtn.getWidth() / 2))
-                    && (screenHeight - Gdx.input.getY()) >= (60)
-                    && (screenHeight - Gdx.input.getY()) <= ((60) + (QuitBtn.getHeight())))////
+            if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
+                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
             {
+                this.dispose();
                 gsm.set(new MenuState(gsm));
             }
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-            Gdx.app.exit();
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            this.dispose();
+            gsm.set(new MenuState(gsm));
         }
     }
 
@@ -59,20 +82,23 @@ public class InstructionsState extends State
     {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         sb.begin();
-        sb.draw(InstructionsImage, 300, 600);
+        sb.draw(InstructionsImage, instructionsXPos, titleYPos);
         for(int i = 0; i < Images.size(); i++)
-        sb.draw(Images.get(i), 300, 550 - i*50);
-        sb.draw(QuitBtn, screenWidth / 2 - QuitBtn.getWidth()/2, 60);
+        sb.draw(Images.get(i),
+                instructionsXPos, instructionsYPos - i*50);
+        sb.draw(quitBtn,
+                (MyGdxGame.centerXCoord) - (quitBtnCenterX), quitYCoord);
         sb.end();
     }
 
     @Override
     public void dispose()
     {
-        QuitBtn.dispose();
+        quitBtn.dispose();
         InstructionsImage.dispose();
-        QuitBtn.dispose();
+        quitBtn.dispose();
         AttackImage.dispose();
         ChargeImage.dispose();
         FireBallImage.dispose();

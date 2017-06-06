@@ -290,7 +290,7 @@ public class PlayState extends State
             }
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
         {
             this.dispose();
             MyGdxGame.changedTurn = false;

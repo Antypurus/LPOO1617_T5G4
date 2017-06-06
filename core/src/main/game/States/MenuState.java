@@ -1,6 +1,7 @@
 package game.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,11 +20,11 @@ import main.game.MyGdxGame;
 
 public class MenuState extends State
 {
-    private static final int playBtnYCoord = 400;
-    private static final int InstructionsYCoord = 250;
-    private static final int quitYCoord = 100;
-    private static final int facebookYCoord = 50;
-    private static final int facebookXCoord = MyGdxGame.WIDTH - 200;
+    private final int playBtnYCoord = 400;
+    private final int InstructionsYCoord = 250;
+    private final int quitYCoord = 100;
+    private final int facebookYCoord = 50;
+    private final int facebookXCoord = MyGdxGame.WIDTH - 200;
 
     private int playBtnCenterX;
     private int instructionsBtnCenterX;
@@ -34,7 +35,8 @@ public class MenuState extends State
     private Texture quitBtn;
     private Texture facebookBtn;
 
-    private long startTime, elapsedTime;
+    private long startTime;
+    private long elapsedTime;
 
     private boolean facebook = true;
 
@@ -62,6 +64,7 @@ public class MenuState extends State
                     && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((playBtnYCoord))
                     && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((playBtnYCoord) + (playBtn.getHeight())))
             {
+                this.dispose();
                 gsm.set(new DifficultyStage(gsm));
             }
             else if(Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (instructionsBtnCenterX))
@@ -69,6 +72,7 @@ public class MenuState extends State
                     && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((InstructionsYCoord))
                     && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((InstructionsYCoord) + (instructionsBtn.getHeight())))
             {
+                this.dispose();
                 gsm.set(new InstructionsState(gsm));
             }
 
@@ -77,6 +81,7 @@ public class MenuState extends State
                     && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
                     && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
             {
+                this.dispose();
                 Gdx.app.exit();
             }
 
@@ -127,6 +132,10 @@ public class MenuState extends State
                 }
             }
         }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            Gdx.app.exit();
+        }
     }
 
     @Override
@@ -140,7 +149,7 @@ public class MenuState extends State
     {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
+
         sb.begin();
         sb.draw(playBtn,
                 (MyGdxGame.centerXCoord) - (playBtnCenterX), playBtnYCoord);
