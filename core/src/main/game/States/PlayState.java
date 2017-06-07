@@ -178,8 +178,7 @@ public class PlayState extends State
         hud = new HUD(this.batch, allies, enemies, currentChar);
     }
 
-    @Override
-    protected void handleInput()
+    protected void handleZoomInput()
     {
         if(Gdx.input.isKeyPressed(Input.Keys.PAGE_UP)){
             this.cam.zoom-=0.02;
@@ -193,42 +192,15 @@ public class PlayState extends State
                 cam.zoom=1.7f;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
-            this.currentChar.beginTurn();
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            this.currentChar.setPosition(this.map.getCell(10,10));
-        }
+    }
+
+    protected void handleAttackInput()
+    {
         if(Gdx.input.isKeyJustPressed(Input.Keys.A) || MyGdxGame.attackMode){
             MyGdxGame.attackMode = true;
             MyGdxGame.moveMode = false;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.M)){
-            MyGdxGame.attackMode = false;
-            MyGdxGame.moveMode = true;
-            xPos = this.currentChar.getX() * Scale;
-            yPos = this.currentChar.getY() * Scale;
-            xCounter = 0;
-            yCounter = 0;
-            movements.clear();
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            this.currentChar.setPosition(this.map.getCell(10,10));
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E) || MyGdxGame.changedTurn){
-            this.gameController.endTurn();
-            currentChar = this.gameController.getCurrentChar();
-            this.currAbl = null;
 
-            xPos = this.currentChar.getX() * Scale;
-            yPos = this.currentChar.getY() * Scale;
-            this.movements.clear();
-
-            MyGdxGame.attackMode = false;
-            MyGdxGame.moveMode = false;
-            this.hasAttacked = false;
-            MyGdxGame.changedTurn = false;
-        }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1) || MyGdxGame.attack1){
             if(this.currentChar.getAbilities().size()==0){
                 MyGdxGame.attack1 = false;
@@ -254,6 +226,10 @@ public class PlayState extends State
             }
             currAbl = this.currentChar.getAbilities().get(2);
         }
+    }
+
+    protected  void handleMovementInput()
+    {
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             movements.add("UP");
 
@@ -289,6 +265,54 @@ public class PlayState extends State
                 xPos += Scale;
             }
         }
+    }
+
+    protected void handleGameLogicKeysInput()
+    {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+            this.currentChar.beginTurn();
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            this.currentChar.setPosition(this.map.getCell(10,10));
+        }
+
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.M)){
+            MyGdxGame.attackMode = false;
+            MyGdxGame.moveMode = true;
+            xPos = this.currentChar.getX() * Scale;
+            yPos = this.currentChar.getY() * Scale;
+            xCounter = 0;
+            yCounter = 0;
+            movements.clear();
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            this.currentChar.setPosition(this.map.getCell(10,10));
+        }
+
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.E) || MyGdxGame.changedTurn){
+            this.gameController.endTurn();
+            currentChar = this.gameController.getCurrentChar();
+            this.currAbl = null;
+
+            xPos = this.currentChar.getX() * Scale;
+            yPos = this.currentChar.getY() * Scale;
+            this.movements.clear();
+
+            MyGdxGame.attackMode = false;
+            MyGdxGame.moveMode = false;
+            this.hasAttacked = false;
+            MyGdxGame.changedTurn = false;
+        }
+    }
+
+    @Override
+    protected void handleInput()
+    {
+        handleZoomInput();
+        handleAttackInput();
+        handleMovementInput();
+        handleGameLogicKeysInput();
+
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
         {
