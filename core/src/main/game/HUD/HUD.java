@@ -94,40 +94,41 @@ public class HUD
     Skin skin;
     TextureAtlas buttonAtlas;
 
-    TextButton button2;
+    private Texture emptyBar;
+    private TextureRegion emptyBarTextureRegion;
+    private TextureRegionDrawable emptyBarRegionDrawable;
+    private ImageButton templateBar, templateBar2, templateBar3, templateBar4,
+            templateBar5, templateBar6;
+    private ImageButton enemytemplateBar, enemytemplateBar2, enemytemplateBar3,
+            enemytemplateBar4, enemytemplateBar5, enemytemplateBar6;
+
     TextButton.TextButtonStyle textButtonStyle2;
     BitmapFont font2;
     Skin skin2;
     TextureAtlas buttonAtlas2;
 
-    TextButton button3;
     TextButton.TextButtonStyle textButtonStyle3;
     BitmapFont font3;
     Skin skin3;
     TextureAtlas buttonAtlas3;
 
-    TextButton red;
+    TextButton red, red2,red3, blue, blue2, blue3;
+    TextButton enemyRed, enemyRed2, enemyRed3, enemyBlue, enemyBlue2, enemyBlue3;
     TextButton.TextButtonStyle redstyle, bluestyle;
     BitmapFont redfont;
     Skin redskin;
     TextureAtlas redatlas;
 
-    TextButton button4, button5, button6,button7, red2,red3, blue, blue2, blue3;
 
     TextButton name1,name2,name3;
+    TextButton enemyName1, enemyName2, enemyName3;
 
-    TextButton name1char, name2char, name3char;
 
     TextButton healthNumbers1, healthNumbers2, healthNumbers3;
     TextButton manaNumbers1, manaNumbers2, manaNumbers3;
     TextButton.TextButtonStyle healthstyle;
     BitmapFont healthfont;
     Skin healthskin;
-
-
-    private Integer worldTimer;
-    private float timeCount;
-    private Integer score;
 
     private Double health;
     private Double healthMax;
@@ -159,15 +160,21 @@ public class HUD
     private Double enemyMana3;
     private Double enemyManaMax3;
 
-    private TextButton enemyButton, enemyButton2, enemyButton3, enemyButton4, enemyButton5, enemyButton6;
-    private TextButton enemyHealthBtn, enemyHealthBtn2, enemyHealthBtn3;
-    private TextButton enemyManaBtn, enemyManaBtn2, enemyManaBtn3;
-    private TextButton enemyHealthRed, enemyHealthRed2, enemyHealthRed3;
-    private TextButton enemyManaBlue, enemyManaBlue2, enemyManaBlue3;
-    private TextButton enemyName1, enemyName2, enemyName3;
+    private TextButton enemyHealthNumbers, enemyHealthNumbers2, enemyHealthNumbers3;
+    private TextButton enemyManaNumbers, enemyManaNumbers2, enemyManaNumbers3;
 
     public HUD(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
     {
+        music = MyGdxGame.manager.get("Audio/audio.mp3", Music.class);
+        music.setLooping(true);
+        if(this.isPlaying) {
+            music.play();
+            isPlaying = true;
+        }else{
+            music.pause();
+            isPlaying = false;
+        }
+
         mText = new Texture("RoundsImages/Movement.png");
         mTextureRegion = new TextureRegion(mText);
         mRegionDrawable = new TextureRegionDrawable(mTextureRegion);
@@ -198,60 +205,21 @@ public class HUD
         attackRegionDrawable = new TextureRegionDrawable(attackTextureRegion);
         attack = new ImageButton(attackRegionDrawable);
 
-        music = MyGdxGame.manager.get("Audio/audio.mp3", Music.class);
-        music.setLooping(true);
-        if(this.isPlaying) {
-            music.play();
-            isPlaying = true;
-        }else{
-            music.pause();
-            isPlaying = false;
-        }
-
-
-        health = allies[0].getHP();
-        healthMax = allies[0].getHP();
-        mana = allies[0].getMANA().EffectiveValue;
-        manaMax = allies[0].getMANA().EffectiveValue;
-
-        health2 = allies[1].getHP();
-        healthMax2 = allies[1].getHP();
-        mana2 = allies[1].getMANA().EffectiveValue;
-        manaMax2 = allies[1].getMANA().EffectiveValue;
-
-        health3 = allies[2].getHP();
-        healthMax3 = allies[2].getHP();
-        mana3 = allies[2].getMANA().EffectiveValue;
-        manaMax3 = allies[2].getMANA().EffectiveValue;
-
-        enemyHealth = enemies[0].getHP();
-        enemyHealthMax = enemies[0].getHP();
-        enemyMana = enemies[0].getMANA().EffectiveValue;
-        enemyManaMax = enemies[0].getMANA().EffectiveValue;
-
-        enemyHealth2 = enemies[1].getHP();
-        enemyHealthMax2 = enemies[1].getHP();
-        enemyMana2 = enemies[1].getMANA().EffectiveValue;
-        enemyManaMax2 = enemies[1].getMANA().EffectiveValue;
-
-        enemyHealth3 = enemies[2].getHP();
-        enemyHealthMax3 = enemies[2].getHP();
-        enemyMana3 = enemies[2].getMANA().EffectiveValue;
-        enemyManaMax3 = enemies[2].getMANA().EffectiveValue;
-
-        viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
-        stage = new Stage(viewport,sb);
-        Gdx.input.setInputProcessor(stage);
-
-        font = new BitmapFont();
-        skin = new Skin();
-        buttonAtlas = new TextureAtlas("MenuImages/MenuImages.pack");
-        skin.addRegions(buttonAtlas);
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("SoundOn");
-        textButtonStyle.checked = skin.getDrawable("SoundOff");
-        button = new TextButton("", textButtonStyle);
+        emptyBar = new Texture("Bars/EmptyBar.png");
+        emptyBarTextureRegion = new TextureRegion(emptyBar);
+        emptyBarRegionDrawable = new TextureRegionDrawable(emptyBarTextureRegion);
+        templateBar = new ImageButton(emptyBarRegionDrawable);
+        templateBar2 = new ImageButton(emptyBarRegionDrawable);
+        templateBar3 = new ImageButton(emptyBarRegionDrawable);
+        templateBar4 = new ImageButton(emptyBarRegionDrawable);
+        templateBar5 = new ImageButton(emptyBarRegionDrawable);
+        templateBar6 = new ImageButton(emptyBarRegionDrawable);
+        enemytemplateBar = new ImageButton(emptyBarRegionDrawable);
+        enemytemplateBar2 = new ImageButton(emptyBarRegionDrawable);
+        enemytemplateBar3 = new ImageButton(emptyBarRegionDrawable);
+        enemytemplateBar4 = new ImageButton(emptyBarRegionDrawable);
+        enemytemplateBar5 = new ImageButton(emptyBarRegionDrawable);
+        enemytemplateBar6 = new ImageButton(emptyBarRegionDrawable);
 
         font2 = new BitmapFont();
         skin2 = new Skin();
@@ -260,12 +228,6 @@ public class HUD
         textButtonStyle2 = new TextButton.TextButtonStyle();
         textButtonStyle2.font = font2;
         textButtonStyle2.up = skin2.getDrawable("EmptyBar");
-        button2 = new TextButton("", textButtonStyle2);
-        button3 = new TextButton("", textButtonStyle2);
-        button4 = new TextButton("", textButtonStyle2);
-        button5 = new TextButton("", textButtonStyle2);
-        button6 = new TextButton("", textButtonStyle2);
-        button7 = new TextButton("", textButtonStyle2);
 
         name1 = new TextButton(allies[0].getName(), textButtonStyle2);
         name2 = new TextButton(allies[1].getName(), textButtonStyle2);
@@ -275,12 +237,37 @@ public class HUD
         enemyName2 = new TextButton(enemies[1].getName(), textButtonStyle2);
         enemyName3  = new TextButton(enemies[2].getName(), textButtonStyle2);
 
-        enemyButton = new TextButton("", textButtonStyle2);
-        enemyButton2 = new TextButton("", textButtonStyle2);
-        enemyButton3 = new TextButton("", textButtonStyle2);
-        enemyButton4 = new TextButton("", textButtonStyle2);
-        enemyButton5 = new TextButton("", textButtonStyle2);
-        enemyButton6 = new TextButton("", textButtonStyle2);
+        healthMax = allies[0].getHP();
+        manaMax = allies[0].getMANA().EffectiveValue;
+
+        healthMax2 = allies[1].getHP();
+        manaMax2 = allies[1].getMANA().EffectiveValue;
+
+        healthMax3 = allies[2].getHP();
+        manaMax3 = allies[2].getMANA().EffectiveValue;
+
+        enemyHealthMax = enemies[0].getHP();
+        enemyManaMax = enemies[0].getMANA().EffectiveValue;
+
+        enemyHealthMax2 = enemies[1].getHP();
+        enemyManaMax2 = enemies[1].getMANA().EffectiveValue;
+
+        enemyHealthMax3 = enemies[2].getHP();
+        enemyManaMax3 = enemies[2].getMANA().EffectiveValue;
+
+        viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
+        stage = new Stage(viewport,sb);
+        Gdx.input.setInputProcessor(stage);
+
+        font = new BitmapFont();
+        skin = new Skin();
+        buttonAtlas = new TextureAtlas("Audio/Audio.pack");
+        skin.addRegions(buttonAtlas);
+        textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = font;
+        textButtonStyle.up = skin.getDrawable("SoundOn");
+        textButtonStyle.checked = skin.getDrawable("SoundOff");
+        button = new TextButton("", textButtonStyle);
 
 
         redfont = new BitmapFont();
@@ -293,9 +280,9 @@ public class HUD
         red = new TextButton("", redstyle);
         red2 = new TextButton("", redstyle);
         red3 = new TextButton("", redstyle);
-        enemyHealthRed = new TextButton("", redstyle);
-        enemyHealthRed2 = new TextButton("", redstyle);
-        enemyHealthRed3 = new TextButton("", redstyle);
+        enemyRed = new TextButton("", redstyle);
+        enemyRed2 = new TextButton("", redstyle);
+        enemyRed3 = new TextButton("", redstyle);
 
         bluestyle = new TextButton.TextButtonStyle();
         bluestyle.font = redfont;
@@ -303,30 +290,14 @@ public class HUD
         blue = new TextButton("", bluestyle);
         blue2 = new TextButton("", bluestyle);
         blue3 = new TextButton("", bluestyle);
-        enemyManaBlue = new TextButton("", bluestyle);
-        enemyManaBlue2 = new TextButton("", bluestyle);
-        enemyManaBlue3 = new TextButton("", bluestyle);
-
+        enemyBlue = new TextButton("", bluestyle);
+        enemyBlue2 = new TextButton("", bluestyle);
+        enemyBlue3 = new TextButton("", bluestyle);
 
         healthfont = new BitmapFont();
         healthskin = new Skin();
         healthstyle = new TextButton.TextButtonStyle();
         healthstyle.font = healthfont;
-        healthNumbers1 = new TextButton(health.toString() + "/ "  + healthMax , healthstyle);
-        healthNumbers2 = new TextButton(health2.toString() + "/ "  + healthMax2, healthstyle);
-        healthNumbers3 = new TextButton(health3.toString() + "/ " + healthMax3, healthstyle);
-
-        enemyHealthBtn = new TextButton(enemyHealth.toString() + "/ " + enemyHealthMax, healthstyle);
-        enemyHealthBtn2 = new TextButton(enemyHealth2.toString() + "/ " + enemyHealthMax2, healthstyle);
-        enemyHealthBtn3 = new TextButton(enemyHealth3.toString() + "/ " + enemyHealthMax3, healthstyle);
-
-        manaNumbers1 = new TextButton(mana.toString() + " / " + manaMax, healthstyle);
-        manaNumbers2 = new TextButton(mana2.toString()+ " / " + manaMax2, healthstyle);
-        manaNumbers3 = new TextButton(mana3.toString() + " / " + manaMax3, healthstyle);
-
-        enemyManaBtn = new TextButton(enemyMana.toString() + " / " + enemyManaMax, healthstyle);
-        enemyManaBtn2 = new TextButton(enemyMana2.toString() + " / " + enemyManaMax2, healthstyle);
-        enemyManaBtn3 = new TextButton(enemyMana3.toString()+ " / " + enemyManaMax3, healthstyle);
 
         button.addListener(new InputListener()
         {
@@ -377,130 +348,6 @@ public class HUD
             }
         });
 
-        Table table = new Table();
-        table.top();
-        table.setFillParent(true);
-
-        name1.setPosition(0,600);
-        button2.setPosition(0,570);
-        button5.setPosition(0,540);
-
-        name2.setPosition(0,450);
-        button3.setPosition(0,420);
-        button6.setPosition(0,390);
-
-        name3.setPosition(0,300);
-        button4.setPosition(0,270);
-        button7.setPosition(0,240);
-
-        enemyName1.setPosition(950,600);
-        enemyButton.setPosition(950,570);
-        enemyButton4.setPosition(950,540);
-
-        enemyName2.setPosition(950,450);
-        enemyButton2.setPosition(950,420);
-        enemyButton5.setPosition(950,390);
-
-        enemyName3.setPosition(950,300);
-        enemyButton3.setPosition(950,270);
-        enemyButton6.setPosition(950,240);
-
-        red.setPosition(10,573);
-        red2.setPosition(10,423);
-        red3.setPosition(10,273);
-
-        enemyHealthRed.setPosition(950, 573);
-        enemyHealthRed2.setPosition(950, 423);
-        enemyHealthRed3.setPosition(950, 273);
-
-        red.setTransform(true);
-        red.setScaleX(health.floatValue()*0.1f);
-        red2.setTransform(true);
-        red2.setScaleX(health2.floatValue()*0.1f);
-        red3.setTransform(true);
-        red3.setScaleX(health3.floatValue()*0.1f);
-
-        enemyHealthRed.setTransform(true);
-        enemyHealthRed.setScaleX(enemyHealth.floatValue()*0.1f);
-        enemyHealthRed2.setTransform(true);
-        enemyHealthRed2.setScaleX(enemyHealth2.floatValue()*0.1f);
-        enemyHealthRed3.setTransform(true);
-        enemyHealthRed3.setScaleX(enemyHealth3.floatValue()*0.1f);
-
-        blue.setPosition(10,543);
-        blue2.setPosition(10,393);
-        blue3.setPosition(10,243);
-
-        enemyManaBlue.setPosition(950, 543);
-        enemyManaBlue2.setPosition(950,393);
-        enemyManaBlue3.setPosition(950,243);
-
-        healthNumbers1.setPosition(105,573);
-        healthNumbers2.setPosition(105,423);
-        healthNumbers3.setPosition(105,273);
-        manaNumbers1.setPosition(105,543);
-        manaNumbers2.setPosition(105,393);
-        manaNumbers3.setPosition(105,243);
-
-        enemyHealthBtn.setPosition(105 + 950,573);
-        enemyHealthBtn2.setPosition(105 + 950,423);
-        enemyHealthBtn3.setPosition(105 + 950,273);
-        enemyManaBtn.setPosition(105 + 950,543);
-        enemyManaBtn2.setPosition(105 + 950,393);
-        enemyManaBtn3.setPosition(105 + 950,243);
-
-        LetterM.setPosition(moveStart.getX() + 8, moveStart.getY() - 15);
-        stage.addActor(LetterM);
-
-        LetterA.setPosition(attack.getX() + 8, attack.getY() - 15);
-        stage.addActor(LetterA);
-
-        LetterE.setPosition(stopRound.getX() + 8, stopRound.getY() - 15);
-        stage.addActor(LetterE);
-
-        stage.addActor(table);
-        stage.addActor(button);
-        stage.addActor(button2);
-        stage.addActor(button3);
-        stage.addActor(button4);
-        stage.addActor(button5);
-        stage.addActor(button6);
-        stage.addActor(button7);
-        stage.addActor(red);
-        stage.addActor(red2);
-        stage.addActor(red3);
-        stage.addActor(blue);
-        stage.addActor(blue2);
-        stage.addActor(blue3);
-        stage.addActor(healthNumbers1);
-        stage.addActor(healthNumbers2);
-        stage.addActor(healthNumbers3);
-        stage.addActor(manaNumbers1);
-        stage.addActor(manaNumbers2);
-        stage.addActor(manaNumbers3);
-
-        stage.addActor(enemyButton);
-        stage.addActor(enemyButton2);
-        stage.addActor(enemyButton3);
-        stage.addActor(enemyButton4);
-        stage.addActor(enemyButton5);
-        stage.addActor(enemyButton6);
-        stage.addActor(enemyHealthRed);
-        stage.addActor(enemyHealthRed2);
-        stage.addActor(enemyHealthRed3);
-        stage.addActor(enemyManaBlue);
-        stage.addActor(enemyManaBlue2);
-        stage.addActor(enemyManaBlue3);
-        stage.addActor(enemyHealthBtn);
-        stage.addActor(enemyHealthBtn2);
-        stage.addActor(enemyHealthBtn3);
-        stage.addActor(enemyManaBtn);
-        stage.addActor(enemyManaBtn2);
-        stage.addActor(enemyManaBtn3);
-
-        stage.addActor(name1);
-        stage.addActor(name2);
-        stage.addActor(name3);
     }
 
     public void update(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
@@ -530,51 +377,46 @@ public class HUD
         healthNumbers2 = new TextButton(health2.toString() + "/ "  + healthMax2, healthstyle);
         healthNumbers3 = new TextButton(health3.toString() + "/ "  + healthMax3, healthstyle);
 
-        enemyHealthBtn = new TextButton(enemyHealth.toString() + "/ " + enemyHealthMax, healthstyle);
-        enemyHealthBtn2 = new TextButton(enemyHealth2.toString() + "/ "  + enemyHealthMax2, healthstyle);
-        enemyHealthBtn3 = new TextButton(enemyHealth3.toString() + "/ "  + enemyHealthMax3, healthstyle);
+        enemyHealthNumbers = new TextButton(enemyHealth.toString() + "/ " + enemyHealthMax, healthstyle);
+        enemyHealthNumbers2 = new TextButton(enemyHealth2.toString() + "/ " + enemyHealthMax2, healthstyle);
+        enemyHealthNumbers3 = new TextButton(enemyHealth3.toString() + "/ " + enemyHealthMax3, healthstyle);
 
         manaNumbers1 = new TextButton(mana.toString() + " / " + manaMax, healthstyle);
-        manaNumbers2 = new TextButton(mana2.toString() + " / " + manaMax2, healthstyle);
+        manaNumbers2 = new TextButton(mana2.toString()+ " / " + manaMax2, healthstyle);
         manaNumbers3 = new TextButton(mana3.toString() + " / " + manaMax3, healthstyle);
 
-        enemyManaBtn = new TextButton(enemyMana.toString() + " / " + enemyManaMax, healthstyle);
-        enemyManaBtn2 = new TextButton(enemyMana2.toString() + " / " + enemyManaMax2, healthstyle);
-        enemyManaBtn3 = new TextButton(enemyMana3.toString() + " / " + enemyManaMax3, healthstyle);
+        enemyManaNumbers = new TextButton(enemyMana.toString() + " / " + enemyManaMax, healthstyle);
+        enemyManaNumbers2 = new TextButton(enemyMana2.toString() + " / " + enemyManaMax2, healthstyle);
+        enemyManaNumbers3 = new TextButton(enemyMana3.toString()+ " / " + enemyManaMax3, healthstyle);
 
 
         name1.setPosition(0,600);
-        button2.setPosition(0,570);
-        button5.setPosition(0,540);
+        templateBar.setPosition(0,570);
+        templateBar2.setPosition(0,540);
 
         name2.setPosition(0,450);
-        button3.setPosition(0,420);
-        button6.setPosition(0,390);
+        templateBar3.setPosition(0,420);
+        templateBar4.setPosition(0,390);
 
         name3.setPosition(0,300);
-        button4.setPosition(0,270);
-        button7.setPosition(0,240);
+        templateBar5.setPosition(0,270);
+        templateBar6.setPosition(0,240);
 
         enemyName1.setPosition(1025,600);
-        enemyButton.setPosition(1025,570);
-        enemyButton4.setPosition(1025,540);
+        enemytemplateBar.setPosition(1025,570);
+        enemytemplateBar2.setPosition(1025,540);
 
         enemyName2.setPosition(1025,450);
-        enemyButton2.setPosition(1025,420);
-        enemyButton5.setPosition(1025,390);
+        enemytemplateBar3.setPosition(1025,420);
+        enemytemplateBar4.setPosition(1025,390);
 
         enemyName3.setPosition(1025,300);
-        enemyButton3.setPosition(1025,270);
-        enemyButton6.setPosition(1025,240);
+        enemytemplateBar5.setPosition(1025,270);
+        enemytemplateBar6.setPosition(1025,240);
 
         red.setPosition(10,573);
         red2.setPosition(10,423);
         red3.setPosition(10,273);
-
-        enemyHealthRed.setPosition(1025 + 10, 573);
-        enemyHealthRed2.setPosition(1025 + 10, 423);
-        enemyHealthRed3.setPosition(1025 + 10, 273);
-
 
         red.setTransform(true);
         red.setScaleX(health.floatValue()/healthMax.floatValue());
@@ -583,12 +425,20 @@ public class HUD
         red3.setTransform(true);
         red3.setScaleX(health3.floatValue()/healthMax3.floatValue());
 
-        enemyHealthRed.setTransform(true);
-        enemyHealthRed.setScaleX(enemyHealth.floatValue()/enemyHealthMax.floatValue());
-        enemyHealthRed2.setTransform(true);
-        enemyHealthRed2.setScaleX(enemyHealth2.floatValue()/enemyHealthMax2.floatValue());
-        enemyHealthRed3.setTransform(true);
-        enemyHealthRed3.setScaleX(enemyHealth3.floatValue()/enemyHealthMax3.floatValue());
+        enemyRed.setPosition(1035, 573);
+        enemyRed2.setPosition(1035, 423);
+        enemyRed3.setPosition(1035, 273);
+
+        enemyRed.setTransform(true);
+        enemyRed.setScaleX(enemyHealth.floatValue()/enemyHealthMax.floatValue());
+        enemyRed2.setTransform(true);
+        enemyRed2.setScaleX(enemyHealth2.floatValue()/enemyHealthMax2.floatValue());
+        enemyRed3.setTransform(true);
+        enemyRed3.setScaleX(enemyHealth3.floatValue()/enemyHealthMax3.floatValue());
+
+        blue.setPosition(10,543);
+        blue2.setPosition(10,393);
+        blue3.setPosition(10,243);
 
         blue.setTransform(true);
         blue.setScaleX(mana.floatValue()/manaMax.floatValue());
@@ -597,20 +447,16 @@ public class HUD
         blue3.setTransform(true);
         blue3.setScaleX(mana3.floatValue()/manaMax3.floatValue());
 
-        enemyManaBlue.setTransform(true);
-        enemyManaBlue.setScaleX(enemyMana.floatValue()/enemyManaMax.floatValue());
-        enemyManaBlue2.setTransform(true);
-        enemyManaBlue2.setScaleX(enemyMana2.floatValue()/enemyManaMax2.floatValue());
-        enemyManaBlue3.setTransform(true);
-        enemyManaBlue3.setScaleX(enemyMana3.floatValue()/enemyManaMax3.floatValue());//
+        enemyBlue.setPosition(1035, 543);
+        enemyBlue2.setPosition(1035,393);
+        enemyBlue3.setPosition(1035,243);
 
-        blue.setPosition(10,543);
-        blue2.setPosition(10,393);
-        blue3.setPosition(10,243);
-
-        enemyManaBlue.setPosition(1025 + 10, 543);
-        enemyManaBlue2.setPosition(1025 + 10,393);
-        enemyManaBlue3.setPosition(1025 + 10,243);
+        enemyBlue.setTransform(true);
+        enemyBlue.setScaleX(enemyMana.floatValue()/enemyManaMax.floatValue());
+        enemyBlue2.setTransform(true);
+        enemyBlue2.setScaleX(enemyMana2.floatValue()/enemyManaMax2.floatValue());
+        enemyBlue3.setTransform(true);
+        enemyBlue3.setScaleX(enemyMana3.floatValue()/enemyManaMax3.floatValue());//
 
         healthNumbers1.setPosition(105,573);
         healthNumbers2.setPosition(105,423);
@@ -619,21 +465,22 @@ public class HUD
         manaNumbers2.setPosition(105,393);
         manaNumbers3.setPosition(105,243);
 
-        enemyHealthBtn.setPosition(105 + 1025,573);
-        enemyHealthBtn2.setPosition(105 + 1025,423);
-        enemyHealthBtn3.setPosition(105 + 1025,273);
-        enemyManaBtn.setPosition(105 + 1025,543);
-        enemyManaBtn2.setPosition(105 + 1025,393);
-        enemyManaBtn3.setPosition(105 + 1025,243);
+        enemyHealthNumbers.setPosition(105 + 1025,573);
+        enemyHealthNumbers2.setPosition(105 + 1025,423);
+        enemyHealthNumbers3.setPosition(105 + 1025,273);
+        enemyManaNumbers.setPosition(105 + 1025,543);
+        enemyManaNumbers2.setPosition(105 + 1025,393);
+        enemyManaNumbers3.setPosition(105 + 1025,243);
+
 
         stage.clear();
         stage.addActor(button);
-        stage.addActor(button2);
-        stage.addActor(button3);
-        stage.addActor(button4);
-        stage.addActor(button5);
-        stage.addActor(button6);
-        stage.addActor(button7);
+        stage.addActor(templateBar);
+        stage.addActor(templateBar2);
+        stage.addActor(templateBar3);
+        stage.addActor(templateBar4);
+        stage.addActor(templateBar5);
+        stage.addActor(templateBar6);
         stage.addActor(red);
         stage.addActor(red2);
         stage.addActor(red3);
@@ -650,24 +497,24 @@ public class HUD
         stage.addActor(name2);
         stage.addActor(name3);
 
-        stage.addActor(enemyButton);
-        stage.addActor(enemyButton2);
-        stage.addActor(enemyButton3);
-        stage.addActor(enemyButton4);
-        stage.addActor(enemyButton5);
-        stage.addActor(enemyButton6);
-        stage.addActor(enemyHealthRed);
-        stage.addActor(enemyHealthRed2);
-        stage.addActor(enemyHealthRed3);
-        stage.addActor(enemyManaBlue);
-        stage.addActor(enemyManaBlue2);
-        stage.addActor(enemyManaBlue3);
-        stage.addActor(enemyHealthBtn);
-        stage.addActor(enemyHealthBtn2);
-        stage.addActor(enemyHealthBtn3);
-        stage.addActor(enemyManaBtn);
-        stage.addActor(enemyManaBtn2);
-        stage.addActor(enemyManaBtn3);
+        stage.addActor(enemytemplateBar);
+        stage.addActor(enemytemplateBar2);
+        stage.addActor(enemytemplateBar3);
+        stage.addActor(enemytemplateBar4);
+        stage.addActor(enemytemplateBar5);
+        stage.addActor(enemytemplateBar6);
+        stage.addActor(enemyRed);
+        stage.addActor(enemyRed2);
+        stage.addActor(enemyRed3);
+        stage.addActor(enemyBlue);
+        stage.addActor(enemyBlue2);
+        stage.addActor(enemyBlue3);
+        stage.addActor(enemyHealthNumbers);
+        stage.addActor(enemyHealthNumbers2);
+        stage.addActor(enemyHealthNumbers3);
+        stage.addActor(enemyManaNumbers);
+        stage.addActor(enemyManaNumbers2);
+        stage.addActor(enemyManaNumbers3);
         stage.addActor(enemyName1);
         stage.addActor(enemyName2);
         stage.addActor(enemyName3);
@@ -743,6 +590,7 @@ public class HUD
         stage.addActor(LetterE);
 
     }
+
 
     public void dispose()
     {
