@@ -186,7 +186,7 @@ public class PlayState extends State
                 cam.zoom=0.15f;
             }
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.PAGE_DOWN)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.PAGE_DOWN)){
             this.cam.zoom+=0.02;
             if(cam.zoom>=1.7){
                 cam.zoom=1.7f;
@@ -196,12 +196,14 @@ public class PlayState extends State
 
     protected void handleAttackInput()
     {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.A) || MyGdxGame.attackMode){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A)
+                || MyGdxGame.attackMode){
             MyGdxGame.attackMode = true;
             MyGdxGame.moveMode = false;
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1) || MyGdxGame.attack1){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)
+                || MyGdxGame.attack1){
             if(this.currentChar.getAbilities().size()==0){
                 MyGdxGame.attack1 = false;
                 currAbl = null;
@@ -210,7 +212,8 @@ public class PlayState extends State
             currAbl = this.currentChar.getAbilities().get(0);
             MyGdxGame.attack1 = false;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2) || MyGdxGame.attack2){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)
+                || MyGdxGame.attack2){
             if(this.currentChar.getAbilities().size()==1){
                 currAbl = null;
                 MyGdxGame.attack2 = false;
@@ -238,7 +241,7 @@ public class PlayState extends State
                 yPos+=Scale;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
             movements.add("DOWN");
 
             if(yPos > 0) {
@@ -247,7 +250,7 @@ public class PlayState extends State
                 yPos -= Scale;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
             movements.add("LEFT");
 
             if(xPos > 0) {
@@ -256,7 +259,7 @@ public class PlayState extends State
                 xPos -=Scale;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
             movements.add("RIGHT");
 
             if(xPos < this.map.width*Scale - Scale) {
@@ -305,15 +308,8 @@ public class PlayState extends State
         }
     }
 
-    @Override
-    protected void handleInput()
+    protected void handleEscapeKey()
     {
-        handleZoomInput();
-        handleAttackInput();
-        handleMovementInput();
-        handleGameLogicKeysInput();
-
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
         {
             this.dispose();
@@ -325,7 +321,10 @@ public class PlayState extends State
             MyGdxGame.attack2 = false;
             gsm.set(new MenuState(gsm));
         }
+    }
 
+    protected void handleEnterKey()
+    {
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             if (MyGdxGame.moveMode) {
                 Character currChar = null;
@@ -344,10 +343,6 @@ public class PlayState extends State
                 for (int i = 0; i < movements.size(); i++) {
                     if (movements.get(i) == "UP") {
                         currChar.moveUp();
-                        batch.begin();
-                        batch.draw(currChar.getSprite(), currChar.getUnit().getX() * Scale,
-                                currChar.getUnit().getY() * Scale, Scale, Scale);
-                        batch.end();
                         cam.update();
                     } else if (movements.get(i) == "DOWN") {
                         currChar.moveDown();
@@ -367,19 +362,32 @@ public class PlayState extends State
                 yCounter = 0;
                 xCounter = 0;
             }
-            if(MyGdxGame.attackMode){
+            else if(MyGdxGame.attackMode){
                 Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
-                if(currAbl!=null&&!hasAttacked){
-                    if(cell.getUnit()!=null) {
-                        if(cell.getUnit().getIsAlly()==false||currAbl.getType().equals(Element.type.HEAL)) {
+                if(currAbl!=null
+                        &&!hasAttacked
+                        && cell.getUnit()!=null
+                        && (cell.getUnit().getIsAlly()==false
+                        || currAbl.getType().equals(Element.type.HEAL)))
+                {
                             System.out.print("Attack \n");
                             this.currAbl.AffectTarget(cell.getUnit());
                             this.hasAttacked=true;
-                        }
-                    }
                 }
             }
         }
+    }
+
+    @Override
+    protected void handleInput()
+    {
+        handleZoomInput();
+        handleAttackInput();
+        handleMovementInput();
+        handleGameLogicKeysInput();
+        handleEscapeKey();
+        handleEnterKey();
+
         this.cam.position.set(currentChar.getX()*Scale+Scale/2,currentChar.getY()*Scale+Scale/2,0);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
