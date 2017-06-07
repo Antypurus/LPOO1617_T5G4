@@ -311,6 +311,399 @@ public class unitTest {
         testUnit.setPosition(testMap.getCell(15,15));
         assertEquals(15,testUnit.getX());
         assertEquals(15,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,2));
+        assertEquals(0,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,3));
+        assertEquals(0,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,4));
+        assertEquals(0,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,5));
+        assertEquals(0,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,6));
+        assertEquals(0,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,7));
+        assertEquals(0,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,8));
+        assertEquals(0,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,9));
+        assertEquals(0,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,0));
+        assertEquals(1,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,1));
+        assertEquals(1,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,2));
+        assertEquals(1,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,3));
+        assertEquals(1,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,4));
+        assertEquals(1,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,5));
+        assertEquals(1,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,6));
+        assertEquals(1,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,7));
+        assertEquals(1,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,8));
+        assertEquals(1,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,9));
+        assertEquals(1,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,0));
+        assertEquals(2,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,1));
+        assertEquals(2,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,2));
+        assertEquals(2,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,3));
+        assertEquals(2,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,4));
+        assertEquals(2,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+
+        testUnit.setPosition(testMap.getCell(2,5));
+        assertEquals(2,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,6));
+        assertEquals(2,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,7));
+        assertEquals(2,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,8));
+        assertEquals(2,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,9));
+        assertEquals(2,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,0));
+        assertEquals(3,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,1));
+        assertEquals(3,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,2));
+        assertEquals(3,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,3));
+        assertEquals(3,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,4));
+        assertEquals(3,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,5));
+        assertEquals(3,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,6));
+        assertEquals(3,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,7));
+        assertEquals(3,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,8));
+        assertEquals(3,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,9));
+        assertEquals(3,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,0));
+        assertEquals(4,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,1));
+        assertEquals(4,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,2));
+        assertEquals(4,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,3));
+        assertEquals(4,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,4));
+        assertEquals(4,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,5));
+        assertEquals(4,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,6));
+        assertEquals(4,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,7));
+        assertEquals(4,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,8));
+        assertEquals(4,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,9));
+        assertEquals(4,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,0));
+        assertEquals(5,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,1));
+        assertEquals(5,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,2));
+        assertEquals(5,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,3));
+        assertEquals(5,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,4));
+        assertEquals(5,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,5));
+        assertEquals(5,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,6));
+        assertEquals(5,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,7));
+        assertEquals(5,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,8));
+        assertEquals(5,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,9));
+        assertEquals(5,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,0));
+        assertEquals(6,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,1));
+        assertEquals(6,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,2));
+        assertEquals(6,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,3));
+        assertEquals(6,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,4));
+        assertEquals(6,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,5));
+        assertEquals(6,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,6));
+        assertEquals(6,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,7));
+        assertEquals(6,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,8));
+        assertEquals(6,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,9));
+        assertEquals(6,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,0));
+        assertEquals(7,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,1));
+        assertEquals(7,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,2));
+        assertEquals(7,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,3));
+        assertEquals(7,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,4));
+        assertEquals(7,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,5));
+        assertEquals(7,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,6));
+        assertEquals(7,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,7));
+        assertEquals(7,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,8));
+        assertEquals(7,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,9));
+        assertEquals(7,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,0));
+        assertEquals(8,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,1));
+        assertEquals(8,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,2));
+        assertEquals(8,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,3));
+        assertEquals(8,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,4));
+        assertEquals(8,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,5));
+        assertEquals(8,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,6));
+        assertEquals(8,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,7));
+        assertEquals(8,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,8));
+        assertEquals(8,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,9));
+        assertEquals(8,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,0));
+        assertEquals(9,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,1));
+        assertEquals(9,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,2));
+        assertEquals(9,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,3));
+        assertEquals(9,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,4));
+        assertEquals(9,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,5));
+        assertEquals(9,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,6));
+        assertEquals(9,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,7));
+        assertEquals(9,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,8));
+        assertEquals(9,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,9));
+        assertEquals(9,testUnit.getX());
+        assertEquals(9,testUnit.getY());
     }
 
     @Test
@@ -590,13 +983,18 @@ public class unitTest {
     public void movetoCellTest(){
         Unit testUnit =  new Unit("Test Unit",5,2,10,6,2);
         Map testMap = new Map("Test Map",10,10);
-        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit.setPosition(testMap.getCell(9,9));
 
-        assertEquals(10,testUnit.getX());
-        assertEquals(10,testUnit.getY());
+        assertEquals(9,testUnit.getX());
+        assertEquals(9,testUnit.getY());
 
-        testUnit.moveToCell(testMap.getCell(13,16));
-        assertEquals(13,testUnit.getX());
-        assertEquals(16,testUnit.getY());
+        testUnit.moveToCell(testMap.getCell(0,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.moveToCell(testMap.getCell(0,1));
+        assertEquals(0,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
     }
 }
