@@ -375,7 +375,7 @@ public class PlayState extends State
             gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, true));
         }
         else
-            hud.update(batch, allies, enemies, currentChar);
+            hud.updateValues(batch, allies, enemies, currentChar);
     }
 
     @Override

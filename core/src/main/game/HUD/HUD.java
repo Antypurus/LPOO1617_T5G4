@@ -160,6 +160,27 @@ public class HUD
 
     public HUD(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
     {
+        MusicGetter();
+        StartMovementUI();
+        StartAttackUI();
+        FinishRoundUI();
+        SettingTemplateBars();
+        getNames(allies, enemies);
+        getMaxHealth(allies, enemies);
+        RedHealthBars();
+        BlueManaBars();
+        SoundImages();
+        viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
+        stage = new Stage(viewport,sb);
+        Gdx.input.setInputProcessor(stage);
+        healthButtonStyle();
+        MusicButtonListener();
+        RoundsButtonsListeners();
+
+    }
+
+    public void MusicGetter()
+    {
         music = MyGdxGame.manager.get("Audio/audio.mp3", Music.class);
         music.setLooping(true);
         if(this.isPlaying) {
@@ -169,7 +190,10 @@ public class HUD
             music.pause();
             isPlaying = false;
         }
+    }
 
+    public void StartMovementUI()
+    {
         mText = new Texture("RoundsImages/Movement.png");
         mTextureRegion = new TextureRegion(mText);
         mRegionDrawable = new TextureRegionDrawable(mTextureRegion);
@@ -179,27 +203,10 @@ public class HUD
         MTextureRegion = new TextureRegion(MText);
         MRegionDrawable = new TextureRegionDrawable(MTextureRegion);
         LetterM = new ImageButton(MRegionDrawable);
+    }
 
-        EText = new Texture("RoundsImages/E.png");
-        ETextureRegion = new TextureRegion(EText);
-        ERegionDrawable = new TextureRegionDrawable(ETextureRegion);
-        LetterE = new ImageButton(ERegionDrawable);
-
-        AText = new Texture("RoundsImages/A.png");
-        ATextureRegion = new TextureRegion(AText);
-        ARegionDrawable = new TextureRegionDrawable(ATextureRegion);
-        LetterA = new ImageButton(ARegionDrawable);
-
-        xText = new Texture("RoundsImages/x_orange.png");
-        xTextureRegion = new TextureRegion(xText);
-        xRegionDrawable = new TextureRegionDrawable(xTextureRegion);
-        stopRound = new ImageButton(xRegionDrawable);
-
-        attackText = new Texture("RoundsImages/Attack.png");
-        attackTextureRegion = new TextureRegion(attackText);
-        attackRegionDrawable = new TextureRegionDrawable(attackTextureRegion);
-        attack = new ImageButton(attackRegionDrawable);
-
+    public void AttackAbilitiesUI()
+    {
         Number1Text = new Texture("RoundsImages/1.png");
         Number1TextureRegion = new TextureRegion(Number1Text);
         Number1RegionDrawable = new TextureRegionDrawable(Number1TextureRegion);
@@ -209,9 +216,37 @@ public class HUD
         Number2TextureRegion = new TextureRegion(Number2Text);
         Number2RegionDrawable = new TextureRegionDrawable(Number2TextureRegion);
         Number2 = new ImageButton(Number2RegionDrawable);
+    }
 
+    public void StartAttackUI()
+    {
+        AText = new Texture("RoundsImages/A.png");
+        ATextureRegion = new TextureRegion(AText);
+        ARegionDrawable = new TextureRegionDrawable(ATextureRegion);
+        LetterA = new ImageButton(ARegionDrawable);
 
+        attackText = new Texture("RoundsImages/Attack.png");
+        attackTextureRegion = new TextureRegion(attackText);
+        attackRegionDrawable = new TextureRegionDrawable(attackTextureRegion);
+        attack = new ImageButton(attackRegionDrawable);
+        AttackAbilitiesUI();
+    }
 
+    public void FinishRoundUI()
+    {
+        xText = new Texture("RoundsImages/x_orange.png");
+        xTextureRegion = new TextureRegion(xText);
+        xRegionDrawable = new TextureRegionDrawable(xTextureRegion);
+        stopRound = new ImageButton(xRegionDrawable);
+
+        EText = new Texture("RoundsImages/E.png");
+        ETextureRegion = new TextureRegion(EText);
+        ERegionDrawable = new TextureRegionDrawable(ETextureRegion);
+        LetterE = new ImageButton(ERegionDrawable);
+    }
+
+    public void SettingTemplateBars()
+    {
         emptyBar = new Texture("Bars/EmptyBar.png");
         emptyBarTextureRegion = new TextureRegion(emptyBar);
         emptyBarRegionDrawable = new TextureRegionDrawable(emptyBarTextureRegion);
@@ -227,7 +262,10 @@ public class HUD
         enemytemplateBar4 = new ImageButton(emptyBarRegionDrawable);
         enemytemplateBar5 = new ImageButton(emptyBarRegionDrawable);
         enemytemplateBar6 = new ImageButton(emptyBarRegionDrawable);
+    }
 
+    public void getNamesButtonStyle()
+    {
         font2 = new BitmapFont();
         skin2 = new Skin();
         buttonAtlas2 = new TextureAtlas("Bars/Bars.pack");
@@ -235,7 +273,11 @@ public class HUD
         textButtonStyle2 = new TextButton.TextButtonStyle();
         textButtonStyle2.font = font2;
         textButtonStyle2.up = skin2.getDrawable("EmptyBar");
+    }
 
+    public void getNames(Unit[] allies, Unit[] enemies)
+    {
+        getNamesButtonStyle();
         name1 = new TextButton(allies[0].getName(), textButtonStyle2);
         name2 = new TextButton(allies[1].getName(), textButtonStyle2);
         name3 = new TextButton(allies[2].getName(), textButtonStyle2);
@@ -243,7 +285,10 @@ public class HUD
         enemyName1 = new TextButton(enemies[0].getName(), textButtonStyle2);
         enemyName2 = new TextButton(enemies[1].getName(), textButtonStyle2);
         enemyName3  = new TextButton(enemies[2].getName(), textButtonStyle2);
+    }
 
+    public void getMaxHealth(Unit[] allies, Unit[] enemies)
+    {
         healthMax = allies[0].getHP();
         manaMax = allies[0].getMANA().EffectiveValue;
 
@@ -261,22 +306,10 @@ public class HUD
 
         enemyHealthMax3 = enemies[2].getHP();
         enemyManaMax3 = enemies[2].getMANA().EffectiveValue;
+    }
 
-        viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
-        stage = new Stage(viewport,sb);
-        Gdx.input.setInputProcessor(stage);
-
-        font = new BitmapFont();
-        skin = new Skin();
-        buttonAtlas = new TextureAtlas("Audio/Audio.pack");
-        skin.addRegions(buttonAtlas);
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("SoundOn");
-        textButtonStyle.checked = skin.getDrawable("SoundOff");
-        button = new TextButton("", textButtonStyle);
-
-
+    public void RedHealthBars()
+    {
         redfont = new BitmapFont();
         redskin = new Skin();
         redatlas = new TextureAtlas("Bars/Bars.pack");
@@ -290,7 +323,10 @@ public class HUD
         enemyRed = new TextButton("", redstyle);
         enemyRed2 = new TextButton("", redstyle);
         enemyRed3 = new TextButton("", redstyle);
+    }
 
+    public void BlueManaBars()
+    {
         bluestyle = new TextButton.TextButtonStyle();
         bluestyle.font = redfont;
         bluestyle.up = redskin.getDrawable("BlueColor");
@@ -300,12 +336,23 @@ public class HUD
         enemyBlue = new TextButton("", bluestyle);
         enemyBlue2 = new TextButton("", bluestyle);
         enemyBlue3 = new TextButton("", bluestyle);
+    }
 
-        healthfont = new BitmapFont();
-        healthskin = new Skin();
-        healthstyle = new TextButton.TextButtonStyle();
-        healthstyle.font = healthfont;
+    public void SoundImages()
+    {
+        font = new BitmapFont();
+        skin = new Skin();
+        buttonAtlas = new TextureAtlas("Audio/Audio.pack");
+        skin.addRegions(buttonAtlas);
+        textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = font;
+        textButtonStyle.up = skin.getDrawable("SoundOn");
+        textButtonStyle.checked = skin.getDrawable("SoundOff");
+        button = new TextButton("", textButtonStyle);
+    }
 
+    public void MusicButtonListener()
+    {
         button.addListener(new InputListener()
         {
             @Override
@@ -325,7 +372,18 @@ public class HUD
                 return true;
             }
         });
+    }
 
+    public void healthButtonStyle()
+    {
+        healthfont = new BitmapFont();
+        healthskin = new Skin();
+        healthstyle = new TextButton.TextButtonStyle();
+        healthstyle.font = healthfont;
+    }
+
+    public void RoundsButtonsListeners()
+    {
         stopRound.addListener(new InputListener()
         {
             @Override
@@ -354,6 +412,23 @@ public class HUD
                 return true;
             }
         });
+    }
+
+    public void updateValues(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
+    {
+        updateHealth(allies,enemies);
+        updateMana(allies, enemies);
+        setManaValuePositions();
+        setEnemiesManaImage();
+        addVisibleUIelementsControlls();
+        viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
+
+        stage.clear();
+        stage.addActor(button);
+        addAlliesToStage();
+        addEnemiesToStage();
+        addVisibleUIelements();
+        addAttackUIelements(current);
 
     }
 
@@ -367,7 +442,7 @@ public class HUD
         enemyHealth3 = enemies[2].getHP();
     }
 
-    public void updateHealthToText()
+    public void updateHealthNumbers()
     {
         healthNumbers1 = new TextButton(health.toString() + "/ "  + healthMax , healthstyle);
         healthNumbers2 = new TextButton(health2.toString() + "/ "  + healthMax2, healthstyle);
@@ -387,9 +462,9 @@ public class HUD
         enemyMana3 = enemies[2].getMANA().EffectiveValue;
     }
 
-    public void updateManaToText()
+    public void updateManaNumbers()
     {
-        updateHealthToText();
+        updateHealthNumbers();
         manaNumbers1 = new TextButton(mana.toString() + " / " + manaMax, healthstyle);
         manaNumbers2 = new TextButton(mana2.toString()+ " / " + manaMax2, healthstyle);
         manaNumbers3 = new TextButton(mana3.toString() + " / " + manaMax3, healthstyle);
@@ -400,7 +475,7 @@ public class HUD
 
     public void setAlliesUiPosition()
     {
-        updateManaToText();
+        updateManaNumbers();
         name1.setPosition(0,600);
         templateBar.setPosition(0,570);
         templateBar2.setPosition(0,540);
@@ -639,70 +714,38 @@ public class HUD
 
     }
 
-    public void update(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
+    public void disposeTextures()
     {
-        updateHealth(allies,enemies);
-        updateMana(allies, enemies);
-        setManaValuePositions();
-        setEnemiesManaImage();
-        addVisibleUIelementsControlls();
-        viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
-
-        stage.clear();
-        stage.addActor(button);
-        addAlliesToStage();
-        addEnemiesToStage();
-        addVisibleUIelements();
-        addAttackUIelements(current);
-
+        xText.dispose();
+        AText.dispose();
+        MText.dispose();
+        EText.dispose();
+        mText.dispose();
+        attackText.dispose();
+        attack1Text.dispose();
+        attack2Text.dispose();
     }
 
+    public void disposeTextButtonsResources()
+    {
+        font.dispose();
+        skin.dispose();
+        buttonAtlas.dispose();
+        font2.dispose();
+        skin2.dispose();
+        buttonAtlas2.dispose();
+        redfont.dispose();
+        redskin.dispose();
+        redatlas.dispose();
+        healthfont.dispose();
+        healthskin.dispose();
+    }
 
     public void dispose()
     {
         music.dispose();
         stage.dispose();
-        if(xText != null)
-            xText.dispose();
-        if(Number1Text != null)
-            Number1Text.dispose();
-        if(Number2Text != null)
-            Number2Text.dispose();
-        if(AText != null)
-            AText.dispose();
-        if(MText != null)
-            MText.dispose();
-        if(EText != null)
-            EText.dispose();
-        if(mText != null)
-            mText.dispose();
-        if(attackText != null)
-            attackText.dispose();
-        if(attack1Text != null)
-            attack1Text.dispose();
-        if(attack2Text != null)
-            attack2Text.dispose();
-        if(font != null)
-            font.dispose();
-        if(skin != null)
-            skin.dispose();
-        if(buttonAtlas != null)
-            buttonAtlas.dispose();
-        if(font2 != null)
-            font2.dispose();
-        if(skin2 != null)
-            skin2.dispose();
-        if(buttonAtlas2 != null)
-            buttonAtlas2.dispose();
-        if(redfont != null)
-            redfont.dispose();
-        if(redskin != null)
-            redskin.dispose();
-        if(redatlas != null)
-            redatlas.dispose();
-        if(healthfont != null)
-            healthfont.dispose();
-        if(healthskin != null)
-            healthskin.dispose();
+        disposeTextures();
+        disposeTextButtonsResources();
     }
 }
