@@ -107,11 +107,6 @@ public class HUD
     Skin skin2;
     TextureAtlas buttonAtlas2;
 
-    TextButton.TextButtonStyle textButtonStyle3;
-    BitmapFont font3;
-    Skin skin3;
-    TextureAtlas buttonAtlas3;
-
     TextButton red, red2,red3, blue, blue2, blue3;
     TextButton enemyRed, enemyRed2, enemyRed3, enemyBlue, enemyBlue2, enemyBlue3;
     TextButton.TextButtonStyle redstyle, bluestyle;
@@ -204,6 +199,18 @@ public class HUD
         attackTextureRegion = new TextureRegion(attackText);
         attackRegionDrawable = new TextureRegionDrawable(attackTextureRegion);
         attack = new ImageButton(attackRegionDrawable);
+
+        Number1Text = new Texture("RoundsImages/1.png");
+        Number1TextureRegion = new TextureRegion(Number1Text);
+        Number1RegionDrawable = new TextureRegionDrawable(Number1TextureRegion);
+        Number1 = new ImageButton(Number1RegionDrawable);
+
+        Number2Text = new Texture("RoundsImages/2.png");
+        Number2TextureRegion = new TextureRegion(Number2Text);
+        Number2RegionDrawable = new TextureRegionDrawable(Number2TextureRegion);
+        Number2 = new ImageButton(Number2RegionDrawable);
+
+
 
         emptyBar = new Texture("Bars/EmptyBar.png");
         emptyBarTextureRegion = new TextureRegion(emptyBar);
@@ -350,58 +357,116 @@ public class HUD
 
     }
 
-    public void update(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
+    public void updateHealth(Unit[] allies, Unit[] enemies)
     {
-
         health = allies[0].getHP();
-        mana = allies[0].getMANA().EffectiveValue;
-
         health2 = allies[1].getHP();
-        mana2 = allies[1].getMANA().EffectiveValue;
-
         health3 = allies[2].getHP();
-        mana3 = allies[2].getMANA().EffectiveValue;
-
         enemyHealth = enemies[0].getHP();
-        enemyMana = enemies[0].getMANA().EffectiveValue;
-
         enemyHealth2 = enemies[1].getHP();
-        enemyMana2 = enemies[1].getMANA().EffectiveValue;
-
         enemyHealth3 = enemies[2].getHP();
-        enemyMana3 = enemies[2].getMANA().EffectiveValue;
+    }
 
-        viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
-
+    public void updateHealthToText()
+    {
         healthNumbers1 = new TextButton(health.toString() + "/ "  + healthMax , healthstyle);
         healthNumbers2 = new TextButton(health2.toString() + "/ "  + healthMax2, healthstyle);
         healthNumbers3 = new TextButton(health3.toString() + "/ "  + healthMax3, healthstyle);
-
         enemyHealthNumbers = new TextButton(enemyHealth.toString() + "/ " + enemyHealthMax, healthstyle);
         enemyHealthNumbers2 = new TextButton(enemyHealth2.toString() + "/ " + enemyHealthMax2, healthstyle);
         enemyHealthNumbers3 = new TextButton(enemyHealth3.toString() + "/ " + enemyHealthMax3, healthstyle);
+    }
 
+    public void updateMana(Unit[] allies, Unit[] enemies)
+    {
+        mana = allies[0].getMANA().EffectiveValue;
+        mana2 = allies[1].getMANA().EffectiveValue;
+        mana3 = allies[2].getMANA().EffectiveValue;
+        enemyMana = enemies[0].getMANA().EffectiveValue;
+        enemyMana2 = enemies[1].getMANA().EffectiveValue;
+        enemyMana3 = enemies[2].getMANA().EffectiveValue;
+    }
+
+    public void updateManaToText()
+    {
+        updateHealthToText();
         manaNumbers1 = new TextButton(mana.toString() + " / " + manaMax, healthstyle);
         manaNumbers2 = new TextButton(mana2.toString()+ " / " + manaMax2, healthstyle);
         manaNumbers3 = new TextButton(mana3.toString() + " / " + manaMax3, healthstyle);
-
         enemyManaNumbers = new TextButton(enemyMana.toString() + " / " + enemyManaMax, healthstyle);
         enemyManaNumbers2 = new TextButton(enemyMana2.toString() + " / " + enemyManaMax2, healthstyle);
         enemyManaNumbers3 = new TextButton(enemyMana3.toString()+ " / " + enemyManaMax3, healthstyle);
+    }
 
-
+    public void setAlliesUiPosition()
+    {
+        updateManaToText();
         name1.setPosition(0,600);
         templateBar.setPosition(0,570);
         templateBar2.setPosition(0,540);
-
         name2.setPosition(0,450);
         templateBar3.setPosition(0,420);
         templateBar4.setPosition(0,390);
-
         name3.setPosition(0,300);
         templateBar5.setPosition(0,270);
         templateBar6.setPosition(0,240);
+    }
 
+    public void setAlliesHealthImage()
+    {
+        setAlliesUiPosition();
+        red.setPosition(10,573);
+        red2.setPosition(10,423);
+        red3.setPosition(10,273);
+
+        red.setTransform(true);
+        red.setScaleX(health.floatValue()/healthMax.floatValue());
+        red2.setTransform(true);
+        red2.setScaleX(health2.floatValue()/healthMax2.floatValue());
+        red3.setTransform(true);
+        red3.setScaleX(health3.floatValue()/healthMax3.floatValue());
+    }
+
+    public void setAlliesManaImage()
+    {
+        setAlliesHealthImage();
+        blue.setPosition(10,543);
+        blue2.setPosition(10,393);
+        blue3.setPosition(10,243);
+
+        blue.setTransform(true);
+        blue.setScaleX(mana.floatValue()/manaMax.floatValue());
+        blue2.setTransform(true);
+        blue2.setScaleX(mana2.floatValue()/manaMax2.floatValue());
+        blue3.setTransform(true);
+        blue3.setScaleX(mana3.floatValue()/manaMax3.floatValue());
+    }
+
+    public void setHealthValuePositions()
+    {
+        setAlliesManaImage();
+        healthNumbers1.setPosition(105,573);
+        healthNumbers2.setPosition(105,423);
+        healthNumbers3.setPosition(105,273);
+        enemyHealthNumbers.setPosition(105 + 1025,573);
+        enemyHealthNumbers2.setPosition(105 + 1025,423);
+        enemyHealthNumbers3.setPosition(105 + 1025,273);
+    }
+
+    public void setManaValuePositions()
+    {
+        setHealthValuePositions();
+        manaNumbers1.setPosition(105,543);
+        manaNumbers2.setPosition(105,393);
+        manaNumbers3.setPosition(105,243);
+
+        enemyManaNumbers.setPosition(105 + 1025,543);
+        enemyManaNumbers2.setPosition(105 + 1025,393);
+        enemyManaNumbers3.setPosition(105 + 1025,243);
+    }
+
+    public void setEnemiesUiPosition()
+    {
         enemyName1.setPosition(1025,600);
         enemytemplateBar.setPosition(1025,570);
         enemytemplateBar2.setPosition(1025,540);
@@ -413,40 +478,26 @@ public class HUD
         enemyName3.setPosition(1025,300);
         enemytemplateBar5.setPosition(1025,270);
         enemytemplateBar6.setPosition(1025,240);
+    }
 
-        red.setPosition(10,573);
-        red2.setPosition(10,423);
-        red3.setPosition(10,273);
-
-        red.setTransform(true);
-        red.setScaleX(health.floatValue()/healthMax.floatValue());
-        red2.setTransform(true);
-        red2.setScaleX(health2.floatValue()/healthMax2.floatValue());
-        red3.setTransform(true);
-        red3.setScaleX(health3.floatValue()/healthMax3.floatValue());
-
+    public void setEnemiesHealthImage()
+    {
+        setEnemiesUiPosition();
         enemyRed.setPosition(1035, 573);
         enemyRed2.setPosition(1035, 423);
         enemyRed3.setPosition(1035, 273);
 
         enemyRed.setTransform(true);
-        enemyRed.setScaleX(enemyHealth.floatValue()/enemyHealthMax.floatValue());
+        enemyRed.setScaleX(enemyHealth.floatValue() / enemyHealthMax.floatValue());
         enemyRed2.setTransform(true);
-        enemyRed2.setScaleX(enemyHealth2.floatValue()/enemyHealthMax2.floatValue());
+        enemyRed2.setScaleX(enemyHealth2.floatValue() / enemyHealthMax2.floatValue());
         enemyRed3.setTransform(true);
-        enemyRed3.setScaleX(enemyHealth3.floatValue()/enemyHealthMax3.floatValue());
+        enemyRed3.setScaleX(enemyHealth3.floatValue() / enemyHealthMax3.floatValue());
+    }
 
-        blue.setPosition(10,543);
-        blue2.setPosition(10,393);
-        blue3.setPosition(10,243);
-
-        blue.setTransform(true);
-        blue.setScaleX(mana.floatValue()/manaMax.floatValue());
-        blue2.setTransform(true);
-        blue2.setScaleX(mana2.floatValue()/manaMax2.floatValue());
-        blue3.setTransform(true);
-        blue3.setScaleX(mana3.floatValue()/manaMax3.floatValue());
-
+    public void setEnemiesManaImage()
+    {
+        setEnemiesHealthImage();
         enemyBlue.setPosition(1035, 543);
         enemyBlue2.setPosition(1035,393);
         enemyBlue3.setPosition(1035,243);
@@ -456,25 +507,11 @@ public class HUD
         enemyBlue2.setTransform(true);
         enemyBlue2.setScaleX(enemyMana2.floatValue()/enemyManaMax2.floatValue());
         enemyBlue3.setTransform(true);
-        enemyBlue3.setScaleX(enemyMana3.floatValue()/enemyManaMax3.floatValue());//
+        enemyBlue3.setScaleX(enemyMana3.floatValue()/enemyManaMax3.floatValue());
+    }
 
-        healthNumbers1.setPosition(105,573);
-        healthNumbers2.setPosition(105,423);
-        healthNumbers3.setPosition(105,273);
-        manaNumbers1.setPosition(105,543);
-        manaNumbers2.setPosition(105,393);
-        manaNumbers3.setPosition(105,243);
-
-        enemyHealthNumbers.setPosition(105 + 1025,573);
-        enemyHealthNumbers2.setPosition(105 + 1025,423);
-        enemyHealthNumbers3.setPosition(105 + 1025,273);
-        enemyManaNumbers.setPosition(105 + 1025,543);
-        enemyManaNumbers2.setPosition(105 + 1025,393);
-        enemyManaNumbers3.setPosition(105 + 1025,243);
-
-
-        stage.clear();
-        stage.addActor(button);
+    public void addAlliesToStage()
+    {
         stage.addActor(templateBar);
         stage.addActor(templateBar2);
         stage.addActor(templateBar3);
@@ -496,7 +533,10 @@ public class HUD
         stage.addActor(name1);
         stage.addActor(name2);
         stage.addActor(name3);
+    }
 
+    public void addEnemiesToStage()
+    {
         stage.addActor(enemytemplateBar);
         stage.addActor(enemytemplateBar2);
         stage.addActor(enemytemplateBar3);
@@ -518,68 +558,21 @@ public class HUD
         stage.addActor(enemyName1);
         stage.addActor(enemyName2);
         stage.addActor(enemyName3);
+    }
 
+    public void addVisibleUIelements()
+    {
         stopRound.setPosition(0, 150);
         stage.addActor(stopRound);
         moveStart.setPosition(40, 150);
         stage.addActor(moveStart);
         attack.setPosition(80, 150);
         stage.addActor(attack);
-        if(MyGdxGame.attackMode) {
+    }
 
-            attack1Text = new Texture("RoundsImages/" + current.getAbilities().get(0).getName() +".png");
-
-            attack1TextureRegion = new TextureRegion(attack1Text);
-            attack1RegionDrawable = new TextureRegionDrawable(attack1TextureRegion);
-            attack1 = new ImageButton(attack1RegionDrawable);
-
-            attack1.setPosition(120, 150);
-            stage.addActor(attack1);
-
-            attack1.addListener(new InputListener()
-            {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
-                    MyGdxGame.attack1 = true;
-                    return true;
-                }
-            });
-
-            Number1Text = new Texture("RoundsImages/1.png");
-            Number1TextureRegion = new TextureRegion(Number1Text);
-            Number1RegionDrawable = new TextureRegionDrawable(Number1TextureRegion);
-            Number1 = new ImageButton(Number1RegionDrawable);
-
-            Number1.setPosition(attack1.getX()+8, attack1.getY()-15);
-            stage.addActor(Number1);
-
-
-            attack2Text = new Texture("RoundsImages/" + current.getAbilities().get(1).getName() + ".png");
-            attack2TextureRegion = new TextureRegion(attack2Text);
-            attack2RegionDrawable = new TextureRegionDrawable(attack2TextureRegion);
-            attack2 = new ImageButton(attack2RegionDrawable);
-            attack2.setPosition(160, 150);
-            stage.addActor(attack2);
-
-            attack2.addListener(new InputListener()
-            {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
-                    MyGdxGame.attack2 = true;
-                    return true;
-                }
-            });
-
-            Number2Text = new Texture("RoundsImages/2.png");
-            Number2TextureRegion = new TextureRegion(Number2Text);
-            Number2RegionDrawable = new TextureRegionDrawable(Number2TextureRegion);
-            Number2 = new ImageButton(Number2RegionDrawable);
-
-            Number2.setPosition(attack2.getX()+8, attack2.getY()-15);
-            stage.addActor(Number2);
-
-        }
-
+    public void addVisibleUIelementsControlls()
+    {
+        addVisibleUIelements();
         LetterM.setPosition(moveStart.getX() + 8, moveStart.getY() - 15);
         stage.addActor(LetterM);
 
@@ -588,6 +581,79 @@ public class HUD
 
         LetterE.setPosition(stopRound.getX() + 8, stopRound.getY() - 15);
         stage.addActor(LetterE);
+    }
+
+    public void attack1GetImage(Unit current)
+    {
+        attack1Text = new Texture("RoundsImages/" + current.getAbilities().get(0).getName() +".png");
+        attack1TextureRegion = new TextureRegion(attack1Text);
+        attack1RegionDrawable = new TextureRegionDrawable(attack1TextureRegion);
+        attack1 = new ImageButton(attack1RegionDrawable);
+    }
+
+    public void attack2GetImage(Unit current)
+    {
+        attack2Text = new Texture("RoundsImages/" + current.getAbilities().get(1).getName() + ".png");
+        attack2TextureRegion = new TextureRegion(attack2Text);
+        attack2RegionDrawable = new TextureRegionDrawable(attack2TextureRegion);
+        attack2 = new ImageButton(attack2RegionDrawable);
+    }
+
+    public void addAttackUIelements(Unit current)
+    {
+        if(MyGdxGame.attackMode) {
+            attack1GetImage(current);
+            attack1.setPosition(120, 150);
+            stage.addActor(attack1);
+            Number1.setPosition(attack1.getX()+8, attack1.getY()-15);
+            stage.addActor(Number1);
+
+            attack2GetImage(current);
+            attack2.setPosition(160, 150);
+            stage.addActor(attack2);
+            Number2.setPosition(attack2.getX()+8, attack2.getY()-15);
+            stage.addActor(Number2);
+            attackListeners();
+        }
+    }
+
+    public void attackListeners()
+    {
+        attack1.addListener(new InputListener()
+        {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+                MyGdxGame.attack1 = true;
+                return true;
+            }
+        });
+
+        attack2.addListener(new InputListener()
+        {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonx) {
+                MyGdxGame.attack2 = true;
+                return true;
+            }
+        });
+
+    }
+
+    public void update(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
+    {
+        updateHealth(allies,enemies);
+        updateMana(allies, enemies);
+        setManaValuePositions();
+        setEnemiesManaImage();
+        addVisibleUIelementsControlls();
+        viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
+
+        stage.clear();
+        stage.addActor(button);
+        addAlliesToStage();
+        addEnemiesToStage();
+        addVisibleUIelements();
+        addAttackUIelements(current);
 
     }
 
@@ -628,10 +694,6 @@ public class HUD
             skin2.dispose();
         if(buttonAtlas2 != null)
             buttonAtlas2.dispose();
-        if(font3 != null)
-            font3.dispose();
-        if(skin3 != null)
-            skin3.dispose();
         if(redfont != null)
             redfont.dispose();
         if(redskin != null)
