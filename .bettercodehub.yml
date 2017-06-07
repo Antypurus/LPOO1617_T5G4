@@ -1,6 +1,8 @@
 exclude:
 - /android/.*
 - /desktop/src/com/mygdx/game/desktop/DesktopLauncher.java
+- /face/.*
+- /facebook/src/.*
 - /html/src/com/mygdx/game/client/HtmlLauncher.java
 - /ios/src/com/mygdx/game/IOSLauncher.java
 component_depth: 10
