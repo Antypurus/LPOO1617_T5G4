@@ -38,38 +38,21 @@ public class DifficultyState extends State
 
     }
 
-    protected void handleEscapeKey()
+    protected void handleDifficultyMouseInput()
     {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            this.dispose();
-            gsm.set(new MenuState(gsm));
-        }
-    }
-
-    protected void handleMouseInput()
-    {
-        if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (easyBtnCenterX))
-                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (easyBtnCenterX))
-                && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((easyBtnYCoord))
-                && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((easyBtnYCoord) + (easyBtn.getHeight())))
+        if (handleBtn(easyBtnCenterX, easyBtnYCoord, easyBtn.getHeight()))
         {
             this.dispose();
             gsm.set(new PlayState(gsm, EASY));
         }
 
-        else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (hardBtnCenterX))
-                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (hardBtnCenterX))
-                && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((hardBtnYCoord))
-                && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((hardBtnYCoord) + (hardBtn.getHeight())))
+        else if (handleBtn(hardBtnCenterX, hardBtnYCoord, hardBtn.getHeight()))
         {
             this.dispose();
             gsm.set(new PlayState(gsm ,HARD));
         }
 
-        else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
-                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
+        else if (handleBtn(quitBtnCenterX, quitYCoord, quitBtn.getHeight()))
         {
             this.dispose();
             gsm.set(new MenuState(gsm));
@@ -80,8 +63,12 @@ public class DifficultyState extends State
     protected void handleInput() {
 
         if(Gdx.input.justTouched())
-            handleMouseInput();
-        handleEscapeKey();
+            handleDifficultyMouseInput();
+        if(handleEscapeKey())
+        {
+            this.dispose();
+            gsm.set(new MenuState(gsm));
+        }
     }
 
     @Override

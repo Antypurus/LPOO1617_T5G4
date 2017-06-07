@@ -65,28 +65,15 @@ public class EndState extends State {
 
     }
 
-    protected void handleEscapeKey()
-    {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            this.dispose();
-            gsm.set(new MenuState(gsm));
-        }
-    }
 
     protected void handleMouseInput()
     {
-        if (Gdx.input.getX() >= (facebookXCoord)
-                && Gdx.input.getX() <= (facebookXCoord + (facebookBtn.getWidth()))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((facebookYCoord))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((facebookYCoord) + (facebookBtn.getHeight())))
+        if (handleFacebookBtn(facebookXCoord, facebookYCoord, facebookBtn.getWidth(), facebookBtn.getHeight()))
         {
             facebookHandler = new FacebookHandler();
         }
 
-        else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
-                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
+        else if (handleBtn(quitBtnCenterX, quitYCoord, quitBtn.getHeight()))
         {
             this.dispose();
             gsm.set(new MenuState(gsm));
@@ -98,7 +85,11 @@ public class EndState extends State {
     {
         if(Gdx.input.justTouched())
             handleMouseInput();
-        handleEscapeKey();
+        if(handleEscapeKey())
+        {
+            this.dispose();
+            gsm.set(new MenuState(gsm));
+        }
     }
 
     @Override

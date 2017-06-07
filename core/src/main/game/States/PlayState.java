@@ -308,20 +308,6 @@ public class PlayState extends State
         }
     }
 
-    protected void handleEscapeKey()
-    {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
-        {
-            this.dispose();
-            MyGdxGame.changedTurn = false;
-            MyGdxGame.attackMode = false;
-            MyGdxGame.moveMode = false;
-            MyGdxGame.attack = false;
-            MyGdxGame.attack1 = false;
-            MyGdxGame.attack2 = false;
-            gsm.set(new MenuState(gsm));
-        }
-    }
 
     protected void handleEnterKey()
     {
@@ -387,6 +373,17 @@ public class PlayState extends State
         handleGameLogicKeysInput();
         handleEscapeKey();
         handleEnterKey();
+        if(handleEscapeKey())
+        {
+            this.dispose();
+            MyGdxGame.changedTurn = false;
+            MyGdxGame.attackMode = false;
+            MyGdxGame.moveMode = false;
+            MyGdxGame.attack = false;
+            MyGdxGame.attack1 = false;
+            MyGdxGame.attack2 = false;
+            gsm.set(new MenuState(gsm));
+        }
 
         this.cam.position.set(currentChar.getX()*Scale+Scale/2,currentChar.getY()*Scale+Scale/2,0);
         cam.update();

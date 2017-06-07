@@ -103,5 +103,9 @@
     <orderEntry type="library" exported="" name="xalan-2.7.2" level="project" />
     <orderEntry type="library" exported="" name="xercesImpl-2.11.0" level="project" />
     <orderEntry type="library" exported="" name="xml-apis-1.4.01" level="project" />
+    <orderEntry type="library" exported="" name="desktop.desktop-1.0" level="project" />
+    <orderEntry type="library" exported="" name="desktop.desktop-1.0" level="project" />
+    <orderEntry type="library" exported="" name="desktop.desktop-1.0" level="project" />
+    <orderEntry type="library" exported="" name="desktop.desktop-1.0" level="project" />
   </component>
 </module>

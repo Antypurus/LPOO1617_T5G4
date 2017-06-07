@@ -54,45 +54,27 @@ public class MenuState extends State
         this.titleCenterX = MyGdxGame.centerXCoord - gameTitle.getWidth()/2;
     }
 
-    protected void handleEscapeKey()
-    {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            Gdx.app.exit();
-        }
-    }
 
-    protected void handleMouseInput()
+    protected void handleMenuMouseInput()
     {
-        if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (playBtnCenterX))
-                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (playBtnCenterX))
-                && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((playBtnYCoord))
-                && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((playBtnYCoord) + (playBtn.getHeight())))
+        if (handleBtn(playBtnCenterX, playBtnYCoord, playBtn.getHeight()))
         {
             this.dispose();
             gsm.set(new DifficultyState(gsm));
         }
-        else if(Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (instructionsBtnCenterX))
-                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (instructionsBtnCenterX))
-                && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((InstructionsYCoord))
-                && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((InstructionsYCoord) + (instructionsBtn.getHeight())))
+        else if(handleBtn(instructionsBtnCenterX, InstructionsYCoord, instructionsBtn.getHeight()))
         {
             this.dispose();
             gsm.set(new InstructionsState(gsm));
         }
 
-        else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
-                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
+        else if (handleBtn(quitBtnCenterX, quitYCoord, quitBtn.getHeight()))
         {
             this.dispose();
             Gdx.app.exit();
         }
 
-        else if (Gdx.input.getX() >= (facebookXCoord)
-                && Gdx.input.getX() <= (facebookXCoord + (facebookBtn.getWidth()))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((facebookYCoord))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((facebookYCoord) + (facebookBtn.getHeight())))
+        else if (handleFacebookBtn(facebookXCoord, facebookYCoord, facebookBtn.getWidth(), facebookBtn.getHeight()))
         {
             facebookHandler = new FacebookHandler();
         }
@@ -102,8 +84,9 @@ public class MenuState extends State
     protected void handleInput()
     {
         if(Gdx.input.justTouched())
-            handleMouseInput();
-        handleEscapeKey();
+            handleMenuMouseInput();
+        if(handleEscapeKey())
+            Gdx.app.exit();
     }
 
     @Override
