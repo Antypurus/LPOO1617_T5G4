@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import main.game.MyGdxGame;
 
 
-public class DifficultyStage extends State
+public class DifficultyState extends State
 {
     private final int easyBtnYCoord = 420;
     private final int hardBtnYCoord = 280;
@@ -25,7 +25,7 @@ public class DifficultyStage extends State
 
     private static final int EASY = 0, HARD = 1;
 
-    public DifficultyStage(GameStateManager gsm) {
+    public DifficultyState(GameStateManager gsm) {
         super(gsm);
 
         easyBtn = new Texture("MenusImages/EasyImage.png");
@@ -38,43 +38,50 @@ public class DifficultyStage extends State
 
     }
 
-    @Override
-    protected void handleInput() {
-
-        if(Gdx.input.justTouched())
-        {
-            if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (easyBtnCenterX))
-                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (easyBtnCenterX))
-                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((easyBtnYCoord))
-                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((easyBtnYCoord) + (easyBtn.getHeight())))
-            {
-                this.dispose();
-                gsm.set(new PlayState(gsm, EASY));
-            }
-
-            else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (hardBtnCenterX))
-                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (hardBtnCenterX))
-                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((hardBtnYCoord))
-                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((hardBtnYCoord) + (hardBtn.getHeight())))
-            {
-                this.dispose();
-                gsm.set(new PlayState(gsm ,HARD));
-            }
-
-            else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
-                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
-                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
-                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
-            {
-                this.dispose();
-                gsm.set(new MenuState(gsm));
-            }
-        }
-
+    protected void handleEscapeKey()
+    {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             this.dispose();
             gsm.set(new MenuState(gsm));
         }
+    }
+
+    protected void handleMouseInput()
+    {
+        if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (easyBtnCenterX))
+                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (easyBtnCenterX))
+                && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((easyBtnYCoord))
+                && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((easyBtnYCoord) + (easyBtn.getHeight())))
+        {
+            this.dispose();
+            gsm.set(new PlayState(gsm, EASY));
+        }
+
+        else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (hardBtnCenterX))
+                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (hardBtnCenterX))
+                && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((hardBtnYCoord))
+                && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((hardBtnYCoord) + (hardBtn.getHeight())))
+        {
+            this.dispose();
+            gsm.set(new PlayState(gsm ,HARD));
+        }
+
+        else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
+                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
+        {
+            this.dispose();
+            gsm.set(new MenuState(gsm));
+        }
+    }
+
+    @Override
+    protected void handleInput() {
+
+        if(Gdx.input.justTouched())
+            handleMouseInput();
+        handleEscapeKey();
     }
 
     @Override

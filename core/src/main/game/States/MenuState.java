@@ -5,9 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -16,6 +13,7 @@ import com.restfb.types.FacebookType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import game.Facebook.FacebookHandler;
 import main.game.MyGdxGame;
 
 public class MenuState extends State
@@ -38,10 +36,7 @@ public class MenuState extends State
     private Texture facebookBtn;
     private Texture gameTitle;
 
-    private long startTime;
-    private long elapsedTime;
-
-    private boolean facebook = true;
+    private FacebookHandler facebookHandler;
 
 
     public MenuState(GameStateManager gsm) {
@@ -59,88 +54,56 @@ public class MenuState extends State
         this.titleCenterX = MyGdxGame.centerXCoord - gameTitle.getWidth()/2;
     }
 
+    protected void handleEscapeKey()
+    {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            Gdx.app.exit();
+        }
+    }
+
+    protected void handleMouseInput()
+    {
+        if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (playBtnCenterX))
+                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (playBtnCenterX))
+                && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((playBtnYCoord))
+                && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((playBtnYCoord) + (playBtn.getHeight())))
+        {
+            this.dispose();
+            gsm.set(new DifficultyState(gsm));
+        }
+        else if(Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (instructionsBtnCenterX))
+                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (instructionsBtnCenterX))
+                && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((InstructionsYCoord))
+                && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((InstructionsYCoord) + (instructionsBtn.getHeight())))
+        {
+            this.dispose();
+            gsm.set(new InstructionsState(gsm));
+        }
+
+        else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
+                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
+        {
+            this.dispose();
+            Gdx.app.exit();
+        }
+
+        else if (Gdx.input.getX() >= (facebookXCoord)
+                && Gdx.input.getX() <= (facebookXCoord + (facebookBtn.getWidth()))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((facebookYCoord))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((facebookYCoord) + (facebookBtn.getHeight())))
+        {
+            facebookHandler = new FacebookHandler();
+        }
+    }
+
     @Override
     protected void handleInput()
     {
         if(Gdx.input.justTouched())
-        {
-            if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (playBtnCenterX))
-                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (playBtnCenterX))
-                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((playBtnYCoord))
-                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((playBtnYCoord) + (playBtn.getHeight())))
-            {
-                this.dispose();
-                gsm.set(new DifficultyStage(gsm));
-            }
-            else if(Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (instructionsBtnCenterX))
-                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (instructionsBtnCenterX))
-                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) >= ((InstructionsYCoord))
-                    && (MyGdxGame.HEIGHT - Gdx.input.getY()) <= ((InstructionsYCoord) + (instructionsBtn.getHeight())))
-            {
-                this.dispose();
-                gsm.set(new InstructionsState(gsm));
-            }
-
-            else if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
-                    && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
-                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
-                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
-            {
-                this.dispose();
-                Gdx.app.exit();
-            }
-
-            else if (Gdx.input.getX() >= (facebookXCoord)
-                    && Gdx.input.getX() <= (facebookXCoord + (facebookBtn.getWidth()))
-                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((facebookYCoord))
-                    && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((facebookYCoord) + (facebookBtn.getHeight())))
-            {
-
-                //TODO: mudar este link para um site onde seja possivel fazer download do jogo
-                String domain = "https://github.com/";
-                String appId = "433157270402383";
-
-                String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id="+appId + "&redirect_uri="+domain+"&scope=user_about_me,"
-                        + "publish_actions";
-
-                System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-
-
-                WebDriver driver = new ChromeDriver();
-                driver.get(authUrl);
-                startTime = System.currentTimeMillis();
-                String accessToken;
-                while(facebook)
-                {
-                    elapsedTime = (System.currentTimeMillis() - startTime) / 1000;
-
-                    if(!driver.getCurrentUrl().contains("facebook.com")) {
-                        String url = driver.getCurrentUrl();
-                        accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
-
-                        driver.close();
-
-                        FacebookClient fbClient = new DefaultFacebookClient(accessToken);
-
-                        FacebookType response = fbClient.publish("me/feed",
-                                FacebookType.class, Parameter.with("message",
-                                        "Currently playing LPOO game"),
-                                Parameter.with("link", "https://github.com/"));
-
-                        facebook = false;
-
-                    }
-                    else if(elapsedTime >= 60) {
-                        driver.close();
-                        facebook = false;
-                    }
-                }
-            }
-        }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            Gdx.app.exit();
-        }
+            handleMouseInput();
+        handleEscapeKey();
     }
 
     @Override

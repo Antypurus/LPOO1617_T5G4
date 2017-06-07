@@ -50,25 +50,33 @@ public class InstructionsState extends State
         this.quitBtnCenterX = quitBtn.getWidth() / 2;
     }
 
-    @Override
-    protected void handleInput()
+    protected void handleEscapeKey()
     {
-        if(Gdx.input.justTouched())
-        {
-            if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
-                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
-                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
-            {
-                this.dispose();
-                gsm.set(new MenuState(gsm));
-            }
-        }
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             this.dispose();
             gsm.set(new MenuState(gsm));
         }
+    }
+
+    protected void handleMouseInput()
+    {
+        if (Gdx.input.getX() >= ((MyGdxGame.centerXCoord) - (quitBtnCenterX))
+                && Gdx.input.getX() <= ((MyGdxGame.centerXCoord) + (quitBtnCenterX))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) >= ((quitYCoord))
+                && (MyGdxGame.HEIGHT  - Gdx.input.getY()) <= ((quitYCoord) + (quitBtn.getHeight())))
+        {
+            this.dispose();
+            gsm.set(new MenuState(gsm));
+        }
+    }
+
+
+    @Override
+    protected void handleInput()
+    {
+        if(Gdx.input.justTouched())
+            handleMouseInput();
+        handleEscapeKey();
     }
 
     @Override
