@@ -73,12 +73,12 @@ public class DifficultyState extends State
 
     @Override
     public void update(float dt) {
+        clearScreen();
         handleInput();
     }
 
     @Override
     public void render(SpriteBatch sb) {
-        clearScreen();
         sb.begin();
         sb.draw(easyBtn,
                 (MyGdxGame.centerXCoord) - (easyBtnCenterX), easyBtnYCoord);

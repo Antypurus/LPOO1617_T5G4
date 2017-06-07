@@ -93,13 +93,12 @@ public class MenuState extends State
     public void update(float dt)
     {
         handleInput();
+        clearScreen();
     }
 
     @Override
     public void render(SpriteBatch sb)
     {
-        clearScreen();
-
         sb.begin();
         sb.draw(gameTitle,
                 titleCenterX, titleYCoord);

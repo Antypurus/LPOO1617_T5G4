@@ -77,13 +77,12 @@ public class InstructionsState extends State
     public void update(float dt)
     {
         handleInput();
+        clearScreen();
     }
 
     @Override
     public void render(SpriteBatch sb)
     {
-        clearScreen();
-
         sb.begin();
         sb.draw(InstructionsImage, instructionsXPos, titleYPos);
         for(int i = 0; i < Images.size(); i++)
