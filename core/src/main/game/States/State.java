@@ -2,6 +2,7 @@ package game.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
@@ -49,6 +50,12 @@ public abstract class State {
             return true;
         else
             return false;
+    }
+
+    public void clearScreen()
+    {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
 }

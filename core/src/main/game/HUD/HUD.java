@@ -420,7 +420,6 @@ public class HUD
         updateMana(allies, enemies);
         setManaValuePositions();
         setEnemiesManaImage();
-        addVisibleUIelementsControlls();
         viewport = new FitViewport(MyGdxGame.WIDTH, MyGdxGame.HEIGHT, new OrthographicCamera());
 
         stage.clear();
@@ -428,6 +427,7 @@ public class HUD
         addAlliesToStage();
         addEnemiesToStage();
         addVisibleUIelements();
+        addVisibleUIelementsControlls();
         addAttackUIelements(current);
 
     }

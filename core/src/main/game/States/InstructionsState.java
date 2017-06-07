@@ -66,7 +66,7 @@ public class InstructionsState extends State
     {
         if(Gdx.input.justTouched())
             handleInstructionsMouseInput();
-        if(handleEscapeKey())
+        else if(handleEscapeKey())
         {
             this.dispose();
             gsm.set(new MenuState(gsm));
@@ -82,8 +82,7 @@ public class InstructionsState extends State
     @Override
     public void render(SpriteBatch sb)
     {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        clearScreen();
 
         sb.begin();
         sb.draw(InstructionsImage, instructionsXPos, titleYPos);

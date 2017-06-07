@@ -83,13 +83,13 @@ public class EndState extends State {
     @Override
     protected void handleInput()
     {
-        if(Gdx.input.justTouched())
-            handleMouseInput();
         if(handleEscapeKey())
         {
-            this.dispose();
-            gsm.set(new MenuState(gsm));
+        this.dispose();
+        gsm.set(new MenuState(gsm));
         }
+        else if(Gdx.input.justTouched())
+            handleMouseInput();
     }
 
     @Override
@@ -99,8 +99,8 @@ public class EndState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        clearScreen();
 
         sb.begin();
 
