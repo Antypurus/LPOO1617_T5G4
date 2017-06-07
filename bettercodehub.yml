@@ -1,9 +1,10 @@
 exclude:
 - /android/.*
 - /desktop/src/com/mygdx/game/desktop/DesktopLauncher.java
-- /html/.*
+- /face/.*
+- /facebook/src/.*
+- /html/src/com/mygdx/game/client/HtmlLauncher.java
 - /ios/src/com/mygdx/game/IOSLauncher.java
-component_depth: 1
+component_depth: 10
 languages:
 - java
-- Javascript
