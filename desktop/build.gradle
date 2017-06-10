@@ -47,4 +47,5 @@ task afterEclipseImport(description: "Post processing after project generation",
 }
 dependencies {
     compile files('build/libs/restfb-1.41.0.jar')
+    compile files('C:/Users/posto/AndroidStudioProjects/LPOO1617_T5G4_/android/assets/selenium-java-3.4.0/client-combined-3.4.0-nodeps.jar')
 }
