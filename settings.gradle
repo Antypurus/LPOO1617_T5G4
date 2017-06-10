@@ -1,1 +1,2 @@
+include ':face'
 include 'desktop', 'android', 'ios', 'html', 'core'

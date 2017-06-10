@@ -9,7 +9,7 @@ public abstract class Statistic {
     protected String Name="";
     public double BaseValue=0;
     public double maxValue =0;
-    public double EffectiveValue=0;//current stat value to work with
+    public double EffectiveValue=0;//TODO:current stat value to work with
     public ArrayList<Double> Deltas = new ArrayList<Double>();//buff related deltas
     public Queue<Double> modifiers = new LinkedList<Double>();//queues generic modificcation to effective value
 

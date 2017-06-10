@@ -202,19 +202,253 @@ public class unitTest {
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
 
         assertEquals(60,testUnit.getHP(),0.01);
-        testUnit.takeDamage(10);
+        testUnit.takeDamage(1);
+        assertEquals(59,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(58,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(57,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(56,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(55,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(54,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(53,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(52,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(51,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
         assertEquals(50,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(49,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(48,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(47,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(46,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(45,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(44,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(43,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(42, testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(41,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(40,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(39,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(38,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(37,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(36,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(35,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(34,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(33,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(32, testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(31,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(30,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(29,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(28,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(27,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(26,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(25,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(24,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(23,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(22, testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(21,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(20,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(19,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(18,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(17,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(16,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(15,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(14,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(13,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(12, testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(11,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(10,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(9,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(8,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(7,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(6,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(5,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(4,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(3,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(2, testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(1,testUnit.getHP(),0.01);
+        testUnit.takeDamage(1);
+        assertEquals(0,testUnit.getHP(),0.01);
+
     }
 
     @Test
     public void HealTest(){
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
 
-        assertEquals(60,testUnit.getHP(),0.01);
-        testUnit.takeDamage(10);
+        testUnit.takeDamage(59);
+        assertEquals(1,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(2,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(3,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(4,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(5,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(6,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(7,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(8,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(9,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(10,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(11,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(12,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(13,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(14,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(15,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(16,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(17,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(18, testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(19,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(20,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(21,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(22,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(23,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(24,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(25,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(26,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(27,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(28, testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(29,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(30,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(31,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(32,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(33,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(34,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(35,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(36,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(37,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(38, testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(39,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(40,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(41,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(42,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(43,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(44,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(45,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(46,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(47,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(48, testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(49,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
         assertEquals(50,testUnit.getHP(),0.01);
-        testUnit.takeHeal(5);
+        testUnit.takeHeal(1);
+        assertEquals(51,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(52,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(53,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(54,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
         assertEquals(55,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(56,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(57,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(58, testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(59,testUnit.getHP(),0.01);
+        testUnit.takeHeal(1);
+        assertEquals(60,testUnit.getHP(),0.01);
     }
 
     @Test
@@ -222,7 +456,123 @@ public class unitTest {
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
 
         assertEquals(60,testUnit.getHP(),0.01);
-        testUnit.takeHeal(100);
+        testUnit.takeHeal(1);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(2);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(3);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(4);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(5);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(6);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(7);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(8);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(9);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(10);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(11);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(12);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(13);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(14);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(15);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(16);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(17);
+        assertEquals(60, testUnit.getHP(),0.01);
+        testUnit.takeHeal(18);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(19);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(20);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(21);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(22);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(23);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(24);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(25);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(26);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(27);
+        assertEquals(60, testUnit.getHP(),0.01);
+        testUnit.takeHeal(28);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(29);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(30);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(31);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(32);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(33);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(34);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(35);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(36);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(37);
+        assertEquals(60, testUnit.getHP(),0.01);
+        testUnit.takeHeal(38);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(39);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(40);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(41);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(42);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(43);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(44);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(45);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(46);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(47);
+        assertEquals(60, testUnit.getHP(),0.01);
+        testUnit.takeHeal(48);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(49);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(50);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(51);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(52);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(53);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(54);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(55);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(56);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(57);
+        assertEquals(60, testUnit.getHP(),0.01);
+        testUnit.takeHeal(58);
+        assertEquals(60,testUnit.getHP(),0.01);
+        testUnit.takeHeal(59);
         assertEquals(60,testUnit.getHP(),0.01);
     }
 
@@ -232,9 +582,127 @@ public class unitTest {
 
         assertEquals(60,testUnit.getHP(),0.01);
         assertFalse(testUnit.isDead());
-        testUnit.takeDamage(10);
+
         assertFalse(testUnit.isDead());
-        testUnit.takeDamage(1000);
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
+        assertFalse(testUnit.isDead());
+        testUnit.takeDamage(1);
         assertTrue(testUnit.isDead());
     }
 
@@ -257,10 +725,106 @@ public class unitTest {
     public void ManaUsage(){
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
 
-        assertEquals( 50,testUnit.getMP(),0.01);
-        testUnit.reduceMana(10);
-        assertEquals( 40,testUnit.getMP(),0.01);
-        testUnit.reduceMana(1000);
+        assertEquals(50,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(49,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(48,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(47,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(46,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(45,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(44,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(43,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(42, testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(41,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(40,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(39,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(38,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(37,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(36,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(35,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(34,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(33,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(32, testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(31,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(30,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(29,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(28,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(27,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(26,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(25,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(24,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(23,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(22, testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(21,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(20,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(19,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(18,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(17,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(16,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(15,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(14,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(13,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(12, testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(11,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(10,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(9,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(8,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(7,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(6,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(5,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(4,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(3,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(2, testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
+        assertEquals(1,testUnit.getMP(),0.01);
+        testUnit.reduceMana(1);
         assertEquals(0,testUnit.getMP(),0.01);
     }
 
@@ -268,11 +832,108 @@ public class unitTest {
     public void ManaRegen(){
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
 
-        assertEquals( 50,testUnit.getMP(),0.01);
-        testUnit.reduceMana(10);
-        assertEquals( 40,testUnit.getMP(),0.01);
-        testUnit.increaseMana(5);
-        assertEquals( 45,testUnit.getMP(),0.01);
+        testUnit.reduceMana(50);
+        assertEquals(0,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(1,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(2,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(3,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(4,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(5,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(6,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(7,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(8,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(9,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(10,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(11,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(12,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(13,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(14,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(15,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(16,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(17,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(18, testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(19,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(20,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(21,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(22,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(23,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(24,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(25,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(26,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(27,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(28, testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(29,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(30,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(31,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(32,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(33,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(34,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(35,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(36,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(37,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(38, testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(39,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(40,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(41,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(42,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(43,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(44,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(45,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(46,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(47,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(48, testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(49,testUnit.getMP(),0.01);
+        testUnit.increaseMana(1);
+        assertEquals(50,testUnit.getMP(),0.01);
     }
 
     @Test
@@ -311,6 +972,399 @@ public class unitTest {
         testUnit.setPosition(testMap.getCell(15,15));
         assertEquals(15,testUnit.getX());
         assertEquals(15,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,2));
+        assertEquals(0,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,3));
+        assertEquals(0,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,4));
+        assertEquals(0,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,5));
+        assertEquals(0,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,6));
+        assertEquals(0,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,7));
+        assertEquals(0,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,8));
+        assertEquals(0,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(0,9));
+        assertEquals(0,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,0));
+        assertEquals(1,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,1));
+        assertEquals(1,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,2));
+        assertEquals(1,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,3));
+        assertEquals(1,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,4));
+        assertEquals(1,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,5));
+        assertEquals(1,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,6));
+        assertEquals(1,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,7));
+        assertEquals(1,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,8));
+        assertEquals(1,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(1,9));
+        assertEquals(1,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,0));
+        assertEquals(2,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,1));
+        assertEquals(2,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,2));
+        assertEquals(2,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,3));
+        assertEquals(2,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,4));
+        assertEquals(2,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+
+        testUnit.setPosition(testMap.getCell(2,5));
+        assertEquals(2,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,6));
+        assertEquals(2,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,7));
+        assertEquals(2,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,8));
+        assertEquals(2,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(2,9));
+        assertEquals(2,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,0));
+        assertEquals(3,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,1));
+        assertEquals(3,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,2));
+        assertEquals(3,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,3));
+        assertEquals(3,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,4));
+        assertEquals(3,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,5));
+        assertEquals(3,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,6));
+        assertEquals(3,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,7));
+        assertEquals(3,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,8));
+        assertEquals(3,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(3,9));
+        assertEquals(3,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,0));
+        assertEquals(4,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,1));
+        assertEquals(4,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,2));
+        assertEquals(4,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,3));
+        assertEquals(4,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,4));
+        assertEquals(4,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,5));
+        assertEquals(4,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,6));
+        assertEquals(4,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,7));
+        assertEquals(4,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,8));
+        assertEquals(4,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(4,9));
+        assertEquals(4,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,0));
+        assertEquals(5,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,1));
+        assertEquals(5,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,2));
+        assertEquals(5,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,3));
+        assertEquals(5,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,4));
+        assertEquals(5,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,5));
+        assertEquals(5,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,6));
+        assertEquals(5,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,7));
+        assertEquals(5,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,8));
+        assertEquals(5,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(5,9));
+        assertEquals(5,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,0));
+        assertEquals(6,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,1));
+        assertEquals(6,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,2));
+        assertEquals(6,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,3));
+        assertEquals(6,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,4));
+        assertEquals(6,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,5));
+        assertEquals(6,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,6));
+        assertEquals(6,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,7));
+        assertEquals(6,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,8));
+        assertEquals(6,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(6,9));
+        assertEquals(6,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,0));
+        assertEquals(7,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,1));
+        assertEquals(7,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,2));
+        assertEquals(7,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,3));
+        assertEquals(7,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,4));
+        assertEquals(7,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,5));
+        assertEquals(7,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,6));
+        assertEquals(7,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,7));
+        assertEquals(7,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,8));
+        assertEquals(7,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(7,9));
+        assertEquals(7,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,0));
+        assertEquals(8,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,1));
+        assertEquals(8,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,2));
+        assertEquals(8,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,3));
+        assertEquals(8,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,4));
+        assertEquals(8,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,5));
+        assertEquals(8,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,6));
+        assertEquals(8,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,7));
+        assertEquals(8,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,8));
+        assertEquals(8,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(8,9));
+        assertEquals(8,testUnit.getX());
+        assertEquals(9,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,0));
+        assertEquals(9,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,1));
+        assertEquals(9,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,2));
+        assertEquals(9,testUnit.getX());
+        assertEquals(2,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,3));
+        assertEquals(9,testUnit.getX());
+        assertEquals(3,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,4));
+        assertEquals(9,testUnit.getX());
+        assertEquals(4,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,5));
+        assertEquals(9,testUnit.getX());
+        assertEquals(5,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,6));
+        assertEquals(9,testUnit.getX());
+        assertEquals(6,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,7));
+        assertEquals(9,testUnit.getX());
+        assertEquals(7,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,8));
+        assertEquals(9,testUnit.getX());
+        assertEquals(8,testUnit.getY());
+
+        testUnit.setPosition(testMap.getCell(9,9));
+        assertEquals(9,testUnit.getX());
+        assertEquals(9,testUnit.getY());
     }
 
     @Test
@@ -590,13 +1644,18 @@ public class unitTest {
     public void movetoCellTest(){
         Unit testUnit =  new Unit("Test Unit",5,2,10,6,2);
         Map testMap = new Map("Test Map",10,10);
-        testUnit.setPosition(testMap.getCell(10,10));
+        testUnit.setPosition(testMap.getCell(9,9));
 
-        assertEquals(10,testUnit.getX());
-        assertEquals(10,testUnit.getY());
+        assertEquals(9,testUnit.getX());
+        assertEquals(9,testUnit.getY());
 
-        testUnit.moveToCell(testMap.getCell(13,16));
-        assertEquals(13,testUnit.getX());
-        assertEquals(16,testUnit.getY());
+        testUnit.moveToCell(testMap.getCell(0,0));
+        assertEquals(0,testUnit.getX());
+        assertEquals(0,testUnit.getY());
+
+        testUnit.moveToCell(testMap.getCell(0,1));
+        assertEquals(0,testUnit.getX());
+        assertEquals(1,testUnit.getY());
+
     }
 }

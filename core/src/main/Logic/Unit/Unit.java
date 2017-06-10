@@ -37,7 +37,7 @@ public class Unit implements Comparable<Unit> {
     private ArrayList<Statistic> Stats = new ArrayList<Statistic>();
     private ArrayList<main.Logic.Abilities.Ability> Abilities = new ArrayList<main.Logic.Abilities.Ability>();
 
-    //primary resources
+    //TODO:primary resources
     private main.Logic.Unit.Stats.HP Health;// health points
     private main.Logic.Unit.Stats.MP Mana;// Mana points
 

@@ -11,13 +11,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
-import Logic.AI.DPSAI.DPSAI;
 import Logic.AI.HealerAI.HealerAI;
-import Logic.AI.TankAI.TankAI;
 import Logic.Abilities.Spells.WaterWip;
 import Logic.Difficulty;
 import Logic.GameController;
-import game.Buttons.HUD;
+import game.HUD.HUD;
 import game.GraphicsComponent.Character;
 import main.Logic.Abilities.Ability;
 import main.Logic.Abilities.Basics.Punch;
@@ -27,11 +25,12 @@ import main.Logic.Abilities.Spells.Fireball;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Unit;
-import main.game.InputHandler.GameHandler;
 import main.game.MyGdxGame;
 
 public class PlayState extends State
 {
+
+    private long startTime;
     private boolean hasAttacked = false;
     Ability currAbl = null;
 
@@ -81,6 +80,9 @@ public class PlayState extends State
     public PlayState(GameStateManager gsm, int Difficulty)
     {
         super(gsm);
+
+        startTime = System.currentTimeMillis();
+
         this.Scale = Gdx.graphics.getWidth()/this.map.width;
         batch = new SpriteBatch();
         background = new Texture("background.jpg");
@@ -103,7 +105,7 @@ public class PlayState extends State
         this.character = new Character("Diogo",1);
         this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
         this.character.getUnit().setPosition(this.map.getCell(10,10));
-        this.character.getUnit().addAbility(new WaterWip(this.character.getUnit()));
+        this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
         this.character.getUnit().addAbility(new Punch(this.character.getUnit()));
         allies[0] = this.character.getUnit();
         character.update();
@@ -113,16 +115,16 @@ public class PlayState extends State
         char2.setUnit(new Unit("Manuel - Healer",10,1,4,8,2));
         allies[1] = this.char2.getUnit();
 
-        this.char3 = new Character("Tiago",0);
-        char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
-        allies[2] = this.char3.getUnit();
-
-
         this.char2.getUnit().setPosition(this.map.getCell(5,5));
         this.char2.getUnit().addAbility(new Mend(this.char2.getUnit()));
         this.char2.getUnit().addAbility(new Punch(this.char2.getUnit()));
         char2.update();
         charArray.add(this.char2);
+
+
+        this.char3 = new Character("Tiago",0);
+        char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
+        allies[2] = this.char3.getUnit();
 
         this.char3.getUnit().setPosition(this.map.getCell(15,15));
         this.char3.getUnit().addAbility(new Charge(this.char3.getUnit()));
@@ -157,8 +159,6 @@ public class PlayState extends State
         enemiesArray.add(this.enemy3);
 
 
-        //gameHandler = new GameHandler(this);
-
         cam.update();
 
         gameController = new GameController(allies,enemies, this.diff,map);
@@ -175,11 +175,10 @@ public class PlayState extends State
 
         Gdx.input.setCursorCatched(false);
 
-        hud = new HUD(this.batch, this.charArray, this.enemiesArray, currentChar);
+        hud = new HUD(this.batch, allies, enemies, currentChar);
     }
 
-    @Override
-    protected void handleInput()
+    protected void handleZoomInput()
     {
         if(Gdx.input.isKeyPressed(Input.Keys.PAGE_UP)){
             this.cam.zoom-=0.02;
@@ -187,49 +186,24 @@ public class PlayState extends State
                 cam.zoom=0.15f;
             }
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.PAGE_DOWN)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.PAGE_DOWN)){
             this.cam.zoom+=0.02;
             if(cam.zoom>=1.7){
                 cam.zoom=1.7f;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
-            this.currentChar.beginTurn();
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            this.currentChar.setPosition(this.map.getCell(10,10));
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.A) || MyGdxGame.attackMode){
+    }
+
+    protected void handleAttackInput()
+    {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A)
+                || MyGdxGame.attackMode){
             MyGdxGame.attackMode = true;
             MyGdxGame.moveMode = false;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.M)){
-            MyGdxGame.attackMode = false;
-            MyGdxGame.moveMode = true;
-            xPos = this.currentChar.getX() * Scale;
-            yPos = this.currentChar.getY() * Scale;
-            xCounter = 0;
-            yCounter = 0;
-            movements.clear();
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            this.currentChar.setPosition(this.map.getCell(10,10));
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E) || MyGdxGame.changedTurn){
-            this.gameController.endTurn();
-            currentChar = this.gameController.getCurrentChar();
-            this.currAbl = null;
 
-            xPos = this.currentChar.getX() * Scale;
-            yPos = this.currentChar.getY() * Scale;
-            this.movements.clear();
-
-            MyGdxGame.attackMode = false;
-            MyGdxGame.moveMode = false;
-            this.hasAttacked = false;
-            MyGdxGame.changedTurn = false;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1) || MyGdxGame.attack1){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)
+                || MyGdxGame.attack1){
             if(this.currentChar.getAbilities().size()==0){
                 MyGdxGame.attack1 = false;
                 currAbl = null;
@@ -238,7 +212,8 @@ public class PlayState extends State
             currAbl = this.currentChar.getAbilities().get(0);
             MyGdxGame.attack1 = false;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2) || MyGdxGame.attack2){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)
+                || MyGdxGame.attack2){
             if(this.currentChar.getAbilities().size()==1){
                 currAbl = null;
                 MyGdxGame.attack2 = false;
@@ -254,8 +229,11 @@ public class PlayState extends State
             }
             currAbl = this.currentChar.getAbilities().get(2);
         }
+    }
+
+    protected  void handleMovementInput()
+    {
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            //this.character.moveUp();
             movements.add("UP");
 
             if(yPos < this.map.height*Scale -Scale) {
@@ -263,8 +241,7 @@ public class PlayState extends State
                 yPos+=Scale;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
-            //this.character.moveDown();
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
             movements.add("DOWN");
 
             if(yPos > 0) {
@@ -273,8 +250,7 @@ public class PlayState extends State
                 yPos -= Scale;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
-            //this.character.moveLeft();
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
             movements.add("LEFT");
 
             if(xPos > 0) {
@@ -283,8 +259,7 @@ public class PlayState extends State
                 xPos -=Scale;
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-            //this.character.moveRight();
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
             movements.add("RIGHT");
 
             if(xPos < this.map.width*Scale - Scale) {
@@ -293,12 +268,49 @@ public class PlayState extends State
                 xPos += Scale;
             }
         }
+    }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
-        {
-            Gdx.app.exit();
+    protected void handleGameLogicKeysInput()
+    {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+            this.currentChar.beginTurn();
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            this.currentChar.setPosition(this.map.getCell(10,10));
         }
 
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.M)){
+            MyGdxGame.attackMode = false;
+            MyGdxGame.moveMode = true;
+            xPos = this.currentChar.getX() * Scale;
+            yPos = this.currentChar.getY() * Scale;
+            xCounter = 0;
+            yCounter = 0;
+            movements.clear();
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            this.currentChar.setPosition(this.map.getCell(10,10));
+        }
+
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.E) || MyGdxGame.changedTurn){
+            this.gameController.endTurn();
+            currentChar = this.gameController.getCurrentChar();
+            this.currAbl = null;
+
+            xPos = this.currentChar.getX() * Scale;
+            yPos = this.currentChar.getY() * Scale;
+            this.movements.clear();
+
+            MyGdxGame.attackMode = false;
+            MyGdxGame.moveMode = false;
+            this.hasAttacked = false;
+            MyGdxGame.changedTurn = false;
+        }
+    }
+
+
+    protected void handleEnterKey()
+    {
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             if (MyGdxGame.moveMode) {
                 Character currChar = null;
@@ -317,10 +329,6 @@ public class PlayState extends State
                 for (int i = 0; i < movements.size(); i++) {
                     if (movements.get(i) == "UP") {
                         currChar.moveUp();
-                        batch.begin();
-                        batch.draw(currChar.getSprite(), currChar.getUnit().getX() * Scale,
-                                currChar.getUnit().getY() * Scale, Scale, Scale);
-                        batch.end();
                         cam.update();
                     } else if (movements.get(i) == "DOWN") {
                         currChar.moveDown();
@@ -340,19 +348,43 @@ public class PlayState extends State
                 yCounter = 0;
                 xCounter = 0;
             }
-            if(MyGdxGame.attackMode){
+            else if(MyGdxGame.attackMode){
                 Cell cell = this.map.getCell(xPos/Scale,yPos/Scale);
-                if(currAbl!=null&&!hasAttacked){
-                    if(cell.getUnit()!=null) {
-                        if(cell.getUnit().getIsAlly()==false||currAbl.getType().equals(Element.type.HEAL)) {
+                if(currAbl!=null
+                        &&!hasAttacked
+                        && cell.getUnit()!=null
+                        && (cell.getUnit().getIsAlly()==false
+                        || currAbl.getType().equals(Element.type.HEAL)))
+                {
                             System.out.print("Attack \n");
                             this.currAbl.AffectTarget(cell.getUnit());
                             this.hasAttacked=true;
-                        }
-                    }
                 }
             }
         }
+    }
+
+    @Override
+    protected void handleInput()
+    {
+        handleZoomInput();
+        handleAttackInput();
+        handleMovementInput();
+        handleGameLogicKeysInput();
+        handleEscapeKey();
+        handleEnterKey();
+        if(handleEscapeKey())
+        {
+            this.dispose();
+            MyGdxGame.changedTurn = false;
+            MyGdxGame.attackMode = false;
+            MyGdxGame.moveMode = false;
+            MyGdxGame.attack = false;
+            MyGdxGame.attack1 = false;
+            MyGdxGame.attack2 = false;
+            gsm.set(new MenuState(gsm));
+        }
+
         this.cam.position.set(currentChar.getX()*Scale+Scale/2,currentChar.getY()*Scale+Scale/2,0);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
@@ -363,7 +395,16 @@ public class PlayState extends State
     public void update(float dt)
     {
         handleInput();
-        hud.update(batch, charArray, enemiesArray, currentChar);
+        if(this.gameController.hasLost()){
+            this.dispose();
+            gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, false));
+        }
+        else if(this.gameController.hasWon()){
+            this.dispose();
+            gsm.set(new EndState(gsm, (System.currentTimeMillis() - startTime) / 1000, true));
+        }
+        else
+            hud.updateValues(batch, allies, enemies, currentChar);
     }
 
     @Override
@@ -434,17 +475,10 @@ public class PlayState extends State
         }
 
         sb.end();
-        //end of draw section
-        Gdx.graphics.setTitle("RPGame FPS:"+fps+" Camara Zoom Value:"+cam.zoom+" Curr Char:"+this.currentChar.getName());
+        Gdx.graphics.setTitle("RPG Game FPS:"+fps+" Camara Zoom Value:"+cam.zoom+" Curr Char:"+this.currentChar.getName());
 
         sb.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-        if(this.gameController.hasLost()){
-            Gdx.app.exit();
-        }
-        if(this.gameController.hasWon()){
-            Gdx.app.exit();
-        }
     }
 
     double fps;
@@ -458,7 +492,7 @@ public class PlayState extends State
         blueBlock.dispose();
         redBlock.dispose();
         redBorder.dispose();
-
+        hud.dispose();
+        font.dispose();
     }
 }
-///////////////////////////////////////

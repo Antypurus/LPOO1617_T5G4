@@ -124,7 +124,7 @@ public class GameController {
                     this.currentChar.getAI().FullTurnBehavior();
                 }
             }
-            this.endTurn();//do we want this ?
+            this.endTurn();//TODO:do we want this ?
         }
     }
 
