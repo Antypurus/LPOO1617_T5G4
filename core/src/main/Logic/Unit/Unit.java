@@ -55,14 +55,28 @@ public class Unit implements Comparable<Unit> {
     private main.Logic.Unit.Stats.AirRes AirResistence; //Magic Air Resistance Stat
 
     //Afinity
+
+    /**
+     * Sets the Elemental affinity of this character, this will be used with abilities to increase
+     * or reduce damage values
+     * @param Afinity Affinity to set this character
+     */
     public void setAfinity(main.Logic.ElementSystem.Element.DamageElement Afinity){
         this.Afinity = Afinity;
     }
 
+    /**
+     * returns the current elemental afinity of this character
+     * @return the elemental affinity of this character bject
+     */
     public main.Logic.ElementSystem.Element.DamageElement getAfinity(){
         return this.Afinity;
     }
 
+    /**
+     * returns an arraylist with all the abilities the character currently knows
+     * @return the abilities of this character
+     */
     public ArrayList<main.Logic.Abilities.Ability> getAbilities(){
         return this.Abilities;
     }
