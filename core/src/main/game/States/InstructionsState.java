@@ -47,7 +47,7 @@ public class InstructionsState extends State
         InstructionsImage = new Texture("InstructionsImages/InstructionsImage.png");
         Images.add(AttackImage = new Texture("InstructionsImages/AttackImage.png"));
         Images.add(ChargeImage = new Texture("InstructionsImages/ChargeImage.png"));
-        Images.add(FireBallImage = new Texture("InstructionsImages/FireBallImage.png"));
+        Images.add(FireBallImage = new Texture("InstructionsImages/FireballImage.png"));
         Images.add(HealingImage = new Texture("InstructionsImages/HealingImage.png"));
         Images.add(WaterWhip = new Texture("InstructionsImages/WaterWhip.png"));
         Images.add(PunchImage = new Texture("InstructionsImages/PunchImage.png"));
