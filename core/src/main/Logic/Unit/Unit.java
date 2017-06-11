@@ -643,6 +643,9 @@ public class Unit implements Comparable<Unit> {
      * @param cell cell to move to
      */
     public void moveToCell(Cell cell){
+        if(cell == null){
+            return;
+        }
         int deltaX = cell.getxPos()-this.getX();
         int deltaY = cell.getyPos()-this.getY();
         this.move(deltaX,deltaY);

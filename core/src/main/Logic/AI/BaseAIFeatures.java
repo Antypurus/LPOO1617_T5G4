@@ -1,7 +1,5 @@
 package Logic.AI;
 
-import com.badlogic.gdx.Game;
-
 import java.util.ArrayList;
 
 import Logic.GameController;
@@ -9,7 +7,6 @@ import main.Logic.Abilities.Ability;
 import main.Logic.ElementSystem.Element;
 import main.Logic.Map.Cell;
 import main.Logic.Unit.Unit;
-import sun.management.counter.Units;
 
 public abstract class BaseAIFeatures {
 
@@ -149,10 +146,12 @@ public abstract class BaseAIFeatures {
             return ret;
         }
         for(int i=0;i<cells.size();i++){
-            int distance = (int)cells.get(i).distanceToCell(target.getPosition());
-            if(dist>distance){
-                dist = distance;
-                ret = cells.get(i);
+            if(cells.get(i)!=null&&cells.get(i).isWalkable()) {
+                int distance = (int) cells.get(i).distanceToCell(target.getPosition());
+                if (dist > distance) {
+                    dist = distance;
+                    ret = cells.get(i);
+                }
             }
         }
         return ret;
