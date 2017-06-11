@@ -23,7 +23,7 @@ public class FacebookHandler
      */
     public FacebookHandler(String message)
     {
-        String domain = "https://github.com/";
+        String domain = "https://www.mediafire.com/folder/0zhuy220fbf6c/RPG-Game";
         String appId = "433157270402383";
 
         String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id="
@@ -31,7 +31,6 @@ public class FacebookHandler
                 +domain+"&scope=user_about_me,"
                 + "publish_actions";
 
-        //TODO: mudar este link para um site onde seja possivel fazer download do jogo
 
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
@@ -53,7 +52,7 @@ public class FacebookHandler
                 FacebookType response = fbClient.publish("me/feed",
                         FacebookType.class, Parameter.with("message",
                                 message),
-                        Parameter.with("link", "https://github.com/"));
+                        Parameter.with("link", "https://www.mediafire.com/folder/0zhuy220fbf6c/RPG-Game"));
 
                 onFacebook = false;
 
