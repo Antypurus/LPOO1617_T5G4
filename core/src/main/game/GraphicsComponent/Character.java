@@ -33,7 +33,11 @@ public class Character {
 
     private float currKeyframe;
 
-
+    /**
+     * construcotr for the character
+     * @param name name of the character
+     * @param sprite sprite identifier 0 - 3
+     */
     public Character(String name,int sprite){
         interm = new Texture("characters.png");
         texts = TextureRegion.split(interm,interm.getWidth()/12,interm.getHeight()/8);
@@ -63,10 +67,18 @@ public class Character {
         unit = new Unit(name,1,1,1,1,1);
     }
 
+    /**
+     *  sets the unit inside the character
+     * @param unit unit to set
+     */
     public void setUnit(Unit unit){
         this.unit = unit;
     }
 
+    /**
+     *
+     * @return the currrent sprite in the animation
+     */
     public Sprite getSprite(){
         currKeyframe+= Gdx.graphics.getDeltaTime();
         if(this.ori.equals(orientation.DOWN)) {
@@ -81,25 +93,41 @@ public class Character {
         return this.spr;
     }
 
+    /**
+     *
+     * @return the unit in the character
+     */
     public Unit getUnit(){
         return this.unit;
     }
 
+    /**
+     * moves up updating the sprite
+     */
     public void moveUp(){
         this.unit.move(0,1);
         this.ori = orientation.UP;
     }
 
+    /**
+     * moves down updating the sprite
+     */
     public void moveDown(){
         this.unit.move(0,-1);
         this.ori = orientation.DOWN;
     }
 
+    /**
+     * moves left updating the sprite
+     */
     public void moveLeft(){
         this.unit.move(-1,0);
         this.ori = orientation.LEFT;
     }
 
+    /**
+     * moves right updating the sprite
+     */
     public void moveRight(){
         this.unit.move(1,0);
         this.ori = orientation.RIGHT;
