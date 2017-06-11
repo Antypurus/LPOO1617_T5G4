@@ -31,7 +31,7 @@ public class fireballTest {
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
         Ability testFireBall = new Fireball(testUnit);
 
-        assertEquals(10,testFireBall.getBaseDamage(),0.01);
+        assertEquals(6,testFireBall.getBaseDamage(),0.01);
         assertEquals(100,testFireBall.getHitChance(),0.01);
         assertEquals(10,testFireBall.getManaCost(),0.01);
         assertEquals(10,testFireBall.getRange());
@@ -193,7 +193,7 @@ public class fireballTest {
         assertEquals(10,testUnit2.getTestModeValue(),0.01);
 
         testFireBall.AffectTarget(testUnit2);
-        assertEquals(23,testUnit2.getHP(),0.01);
+        assertEquals(43,testUnit2.getHP(),0.01);
         assertEquals(40,testUnit.getMP(),0.01);
     }
 
@@ -214,17 +214,17 @@ public class fireballTest {
         assertEquals(10,testUnit2.getTestModeValue(),0.01);
 
         testFireBall.AffectTarget(testUnit2);
-        assertEquals(567,testUnit2.getHP(),0.01);
+        assertEquals(600,testUnit2.getHP(),0.01);
 
         testUnit2.setAfinity(Element.DamageElement.EARTH);
         assertTrue(testFireBall.canHitTarget(testUnit2));
         testFireBall.AffectTarget(testUnit2);
-        assertEquals(434,testUnit2.getHP(),0.01);
+        assertEquals(547,testUnit2.getHP(),0.01);
 
         testUnit2.setAfinity(Element.DamageElement.WATER);
         assertTrue(testFireBall.canHitTarget(testUnit2));
         testFireBall.AffectTarget(testUnit2);
-        assertEquals(434,testUnit2.getHP(),0.01);
+        assertEquals(547,testUnit2.getHP(),0.01);
     }
 
     @Test
@@ -243,6 +243,6 @@ public class fireballTest {
         assertEquals(1,testUnit2.getTestModeValue(),0.01);
 
         testFireBall.AffectTarget(testUnit2);
-        assertEquals(467,testUnit2.getHP(),0.01);
+        assertEquals(547,testUnit2.getHP(),0.01);
     }
 }

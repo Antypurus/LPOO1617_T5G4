@@ -28,7 +28,7 @@ public class chargeTest {
         Unit testUnit = new Unit("Test Unit",5,2,5,6,2);
         Ability testCharge = new Charge(testUnit);
 
-        assertEquals(20,testCharge.getBaseDamage(),0.01);
+        assertEquals(15,testCharge.getBaseDamage(),0.01);
         assertEquals(60,testCharge.getHitChance(),0.01);
         assertEquals(15,testCharge.getRange());
         assertEquals(0,testCharge.getAOE());
@@ -235,7 +235,7 @@ public class chargeTest {
         assertEquals(10,testUnit2.generateDodgeVal(),0.01);
 
         testCharge.AffectTarget(testUnit2);
-        assertEquals(562,testUnit2.getHP(),0.01);
+        assertEquals(572,testUnit2.getHP(),0.01);
     }
 
     @Test
@@ -255,7 +255,7 @@ public class chargeTest {
         assertEquals(6,testUnit2.generateDodgeVal(),0.01);
 
         testCharge.AffectTarget(testUnit2);
-        assertEquals(522,testUnit2.getHP(),0.01);
+        assertEquals(542,testUnit2.getHP(),0.01);
     }
 
     @Test
@@ -275,7 +275,7 @@ public class chargeTest {
         assertEquals(1,testUnit2.generateDodgeVal(),0.01);
 
         testCharge.AffectTarget(testUnit2);
-        assertEquals(522,testUnit2.getHP(),0.01);
+        assertEquals(542,testUnit2.getHP(),0.01);
     }
 
     @Test
@@ -300,7 +300,7 @@ public class chargeTest {
         assertEquals(10,testUnit2.generateDodgeVal(),0.01);
 
         testCharge.AffectTarget(testUnit2);
-        assertEquals(562,testUnit2.getHP(),0.01);
+        assertEquals(572,testUnit2.getHP(),0.01);
 
         assertEquals(10,testUnit.getX());
         assertEquals(19,testUnit.getY());
