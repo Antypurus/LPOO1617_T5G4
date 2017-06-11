@@ -11,7 +11,7 @@ import main.Logic.Unit.Unit;
 
 public class Charge extends BaseAbilityFunctions implements Ability {
 
-    private  double ChargeBaseDamage = 20;
+    private  double ChargeBaseDamage = 15;
     private  double ChargeHitChance = 60;
     private  int ChargeRange = 15;
     private double ChargeManaCost = 0;

@@ -11,7 +11,7 @@ import main.Logic.Unit.Unit;
 
 public class Mend extends BaseAbilityFunctions implements Ability{
 
-    private  double MendBaseHeal = 100;
+    private  double MendBaseHeal = 10;
     private double MendManaCost = 10;
     private  int MendAOE = 0;
     private  double MendHitChance = 100;
