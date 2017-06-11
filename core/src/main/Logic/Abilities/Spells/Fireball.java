@@ -11,7 +11,7 @@ import main.Logic.Unit.Unit;
 
 public class Fireball extends BaseAbilityFunctions implements Ability{
 
-    private double FireBallBaseDamage = 10;
+    private double FireBallBaseDamage = 6;
     private double FireBallManaCost = 10;
     private Statistic FireBallScallingStat = null;
     private int FireballAOE = 0;

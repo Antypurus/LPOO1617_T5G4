@@ -342,7 +342,7 @@ public class Unit implements Comparable<Unit> {
         this.AirResistence = new main.Logic.Unit.Stats.AirRes(this.Inteligence,this.Strength,this.Vitality);
         this.setStats();
         this.update();
-        this.movementsPerTurn = (int)this.Speed.EffectiveValue*5;
+        this.movementsPerTurn = (int)this.Speed.EffectiveValue*2;
         this.remainingMovement = this.movementsPerTurn;
         this.ID = this.Identifier++;
     }
