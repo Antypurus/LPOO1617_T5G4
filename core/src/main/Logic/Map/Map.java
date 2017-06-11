@@ -38,6 +38,12 @@ public class Map {
         return;
     }
 
+    /**
+     * constructor for the map
+     * @param name name of the map
+     * @param width width of the map
+     * @param height height of the map
+     */
     public Map(String name,int width,int height){
 
         this.name=name;
@@ -57,10 +63,17 @@ public class Map {
         this.update();
     }
 
+    /**
+     *
+     * @return the name of the map
+     */
     public String getName(){
         return this.name;
     }
 
+    /**
+     * updates the map and all its cells
+     */
     public void update(){
         for(int i=0;i<this.height;++i){
             for(int j=0;j<this.width;++j){
@@ -69,6 +82,12 @@ public class Map {
         }
     }
 
+    /**
+     * returns the cell object from the map with the corresponding coordinates if it exists
+     * @param x x coordinate of the cell
+     * @param y y coordinate of the cell
+     * @return the cell of object or null if no cell matches the given coordinates
+     */
     public Cell getCell(int x, int y){
         if(x>=0&&x<this.width){
             if(y>=0&&y<this.height){
@@ -78,6 +97,11 @@ public class Map {
         return null;
     }
 
+    /**
+     * returns an array list with all the cells an ability can currently affect given its owners position
+     * @param ability ability to be verified
+     * @return the arraylist of affectable cells
+     */
     public ArrayList<Cell> validCells(Ability ability){
         ArrayList<Cell>ret = new ArrayList<Cell>();
         for(int i=0;i<this.height;++i){
@@ -90,6 +114,11 @@ public class Map {
         return ret;
     }
 
+    /**
+     * returns an array list of all the cells the unit can currently walk to given its remaining movements
+     * @param unit unit to whoms movements are checked
+     * @return arraylist of cell that can move to
+     */
     public ArrayList<Cell> validCells(Unit unit){
         ArrayList<Cell>ret = new ArrayList<Cell>();
         for(int i=0;i<this.height;++i){

@@ -17,6 +17,11 @@ public class TankAI extends BaseAIFeatures implements BaseAi{
     private Unit TankAIUnit = null;
     private GameController CurrentGame = null;
 
+    /**
+     * contructor for the tank ai
+     * @param owner the unit that will be controlled by this ai
+     * @param game the game controlelr of the game
+     */
     public TankAI(Unit owner,GameController game){
         this.TankAIUnit = owner;
         this.CurrentGame = game;
