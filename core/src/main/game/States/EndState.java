@@ -41,6 +41,8 @@ public class EndState extends State {
 
     private FacebookHandler facebookHandler;
 
+    private String message;
+
 
     protected EndState(GameStateManager gsm, Long elapsedTime, Boolean gameWon)
     {
@@ -58,6 +60,11 @@ public class EndState extends State {
         this.gameWon = gameWon;
 
         this.timeFont = new BitmapFont();
+
+        if(this.gameWon)
+            this.message = "Won the game in " + this.elapsedTime.toString() + " seconds. Try to beat my time.";
+        else
+            this.message = "Lost the game in " + this.elapsedTime.toString() + " seconds. Better luck next time.";
     }
 
     protected EndState(GameStateManager gsm) {
@@ -70,7 +77,7 @@ public class EndState extends State {
     {
         if (handleFacebookBtn(facebookXCoord, facebookYCoord, facebookBtn.getWidth(), facebookBtn.getHeight()))
         {
-            facebookHandler = new FacebookHandler();
+            facebookHandler = new FacebookHandler(message);
         }
 
         else if (handleBtn(quitBtnCenterX, quitYCoord, quitBtn.getHeight()))
@@ -112,7 +119,7 @@ public class EndState extends State {
                 MyGdxGame.centerXCoord - (templateCenterX), MyGdxGame.centerYCoord);
 
         timeFont.setColor(Color.BLACK);
-        timeFont.draw(sb, elapsedTime.toString(), MyGdxGame.centerXCoord, MyGdxGame.centerYCoord + templateCenterY);
+        timeFont.draw(sb, message, MyGdxGame.centerXCoord, MyGdxGame.centerYCoord + templateCenterY);
 
         sb.end();
     }
