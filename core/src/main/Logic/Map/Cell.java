@@ -18,9 +18,9 @@ public class Cell {
     private Cell Bottom = null;
 
     /**
-     *
-     * @param x
-     * @param y
+     * creates a cell with x y coordinates
+     * @param x x coordinate
+     * @param y y coordinate
      */
     public Cell(int x,int y){
         this.xPos=x;
@@ -28,47 +28,47 @@ public class Cell {
     }
 
     /**
-     *
-     * @param value
+     * sets wheter or not a unit can walk into this cell
+     * @param value walckability value
      */
     public void setWalkable(boolean value){
         this.isWalkable=value;
     }
 
     /**
-     *
-     * @param left
+     * sets what cell is to the left of this one
+     * @param left cell to the left
      */
     public void setLeft(Cell left){
         this.Left=left;
     }
 
     /**
-     *
-     * @param right
+     * sets what cell is to the right of thi sone
+     * @param right cell to the right
      */
     public void setRight(Cell right){
         this.Right = right;
     }
 
     /**
-     *
-     * @param top
+     *sets what cell is to the top of this one
+     * @param top cell to the top
      */
     public void setTop(Cell top){
         this.Top=top;
     }
 
     /**
-     *
-     * @param bottom
+     * sets what cell is bellow this one
+     * @param bottom cell bellow
      */
     public void setBottom(Cell bottom){
         this.Bottom=bottom;
     }
 
     /**
-     *
+     *  sets the map this cell inserts itself into
      * @param map
      */
     public void setMap(Map map){
@@ -77,7 +77,7 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return the map this cell is in
      */
     public Map getMap(){
         return this.belongingMap;
@@ -85,7 +85,7 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return the x coordinate of this cell
      */
     public int getxPos(){
         return this.xPos;
@@ -93,7 +93,7 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return the y coordinate of this cell
      */
     public int getyPos(){
         return this.yPos;
@@ -101,7 +101,7 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return is the cell is walckable or not
      */
     public boolean isWalkable() {
         return isWalkable;
@@ -109,7 +109,7 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return cell to the left
      */
     public Cell getLeft() {
         return Left;
@@ -117,7 +117,7 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return cell to the right
      */
     public Cell getRight() {
         return Right;
@@ -125,7 +125,7 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return cell on top
      */
     public Cell getTop() {
         return Top;
@@ -133,7 +133,7 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return cell on bottom
      */
     public Cell getBottom() {
         return Bottom;
@@ -141,22 +141,22 @@ public class Cell {
 
     /**
      *
-     * @return
+     * @return unit in the cell
      */
     public Unit getUnit(){
         return this.unit;
     }
 
     /**
-     *
-     * @param unit
+     * sets the unit that is in this cell
+     * @param unit unit in the cell
      */
     public void setUnit(Unit unit){
         this.unit=unit;
     }
 
     /**
-     *
+     *updates the cells various values
      */
     public void update(){
         if(this.unit!=null){
@@ -165,9 +165,9 @@ public class Cell {
     }
 
     /**
-     *
-     * @param cell
-     * @return
+     * returns the distance from this cell to the specified one
+     * @param cell cell to mesure distance to
+     * @return distance to cell
      */
     public double distanceToCell(Cell cell){
         if(cell!=null) {
