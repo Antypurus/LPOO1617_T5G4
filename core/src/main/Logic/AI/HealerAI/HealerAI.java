@@ -17,6 +17,11 @@ public class HealerAI extends BaseAIFeatures implements BaseAi{
     private Unit HealerAIUnit = null;
     private GameController CurrentGame = null;
 
+    /**
+     * constructor of the healer ai
+     * @param owner unit that will be controlled by the healer ai
+     * @param game the game controller
+     */
     public HealerAI(Unit owner,GameController game){
         this.HealerAIUnit = owner;
         this.CurrentGame = game;

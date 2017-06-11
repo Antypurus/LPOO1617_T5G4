@@ -15,6 +15,11 @@ public class DPSAI extends BaseAIFeatures implements BaseAi{
     private Unit DPSAIUnit = null;
     private GameController CurrentGame = null;
 
+    /**
+     * the dps ai contructor
+     * @param owner the unit that will be controler by the ai
+     * @param game the game controller
+     */
     public DPSAI(Unit owner,GameController game){
         this.DPSAIUnit = owner;
         this.CurrentGame = game;

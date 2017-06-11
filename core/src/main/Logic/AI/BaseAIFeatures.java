@@ -13,6 +13,11 @@ import sun.management.counter.Units;
 
 public abstract class BaseAIFeatures {
 
+    /**
+     * returns the number of ofensive abilities the unit passed in can use
+     * @param owner the unit whoms abilties are checked
+     * @return the number of usable abilities
+     */
     public int numberOfOffensivAbilitiesAvailableToUse(Unit owner){
         int ret = 0;
         for(int i=0;i<owner.getAbilities().size();++i){
@@ -25,6 +30,11 @@ public abstract class BaseAIFeatures {
         return ret;
     }
 
+    /**
+     * this mehtod returns the number of healing abilities the unis passed in can use
+     * @param owner the unit whoms abilities are checked
+     * @return the number of usable healing abilities
+     */
     public int numberOfHealingAbilitiesAvailableToUse(Unit owner){
         int ret = 0;
         for(int i=0;i<owner.getAbilities().size();++i){

@@ -55,10 +55,10 @@ public class Element {
     }
 
     /**
-     *
-     * @param AttackElement
-     * @param DefenseElement
-     * @return
+     *  Calculates de damage that one element does to another
+     * @param AttackElement the element that attacks
+     * @param DefenseElement the element that deffends
+     * @return the damage the offensive element does to the defensive element
      */
     public double ElementComparation(DamageElement AttackElement,DamageElement DefenseElement){
         if(AttackElement.equals(DefenseElement.EARTH)){
