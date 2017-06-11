@@ -716,28 +716,47 @@ public class HUD
 
     public void disposeTextures()
     {
+        if(xText!=null)
         xText.dispose();
+        if(AText!=null)
         AText.dispose();
+        if(MText!=null)
         MText.dispose();
+        if(EText!=null)
         EText.dispose();
+        if(mText!=null)
         mText.dispose();
+        if(attackText!=null)
         attackText.dispose();
+        if(attack1Text!=null)
         attack1Text.dispose();
+        if(attack2Text!=null)
         attack2Text.dispose();
     }
 
     public void disposeTextButtonsResources()
     {
+        if(font!=null)
         font.dispose();
+        if(skin!=null)
         skin.dispose();
+        if(buttonAtlas!=null)
         buttonAtlas.dispose();
+        if(font2!=null)
         font2.dispose();
+        if(skin2!=null)
         skin2.dispose();
+        if(buttonAtlas2!=null)
         buttonAtlas2.dispose();
+        if(redfont!=null)
         redfont.dispose();
+        if(redskin!=null)
         redskin.dispose();
+        if(redatlas!=null)
         redatlas.dispose();
+        if(healthfont!=null)
         healthfont.dispose();
+        if(healthskin!=null)
         healthskin.dispose();
     }
 

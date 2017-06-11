@@ -15,6 +15,12 @@ public class FacebookHandler
 {
     private boolean onFacebook = false;
 
+    /**
+     *
+     * Constructor for the FacebookHandler , this class lets the user post to facebook
+     *
+     * @param message a String containing the message to be written alongside the facebook post
+     */
     public FacebookHandler(String message)
     {
         String domain = "https://github.com/";
