@@ -1,3 +1,5 @@
+[![BCH compliance](https://bettercodehub.com/edge/badge/TiagoJoseMagalhaes/LPOO1617_T5G4?branch=AndroidProject&token=8cc3949e4211773c91329c3e4357f448acdf770b)](https://bettercodehub.com/)
+
 UML: https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/finalRelease/Class-Model.pdf
 
 JavaDocs: https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/tree/finalRelease/JavaDocs
