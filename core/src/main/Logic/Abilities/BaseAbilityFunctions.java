@@ -6,7 +6,7 @@ import main.Logic.Unit.Unit;
 
 public abstract class BaseAbilityFunctions {
 
-    public boolean baseCanHitCell(Unit owner,Cell cell,double range){
+    protected boolean baseCanHitCell(Unit owner,Cell cell,double range){
         double dist = owner.getPosition().distanceToCell(cell);
         if(dist>range){
             return false;
@@ -17,7 +17,7 @@ public abstract class BaseAbilityFunctions {
         return true;
     }
 
-    public boolean targetIsOwnerAbilityCheck(Ability ability, Unit target){
+    protected boolean targetIsOwnerAbilityCheck(Ability ability, Unit target){
         boolean check = this.baseNonDistanceRelatedHitCheck(ability,target);
         if(!check){
             if(target==ability.getOwner()){
@@ -33,7 +33,7 @@ public abstract class BaseAbilityFunctions {
         return true;
     }
 
-    public boolean baseNonDistanceRelatedHitCheck(Ability ability, Unit target){
+    protected boolean baseNonDistanceRelatedHitCheck(Ability ability, Unit target){
         if (ability.getOwner() == null) {
             return false;
         }
@@ -58,7 +58,7 @@ public abstract class BaseAbilityFunctions {
         return true;
     }
 
-    public boolean baseCanHitTarget(Ability ability, Unit target){
+    protected boolean baseCanHitTarget(Ability ability, Unit target){
         boolean check = this.baseNonDistanceRelatedHitCheck(ability,target);
         if(!check){
             return false;
