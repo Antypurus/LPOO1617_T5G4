@@ -11,7 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
+import Logic.AI.DPSAI.DPSAI;
 import Logic.AI.HealerAI.HealerAI;
+import Logic.AI.TankAI.TankAI;
 import Logic.Abilities.Spells.WaterWip;
 import Logic.Difficulty;
 import Logic.GameController;
@@ -102,7 +104,7 @@ public class PlayState extends State
         this.cam = new OrthographicCamera(1280,720);
         cam.update();
 
-        this.character = new Character("Diogo",1);
+        this.character = new Character("Diogo",2);
         this.character.setUnit(new Unit("Diogo - Caster",10,1,5,5,2));
         this.character.getUnit().setPosition(this.map.getCell(10,10));
         this.character.getUnit().addAbility(new Fireball(this.character.getUnit()));
@@ -111,50 +113,53 @@ public class PlayState extends State
         character.update();
         charArray.add(this.character);
 
-        this.char2 = new Character("Manuel",2);
+        this.char2 = new Character("Manuel",0);
         char2.setUnit(new Unit("Manuel - Healer",10,1,4,8,2));
         allies[1] = this.char2.getUnit();
 
-        this.char2.getUnit().setPosition(this.map.getCell(5,5));
+        this.char2.getUnit().setPosition(this.map.getCell(5,10));
         this.char2.getUnit().addAbility(new Mend(this.char2.getUnit()));
         this.char2.getUnit().addAbility(new Punch(this.char2.getUnit()));
         char2.update();
         charArray.add(this.char2);
 
 
-        this.char3 = new Character("Tiago",0);
+        this.char3 = new Character("Tiago",1);
         char3.setUnit(new Unit("Tiago - Tank",1,10,5,15,10));
         allies[2] = this.char3.getUnit();
 
-        this.char3.getUnit().setPosition(this.map.getCell(15,15));
+        this.char3.getUnit().setPosition(this.map.getCell(15,10));
         this.char3.getUnit().addAbility(new Charge(this.char3.getUnit()));
         this.char3.getUnit().addAbility(new Punch(this.char3.getUnit()));
         char3.update();
         charArray.add(this.char3);
 
         this.enemy1 = new Character("Ogre",1);
-        enemy1.setUnit(new Unit("Ogre",10,10,10,10,10));
+        enemy1.setUnit(new Unit("Ogre",3,10,6,10,10));
         enemy1.getUnit().setIsAiControlled(true);
         enemies[0]=enemy1.getUnit();
         this.enemy2 = new Character("Maluco",2);
+        enemy2.setUnit(new Unit("Maluco",12,1,5,7,3));
         enemy2.getUnit().setIsAiControlled(true);
         enemies[1]=enemy2.getUnit();
         this.enemy3 = new Character("Bebado",0);
+        enemy3.setUnit(new Unit("Bebado",15,3,8,10,10));
         enemy3.getUnit().setIsAiControlled(true);
         enemies[2]=enemy3.getUnit();
 
-        this.enemy1.getUnit().setPosition(this.map.getCell(16,16));
-        this.enemy1.getUnit().addAbility(new Fireball(this.enemy1.getUnit()));
+        this.enemy1.getUnit().setPosition(this.map.getCell(16,20));
+        this.enemy1.getUnit().addAbility(new Charge(this.enemy1.getUnit()));
         enemy1.update();
         enemiesArray.add(this.enemy1);
 
-        this.enemy2.getUnit().setPosition(this.map.getCell(17,17));
+        this.enemy2.getUnit().setPosition(this.map.getCell(17,20));
         this.enemy2.getUnit().addAbility(new Fireball(this.enemy2.getUnit()));
+        this.enemy2.getUnit().addAbility(new Punch(this.enemy2.getUnit()));
         enemy2.update();
         enemiesArray.add(this.enemy2);
 
-        this.enemy3.getUnit().setPosition(this.map.getCell(18,18));
-        this.enemy3.getUnit().addAbility(new Fireball(this.enemy3.getUnit()));
+        this.enemy3.getUnit().setPosition(this.map.getCell(18,20));
+        this.enemy3.getUnit().addAbility(new Mend(this.enemy3.getUnit()));
         enemy3.update();
         enemiesArray.add(this.enemy3);
 
@@ -164,8 +169,9 @@ public class PlayState extends State
         gameController = new GameController(allies,enemies, this.diff,map);
         currentChar = gameController.getCurrentChar();
 
-        enemy1.getUnit().addAbility(new Mend(enemy1.getUnit()));
-        enemy1.getUnit().setAi(new HealerAI(enemy1.getUnit(),gameController));
+        enemy1.getUnit().setAi(new TankAI(enemy1.getUnit(),gameController));
+        enemy2.getUnit().setAi(new DPSAI(enemy2.getUnit(),gameController));
+        enemy3.getUnit().setAi(new HealerAI(enemy3.getUnit(),gameController));
 
         xPos = this.currentChar.getX() * Scale;
         yPos = this.currentChar.getY() * Scale;

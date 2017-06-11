@@ -71,7 +71,7 @@ public abstract class BaseAbilityFunctions {
         return true;
     }
 
-    public boolean baseCanUseAbility(Ability ability,Unit owner){
+    protected boolean baseCanUseAbility(Ability ability,Unit owner){
         if(owner.isDead()){
             return false;
         }
