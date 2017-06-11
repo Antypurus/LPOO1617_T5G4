@@ -158,6 +158,16 @@ public class HUD
     private TextButton enemyHealthNumbers, enemyHealthNumbers2, enemyHealthNumbers3;
     private TextButton enemyManaNumbers, enemyManaNumbers2, enemyManaNumbers3;
 
+
+    /**
+     *
+     * Constructor for the HUD , handles the user Hud
+     *
+     * @param sb spritebatch containing the sprites to be drawn
+     * @param allies array containing the allies units
+     * @param enemies array containing the enemies units
+     * @param current current char controlled by the player
+     */
     public HUD(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
     {
         MusicGetter();
@@ -166,7 +176,7 @@ public class HUD
         FinishRoundUI();
         SettingTemplateBars();
         getNames(allies, enemies);
-        getMaxHealth(allies, enemies);
+        getMaxHealthMana(allies, enemies);
         RedHealthBars();
         BlueManaBars();
         SoundImages();
@@ -179,6 +189,11 @@ public class HUD
 
     }
 
+    /**
+     *
+     * Gets the music to be played in the game
+     *
+     */
     public void MusicGetter()
     {
         music = MyGdxGame.manager.get("Audio/audio.mp3", Music.class);
@@ -192,6 +207,12 @@ public class HUD
         }
     }
 
+
+    /**
+     *
+     * Images related to the player movement
+     *
+     */
     public void StartMovementUI()
     {
         mText = new Texture("RoundsImages/Movement.png");
@@ -205,6 +226,11 @@ public class HUD
         LetterM = new ImageButton(MRegionDrawable);
     }
 
+    /**
+     *
+     * Images related to the player attack
+     *
+     */
     public void AttackAbilitiesUI()
     {
         Number1Text = new Texture("RoundsImages/1.png");
@@ -218,6 +244,11 @@ public class HUD
         Number2 = new ImageButton(Number2RegionDrawable);
     }
 
+    /**
+     *
+     * Images related to the player attack habilities
+     *
+     */
     public void StartAttackUI()
     {
         AText = new Texture("RoundsImages/A.png");
@@ -232,6 +263,11 @@ public class HUD
         AttackAbilitiesUI();
     }
 
+    /**
+     *
+     * Images related to finishing the round
+     *
+     */
     public void FinishRoundUI()
     {
         xText = new Texture("RoundsImages/x_orange.png");
@@ -245,6 +281,11 @@ public class HUD
         LetterE = new ImageButton(ERegionDrawable);
     }
 
+    /**
+     *
+     * Sets the bars that will be drawn below every game's information
+     *
+     */
     public void SettingTemplateBars()
     {
         emptyBar = new Texture("Bars/EmptyBar.png");
@@ -264,6 +305,11 @@ public class HUD
         enemytemplateBar6 = new ImageButton(emptyBarRegionDrawable);
     }
 
+    /**
+     *
+     * Buttons that will contain the characters names
+     *
+     */
     public void getNamesButtonStyle()
     {
         font2 = new BitmapFont();
@@ -275,6 +321,11 @@ public class HUD
         textButtonStyle2.up = skin2.getDrawable("EmptyBar");
     }
 
+    /**
+     *
+     * Get's the chars names
+     *
+     */
     public void getNames(Unit[] allies, Unit[] enemies)
     {
         getNamesButtonStyle();
@@ -287,7 +338,12 @@ public class HUD
         enemyName3  = new TextButton(enemies[2].getName(), textButtonStyle2);
     }
 
-    public void getMaxHealth(Unit[] allies, Unit[] enemies)
+    /**
+     *
+     * Get's the chars max health and Mana
+     *
+     */
+    public void getMaxHealthMana(Unit[] allies, Unit[] enemies)
     {
         healthMax = allies[0].getHP();
         manaMax = allies[0].getMANA().EffectiveValue;
@@ -308,6 +364,11 @@ public class HUD
         enemyManaMax3 = enemies[2].getMANA().EffectiveValue;
     }
 
+    /**
+     *
+     * Get's the chars red bars representing health
+     *
+     */
     public void RedHealthBars()
     {
         redfont = new BitmapFont();
@@ -325,6 +386,11 @@ public class HUD
         enemyRed3 = new TextButton("", redstyle);
     }
 
+    /**
+     *
+     * Get's the chars blue bars representing mana
+     *
+     */
     public void BlueManaBars()
     {
         bluestyle = new TextButton.TextButtonStyle();
@@ -338,6 +404,11 @@ public class HUD
         enemyBlue3 = new TextButton("", bluestyle);
     }
 
+    /**
+     *
+     * Sets the sound off and on images, and checks if the user pressed them to change image
+     *
+     */
     public void SoundImages()
     {
         font = new BitmapFont();
@@ -351,6 +422,11 @@ public class HUD
         button = new TextButton("", textButtonStyle);
     }
 
+    /**
+     *
+     * If the user pressed the sound image the game will start the music, or stop
+     *
+     */
     public void MusicButtonListener()
     {
         button.addListener(new InputListener()
@@ -374,6 +450,11 @@ public class HUD
         });
     }
 
+    /**
+     *
+     * Font Button that will contain the chars health points and mana points
+     *
+     */
     public void healthButtonStyle()
     {
         healthfont = new BitmapFont();
@@ -382,6 +463,11 @@ public class HUD
         healthstyle.font = healthfont;
     }
 
+    /**
+     *
+     * checks which ui button the user pressed and changes the game logic accordingly
+     *
+     */
     public void RoundsButtonsListeners()
     {
         stopRound.addListener(new InputListener()
@@ -414,6 +500,15 @@ public class HUD
         });
     }
 
+    /**
+     *
+     * Calls the methods above to update all the ui elements
+     *
+     * @param sb spritebatch containing the sprites to be drawn
+     * @param allies array containing the allies units
+     * @param enemies array containing the enemies units
+     * @param current current char controlled by the player
+     */
     public void updateValues(SpriteBatch sb, Unit[] allies, Unit[] enemies, Unit current)
     {
         updateHealth(allies,enemies);
@@ -432,6 +527,13 @@ public class HUD
 
     }
 
+    /**
+     *
+     * Update's the chars health points
+     *
+     * @param allies array containing the allies units
+     * @param enemies array containing the enemies units
+     */
     public void updateHealth(Unit[] allies, Unit[] enemies)
     {
         health = allies[0].getHP();
@@ -442,6 +544,11 @@ public class HUD
         enemyHealth3 = enemies[2].getHP();
     }
 
+    /**
+     *
+     * Update's the buttons containing the chars health points
+     *
+     */
     public void updateHealthNumbers()
     {
         healthNumbers1 = new TextButton(health.toString() + "/ "  + healthMax , healthstyle);
@@ -452,6 +559,13 @@ public class HUD
         enemyHealthNumbers3 = new TextButton(enemyHealth3.toString() + "/ " + enemyHealthMax3, healthstyle);
     }
 
+    /**
+     *
+     * Update's the chars mana points
+     *
+     * @param allies array containing the allies units
+     * @param enemies array containing the enemies units
+     */
     public void updateMana(Unit[] allies, Unit[] enemies)
     {
         mana = allies[0].getMANA().EffectiveValue;
@@ -462,6 +576,11 @@ public class HUD
         enemyMana3 = enemies[2].getMANA().EffectiveValue;
     }
 
+    /**
+     *
+     * Update's the buttons containing the chars mana points
+     *
+     */
     public void updateManaNumbers()
     {
         updateHealthNumbers();
@@ -473,6 +592,11 @@ public class HUD
         enemyManaNumbers3 = new TextButton(enemyMana3.toString()+ " / " + enemyManaMax3, healthstyle);
     }
 
+    /**
+     *
+     * Set's on screen the allies information
+     *
+     */
     public void setAlliesUiPosition()
     {
         updateManaNumbers();
@@ -487,6 +611,11 @@ public class HUD
         templateBar6.setPosition(0,240);
     }
 
+    /**
+     *
+     * Set's on screen the allies health bars
+     *
+     */
     public void setAlliesHealthImage()
     {
         setAlliesUiPosition();
@@ -502,6 +631,11 @@ public class HUD
         red3.setScaleX(health3.floatValue()/healthMax3.floatValue());
     }
 
+    /**
+     *
+     * Set's on screen the allies mana bars
+     *
+     */
     public void setAlliesManaImage()
     {
         setAlliesHealthImage();
@@ -517,6 +651,11 @@ public class HUD
         blue3.setScaleX(mana3.floatValue()/manaMax3.floatValue());
     }
 
+    /**
+     *
+     * Set's on screen the chars health values
+     *
+     */
     public void setHealthValuePositions()
     {
         setAlliesManaImage();
@@ -528,6 +667,11 @@ public class HUD
         enemyHealthNumbers3.setPosition(105 + 1025,273);
     }
 
+    /**
+     *
+     * Set's on screen the chars mana values
+     *
+     */
     public void setManaValuePositions()
     {
         setHealthValuePositions();
@@ -540,6 +684,11 @@ public class HUD
         enemyManaNumbers3.setPosition(105 + 1025,243);
     }
 
+    /**
+     *
+     * Set's on screen the enemies informations
+     *
+     */
     public void setEnemiesUiPosition()
     {
         enemyName1.setPosition(1025,600);
@@ -555,6 +704,11 @@ public class HUD
         enemytemplateBar6.setPosition(1025,240);
     }
 
+    /**
+     *
+     * Set's on screen the enemies health values
+     *
+     */
     public void setEnemiesHealthImage()
     {
         setEnemiesUiPosition();
@@ -570,6 +724,11 @@ public class HUD
         enemyRed3.setScaleX(enemyHealth3.floatValue() / enemyHealthMax3.floatValue());
     }
 
+    /**
+     *
+     * Set's on screen the enemies mana values
+     *
+     */
     public void setEnemiesManaImage()
     {
         setEnemiesHealthImage();
@@ -585,6 +744,11 @@ public class HUD
         enemyBlue3.setScaleX(enemyMana3.floatValue()/enemyManaMax3.floatValue());
     }
 
+    /**
+     *
+     * Add's the allies to the stage
+     *
+     */
     public void addAlliesToStage()
     {
         stage.addActor(templateBar);
@@ -610,6 +774,11 @@ public class HUD
         stage.addActor(name3);
     }
 
+    /**
+     *
+     * Add's the enemies to the stage
+     *
+     */
     public void addEnemiesToStage()
     {
         stage.addActor(enemytemplateBar);
@@ -635,6 +804,11 @@ public class HUD
         stage.addActor(enemyName3);
     }
 
+    /**
+     *
+     * Add's the always visible ui elements to the stage
+     *
+     */
     public void addVisibleUIelements()
     {
         stopRound.setPosition(0, 150);
@@ -645,6 +819,11 @@ public class HUD
         stage.addActor(attack);
     }
 
+    /**
+     *
+     * Add's the always visible ui elements keys to the stage
+     *
+     */
     public void addVisibleUIelementsControlls()
     {
         addVisibleUIelements();
@@ -658,6 +837,11 @@ public class HUD
         stage.addActor(LetterE);
     }
 
+    /**
+     *
+     * Sets the first hability image to the char's first hability
+     *
+     */
     public void attack1GetImage(Unit current)
     {
         attack1Text = new Texture("RoundsImages/" + current.getAbilities().get(0).getName() +".png");
@@ -666,6 +850,11 @@ public class HUD
         attack1 = new ImageButton(attack1RegionDrawable);
     }
 
+    /**
+     *
+     * Sets the second hability image to the char's second hability
+     *
+     */
     public void attack2GetImage(Unit current)
     {
         attack2Text = new Texture("RoundsImages/" + current.getAbilities().get(1).getName() + ".png");
@@ -674,6 +863,11 @@ public class HUD
         attack2 = new ImageButton(attack2RegionDrawable);
     }
 
+    /**
+     *
+     * Add's the habilities keys to the stage
+     *
+     */
     public void addAttackUIelements(Unit current)
     {
         if(MyGdxGame.attackMode) {
@@ -692,6 +886,11 @@ public class HUD
         }
     }
 
+    /**
+     *
+     * Checks which hability the user chose for the attack
+     *
+     */
     public void attackListeners()
     {
         attack1.addListener(new InputListener()
@@ -714,6 +913,11 @@ public class HUD
 
     }
 
+    /**
+     *
+     * Deletes all textures from memory
+     *
+     */
     public void disposeTextures()
     {
         if(xText!=null)
@@ -734,6 +938,11 @@ public class HUD
         attack2Text.dispose();
     }
 
+    /**
+     *
+     * Deletes all text buttons from memory
+     *
+     */
     public void disposeTextButtonsResources()
     {
         if(font!=null)
@@ -760,6 +969,11 @@ public class HUD
         healthskin.dispose();
     }
 
+    /**
+     *
+     * calls the methods to dispose the elements and also dispose's the stage and music
+     *
+     */
     public void dispose()
     {
         music.dispose();
