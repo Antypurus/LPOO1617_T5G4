@@ -54,6 +54,12 @@ public class Element {
         return 0;
     }
 
+    /**
+     *
+     * @param AttackElement
+     * @param DefenseElement
+     * @return
+     */
     public double ElementComparation(DamageElement AttackElement,DamageElement DefenseElement){
         if(AttackElement.equals(DefenseElement.EARTH)){
             return earthVS(DefenseElement);

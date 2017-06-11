@@ -38,6 +38,12 @@ public class Map {
         return;
     }
 
+    /**
+     *
+     * @param name
+     * @param width
+     * @param height
+     */
     public Map(String name,int width,int height){
 
         this.name=name;
@@ -57,10 +63,17 @@ public class Map {
         this.update();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName(){
         return this.name;
     }
 
+    /**
+     *
+     */
     public void update(){
         for(int i=0;i<this.height;++i){
             for(int j=0;j<this.width;++j){
@@ -69,6 +82,12 @@ public class Map {
         }
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public Cell getCell(int x, int y){
         if(x>=0&&x<this.width){
             if(y>=0&&y<this.height){
@@ -78,6 +97,11 @@ public class Map {
         return null;
     }
 
+    /**
+     *
+     * @param ability
+     * @return
+     */
     public ArrayList<Cell> validCells(Ability ability){
         ArrayList<Cell>ret = new ArrayList<Cell>();
         for(int i=0;i<this.height;++i){
@@ -90,6 +114,11 @@ public class Map {
         return ret;
     }
 
+    /**
+     *
+     * @param unit
+     * @return
+     */
     public ArrayList<Cell> validCells(Unit unit){
         ArrayList<Cell>ret = new ArrayList<Cell>();
         for(int i=0;i<this.height;++i){

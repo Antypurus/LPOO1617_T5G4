@@ -17,81 +17,158 @@ public class Cell {
     private Cell Top=null;
     private Cell Bottom = null;
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public Cell(int x,int y){
         this.xPos=x;
         this.yPos=y;
     }
 
+    /**
+     *
+     * @param value
+     */
     public void setWalkable(boolean value){
         this.isWalkable=value;
     }
 
+    /**
+     *
+     * @param left
+     */
     public void setLeft(Cell left){
         this.Left=left;
     }
 
+    /**
+     *
+     * @param right
+     */
     public void setRight(Cell right){
         this.Right = right;
     }
 
+    /**
+     *
+     * @param top
+     */
     public void setTop(Cell top){
         this.Top=top;
     }
 
+    /**
+     *
+     * @param bottom
+     */
     public void setBottom(Cell bottom){
         this.Bottom=bottom;
     }
 
+    /**
+     *
+     * @param map
+     */
     public void setMap(Map map){
         this.belongingMap = map;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map getMap(){
         return this.belongingMap;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getxPos(){
         return this.xPos;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getyPos(){
         return this.yPos;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isWalkable() {
         return isWalkable;
     }
 
+    /**
+     *
+     * @return
+     */
     public Cell getLeft() {
         return Left;
     }
 
+    /**
+     *
+     * @return
+     */
     public Cell getRight() {
         return Right;
     }
 
+    /**
+     *
+     * @return
+     */
     public Cell getTop() {
         return Top;
     }
 
+    /**
+     *
+     * @return
+     */
     public Cell getBottom() {
         return Bottom;
     }
 
+    /**
+     *
+     * @return
+     */
     public Unit getUnit(){
         return this.unit;
     }
 
+    /**
+     *
+     * @param unit
+     */
     public void setUnit(Unit unit){
         this.unit=unit;
     }
 
+    /**
+     *
+     */
     public void update(){
         if(this.unit!=null){
             this.isWalkable=false;
         }
     }
 
+    /**
+     *
+     * @param cell
+     * @return
+     */
     public double distanceToCell(Cell cell){
         if(cell!=null) {
             int x1 = this.xPos;
