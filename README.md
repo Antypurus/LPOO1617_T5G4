@@ -10,7 +10,7 @@ Tempo de Desenvolvimento : Cerca de 90 a 100 Horas
 
 Contribuicao: 50%-50%
 
-Manual : The Game has a how to play internally.
+Manual :https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/finalRelease/Manual.pdf The Game has a how to play internally.
 
 Membros:
 
