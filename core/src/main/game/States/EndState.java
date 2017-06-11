@@ -44,6 +44,17 @@ public class EndState extends State {
     private String message;
 
 
+    /**
+     *
+     * Constructor for the EndState , handles the game's final actions as well
+     * as showing if the user won or lost and how much time it took
+     *
+     * @param gsm a gamestatemanager that will handle
+     *            the different states set's and pop's
+     *
+     * @param elapsedTime how long the playstate took to be popped
+     * @param gameWon true if the user won, false if the user lost
+     */
     protected EndState(GameStateManager gsm, Long elapsedTime, Boolean gameWon)
     {
         super(gsm);
@@ -67,12 +78,12 @@ public class EndState extends State {
             this.message = "Lost the game in " + this.elapsedTime.toString() + " seconds. Better luck next time.";
     }
 
-    protected EndState(GameStateManager gsm) {
-        super(gsm);
 
-    }
-
-
+    /**
+     *
+     * Checks which button the user pressed
+     *
+     */
     protected void handleMouseInput()
     {
         if (handleFacebookBtn(facebookXCoord, facebookYCoord, facebookBtn.getWidth(), facebookBtn.getHeight()))
@@ -119,7 +130,7 @@ public class EndState extends State {
                 MyGdxGame.centerXCoord - (templateCenterX), MyGdxGame.centerYCoord);
 
         timeFont.setColor(Color.BLACK);
-        timeFont.draw(sb, message, MyGdxGame.centerXCoord, MyGdxGame.centerYCoord + templateCenterY);
+        timeFont.draw(sb, message, MyGdxGame.centerXCoord - message.length()*3, MyGdxGame.centerYCoord + templateCenterY);
 
         sb.end();
     }

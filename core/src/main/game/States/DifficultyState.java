@@ -25,6 +25,14 @@ public class DifficultyState extends State
 
     private static final int EASY = 0, HARD = 1;
 
+    /**
+     *
+     * Constructor for the DifficultyState , handles the user decision
+     * for the game to be hard or easy
+     *
+     * @param gsm a gamestatemanager that will handle
+     *            the different states set's and pop's
+     */
     public DifficultyState(GameStateManager gsm) {
         super(gsm);
 
@@ -38,6 +46,12 @@ public class DifficultyState extends State
 
     }
 
+
+    /**
+     *
+     * Checks which button the user pressed
+     *
+     */
     protected void handleDifficultyMouseInput()
     {
         if (handleBtn(easyBtnCenterX, easyBtnYCoord, easyBtn.getHeight()))

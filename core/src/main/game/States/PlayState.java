@@ -79,6 +79,16 @@ public class PlayState extends State
 
     private int Scale = 0;
 
+
+    /**
+     *
+     * Constructor for the PlayState , handles the game
+     *
+     * @param gsm a gamestatemanager that will handle
+     *            the different states set's and pop's
+     *
+     * @param Difficulty if 0 the game will be set to easy, if 1 the game will be set to hard
+     */
     public PlayState(GameStateManager gsm, int Difficulty)
     {
         super(gsm);
@@ -184,6 +194,11 @@ public class PlayState extends State
         hud = new HUD(this.batch, allies, enemies, currentChar);
     }
 
+    /**
+     *
+     * Handles the game zoom
+     *
+     */
     protected void handleZoomInput()
     {
         if(Gdx.input.isKeyPressed(Input.Keys.PAGE_UP)){
@@ -200,6 +215,11 @@ public class PlayState extends State
         }
     }
 
+    /**
+     *
+     * If the user pressed to attack, this method handles the attack logic
+     *
+     */
     protected void handleAttackInput()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.A)
@@ -237,6 +257,11 @@ public class PlayState extends State
         }
     }
 
+    /**
+     *
+     * If the user pressed to move, this method handles the move logic
+     *
+     */
     protected  void handleMovementInput()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
@@ -276,6 +301,11 @@ public class PlayState extends State
         }
     }
 
+    /**
+     *
+     * Checks the user key input and handles the logic for behind them
+     *
+     */
     protected void handleGameLogicKeysInput()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
@@ -315,6 +345,11 @@ public class PlayState extends State
     }
 
 
+    /**
+     *
+     * Handles the enter key press that finishes the selected user action
+     *
+     */
     protected void handleEnterKey()
     {
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {

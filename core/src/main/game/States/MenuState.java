@@ -40,7 +40,13 @@ public class MenuState extends State
 
     private FacebookHandler facebookHandler;
 
-
+    /**
+     *
+     * Constructor for the MenuState , handles the main menu user actions
+     *
+     * @param gsm a gamestatemanager that will handle
+     *            the different states set's and pop's
+     */
     public MenuState(GameStateManager gsm) {
         super(gsm);
 
@@ -58,6 +64,11 @@ public class MenuState extends State
     }
 
 
+    /**
+     *
+     * Checks which button the user pressed
+     *
+     */
     protected void handleMenuMouseInput()
     {
         if (handleBtn(playBtnCenterX, playBtnYCoord, playBtn.getHeight()))

@@ -33,6 +33,13 @@ public class InstructionsState extends State
 
     private ArrayList<Texture> Images = new ArrayList<Texture>();
 
+    /**
+     *
+     * Constructor for the InstructionsState , shows the game's instructions
+     *
+     * @param gsm a gamestatemanager that will handle
+     *            the different states set's and pop's
+     */
     public InstructionsState(GameStateManager gsm) {
         super(gsm);
 
@@ -51,6 +58,11 @@ public class InstructionsState extends State
     }
 
 
+    /**
+     *
+     * Checks which button the user pressed
+     *
+     */
     protected void handleInstructionsMouseInput()
     {
         if (handleBtn(quitBtnCenterX, quitYCoord, quitBtn.getHeight()))
