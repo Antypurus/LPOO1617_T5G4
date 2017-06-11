@@ -36,6 +36,8 @@ public class MenuState extends State
     private Texture facebookBtn;
     private Texture gameTitle;
 
+    private String message;
+
     private FacebookHandler facebookHandler;
 
 
@@ -52,6 +54,7 @@ public class MenuState extends State
         this.instructionsBtnCenterX = instructionsBtn.getWidth()/2;
         this.quitBtnCenterX = quitBtn.getWidth() / 2;
         this.titleCenterX = MyGdxGame.centerXCoord - gameTitle.getWidth()/2;
+        this.message = "Currently playing RPG Game";
     }
 
 
@@ -76,7 +79,7 @@ public class MenuState extends State
 
         else if (handleFacebookBtn(facebookXCoord, facebookYCoord, facebookBtn.getWidth(), facebookBtn.getHeight()))
         {
-            facebookHandler = new FacebookHandler();
+            facebookHandler = new FacebookHandler(message);
         }
     }
 

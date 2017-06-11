@@ -15,7 +15,7 @@ public class FacebookHandler
 {
     private boolean onFacebook = false;
 
-    public FacebookHandler()
+    public FacebookHandler(String message)
     {
         String domain = "https://github.com/";
         String appId = "433157270402383";
@@ -46,7 +46,7 @@ public class FacebookHandler
 
                 FacebookType response = fbClient.publish("me/feed",
                         FacebookType.class, Parameter.with("message",
-                                "Currently playing LPOO game"),
+                                message),
                         Parameter.with("link", "https://github.com/"));
 
                 onFacebook = false;
