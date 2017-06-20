@@ -10,6 +10,14 @@ Tempo de Desenvolvimento : Cerca de 90 a 100 Horas
 
 Contribuicao: 50%-50%
 
+Ai Behavior Tree Diagrams:
+
+  - Damage Dealer AI : https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/finalRelease/AI/DPSAI.png
+  
+  - Tank AI : https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/finalRelease/AI/TankAI.png
+  
+  - Healer AI : https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/finalRelease/AI/HealerAI.png
+
 Manual :https://github.com/TiagoJoseMagalhaes/LPOO1617_T5G4/blob/finalRelease/Manual.pdf The Game has a how to play internally.
 
 Membros:
